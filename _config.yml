@@ -70,4 +70,4 @@ theme: maupassant
 deploy: 
   type: git
   repo: git@github.com:fjonas/fjonas.github.io.git
-  branch: master
+  branch: gh-pages
