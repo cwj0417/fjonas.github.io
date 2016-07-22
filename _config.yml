@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Bonjouruby!
 subtitle:
 description:
-author: John Doe
-language:
+author: chen wenjun
+language: zh-CN
 timezone:
 
 # URL
@@ -63,9 +63,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repo: git@github.com:fjonas/fjonas.github.io.git
+  branch: gh-pages
