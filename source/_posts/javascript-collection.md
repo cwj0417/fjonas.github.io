@@ -11,17 +11,20 @@ tags:
 var num = +"5";
 ```
 ``+``运算符约等于parseInt
+
 ---
 ```js
 var boolean = !!"string";
 ```
 ``!!``强制转为布尔值
+
 ---
 ```js
 !0 === true
 !1 === false
 ```
 ``true``和``false``的表达方式
+
 ---
 #### 优化循环
 ```js
