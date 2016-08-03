@@ -1,14 +1,11 @@
 ---
 title: 关于Promise
 date: 2016-07-23 12:01:35
-categories: 
-- 工作相关
-tags: 
-- javascript	
-- promise
-- 设计模式
+categories: 工作相关
+tags: [javascript,promise,设计模式]
 ---
-
+promise的理解于实践场景
+<!--more-->
 ## 关于本文
 这条是最后加上的， 本文语法来源都是正统的， 理解却是自己的经验产生的， 包括应用， 优缺点， 作用， **可能与部分朋友意见不同或者与主流观点不同。** 
 
