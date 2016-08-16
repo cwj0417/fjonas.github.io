@@ -14,18 +14,15 @@ busuanzi: true ## If you want to use Busuanzi page views please set the value to
 widgets_on_small_screens: false ## Set to true to enable widgets on small screens.
 
 menu:
-  - page: home
+  - page: 凤凰院凶真
     directory: .
     icon: fa-home
-  - page: archive
+  - page: 克里斯蒂娜
     directory: archives/
     icon: fa-archive
-  - page: about
+  - page: 椎名真由氏
     directory: about/
     icon: fa-user
-  - page: rss
-    directory: atom.xml
-    icon: fa-rss
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - search

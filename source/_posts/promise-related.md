@@ -28,13 +28,13 @@ promise的理解于实践场景
 以下callback伪代码：
 ```js
 getSchoolInfo('spicyChickenScool', (schoolInfo) => {
-	getGradeInfo(2, (gradeInfo) => {
-		getClassInfo(3, (classInfo) {
-			getStudent(4, (student) => {
-				//悄悄调查小姐姐的个人信息
-			})
-		})
-	})
+    getGradeInfo(2, (gradeInfo) => {
+        getClassInfo(3, (classInfo) {
+            getStudent(4, (student) => {
+                //悄悄调查小姐姐的个人信息
+            })
+        })
+    })
 })
 ```
 如果以上获取信息的方式全是promise的话：
@@ -59,15 +59,15 @@ promise把对成功失败的处理统一放在了回调中， 而callback可能�
 
 ```js
 var updateUser = function(uid, filed, value, callback) {
-	getUser(uid, function(err, data) {
-		if(err) {
-			callback && callback(true);
-		}else {
-			update(uid, filed, value, function(err, data) {
-				//
-			})
-		}
-	})		
+    getUser(uid, function(err, data) {
+        if(err) {
+            callback && callback(true);
+        }else {
+            update(uid, filed, value, function(err, data) {
+                //
+            })
+        }
+    })		
 }
 ```
 
@@ -105,25 +105,25 @@ promise内部异常是需要在error callback中写的， 如果不写内部异�
 ```js
 //获取游戏信息的服务
 var changeGame = game => new Promise((resolve, reject) => {
-	resolve({
-		game:game
-	})
+    resolve({
+        game:game
+    })
 });
 //获取‘pokemon’这个游戏的信息， 其他需要游戏信息的服务取这里的数据就可以
 var curGame = changeGame('pokemon');
 //获取某个日期新增用户的服务
 var getNewUser = date => curGame
-	.then(game => new Promise((resolve, reject) => {
-		resolve({
-			date:date,
-			game:game.game,
-			newUser:233
-		})
-	}));
+    .then(game => new Promise((resolve, reject) => {
+        resolve({
+            date:date,
+            game:game.game,
+            newUser:233
+        })
+    }));
 //如此调用
 getNewUser('20160724')
 .then((res) => {
-	// 我们获得了新增数据{date: '20160724', game: 'pokemon', newUser: 233 }
+    // 我们获得了新增数据{date: '20160724', game: 'pokemon', newUser: 233 }
 })
 ```
 讲一下原理， changeGame的时候就会马上发起请求， 并且一但resolve，curGame就一直是resolve状态， 调用就能直接获得结果。
@@ -137,8 +137,8 @@ getNewUser('20160724')
 //简单模拟获取班级最强的学生和获取学生信息
 var getTopStudent = clazz => Promise.resolve('top student in class' + clazz);
 var getStudentInfo = student => Promise.resolve({
-	name:student,
-	age:18
+    name:student,
+    age:18
 });
 //假设班级列表
 var classList = [1,2,3];
@@ -146,16 +146,16 @@ var classList = [1,2,3];
 var requests = [];
 //开始请求
 classList.forEach((clazz) => {
-	requests.push(
-			getTopStudent(clazz)
-				.then(studentName => getStudentInfo(studentName))
-		);
+    requests.push(
+        getTopStudent(clazz)
+            .then(studentName => getStudentInfo(studentName))
+    );
 });
 //获取结果
 Promise.all(requests)
-	.then((results) => {
-		//获得的结果为[ { name: 'top student in class1', age: 18 },{ name: 'top student in class2', age: 18 },{ name: 'top student in class3', age: 18 } ]
-	})
+    .then((results) => {
+        //获得的结果为[ { name: 'top student in class1', age: 18 },{ name: 'top student in class2', age: 18 },{ name: 'top student in class3', age: 18 } ]
+    })
 ```
 
 ## 其他细节
