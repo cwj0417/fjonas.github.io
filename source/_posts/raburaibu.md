@@ -5,6 +5,7 @@ categories: 娱乐
 tags: [动漫,Lovelive!,介绍]
 ---
 大家一起实现梦想！我们也要闪闪发光！
+![](/images/lovelive_miusi.jpg)
 <!--more-->
 
 #### Lovelive!这个作品的本体其实不是动画
