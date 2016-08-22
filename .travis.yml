@@ -1,0 +1,8 @@
+install: 
+ - npm install
+script:
+ - hexo d
+env:
+ global:
+  - GH_REF: github.com/fjonas/fjonas.github.io
+  - secure: "TGdmUBKFKcHsOP6uUVlq76b6u8IGqsSiExGKiwNFtfo7idYdGBtRS6OWAb0CnYbFIwGrey5BcoC7K8WttSMOc4yiDgAKmupxB0GzADapPALVl8bfh96xR/dGkoeC+rEGu7YZ3kUA08B5Jjx716Bp4EIYOfWWTCtkenaCD8B/7T4du6WkxJSdQycmBUIbWQlfGDLtpA+1jVC1QKwByhAVMu4fBBHP3ha1vjLVgEOe7e9Km3Vb+HcSPjE5FsNJkgVaj1SryolO7i9YsPD4reAAgLru9mVs0ZUldiolbLZ2dJPCNmUuCEa+YhyC6uMD6HnfA0nlWvb4/P+p1jQCtnNWm3GXVTShNMdTFAMmv9leMbjGd8XtevP3Xzi63oW9OaPMTp+u0fs0c5rS1IYmuIgyHml3BO8KGyoRerd1H1CFLlcJaU0C5uTA1hB6kDFoOdLvV+i/dQfuh0eOIu+dDqOeV0wfwcPBzfFyIexpPBFQyHy+bkFyLD4D1+K77uPfK9U1bb4RhgEtlfa7fmUk22KL0HPqSXkZE950EI+ARWZwxQbqQbFWCCraTBPYjVV7P/AZk3VFvS/fRASRYXXHl0c81OHk1FEa0y1wcX45TRcwu+Dwn5CqcGiZwT7m5BN9cejB/57lJnuIG0F2+piycqVILtZRcEP7mk+45UuIHVcM8VQ="
