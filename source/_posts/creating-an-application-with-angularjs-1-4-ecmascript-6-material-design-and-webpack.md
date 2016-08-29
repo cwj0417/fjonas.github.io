@@ -1,11 +1,10 @@
 ---
 title: 使用angular1.4, es2015, webpack, angular-material来搭建一个app 
 date: 2016-08-09 17:45:04
-categories: [入门试水,翻译]
+categories: [试一试,翻译]
 
 ---
-介绍了如何用webpack构建ng1+es6应用， 原文：<a href="http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/" target="_blank">Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack</a>
-
+介绍了如何用webpack构建ng1+es6应用， 原文：[Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack](http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/)
 <!--more-->
 
 ### 来学一下如何用ng1.4, es6， material design和webpack来做一个应用吧！
@@ -28,7 +27,7 @@ require('expose?angular!exports?window.angular!angular/angular.js');
 
 ### DEMO
 
-<a href="https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate" target="_blank">这是demo地址</a>
+[这是demo地址](https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate)
 
 ---
 ## 基本配置
@@ -206,4 +205,4 @@ export default homeModule = homeModule.name
 
 ### DEMO地址
 
-[最好按ctrl再点我](https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate)
+[demo](https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate)

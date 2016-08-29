@@ -1,10 +1,10 @@
 ---
 title: 三分钟精通webpack
 date: 2016-08-09 14:33:13
-categories: [入门试水,翻译]
+categories: [试一试,翻译]
 tags: [javascript,webpack]
 ---
-带有实例的webpack介绍， 原文：<a href="http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/" target="_blank">Introduction to Webpack with practical examples</a>
+带有实例的webpack介绍， 原文：[Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/)
 <!--more-->
 
 **webpack是一个模块化打包工具， 可以根据依赖处理模块来生成静态资源。 我们准备借鉴真实场景的应用作为例子来学习。**
@@ -19,11 +19,11 @@ webpack正快速占领自动化构建市场。 我用了几个月， 在大部�
 
 > webpack只能处理原生js， 而加载器用来把其他资源转化为js。 这样做的话每个资源都形成了一个模块。
 
-<a href="https://github.com/shprink/webpack-examples" target="_blank">我是一个例子的链接</a>
+[我是一个例子的链接](https://github.com/shprink/webpack-examples)
 
 ### 准备
 
-你的电脑上需要装好<a href="https://nodejs.org" target="_blank">node</a>
+你的电脑上需要装好[node](https://nodejs.org)
 
 ### 安装
 
@@ -64,7 +64,7 @@ webpack -p
 
 ### ES2015编译
 
-ES2015引进了一些我们马上就可以使用的新特性（箭头函数， 类， 生成器， 模块等）。为了使用ES2015我推荐使用<a href="https://babeljs.io/" target="_blank">Babel</a>
+ES2015引进了一些我们马上就可以使用的新特性（箭头函数， 类， 生成器， 模块等）。为了使用ES2015我推荐使用[Babel](https://babeljs.io/)
 
 装一下babel：
 ```
