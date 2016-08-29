@@ -14,13 +14,13 @@ busuanzi: true ## If you want to use Busuanzi page views please set the value to
 widgets_on_small_screens: false ## Set to true to enable widgets on small screens.
 
 menu:
-  - page: 凤凰院凶真
+  - page: home
     directory: .
     icon: fa-home
-  - page: 克里斯蒂娜
+  - page: archives
     directory: archives/
     icon: fa-archive
-  - page: 椎名真由氏
+  - page: about
     directory: about/
     icon: fa-user
 
