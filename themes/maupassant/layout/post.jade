@@ -3,10 +3,9 @@ extends base
 block title
   title= page.title + ' | ' + config.title
 
-block head
+block scripts
   script(type='text/javascript',src='//cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js')
   link(rel='stylesheet', type='text/css', href='//cdn.bootcss.com/highlight.js/9.6.0/styles/default.min.css')
-  - hljs.initHighlightingOnLoad();
 
 block content
   .post

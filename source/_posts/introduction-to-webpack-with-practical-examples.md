@@ -31,7 +31,7 @@ webpack正快速占领自动化构建市场。 我用了几个月， 在大部�
 npm install webpack --save-dev
 ```
 现在新建个文件`webpack.config.js`然后输入这些：
-```
+```js
 var webpack = require('webpack'),
     path = require('path');
  
@@ -54,7 +54,7 @@ module.exports = {
 ### 编译
 
 你已经写好入口文件的话就可以用以下命令编译了。(我理解就是在主入口文件里require,import)
-```
+```sh
 # Debug mode
 webpack
  
@@ -67,11 +67,11 @@ webpack -p
 ES2015引进了一些我们马上就可以使用的新特性（箭头函数， 类， 生成器， 模块等）。为了使用ES2015我推荐使用[Babel](https://babeljs.io/)
 
 装一下babel：
-```
+```sh
 npm install babel-loader --save-dev
 ```
 在webpack配置里增加加载器：
-```
+```js
 loaders: [{
   test: /\.es6.js$/,
   loader: "babel-loader"
@@ -145,12 +145,12 @@ module.exports = fibonacci;
 ### 引入css文件
 
 装一下：
-```
+```sh
 npm install css-loader --save-dev
 ```
 在webpack配置里增加一个加载器规则：
 `css-loader`会建立一个`style`标签在程序运行的时候注入页面。 还会在生产环境的时候自动压缩文件。生产环境是`-p`。e.g.`webpack -p`
-```
+```js
 loaders: [{
   test: /\.css$/,
   loader: "css-loader"
@@ -163,11 +163,11 @@ loaders: [{
 ### 给css自动加前缀
 
 装装装：
-```
+```sh
 npm install autoprefixer-loader --save-dev
 ```
 我们很烦在各个浏览器上一些样式的写法是不同的。IE要加`-ms-`的前缀， 火狐是`-moz-`， chrome、opera、safari是`-webkit-`。 这个lib让您安心使用标准css， 不需要考虑浏览器语法兼容了。
-```
+```js
 loaders: [{
   test: /\.css$/,
   loader: "css-loader!autoprefixer-loader"
@@ -198,13 +198,13 @@ body {
 sass让你可以写css的时候可以用变量， 嵌套， 混合， 继承等。 用sass会很方便。
 
 安装：
-```
+```sh
 npm install css-loader sass-loader --save-dev
 ```
 webpack配置如下：
 （吐槽：终于有不一样的了）
 现在我们要同时使用2个加载器了！第一个加载器`sass-loader`（从右向左看）会把ssass编译成css然后交给css处理， 就是之前说的创建`style`标签之类的。
-```
+```js
 loaders: [{
   test: /\.scss$/,
   loader: "css-loader!sass-loader"
@@ -242,13 +242,13 @@ body {
 我们可以移动任何文件， lib名字叫`file-loader`。
 
 安装：
-```
+```sh
 npm install file-loader --save-dev
 ```
 来看看如何配置吧：
 
 例子里我们尝试把一个图片从他的目录里移动到指定的目录并命名成这种规范：`img-[hash].[ext]`.
-```
+```js
 loaders: [{
   test: /\.(png|jpg|gif)$/,
   loader: "file-loader?name=img/img-[hash:6].[ext]"
@@ -266,14 +266,14 @@ loaders: [{
 有时候你不想通过http来拿资源。 比如：当你可以直接拿到encode过的资源的时候， 选择去http拿一个很小的图片还有什么意义呢？这个lib正是做了这个事情。 你需要做的只是决定什么编码的文件给多少限制（如果超过限制你会得到路径）。
 
 安装：
-```
+```sh
 npm install url-loader --save-dev
 ```
 
 配置如下：
 
 如果图片小于5k我们就拿他base64encoded， 不然就路径。
-```
+```js
 loaders: [{
   test: /\.(png|jpg|gif)$/,
   loader: "url-loader?limit=5000&name=img/img-[hash:6].[ext]"
@@ -282,12 +282,12 @@ loaders: [{
 
 ### 编译结果
 #### 编译前
-```
+```js
 var imgBig = '<img src="' + require("./src/image_big.jpg") + '" />';
 var imgSmall = '<img src="' + require("./src/image_small.png") + '" />';
 ```
 #### 编译后
-```
+```js
 var imgBig = '<img src="img/img-a4bd04.jpg" />';
 var imgSmall = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA" />';
 ``` 
@@ -298,11 +298,11 @@ var imgSmall = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA" />';
 
 `html-loader`可以把任何文件转成模块， 也可以引入任何图片。
 安装：
-```
+```sh
 npm install html-loader --save-dev
 ```
 配置：
-```
+```js
 loaders: [{
   test: /\.html$/,
   loader: "html-loader"
@@ -348,13 +348,13 @@ module.exports = '<html>\n
 
 `expose-loader`可以让你把任何模块绑定到全局作用域上。
 安装：
-```
+```sh
 npm install expose-loader --save-dev
 ```
 配置：
 例子中我们要把`lodash`在全局作用域中暴露为`_`.
 
-```
+```js
 loaders: [{
   test: require.resolve("lodash"),
   loader: 'expose?_'

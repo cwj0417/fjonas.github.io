@@ -14,13 +14,13 @@ busuanzi: true ## If you want to use Busuanzi page views please set the value to
 widgets_on_small_screens: false ## Set to true to enable widgets on small screens.
 
 menu:
-  - page: home
+  - page: 主页
     directory: .
     icon: fa-home
-  - page: archives
+  - page: 归档
     directory: archives/
     icon: fa-archive
-  - page: about
+  - page: 关于
     directory: about/
     icon: fa-user
 

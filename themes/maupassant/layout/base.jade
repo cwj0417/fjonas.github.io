@@ -33,6 +33,7 @@ html(lang='#{config.language}')
     link(rel='apple-touch-icon', href=url_for('apple-touch-icon.png'))
     link(rel='apple-touch-icon-precomposed', href=url_for('apple-touch-icon.png'))
     script(type='text/javascript', src=url_for(theme.js) + '/main.js')
+    block scripts
     if config.feed
       link(rel='alternate', type=feed_type, href=url_for(config.feed.path))
 
