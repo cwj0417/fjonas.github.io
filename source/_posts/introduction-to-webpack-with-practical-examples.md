@@ -1,8 +1,8 @@
 ---
 title: 三分钟精通webpack
 date: 2016-08-09 14:33:13
-categories: [试一试,翻译]
-tags: [javascript,webpack]
+categories: 试水
+tags: [javascript,webpack,翻译]
 ---
 带有实例的webpack介绍， 原文：[Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/)
 <!--more-->

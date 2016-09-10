@@ -1,7 +1,7 @@
 ---
 title: js小细节收集
 date: 2016-08-01 15:44:33
-categories: 工作相关
+categories: 代码
 tags: javascript
 ---
 javascript的没什么用的细节收集， 内容不断更新

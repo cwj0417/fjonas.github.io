@@ -1,8 +1,8 @@
 ---
 title: 一分钟心理学
 date: 2016-08-19 14:34:44
-categories: [娱乐,玄学]
-tags: 读后感
+categories: 玄学
+tags: 介绍
 ---
 书名叫‘一分钟心理学’ 有点意思的心理学介绍
 <!--more-->

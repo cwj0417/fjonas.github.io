@@ -1,7 +1,7 @@
 ---
 title: 关于Promise
 date: 2016-07-23 12:01:35
-categories: 工作相关
+categories: 代码
 tags: [javascript,promise,设计模式]
 ---
 promise的理解于实践场景
