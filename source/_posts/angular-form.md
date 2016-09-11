@@ -7,6 +7,7 @@ tags: angular 1.x
 从零开始跟着文档学习angular表单
 <!--more-->
 
+## 表单简介
 **打开了angular1.5.9的form文档开始一行行了解下angular表单的东西吧**
 
 *暂时跳过的部分用这个字体表示， 以便查漏补缺*
@@ -14,6 +15,8 @@ tags: angular 1.x
 [写作时查看的文档地址](https://docs.angularjs.org/api/ng/directive/form)
 
 ---
+
+## form行为
 
 + *form这个directive是提供api的， 提供了方法和属性。*
 + *如果form有`name`这个属性， form的api会挂在当前scope的这个字段下(后面会有例子)。*
@@ -63,6 +66,8 @@ form状态改变导致的class改变都可以和`ngAnimate`配合的， css大�
 ```
 
 ---
+
+## 实测
 
 （万万没想到文档竟然这么短。）
 文档已经教我们如何拿到form的状态了， 写个简单的form来看一下form的状态如何吧:)

@@ -13,7 +13,7 @@ tags: [javascript,webpack,翻译]
 
 webpack正快速占领自动化构建市场。 我用了几个月， 在大部分需求上已经可以代替`Grunt`和`gulp`了。
 
-### Webpack 加载器
+## Webpack 加载器
 
 加载器是可以在编译中注入的代码片段， 加载器会在编译结束时被调用。
 
@@ -21,11 +21,11 @@ webpack正快速占领自动化构建市场。 我用了几个月， 在大部�
 
 [我是一个例子的链接](https://github.com/shprink/webpack-examples)
 
-### 准备
+## 准备
 
 你的电脑上需要装好[node](https://nodejs.org)
 
-### 安装
+## 安装
 
 ```sh
 npm install webpack --save-dev
@@ -51,18 +51,18 @@ module.exports = {
 ```
 上面配置的意思大概是：把入口文件设为`index.js`， 文件编译后会输出到`dist`这个目录里。 （作者笔误拼错单词了:p）
 
-### 编译
+## 编译
 
 你已经写好入口文件的话就可以用以下命令编译了。(我理解就是在主入口文件里require,import)
 ```sh
-# Debug mode
+## Debug mode
 webpack
  
-# Production mode (minified version)
+## Production mode (minified version)
 webpack -p
 ```
 
-### ES2015编译
+## ES2015编译
 
 ES2015引进了一些我们马上就可以使用的新特性（箭头函数， 类， 生成器， 模块等）。为了使用ES2015我推荐使用[Babel](https://babeljs.io/)
 
@@ -142,7 +142,7 @@ module.exports = fibonacci;
 
 ---
 
-### 引入css文件
+## 引入css文件
 
 装一下：
 ```sh
@@ -160,7 +160,7 @@ loaders: [{
 
 ---
 
-### 给css自动加前缀
+## 给css自动加前缀
 
 装装装：
 ```sh
@@ -193,7 +193,7 @@ body {
 ```
 ---
 
-### 编译SASS
+## 编译SASS
 
 sass让你可以写css的时候可以用变量， 嵌套， 混合， 继承等。 用sass会很方便。
 
@@ -237,7 +237,7 @@ body {
 
 ---
 
-### 移动文件
+## 移动文件
 
 我们可以移动任何文件， lib名字叫`file-loader`。
 
@@ -261,7 +261,7 @@ loaders: [{
 
 ---
 
-### 编码文件(encode files)
+## 编码文件(encode files)
 
 有时候你不想通过http来拿资源。 比如：当你可以直接拿到encode过的资源的时候， 选择去http拿一个很小的图片还有什么意义呢？这个lib正是做了这个事情。 你需要做的只是决定什么编码的文件给多少限制（如果超过限制你会得到路径）。
 
@@ -294,7 +294,7 @@ var imgSmall = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA" />';
 
 ---
 
-### 引入HTML文件（require HTML files)
+## 引入HTML文件（require HTML files)
 
 `html-loader`可以把任何文件转成模块， 也可以引入任何图片。
 安装：
@@ -344,7 +344,7 @@ module.exports = '<html>\n
 
 ---
 
-### 暴露任何模块（Expose any module)
+## 暴露任何模块（Expose any module)
 
 `expose-loader`可以让你把任何模块绑定到全局作用域上。
 安装：

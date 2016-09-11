@@ -8,7 +8,7 @@ tags: [翻译,webpack,angular 1.x]
 介绍了如何用webpack构建ng1+es6应用， 原文：[Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack](http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/)
 <!--more-->
 
-### 来学一下如何用ng1.4, es6， material design和webpack来做一个应用吧！
+## 来学一下如何用ng1.4, es6， material design和webpack来做一个应用吧！
 
 angular1.4发布了。（现在1.x的最后版本是**1.5.8**， 1.5.9好像僵死在了beta)。
 
@@ -26,7 +26,7 @@ require('expose?angular!exports?window.angular!angular/angular.js');
 
 ---
 
-### DEMO
+## DEMO
 
 [这是demo地址](https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate)
 
@@ -50,7 +50,7 @@ require('expose?angular!exports?window.angular!angular/angular.js');
 
 ---
 
-### Webpack
+## Webpack
 
 如果你想知道webpack是干嘛的， 我建议你看我的上篇博客。
 
@@ -103,7 +103,7 @@ module.exports = {
 
 ---
 
-### 入口文件(lib/index.js)
+## 入口文件(lib/index.js)
 
 下面这个入口文件集合了我们应用的所有基本依赖的库：Angular, Material Design, 路由和icon。 我们用`import`这个es6的引入CommonJS模块的语法， 注入了`angularMaterial`和`angularUIRouter`作为模块依赖并输出默认模块。（你可以在单个文件输出多个模块， 如果没指定import那么获取到的就是默认模块。）
 
@@ -130,7 +130,7 @@ export default demoModule;
 
 ---
 
-### index.html
+## index.html
 
 index.html要做2件事。 一个是启动应用（就是`ng-app="demo"`）， 另外是引入js文件。（`src="{\%=o.htmlWebpackPlugin.assets[chunk]\%}"`）。
 
