@@ -4,20 +4,20 @@ date: 2016-08-09 14:33:13
 categories: 试水
 tags: [javascript,webpack,翻译]
 ---
-带有实例的webpack介绍， 原文：[Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/)
+带有实例的webpack介绍, 原文：[Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/)
 <!--more-->
 
-**webpack是一个模块化打包工具， 可以根据依赖处理模块来生成静态资源。 我们准备借鉴真实场景的应用作为例子来学习。**
+**webpack是一个模块化打包工具, 可以根据依赖处理模块来生成静态资源。 我们准备借鉴真实场景的应用作为例子来学习。**
 
 ---
 
-webpack正快速占领自动化构建市场。 我用了几个月， 在大部分需求上已经可以代替`Grunt`和`gulp`了。
+webpack正快速占领自动化构建市场。 我用了几个月, 在大部分需求上已经可以代替`Grunt`和`gulp`了。
 
 ## Webpack 加载器
 
-加载器是可以在编译中注入的代码片段， 加载器会在编译结束时被调用。
+加载器是可以在编译中注入的代码片段, 加载器会在编译结束时被调用。
 
-> webpack只能处理原生js， 而加载器用来把其他资源转化为js。 这样做的话每个资源都形成了一个模块。
+> webpack只能处理原生js, 而加载器用来把其他资源转化为js。 这样做的话每个资源都形成了一个模块。
 
 [我是一个例子的链接](https://github.com/shprink/webpack-examples)
 
@@ -49,7 +49,7 @@ module.exports = {
     }
 };
 ```
-上面配置的意思大概是：把入口文件设为`index.js`， 文件编译后会输出到`dist`这个目录里。 （作者笔误拼错单词了:p）
+上面配置的意思大概是：把入口文件设为`index.js`, 文件编译后会输出到`dist`这个目录里。 （作者笔误拼错单词了:p）
 
 ## 编译
 
@@ -64,7 +64,7 @@ webpack -p
 
 ## ES2015编译
 
-ES2015引进了一些我们马上就可以使用的新特性（箭头函数， 类， 生成器， 模块等）。为了使用ES2015我推荐使用[Babel](https://babeljs.io/)
+ES2015引进了一些我们马上就可以使用的新特性（箭头函数, 类, 生成器, 模块等）。为了使用ES2015我推荐使用[Babel](https://babeljs.io/)
 
 装一下babel：
 ```sh
@@ -77,10 +77,10 @@ loaders: [{
   loader: "babel-loader"
 }]
 ```
-你现在可以用ES2015写代码了， 需要根据配置里的正则引入， 当前的配置引入方式是`require('./src/index.es6.js');
+你现在可以用ES2015写代码了, 需要根据配置里的正则引入, 当前的配置引入方式是`require('./src/index.es6.js');
 
 ### 编译结果
-作者用ES2015的生成器写了一个斐波那契数列的输出， 然后用webpack加babel编译成了es5。 顺便说一下， 好处很明显， 代码量变少了， 类型明确了， 在编译的层面上进行了jshint。
+作者用ES2015的生成器写了一个斐波那契数列的输出, 然后用webpack加babel编译成了es5。 顺便说一下, 好处很明显, 代码量变少了, 类型明确了, 在编译的层面上进行了jshint。
 #### 编译前
 ```js
 // Generators
@@ -137,8 +137,8 @@ module.exports = fibonacci;
 
 ---
 
-这里有一段coffescript的编译介绍， 我不想看了， 本文头有原文链接。
-作者用的lib叫`cofffee-loader`， 所有用法和es6是一样的。
+这里有一段coffescript的编译介绍, 我不想看了, 本文头有原文链接。
+作者用的lib叫`cofffee-loader`, 所有用法和es6是一样的。
 
 ---
 
@@ -156,7 +156,7 @@ loaders: [{
   loader: "css-loader"
 }]
 ```
-老规矩， 你要引入css的话就要符合正则：`require('./src/index.css')`
+老规矩, 你要引入css的话就要符合正则：`require('./src/index.css')`
 
 ---
 
@@ -166,14 +166,14 @@ loaders: [{
 ```sh
 npm install autoprefixer-loader --save-dev
 ```
-我们很烦在各个浏览器上一些样式的写法是不同的。IE要加`-ms-`的前缀， 火狐是`-moz-`， chrome、opera、safari是`-webkit-`。 这个lib让您安心使用标准css， 不需要考虑浏览器语法兼容了。
+我们很烦在各个浏览器上一些样式的写法是不同的。IE要加`-ms-`的前缀, 火狐是`-moz-`, chrome、opera、safari是`-webkit-`。 这个lib让您安心使用标准css, 不需要考虑浏览器语法兼容了。
 ```js
 loaders: [{
   test: /\.css$/,
   loader: "css-loader!autoprefixer-loader"
 }]
 ```
-引入方式还是一样（我倒建议这里的规则要写特殊点， 毕竟前缀只是少数）
+引入方式还是一样（我倒建议这里的规则要写特殊点, 毕竟前缀只是少数）
 
 ### 编译结果
 #### 编译前
@@ -195,7 +195,7 @@ body {
 
 ## 编译SASS
 
-sass让你可以写css的时候可以用变量， 嵌套， 混合， 继承等。 用sass会很方便。
+sass让你可以写css的时候可以用变量, 嵌套, 混合, 继承等。 用sass会很方便。
 
 安装：
 ```sh
@@ -203,7 +203,7 @@ npm install css-loader sass-loader --save-dev
 ```
 webpack配置如下：
 （吐槽：终于有不一样的了）
-现在我们要同时使用2个加载器了！第一个加载器`sass-loader`（从右向左看）会把ssass编译成css然后交给css处理， 就是之前说的创建`style`标签之类的。
+现在我们要同时使用2个加载器了！第一个加载器`sass-loader`（从右向左看）会把ssass编译成css然后交给css处理, 就是之前说的创建`style`标签之类的。
 ```js
 loaders: [{
   test: /\.scss$/,
@@ -233,13 +233,13 @@ body {
 
 ---
 
-这里有段less的，使用的lib是`less-loader`， 用法和sass一样的。
+这里有段less的,使用的lib是`less-loader`, 用法和sass一样的。
 
 ---
 
 ## 移动文件
 
-我们可以移动任何文件， lib名字叫`file-loader`。
+我们可以移动任何文件, lib名字叫`file-loader`。
 
 安装：
 ```sh
@@ -263,7 +263,7 @@ loaders: [{
 
 ## 编码文件(encode files)
 
-有时候你不想通过http来拿资源。 比如：当你可以直接拿到encode过的资源的时候， 选择去http拿一个很小的图片还有什么意义呢？这个lib正是做了这个事情。 你需要做的只是决定什么编码的文件给多少限制（如果超过限制你会得到路径）。
+有时候你不想通过http来拿资源。 比如：当你可以直接拿到encode过的资源的时候, 选择去http拿一个很小的图片还有什么意义呢？这个lib正是做了这个事情。 你需要做的只是决定什么编码的文件给多少限制（如果超过限制你会得到路径）。
 
 安装：
 ```sh
@@ -272,7 +272,7 @@ npm install url-loader --save-dev
 
 配置如下：
 
-如果图片小于5k我们就拿他base64encoded， 不然就路径。
+如果图片小于5k我们就拿他base64encoded, 不然就路径。
 ```js
 loaders: [{
   test: /\.(png|jpg|gif)$/,
@@ -296,7 +296,7 @@ var imgSmall = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA" />';
 
 ## 引入HTML文件（require HTML files)
 
-`html-loader`可以把任何文件转成模块， 也可以引入任何图片。
+`html-loader`可以把任何文件转成模块, 也可以引入任何图片。
 安装：
 ```sh
 npm install html-loader --save-dev

@@ -5,14 +5,14 @@ categories: 试水
 tags: [翻译,webpack,angular 1.x]
 
 ---
-介绍了如何用webpack构建ng1+es6应用， 原文：[Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack](http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/)
+介绍了如何用webpack构建ng1+es6应用, 原文：[Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack](http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/)
 <!--more-->
 
-## 来学一下如何用ng1.4, es6， material design和webpack来做一个应用吧！
+## 来学一下如何用ng1.4, es6, material design和webpack来做一个应用吧！
 
-angular1.4发布了。（现在1.x的最后版本是**1.5.8**， 1.5.9好像僵死在了beta)。
+angular1.4发布了。（现在1.x的最后版本是**1.5.8**, 1.5.9好像僵死在了beta)。
 
-现在要介绍一个新的路由：一个由Pascal Percht开发的类似于angular-translate的转换系统， 加强了webpack， 没有‘劫持’的Browserify支持(CommonJS)(Browserify就是在web应用里可以像node一样require lib的一个lib)。 你可以像这样直接import angular：
+现在要介绍一个新的路由：一个由Pascal Percht开发的类似于angular-translate的转换系统, 加强了webpack, 没有‘劫持’的Browserify支持(CommonJS)(Browserify就是在web应用里可以像node一样require lib的一个lib)。 你可以像这样直接import angular：
 
 ```js
 import 'angular/angular.js';
@@ -35,7 +35,7 @@ require('expose?angular!exports?window.angular!angular/angular.js');
 
 ### 依赖(package.json)
 
-这个教程里我们会使用`AngularJS`,`Angular Material`,`UI router`（一个还没能可以上生产的路由）（其实现在早可以上了， 这文章在一年前， 作者眼光真是厉害）和`icon library`。
+这个教程里我们会使用`AngularJS`,`Angular Material`,`UI router`（一个还没能可以上生产的路由）（其实现在早可以上了, 这文章在一年前, 作者眼光真是厉害）和`icon library`。
 
 ```js
 "dependencies": {
@@ -52,7 +52,7 @@ require('expose?angular!exports?window.angular!angular/angular.js');
 
 ## Webpack
 
-如果你想知道webpack是干嘛的， 我建议你看我的上篇博客。
+如果你想知道webpack是干嘛的, 我建议你看我的上篇博客。
 
 我们要让webpack的加载器去编译es6并处理css和html文件。
 
@@ -105,7 +105,7 @@ module.exports = {
 
 ## 入口文件(lib/index.js)
 
-下面这个入口文件集合了我们应用的所有基本依赖的库：Angular, Material Design, 路由和icon。 我们用`import`这个es6的引入CommonJS模块的语法， 注入了`angularMaterial`和`angularUIRouter`作为模块依赖并输出默认模块。（你可以在单个文件输出多个模块， 如果没指定import那么获取到的就是默认模块。）
+下面这个入口文件集合了我们应用的所有基本依赖的库：Angular, Material Design, 路由和icon。 我们用`import`这个es6的引入CommonJS模块的语法, 注入了`angularMaterial`和`angularUIRouter`作为模块依赖并输出默认模块。（你可以在单个文件输出多个模块, 如果没指定import那么获取到的就是默认模块。）
 
 ```js
 // Import angular
@@ -132,7 +132,7 @@ export default demoModule;
 
 ## index.html
 
-index.html要做2件事。 一个是启动应用（就是`ng-app="demo"`）， 另外是引入js文件。（`src="{\%=o.htmlWebpackPlugin.assets[chunk]\%}"`）。
+index.html要做2件事。 一个是启动应用（就是`ng-app="demo"`）, 另外是引入js文件。（`src="{\%=o.htmlWebpackPlugin.assets[chunk]\%}"`）。
 
 ```html
 <!DOCTYPE html>
@@ -162,7 +162,7 @@ demoModule.run(($log) => {
 
 ### 创建你自己的模块
 
-你的应用已经运行了， 我们来用es6创建一个home模块吧！
+你的应用已经运行了, 我们来用es6创建一个home模块吧！
 ```js
 // Create a new module
 let homeModule = angular.module('demo.home', []);
@@ -189,7 +189,7 @@ export default function($scope) {
     'ngInject';
 }
 ```
-`ngInject`是`ng-annotate`的注释， 让angular可以进入严格模式， 预知详情可以复制以下链接**http://julienrenaux.fr/2015/01/18/angularjs-1-x-open-source-projects-to-follow-in-2015/#Ng-Annotate**
+`ngInject`是`ng-annotate`的注释, 让angular可以进入严格模式, 预知详情可以复制以下链接**http://julienrenaux.fr/2015/01/18/angularjs-1-x-open-source-projects-to-follow-in-2015/#Ng-Annotate**
 
 我们可以这样引入方法：
 ```js

@@ -4,7 +4,7 @@ date: 2016-08-01 15:44:33
 categories: 代码
 tags: javascript
 ---
-javascript的没什么用的细节收集， 内容不断更新
+javascript的没什么用的细节收集, 内容不断更新
 <!--more-->
 ---
 ```js
@@ -31,4 +31,4 @@ var boolean = !!"string";
 var arr = [1,2,3], arrlen = arr.length;
 for(let i = arrlen; i >= 0; i --) {}
 ```
-效率提高， 数组是反过来遍历的。 原理是js--比++快(引擎已优化：length只需要计算一次)。
+效率提高, 数组是反过来遍历的。 原理是js--比++快(引擎已优化：length只需要计算一次)。
