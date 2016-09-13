@@ -31,4 +31,4 @@ var boolean = !!"string";
 var arr = [1,2,3], arrlen = arr.length;
 for(let i = arrlen; i >= 0; i --) {}
 ```
-效率提高, 数组是反过来遍历的。 原理是js--比++快(引擎已优化：length只需要计算一次)。
+效率提高, 数组是反过来遍历的. 原理是js--比++快(引擎已优化: length只需要计算一次).
