@@ -161,36 +161,52 @@ var zeroForeverIterator = {
 };
 ```
 
-每次这里的`.next()`方法被调用都会返回一个相同的结果, 告诉`for-of`循环我们还没有遍历完; 并且返回的value是0. 这意味着`for (value of zeroForeverIterator) {}`将是一个无限循环. 当然一个普通的遍历器不会像这次尝试一样.
+每次这里的`.next()`方法被调用都会返回一个相同的结果, 告诉`for-of`循环我们还没有遍历完; 并且返回的value是0. 
+这意味着`for (value of zeroForeverIterator) {}`将是一个无限循环. 当然一个普通的遍历器不会像这次尝试一样.
 
 这种有着`.done`和`.value`属性的遍历器设计, 看起来和其他语言的遍历器工作方式不同. Java里遍历器有`.hasNext()`和`.next()`方法. Python里只有`.next()`方法并会在没有值来进行遍历的时候抛出`StopIteration`. 但三种设计其实包含的基本信息是一样的.
 
-可遍历对象也可以选择性得包含`.return()`和`.throw(exc)`方法. `for-of`循环会在循环因为`break`或`return`语句过早退出的时候调用`.return(). 如果遍历器需要清理或释放正在使用的资源那就可以包含`.return()`方法, 大多数遍历器不需要. `.throw(exc)`方法比较特殊: `for-of`永远不会调用他. 我们会在下篇文章更多了解他.
+可遍历对象也可以选择性得包含`.return()`和`.throw(exc)`方法. `for-of`循环会在循环因为`break`或`return`语句过早退出的时候调用`.return().`如果遍历器需要清理或释放正在使用的资源那就可以包含`.return()`方法, 大多数遍历器不需要. `.throw(exc)`方法比较特殊: `for-of`永远不会调用他. 我们会在下篇文章更多了解他.
 
- 
+ 我们已经知道了所有的细节, 现在我们可以写一个简单的`for-of`循环并重载他隐性调用的方法了.
+
+首先写一下`for-of`循环:
+
+```js
+for (VAR of ITERABLE) {
+    STATEMENTS
+}
+```
+
+以下这段代码是差不多等价的, 用了隐性方法和一些临时变量.
+
+```js
+var $interator = ITERABLE[Symbol.iterator]();
+var $result = $iterator.next();
+while (!$result.done) {
+    VAR = $result.value;
+    $result = $iterator.next();
+}
+```
+
+以上代码没有表现`.return()`是如何处理的. 
+我可以加上, 但我觉得会使我们搞不清发生了什么, 更不用说原理了.
+`for-of`循环很容易用, 但底层有很多内容.
+
+## 我们什么时候可以开始用他?
+
+`for-of`循环被现在所有火狐支持. chrome的话要去`chrome://flags`开启'Experimental JavaScript'选项. 也被微软的浏览器spartan支持(并不是IE). 当然如果你你需要支持IE或者Safari, 你可以使用类似`Babel`或谷歌的`Traceur`这样的编译器来把你的es6代码转为es5.
 
 
+如果是服务端, 就不需要编译器了. 高版本的nodejs就可以.
 
+## {done: true}
 
+哦耶!
 
+这篇文章结束啦, 但我们在`for-of`的学习还没有结束.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+还有更多es6的新品种对象可以和`for-of`一起工作. 因为是下周的主题所以我没提. 我觉得这是es里最魔性的新特性. 如果你已经在Python和C#里遇到过你可能会觉得吃惊. 但这是写遍历器最简单的方法, 并且对重构友善, 改变你写异步代码的方式, 无论在浏览器还是服务端. 敬请期待下周的es6-in-depth之生成器.
 
 ---
 

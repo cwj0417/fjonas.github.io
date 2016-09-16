@@ -12,7 +12,8 @@ tags: [翻译,webpack,angular 1.x]
 
 angular1.4发布了.（现在1.x的最后版本是**1.5.8**, 1.5.9好像僵死在了beta).
 
-现在要介绍一个新的路由: 一个由Pascal Percht开发的类似于angular-translate的转换系统, 加强了webpack, 没有‘劫持’的Browserify支持(CommonJS)(Browserify就是在web应用里可以像node一样require lib的一个lib). 你可以像这样直接import angular: 
+现在要介绍一个新的路由: 一个由Pascal Percht开发的类似于angular-translate的转换系统, 加强了webpack, 没有‘劫持’的Browserify支持(CommonJS)
+(Browserify就是在web应用里可以像node一样require lib的一个lib). 你可以像这样直接import angular: 
 
 ```js
 import 'angular/angular.js';
@@ -105,7 +106,9 @@ module.exports = {
 
 ## 入口文件(lib/index.js)
 
-下面这个入口文件集合了我们应用的所有基本依赖的库: Angular, Material Design, 路由和icon. 我们用`import`这个es6的引入CommonJS模块的语法, 注入了`angularMaterial`和`angularUIRouter`作为模块依赖并输出默认模块.（你可以在单个文件输出多个模块, 如果没指定import那么获取到的就是默认模块.）
+下面这个入口文件集合了我们应用的所有基本依赖的库: Angular, Material Design, 路由和icon. 
+我们用`import`这个es6的引入CommonJS模块的语法, 注入了`angularMaterial`和`angularUIRouter`作为模块依赖并输出默认模块.
+（你可以在单个文件输出多个模块, 如果没指定import那么获取到的就是默认模块.）
 
 ```js
 // Import angular
