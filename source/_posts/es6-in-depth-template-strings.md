@@ -11,7 +11,7 @@ tags: [ES2015,es6-in-depth,翻译]
 
 ## 反引号
 
-es6引入了一个新的字符串字面语法叫做*模版字符串*. 他看起来和普通字符串差不多, 除了用了反引号`\``而不是通常的引号`'`或者`"`. 简单的例子的话就是以下的单纯字符串:
+es6引入了一个新的字符串字面语法叫做*模版字符串*. 他看起来和普通字符串差不多, 除了用了反引号<code>\`</code>而不是通常的引号`'`或者`"`. 简单的例子的话就是以下的单纯字符串:
 
 ```js
 context.fillText(`Ceci n'est pas une chaîne.`, x, y);
@@ -36,7 +36,7 @@ function authorize(user, action) {
 
 + 模版占位符可以是任何javascript表达式. 函数调用, 算数表达式等等都是可以的. (如果你真的想, 甚至可以在模版字符串里嵌入另一个模版字符串, 这样叫做*模版嵌套*)
 + 如果插值内容不是字符串, 他会被用通常的规则转为字符串. 比如`action`是一个对象的话, 就会调用他的`toString()`方法.
-+ 如果你想在模版字符串中写反引号, 那么就要把他转义为`\\``, 得到的效果如同`"\`"`.
++ 如果你想在模版字符串中写反引号, 那么就要把他转义为<code>\\\`</code>, 得到的效果如同<code>"\`"</code>.
 + 同样的, 如果你想要在模版字符串中包含这2个字母`${`, 你也可以用反斜杠把他们转义成`write \${ or $\{`.
 
 和普通字符串不同, 模版字符串可以包含多行:
@@ -112,7 +112,7 @@ function SaferHTML(templateData) {
 }
 ```
 
-这样做以后, 标签模版的`SaferHTML\`<p>${bonk.sender} has sent you a bonk.</p>\``会被展开成` "<p>ES6&lt;3er has sent you a bonk.</p>"` 这样用户及时遇到恶意的攻击也是安全的, 例如: ` Hacker Steve \<script\>alert('xss');</script>` 的发起攻击.
+这样做以后, 标签模版的<code>SaferHTML\`&lt;p&gt;${bonk.sender} has sent you a bonk.&lt;/p&gt;\`</code>会被展开成<code>"&lt;p&gt;ES6& lt;3er has sent you a bonk.&lt;/p&gt;"</code> 这样用户及时遇到恶意的攻击也是安全的, 例如: ` Hacker Steve <script>alert('xss');</script>` 的发起攻击.
 
 (顺带一提, 如果函数的参数对象太多让你很烦, 下周我会给大家介绍一个我想你会喜欢的新特性)
 
@@ -124,7 +124,75 @@ function SaferHTML(templateData) {
 
 从安全角度来说, 我的`SaferHTML`其实相当弱. html不同的地方需要有不同的转义策略; `SaferHTML`没有把他们都转义. 但只需要再折腾一下, 你就可以写出比`SaferHTML`智能很多的函数, 可以分辨每个在`templateData`中的字节, 知道哪些是html代码; 那些实在元素属性中的, 他们需要被转义`'`和`"`; 那些是在url的参数里的, 这些需要被url编码; 等等. 他们每个都需要被正确地替换.
 
-这样听起来是不是有点牵强, 因为html转换太慢了. 幸运的是, 
+这样听起来是不是有点牵强, 因为html转换太慢了. 幸运的是, 标签模板的字符串部分被二次编译时不会再有变化. `SaferHTML`会把转换的结果缓存起来来提升以后编译的速度. (缓存可以是[WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)是es6另一个特性, 以后也会讲到).
+
++ 模板字符串没有内置的i18n特性. 但可以用标签来实现. 有一篇[Jack hsu的文章](http://jaysoo.ca/2014/03/20/i18n-with-es6-template-strings/)写了我们第一步大概该如何做, 以下样例抛砖引玉:
+
+```js
+i18n`Hello ${name}, you have ${amount}:c(CAD) in your bank account.`
+// => Hallo Bob, Sie haben 1.234,56 $CA auf Ihrem Bankkonto.
+```
+
+注意到这个例子, `name`和`amout`是javascript, 但有一个不熟悉的代码, `:c(CAD)`, Jack把他放在了字符串部分. javascript是javascript引擎处理的部分; 字符串部分就由Jack的`i18n`标签来处理. 我们可以从`i18n`的文档中读到`:c(CAD)`意思是`amount`是一个货币计量, 加拿大刀.
+
+以上是关于标签模板的事情.
+
++ 模板字符串不能代替Mustache和Nunjucks, 一部分是因为他没有内置的循环和条件语句. 现在我们开始看看你可以如何修复这个问题. 如果js没有提供这个特性, 那么我可以写个标签来提供这个特性.
+
+```js
+// Purely hypothetical template language based on
+// ES6 tagged templates.
+var libraryHtml = hashTemplate`
+  <ul>
+    #for book in ${myBooks}
+      <li><i>#{book.title}</i> by #{book.author}</li>
+    #end
+  </ul>
+`;
+```
+
+灵活性还不止于此. 注意标签函数的参数不会被自动转换成字符串. 他们可以是任何东西. 包括返回值也一样, 可以是任何东西. 标签模板甚至也不一定是字符串! 你可以用标签字符串来创建: 正则, dom树, 图片, promise, js数据结构, openGL 的shader...
+**标签模板让类库开发者来创造更多强大的面向领域的语言.** 这些语言可能看起来不像js, 但他们可以无缝插入js并与其余语言智能互动. 我一时想不出别的有这样特性的语言了. 我不知道这个特性会给我们带来什么, 这种可能性让人兴奋.
+
+## 我们什么时候可以使用他?
+
+用高端浏览器和nodejs, 或者是typescript.
+
+## 等等..那markdown呢?
+
+嗯哼?
+
+噢.. 好问题.
+
+(这个缓解并没有在讲js, 如果你不用markdown, 你可以跳过这里)
+
+用模板字符串的话, markdown和javascript都用了<code>`</code>来表示一些特殊的东西. 其实在markdown里, 反引号是用来分隔文本中的``code``(代码)的.
+
+这带来了些小问题! 如果你写了以下的markdown文档:
+
+```
+To display a message, write `alert(`hello world!`)`.
+```
+
+他可能会被显示成:
+
+   To display a message, write `alert(h`ello world!).
+
+注意markdown是不存在反引号的. markdown会把所有反引号认为是代码并把他们用html标签替换.
+
+为了避免这点, 我告诉你一个新手不太知道的事: 你可以用多个反引号来作为代码分隔符, 像这样:
+
+```
+To display a message, write ``alert(`hello world!`)``.
+```
+
+[这里](https://gist.github.com/jorendorff/d3df45120ef8e4a342e5)有详情, 这些使用markdown写的你可以看一下.
+
+## 下一章
+
+下一章我们将说一下许多程序员在别的语言中喜欢了几十年的两个特性: 一个是为了尽量节省参数的人, 一个是为了需要写很多参数的人. --我会讲一下函数的参数问题.
+
+我们将看到在在火狐中实现这个特性的人的眼里这个特性是怎么样的. 下周我们的嘉宾Benjamin Peterson带来的es6的rest默认参数和rest参数.
 
 ---
 
