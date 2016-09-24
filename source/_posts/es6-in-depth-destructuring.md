@@ -5,9 +5,11 @@ categories: 代码
 tags: [ES2015,es6-in-depth,翻译]
 ---
 
-## 什么是解构赋值?
-
 解构赋值允许你通过和数组对象相近的语法来使用数组或对象的属性. 他的语法非常简单. 而且还比传统的获取属性方法更清晰.
+
+<!--more-->
+
+## 什么是解构赋值?
 
 不使用解构赋值, 你获取一个数组前三个属性的语法可能是这样的:
 
@@ -23,6 +25,129 @@ var third = someArray[2];
 var [first, second, third] = someArray;
 ```
 
+## 解构数组与可遍历数据
+
+我们已经看了一个解构赋值的示例了, 他的语法基本形式是:
+
+```js
+[ variable1, variable2, ..., variableN] = array;
+```
+
+这样做会把数组中对应的变量赋值给variable1到variableN. 如果你想同时声明变量, 你可以在赋值前加上表示声明的`var`, `let`, `const`.
+
+```js
+var [ variable1, variable2, ..., variableN ] = array;
+let [ variable1, variable2, ..., variableN ] = array;
+const [ variable1, variable2, ..., variableN ] = array;
+```
+
+事实上上面代码的`variable`并不正确, 因为你可以无限层嵌套:
+
+```js
+var [foo, [[bar], baz]] = [1, [[2], 3]];
+console.log(foo);
+// 1
+console.log(bar);
+// 2
+console.log(baz);
+// 3
+```
+
+而且你可以跳过数组的一些属性:
+
+```js
+var [,,third] = ["foo", "bar", "baz"];
+console.log(third);
+// "baz"
+```
+
+你也可以用"rest"风格来拿到尾部的多个内容.
+
+```js
+var [head, ...tail] = [1, 2, 3, 4];
+console.log(tail);
+// [2, 3, 4]
+```
+
+如果你尝试获取不存在的变量, 你会获得`undefined`, 就像你去获取一个不存在的索引一样:
+
+```js
+console.log([][0]);
+// undefined
+
+var [missing] = [];
+console.log(missing);
+// undefined
+```
+
+注意解构以后为数组赋值也可以在任何可遍历对象上执行:
+
+```js
+function* fibs() {
+  var a = 0;
+  var b = 1;
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+var [first, second, third, fourth, fifth, sixth] = fibs();
+console.log(sixth);
+// 5
+```
+## 解构对象
+
+对象的解构赋值让我们可以把值绑定到对象的不同属性上. 你指定的绑定属性需要和你解构的字段一样.
+
+```js
+var robotA = { name: "Bender" };
+var robotB = { name: "Flexo" };
+
+var { name: nameA } = robotA;
+var { name: nameB } = robotB;
+
+console.log(nameA);
+// "Bender"
+console.log(nameB);
+// "Flexo"
+```
+
+当我们需要赋值的变量属性名一样的时候下面这个快捷的语法很有用:
+
+```js
+var { foo, bar } = { foo: "lorem", bar: "ipsum" };
+console.log(foo);
+// "lorem"
+console.log(bar);
+// "ipsum"
+```
+
+和数组的嵌套解构一样, 对象也可以这样:
+
+```js
+var complicatedObj = {
+  arrayProp: [
+    "Zapp",
+    { second: "Brannigan" }
+  ]
+};
+
+var { arrayProp: [first, { second }] } = complicatedObj;
+
+console.log(first);
+// "Zapp"
+console.log(second);
+// "Brannigan"
+```
+
+同样的, 当你尝试获取一个不存在的属性后也会得到`undefined`:
+
+```js
+var { missing } = {};
+console.log(missing);
+// undefined
+```
 
 
 
