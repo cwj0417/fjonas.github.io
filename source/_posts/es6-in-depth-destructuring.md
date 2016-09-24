@@ -149,6 +149,179 @@ console.log(missing);
 // undefined
 ```
 
+有一个需要注意的地方是, 你在没有声明变量前(没有`let`,`const`或`var`)进行了对象的解构赋值就会发生:(数组的话可以不声明)
+
+```js
+{ blowUp } = { blowUp: 10 };
+// Syntax error
+```
+
+发生这个语法错误的原因是js语法会告诉引擎把`{`开头的语句都认为是一个语句块(打个比方, `{console}`会被认为是个合法的语句块). 解决的方法是在这个表达式两边加上括号.
+
+```js
+({ safe } = {});
+// No errors
+```
+
+## 解构不是数组,对象,或可遍历对象的值
+
+当你尝试去解构`null`或者`undefined`, 你会获得一个TypeError:
+
+```js
+var {blowUp} = null;
+// TypeError: null has no properties
+```
+
+但你如果尝试解构类似布尔值, 数字, 字符串这些乱七八糟的数据类型时, 你会获得`undefined`:
+
+```js
+var {wtf} = NaN;
+console.log(wtf);
+// undefined
+```
+
+这看起来很莫名, 但仔细考虑原因其实很简单. 当我们使用了赋值语句, 待被解构的值需要被[转换为对象](https://tc39.github.io/ecma262/#sec-requireobjectcoercible)来被解构. 大多类型都可以被转为对象, 但是`null`和`undefined`无法被转换. 举一反三, 当给数组解构赋值时, 目标值需要[有遍历器](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-getiterator).
+
+## 默认值
+
+你也可以在解构可能没有值的时候设置默认值:
+
+```js
+var [missing = true] = [];
+console.log(missing);
+// true
+
+var { message: msg = "Something went wrong" } = {};
+console.log(msg);
+// "Something went wrong"
+
+var { x = 3 } = {};
+console.log(x);
+// 3
+```
+
+## 解构赋值的实际应用
+
+### 函数参数定义
+
+作为开发者, 我们现在可以提供更人性化的api: 接受一个包含多个属性的对象而不需要使用者来记住每个参数的顺序. 我们可以使用解构赋值来简化我们取到对应属性的过程:
+
+```js
+function removeBreakpoint({ url, line, column }) {
+  // ...
+}
+```
+### 配置参数对象
+
+展开上一个例子, 我们同样可以给解构参数的属性默认值. 当我们需要给有很多属性的参数对象配置一些合理的默认值时这个特性就很有用.举个例子, jQuery的`ajax`函数接受一个对象配置作为第二个参数, 所以可以被写成这样:
+
+```js
+jQuery.ajax = function (url, {
+  async = true,
+  beforeSend = noop,
+  cache = true,
+  complete = noop,
+  crossDomain = false,
+  global = true,
+  // ... more config
+}) {
+  // ... do stuff
+};
+```
+
+这样写避免了给每个属性的默认值重复写`var foo = config.foo || theDefaultFoo;`
+
+### 与es6的遍历协议配合
+
+es6定义了遍历器的协议, 在我们之前的章节讲过了. 当我们遍历[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)时, 会得到一系列的`[key, value]`对. 我们解构他时可以同时获得键和值:
+
+```js
+var map = new Map();
+map.set(window, "the global");
+map.set(document, "the document");
+
+for (var [key, value] of map) {
+  console.log(key + " is " + value);
+}
+// "[object Window] is the global"
+// "[object HTMLDocument] is the document"
+```
+
+只遍历键:
+
+```js
+for (var [key] of map) {
+  // ...
+}
+```
+
+或者只遍历值:
+
+```js
+for (var [,value] of map) {
+  // ...
+}
+```
+
+### 多个返回值
+
+语言特性里没有被假如返回多个值, 是因为没有必要, 因为你可以解构函数返回值:
+
+```js
+function returnMultipleValues() {
+  return [1, 2];
+}
+var [foo, bar] = returnMultipleValues();
+```
+
+当然你也可以你也可以把对象作为返回值来解构:
+
+```js
+function returnMultipleValues() {
+  return {
+    foo: 1,
+    bar: 2
+  };
+}
+var { foo, bar } = returnMultipleValues();
+```
+
+以上两种都比创建一个临时变量优雅:
+
+```js
+function returnMultipleValues() {
+  return {
+    foo: 1,
+    bar: 2
+  };
+}
+var temp = returnMultipleValues();
+var foo = temp.foo;
+var bar = temp.bar;
+```
+
+或者使用延续传值的形式:
+
+```js
+function returnMultipleValues(k) {
+  k(1, 2);
+}
+returnMultipleValues((foo, bar) => ...);
+```
+
+### 从commonJS模块中import name
+
+还没有使用es6的模块? 还在用commonJS的模块? 没问题! 当我们引入某个commonJS的模块X, 模块X提供了比你需要得更多的功能是很正常的. 使用了解构, 你可以引入你需要的模块而避免污染你的命名空间:
+
+```js
+const { SourceMapConsumer, SourceNode } = require("source-map");
+```
+
+(如果你在用es6的模块, 你应该知道`import`声明有类似的语法)
+
+## 结论
+
+我们已经知道了解构在各种小场景中都很有用. 在火狐中我们已经有一些这方面的经验了. Lar Hansen在十年前就在Opera里引入了解构, Brendan Eich在后来给火狐添加了这个特性. 解构赋值已经被使用到了我们每天对js的使用中, 让我们的代码更简短.
 
 
 ---
