@@ -133,9 +133,37 @@ element[isMoving] = true;
 +	如果你已经获得symbol, 那么拿到属性值就很容易, 上面已经展示了如何get和set`element[isMoving]`, 如果有需要的话我们同样也可以调用`if(isMoving in element)`甚至`delete element[isMoving]`.
 +	另一方面, 上面所有这些都需要`isMoving`在作用域内. 这让symbol可以用来实现弱封装: 一个模块可以创建一些sybol来给自己的object使用并且**不用担心与其他代码创建的属性冲突**.
 
+因为symbol键是被设计来避免冲撞的, javascript大多数普通的遍历对象的方法都会忽略symbol键. 比如唯一的获得对象字符串键的`for-in`循环. `Object.keys(obj)`和`Object.getOwnPropertyNames(obj)`也是如此. 但symbol实际上不是私有的: 通过新的api`Object.getOwnPropertySymbols(obj)`来列出一个对象的symbol. 另外一个api`Reflect.ownKeys(obj)`, 可以同时返回字符串键和symbol键. (Reflect将会在下篇文章里说.)
 
+看起来lib和框架可能会更多使用symbol, 我们接下来也会看到es6让我们看到他有广泛的用途.
 
+## symbol的三种放置
 
+有三种方法可以获取到symbol.
+
++	**调用`Symbol()`**. 正如之前说的, 这样调用每次都会返回一个新的唯一的symbol.
++	**调用`Symbol.for(string)`**. 获得一个叫做*symbol寄存器*中的symbol集合. 与被`Symbol()`定义的唯一symbol不同, 在symbol寄存器中的symbol是共享的. 如果你调用`Symbol.for('cat')`三次,  你会得到同一个symbol. symbol寄存器可以用在多个web页面或者一个页面多个模块的情景下.
++	**使用类似`Symbol.iterator`的形式, 这是标准定义的**. 一些symbol已经被标准创建了. 每个都有他们特殊的用途.
+
+如果你仍然没有确定symbol是不是那么有用, 下个章节很有趣, 会告诉你symbol已经被实践证明是有用的.
+
+## es6标准中的symbol的使用.
+
+我们已经知道es6用symbol来避免与现有代码的冲突. 几周前, 我写过一个iterator的文章, 我们看到了循环:`fro (var item of myArray)` 以`myArray[Symbol.iterator]()`开头. 我提到过这个可以被写作`myArray.iterator()`, 但是写作symbol更利于兼容性.
+
+现在我们已经吧symbol讲到这个程度了, 也很容易理解上面的代码的意思和原理了.
+
+下面是几个es6使用的著名的symbol.
+
++	**使`instanceof`可拓展**. 在es6中, 表达式:`object instanceof constructor`被认为是构造方法的一个方法:`constructor[Symbol.hasInstance](object)`. 这意味了可拓展性.
++	**解决新特性和旧代码的冲突**. 这又点难理解, 我们会发现*只是写了一些es6的`Array`方法*就把整个页面写崩了. 其他的web标准也存在类似的问题: 只是用了一个新方法就把浏览器整个页面搞挂了. 但是我们发现, 这种页面崩坏大多由一种被称作*不稳定范围的特性*导致的, 所以es6引入了一个特殊的symbol:`Symbol.unscopables`, 这样web标准可以防止我们使用了不稳定的特性而弄崩页面.
++	**支持字符串匹配的新种类**. 在es6里, `str.match(myObject)`会尝试吧`myObject`转换为`RegExp`. 在es6, js首先会去检查`myObject`是否存在`myObject[Symbol.match](str)`. 现在各种lib就可以提供自定义的parse字符串的类来替换所有`RegExp`影响的地方.
+
+以上这些用法其实还很窄. 这还很难看到这个特性对我们每天编码的巨大影响. 来日方长. 这些被标准定义的symbol是js对php和python中的`__doubleUnderscores`(魔术方法)的改进版本. js标准会在将来给语言增加更多新的钩子并没有影响现有代码的危险.
+
+## 如何可以用es6的sybol?
+
+用一些polyfill的lib.
 
 
 
