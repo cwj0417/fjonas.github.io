@@ -161,13 +161,8 @@ element[isMoving] = true;
 
 以上这些用法其实还很窄. 这还很难看到这个特性对我们每天编码的巨大影响. 来日方长. 这些被标准定义的symbol是js对php和python中的`__doubleUnderscores`(魔术方法)的改进版本. js标准会在将来给语言增加更多新的钩子并没有影响现有代码的危险.
 
-## 如何可以用es6的sybol?
+## 如何可以用es6的symbol?
 
 用一些polyfill的lib.
-
-
-
-
-
 
 es in depth 系列 [目录](/2016/09/10/es6-in-depth-content/) [原文地址](https://hacks.mozilla.org/category/es6-in-depth/)
