@@ -12,8 +12,7 @@ tags: [翻译,webpack,angular 1.x]
 
 angular1.4发布了.（现在1.x的最后版本是**1.5.8**, 1.5.9好像僵死在了beta).
 
-现在要介绍一个新的路由: 一个由Pascal Percht开发的类似于angular-translate的转换系统, 加强了webpack, 没有‘劫持’的Browserify支持(CommonJS)
-(Browserify就是在web应用里可以像node一样require lib的一个lib). 你可以像这样直接import angular: 
+现在要介绍一个新的路由: 一个由Pascal Percht开发的类似于angular-translate的转换系统, 加强了webpack, 没有‘劫持’的Browserify支持(CommonJS)(Browserify就是在web应用里可以像node一样require lib的一个lib). 你可以像这样直接import angular: 
 
 ```js
 import 'angular/angular.js';

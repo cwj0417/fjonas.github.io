@@ -1,1 +1,1 @@
-git add . && git commit -m'update' && git push blog master:source
+git add . && git commit -m'update' && git push blog source:source

@@ -261,4 +261,6 @@ function makeNoise_async() {
 
 接下来: 一些会对你每天都要写的代码有影响的东西. 请期待下周的es6-in-depth之模板字符串.
 
+---
+
 es in depth 系列 [目录](/2016/09/10/es6-in-depth-content/) [原文地址](https://hacks.mozilla.org/category/es6-in-depth/)

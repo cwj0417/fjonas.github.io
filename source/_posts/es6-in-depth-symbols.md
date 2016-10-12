@@ -165,4 +165,6 @@ element[isMoving] = true;
 
 用一些polyfill的lib.
 
+---
+
 es in depth 系列 [目录](/2016/09/10/es6-in-depth-content/) [原文地址](https://hacks.mozilla.org/category/es6-in-depth/)

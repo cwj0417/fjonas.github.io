@@ -55,13 +55,7 @@ function animalSentence(animals2="tigers", animals3="bears") {
 }
 ```
 
-在每个参数中, `=`的值代表如果调用时没传入值的默认参数. 所以
-`animalSentence()`会返回
-` "Lions and tigers and bears! Oh my!"`,
- `animalSentence("elephants")`会返回
-`"Lions and elephants and bears! Oh my!"`,
-`animalSentence("elephants", "whales")`会返回
-`"Lions and elephants and whales! Oh my!"`.
+在每个参数中, `=`的值代表如果调用时没传入值的默认参数. 所以`animalSentence()`会返回` "Lions and tigers and bears! Oh my!"`, `animalSentence("elephants")`会返回`"Lions and elephants and bears! Oh my!"`,`animalSentence("elephants", "whales")`会返回`"Lions and elephants and whales! Oh my!"`.
 
 默认参数还有一些细节:
 
@@ -73,12 +67,9 @@ function animalSentence(animals2="tigers", animals3="bears") {
       return `Lions and ${animals2} and ${animals3}! Oh my!`;
     }
     ```
-    然后`animalSentenceFancy("bears")`的调用会返回
-    `"Lions and bears and sealions. Oh my!"`.
+    然后`animalSentenceFancy("bears")`的调用会返回`"Lions and bears and sealions. Oh my!"`.
 
-+   传入`undefined`会被认为没有传入任何参数. 所以
-    `animalSentence(undefined, "unicorns")`的返回结果是
-    `"Lions and tigers and unicorns! Oh my!"`.
++   传入`undefined`会被认为没有传入任何参数. 所以`animalSentence(undefined, "unicorns")`的返回结果是`"Lions and tigers and unicorns! Oh my!"`.
 
 +   没有被保留默认值的参数默认为undefined, 所以
     ```js

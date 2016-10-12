@@ -323,7 +323,6 @@ const { SourceMapConsumer, SourceNode } = require("source-map");
 
 我们已经知道了解构在各种小场景中都很有用. 在火狐中我们已经有一些这方面的经验了. Lar Hansen在十年前就在Opera里引入了解构, Brendan Eich在后来给火狐添加了这个特性. 解构赋值已经被使用到了我们每天对js的使用中, 让我们的代码更简短.
 
-
 ---
 
 es in depth 系列 [目录](/2016/09/10/es6-in-depth-content/) [原文地址](https://hacks.mozilla.org/category/es6-in-depth/)
