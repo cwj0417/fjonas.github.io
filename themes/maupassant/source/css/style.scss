@@ -1952,3 +1952,47 @@ em.search-keyword {
         height:56px;
     }
 }
+
+//右侧文章目录
+#outline a {
+    color:inherit;
+    display: inline-block;
+    border-left:4px solid rgba(255,255,255,0);
+    padding: 5px;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+}
+.outline-title {
+    padding: 10px;
+    font-size: 1.4em;
+}
+img {
+    max-width: 100%;
+}
+.sidebar a {
+    color: #545454;
+}
+.active{
+    color: white !important;
+    border-left: 4px solid #000000 !important;
+    background: rgb(223, 122, 203);
+}
+.active li {
+    display: block !important;
+}
+.depth2 > a {
+    text-indent: 1em;
+    font-size: 0.95em;
+}
+.depth3 > a {
+    text-indent: 2em;
+    font-size: 0.9em;
+}
+.depth4 > a {
+    text-indent: 3em;
+    font-size: 0.85em;
+}
+.depth2 > li{
+    display: none;
+}
