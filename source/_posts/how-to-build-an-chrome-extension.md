@@ -1,5 +1,5 @@
 ---
-title: 谷歌拓展程序试水
+title: 谷歌拓展程序初体验
 date: 2016-11-07 20:49:42
 categories: 试水
 tags: [chrome,vue,chrome extension]
