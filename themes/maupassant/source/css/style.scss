@@ -517,9 +517,9 @@ pre {
     transform:scaleX(-1);
     opacity: 0;
     transform-origin: 0 100%;
-    -webkit-transition: all .6s;
-    -moz-transition: all .6s;
-    transition: all .6s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
     -webkit-animation: backtotop 5s infinite;
     -o-animation: backtotop 5s infinite;
     animation: backtotop 5s infinite;
@@ -538,9 +538,8 @@ pre {
     }
 }
 #rocket:hover {
-    -webkit-animation: backtotop 0;
-    -o-animation: backtotop 0;
-    animation: backtotop 0;
+    width: 82px;
+    height: 82px;
     i {
       background-position: 50% 100%;
       -webkit-animation: flaming .7s infinite;
