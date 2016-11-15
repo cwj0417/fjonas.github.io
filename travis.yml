@@ -1,9 +1,9 @@
 language: node_js
 node_js: "6"
-install: 
- - npm install
 script:
- - hexo d
+ - hexo d -g
+branches:
+	only: source
 env:
  global:
   - GH_REF: github.com/fjonas/fjonas.github.io
