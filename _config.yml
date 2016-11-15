@@ -4,15 +4,15 @@
 
 # Site
 title: EL PSY CONGROO
-subtitle: 陈文俊的博客
-description: 陈文俊的博客
+subtitle: Jin's Blog
+description: chen wen jun's blog
 author: chen wenjun
 language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://nujnewnehc.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
