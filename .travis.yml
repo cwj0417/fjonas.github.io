@@ -3,7 +3,7 @@ node_js: "6"
 script:
  - hexo d -g
 branches:
-	only: source
+ only: source
 env:
  global:
   - GH_REF: github.com/fjonas/fjonas.github.io
