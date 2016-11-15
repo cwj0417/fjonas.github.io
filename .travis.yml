@@ -1,25 +1,14 @@
 language: node_js
 node_js: '6'
-before_script:
+before_install:
+- openssl aes-256-cbc -K $encrypted_98844b460339_key -iv $encrypted_98844b460339_iv -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- eval $(ssh-agent)
+- ssh-add ~/.ssh/id_rsa
+- cp .travis/ssh_config ~/.ssh/config
 - git config --global user.email "731028571@qq.com"
 - git config --global user.name "fjonas"
 script:
 - hexo d -g
 branches:
   only: source
-env:
-  global:
-  - GH_REF: github.com/fjonas/fjonas.github.io
-  - secure: QY1dHZUSTpADa/cFvwdCSk0zPTT2Ohel05EgS6ZMDId0xnZFpCBnsyOCS36BoTCR+wDwVUdFE53rjr97dWlm9oRn/vKFjXEFWATKnyqVUZtulFE1daASG89bVKdaqm7FD6Zz+emxc93CdquQ6r8a2MOOzJpyH+rfx+OYoCthEgsSK8Dls1CDCm+sVimVEyBzo5Se03tHocSUX+9zITFJgh/3HwKJVeCwKPyEuLpMdxnyBo3AWEOx+ye9Fwou4NYGnCoRcFbuqsoOQzDqPJwife6dq/EdcjsqNsyk0ohvda2LNux4cqhZfW/jgmc23LjSmduVHRkgwExy/zC2Z4/G/2mG/y301rTe23RbIDoIGz3NB1p4/OZo8JxNGMeYHBVLGa7tTsuUjcynO1zyt4+vcymPVN29lR9sJDYvZXYyC8QJ696NPJZ7X1S3e/PTXJteMqi7bJZolLz770ai8S/8wA3GdsfAZ8kiOM6LM2QUmvhJqkviQjbmjLLuQ+Sj7hlggl9oEDX6JL9PjVOZy2tejtEHlvKrPlUqJvsLn3D2Zge4k1+Er3oFlyB8tlmUbpSQy0lDXgqrMdkmQagdXNf2fFHxFV9sN/1mtc/fpjKbRIi8Fzryp5OgIavmHOQBFw1SZxLtwNtzkhgkC1x2wDnW4h43umFRixSfB6U+yYdb/HI=
-before_install:
-# Decrypt the private key
-- openssl aes-256-cbc -K $encrypted_98844b460339_key -iv $encrypted_98844b460339_iv
--in id_rsa.enc -out ~\/.ssh/id_rsa -d
-# Set the permission of the key
-- chmod 600 ~/.ssh/id_rsa
-# Start SSH agent
-- eval $(ssh-agent)
-# Add the private key to the system
-- ssh-add ~/.ssh/id_rsa
-# Copy SSH config
-- cp .travis/ssh_config ~/.ssh/config
