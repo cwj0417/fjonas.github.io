@@ -1,5 +1,8 @@
 language: node_js
 node_js: "6"
+install:
+ - git config --global user.email "731028571@qq.com"
+ - git config --global user.name "fjonas"
 script:
  - hexo d -g
 branches:
