@@ -4,7 +4,7 @@ date: 2016-11-13 14:39:09
 categories: 代码
 tags: [javascript,stage-3]
 ---
-ECMAScript官方提出的异步解决方案(可能是阶段性的终极方案), 原理是*generator*的执行器(官方逼死同人[*co*]). 越新的东西越傻瓜, 所以来体验下.
+ECMAScript官方提出的异步解决方案(可能是阶段性的终极方案), 原理是*generator*的执行器(官方逼死同人系列ww[*co*]). 越新的东西越傻瓜, 所以来体验下.
 
 **本文所有的结论都是基于babel的preset-stage-1环境编译[实验](http://github.com/fjonas/ecma-feature-test)的结果**(这个性质是stage-3的, 只是偷懒?)
 
