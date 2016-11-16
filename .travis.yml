@@ -3,7 +3,8 @@ node_js: '6'
 script:
 - hexo d -g
 branches:
-  only: source
+  only:
+  - source
 before_install:
 - git config --global user.email "731028571@qq.com"
 - git config --global user.name "fjonas"
