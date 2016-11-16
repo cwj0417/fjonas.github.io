@@ -5,12 +5,5 @@ script:
 branches:
   only: source
 before_install:
-- openssl aes-256-cbc -K $encrypted_98844b460339_key -iv $encrypted_98844b460339_iv
-  -in .travis/ssh_key.enc -out ~\/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
-- eval $(ssh-agent)
-- ssh-add ~/.ssh/id_rsa
-- echo ""
-- cp .travis/ssh_config ~/.ssh/config
 - git config --global user.email "731028571@qq.com"
 - git config --global user.name "fjonas"
