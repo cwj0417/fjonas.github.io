@@ -1,0 +1,31 @@
+//主题颜色需要设置3种..
+
+$TC1:#99CC33;
+$TC2:#FF9900;
+$TC3:#FFCC00;
+
+$TC1_D2: darken($TC1, 20%);
+$TC1_D4: darken($TC1, 40%);
+$TC1_D6: darken($TC1, 60%);
+
+$TC1_L2: lighten($TC1, 20%);
+$TC1_L4: lighten($TC1, 40%);
+$TC1_L6: lighten($TC1, 60%);
+
+
+$TC2_D2: darken($TC2, 20%);
+$TC2_D4: darken($TC2, 40%);
+$TC2_D6: darken($TC2, 60%);
+
+$TC2_L2: lighten($TC2, 20%);
+$TC2_L4: lighten($TC2, 40%);
+$TC2_L6: lighten($TC2, 60%);
+
+
+$TC3_D2: darken($TC3, 20%);
+$TC3_D4: darken($TC3, 40%);
+$TC3_D6: darken($TC3, 60%);
+
+$TC3_L2: lighten($TC3, 20%);
+$TC3_L4: lighten($TC3, 40%);
+$TC3_L6: lighten($TC3, 60%);
