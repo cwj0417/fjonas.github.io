@@ -7,6 +7,7 @@
 +   [github](https://github.com/fjonas)
 +   [segmentfault](https://segmentfault.com/u/rehapun)
 +   [微博](http://weibo.com/u/2719310113)
++   [dribbble](https://dribbble.com/fjonas)
 
 ## 其他
 
