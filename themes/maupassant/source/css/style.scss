@@ -1821,26 +1821,28 @@ img {
 .sidebar a {
     color: #545454;
 }
-.active{
+#outline {
+  .active{
     color: white !important;
     border-left: 4px solid #000000 !important;
     background: rgb(223, 122, 203);
-}
-.active li {
+  }
+  .active li {
     display: block !important;
-}
-.depth2 > a {
+  }
+  .depth2 > a {
     text-indent: 1em;
     font-size: 0.95em;
-}
-.depth3 > a {
+  }
+  .depth3 > a {
     text-indent: 2em;
     font-size: 0.9em;
-}
-.depth4 > a {
+  }
+  .depth4 > a {
     text-indent: 3em;
     font-size: 0.85em;
-}
-.depth2 > li{
+  }
+  .depth2 > li{
     display: none;
+  }
 }
