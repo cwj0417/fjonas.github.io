@@ -56,17 +56,17 @@ export default new Vuex.Store({
 
 ### Store对象分析
 
-line6: 本地vue变量, 在install时会被赋值, 之后会通过vue是否为`undefined`来判断是否install
+[line6](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L6): 本地vue变量, 在install时会被赋值, 之后会通过vue是否为`undefined`来判断是否install
 
 #### Store对象构建
 
-line10~14: 判断vuex是否被正确使用
-line16~26: 获取options, **`state`可以和vue的component的`data`一样为函数return一个对象, 会在这段代码中被parse**
-line28~36: [store对象内部变量初始化](#store内部变量初始化)
-line39~46: 绑定commit和dispatch方法到自身
-line54: 装载动作
-line58: 装载响应动作
-line61: 调用插件
+[line10~14](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L10): 判断vuex是否被正确使用
+[line16~26](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L16): 获取options, **`state`可以和vue的component的`data`一样为函数return一个对象, 会在这段代码中被parse**
+[line28~36](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L28): [store对象内部变量初始化](#store内部变量初始化)
+[line39~46](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L39): 绑定commit和dispatch方法到自身
+[line54](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L54): 装载动作
+[line58](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L58): 装载响应动作
+[line61](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L61): 调用插件
 
 #### store内部变量初始化
 
@@ -100,13 +100,13 @@ this._watcherVM = new Vue()
 
 #### 绑定dispatch和commit方法
 
-在line39~46, 对dispatch和commit方法进行绑定, 使dispatch方法可以调用在Store对象上注册过的`._actions`
+在[line39~46](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L39), 对dispatch和commit方法进行绑定, 使dispatch方法可以调用在Store对象上注册过的`._actions`
 
 和`._mutations`的方法.
 
-dispatch方法在line108, 先兼容了参数的写法, 取到参数, 然后判断Store对象的`_.actions`属性是否注册过, 如果注册过多个, 将会**依次调用**. 也就是如果type重复了也是会调用多次的, 这个地方如果出错debug会非常困难. 暂时没有理解vuex此处设计的意图.
+dispatch方法在[line108](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L108), 先兼容了参数的写法, 取到参数, 然后判断Store对象的`_.actions`属性是否注册过, 如果注册过多个, 将会**依次调用**. 也就是如果type重复了也是会调用多次的, 这个地方如果出错debug会非常困难. 暂时没有理解vuex此处设计的意图.
 
-commit方法稍微多一点, 大体思路是一样的, 只是直接执行没有返回值, dispatch会返回执行结果. 另外在line95进行了subscriber的操作, 我们暂且不知道subscriber的作用. 稍后再看.
+commit方法稍微多一点, 大体思路是一样的, 只是直接执行没有返回值, dispatch会返回执行结果. 另外在[line95](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L95)进行了subscriber的操作, 我们暂且不知道subscriber的作用. 稍后再看.
 
 #### install模块
 
@@ -118,11 +118,11 @@ function installModule (store, rootState, path, module, hot)
 installModule(this, state, [], this._modules.root)
 ```
 
-line255 根据path获得namespace, 做法是读取path的每个模块, 如果namespaced为true则拼接, 例如path为`['catagories', 'price', 'detail']`, 其中`price`的namespaced为false, 其余为true, 那么获得的namespace为`catagories/detail/`.
+[line255](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L255) 根据path获得namespace, 做法是读取path的每个模块, 如果namespaced为true则拼接, 例如path为`['catagories', 'price', 'detail']`, 其中`price`的namespaced为false, 其余为true, 那么获得的namespace为`catagories/detail/`.
 
-line258~260 把namespaced为true的module注册到`_modulesNamespaceMap`.
+[line258~260](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L260) 把namespaced为true的module注册到`_modulesNamespaceMap`.
 
-line271的`makeLocalContext`函数整理了namespace和type的关系. 在之后的三个`module.forEachXxx`中, 都调用了`registerXxx`, 最后的参数都是`makeLocalContext`的返回值.  我们来分析一下`makeLocalContext`的作用:
+[line271](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L271)的`makeLocalContext`函数整理了namespace和type的关系. 在之后的三个`module.forEachXxx`中, 都调用了`registerXxx`, 最后的参数都是`makeLocalContext`的返回值.  我们来分析一下`makeLocalContext`的作用:
 
 被注册到全局的mutation/actiongetter实际的type类似于`namespace1/namespace2/type`的形式, 而我们在namespaced为true的module中调用的type只是:`type`. 所以在namespace[true]的action中调用的所有`dispatch`, `commit`, `getter`, `state` 都会被加上  path.join("/") + "/"  的type来调用到正确的方法.
 
@@ -132,7 +132,7 @@ line271的`makeLocalContext`函数整理了namespace和type的关系. 在之后�
 
 通过比较, install child module的时候是改了第三第四个参数: `path` => `path.concat(key)`, `module` => `module.getChild(key)`.
 
-主要区别只是在line264~268, 与[ModuleCollection的递归注册子module](#递归register子module)行为类似, 递归的path参数流程上只是多了一步把当前loop产生的对象挂到父节点上. 做法也是一样的, 把module名字(path)作为key, 套在父级state上. 也就是结构为:
+主要区别只是在[line264~268](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L264), 与[ModuleCollection的递归注册子module](#递归register子module)行为类似, 递归的path参数流程上只是多了一步把当前loop产生的对象挂到父节点上. 做法也是一样的, 把module名字(path)作为key, 套在父级state上. 也就是结构为:
 
 ```js
 state: {
@@ -180,9 +180,9 @@ store对象把传入的options放入了各个变量进行储存, 并提供了com
 
 ### Store对象的属性&方法
 
-line64 state的getter方法, 会获取`._vm`的vue实例的state. 所以我们在vue代码中`this.$store.state.xxx`获取到的东西就是这个vue的实例的数据.
+[line64](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L64) state的getter方法, 会获取`._vm`的vue实例的state. 所以我们在vue代码中`this.$store.state.xxx`获取到的东西就是这个vue的实例的数据.
 
-line68 当直接set Store的state时报错, 只能通过设置`._vm`来进行.
+[line68](https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L68) 当直接set Store的state时报错, 只能通过设置`._vm`来进行.
 
 剩余的方法的是vuex的进阶用法, 是可以在使用时对vuex状态进行操作的方法, 详见[文档](http://vuex.vuejs.org/en/api.html#vuexstore-instance-methods)
 
