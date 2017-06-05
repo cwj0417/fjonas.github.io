@@ -1,0 +1,84 @@
+.outline-title {
+  padding: 15px 0 0 15px;
+  font-size: 1.4em;
+}
+img {
+  max-width: 100%;
+}
+.sidebar a {
+  color: #545454;
+}
+.blur {
+  filter: blur(5px);
+}
+#outline {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 25%;
+  filter: none !important;
+  a {
+    width: 80%;
+    color:inherit;
+    display: inline-block;
+    border-left:4px solid rgba(255,255,255,0);
+    padding: 5px;
+    transition: background .35s;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+  }
+  a:hover {
+    background: #ccc;
+  }
+  .active{
+    color: white !important;
+    font-weight: 600;
+    border-left: 4px solid #000000 !important;
+    background: rgb(122, 122, 122) !important;
+  }
+  .active li {
+    display: block !important;
+  }
+  .depth2 > a {
+    text-indent: 1em;
+    font-size: 0.95em;
+  }
+  .depth3 > a {
+    text-indent: 2em;
+    font-size: 0.9em;
+  }
+  .depth4 > a {
+    text-indent: 3em;
+    font-size: 0.85em;
+  }
+  .depth5 > a {
+    text-indent: 4em;
+    font-size: 0.8em;
+  }
+  .depth2 > li{
+    display: none;
+  }
+}
+.content-in {
+  animation: content-in .5s;
+}
+.content-out {
+  animation: content-out .5s;
+}
+@keyframes content-in {
+  from {
+    transform: translateY(-1000px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes content-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1000px);
+  }
+}

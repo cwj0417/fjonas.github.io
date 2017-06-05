@@ -75,11 +75,7 @@ $(function () {
         })
     }
     scrollSpy.init({nodeList: $("nav a")});
-    $("#outline").pin();
 });
-
-
-
 
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -143,13 +139,36 @@ $(function () {
 
             spy(items, className);
 
+            var timer = null
+            var last = null
+
             util.bind(scrollTarget, 'scroll', function () {
                 spy(items, className);
+                if (!timer) {
+                    timer = setTimeout(function () {
+                        var body = document.getElementsByTagName('body')[0]
+                        var cur = body.scrollTop
+                        if (cur && last) {
+                            if (cur - last > 0) {
+                                $('#outline').show().removeClass('content-out').addClass('content-in')
+                                $('.widget').addClass('blur')
+                            } else {
+                                $('#outline').removeClass('content-in').addClass('content-out')
+                                $('.widget').removeClass('blur')
+                                setTimeout(function () {
+                                    $('#outline').hide()
+                                }, 500)
+                            }
+                        }
+                        last = cur
+                        clearTimeout(timer)
+                        timer = null
+                    }, 200)
+                }
             });
         }
     };
 
-// //////////////////////
     function getItems(ary) {
         var items = [];
         for (var i = 0, l = ary.length; i < l; i++) {
