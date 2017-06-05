@@ -1825,7 +1825,7 @@ img {
   .active{
     color: white !important;
     border-left: 4px solid #000000 !important;
-    background: rgb(223, 122, 203);
+    background: rgb(122, 122, 122);
   }
   .active li {
     display: block !important;
@@ -1841,6 +1841,10 @@ img {
   .depth4 > a {
     text-indent: 3em;
     font-size: 0.85em;
+  }
+  .depth5 > a {
+    text-indent: 4em;
+    font-size: 0.8em;
   }
   .depth2 > li{
     display: none;
