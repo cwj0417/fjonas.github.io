@@ -142,8 +142,20 @@ $(function () {
             var timer = null
             var last = null
 
+            var outLineHeight = $('#outline').height()
+
             util.bind(scrollTarget, 'scroll', function () {
                 spy(items, className);
+                var post = document.getElementsByClassName('post')[0]
+                var react = post.getBoundingClientRect()
+                var postScroll = - +react.top + 180
+                if (document.documentElement.clientHeight < outLineHeight) {
+                    if (postScroll / post.scrollHeight > (document.documentElement.clientHeight / outLineHeight) - 0.1) {
+                        $('#outline').css("transform", "scale(" + ((document.documentElement.clientHeight / outLineHeight)) + ")")
+                    } else {
+                        $('#outline').css("transform", "scale(1)")
+                    }
+                }
                 if (!timer) {
                     timer = setTimeout(function () {
                         var body = document.getElementsByTagName('body')[0]
@@ -153,11 +165,13 @@ $(function () {
                                 $('#outline').show().removeClass('content-out').addClass('content-in')
                                 $('.widget').addClass('blur')
                             } else {
-                                $('#outline').removeClass('content-in').addClass('content-out')
-                                $('.widget').removeClass('blur')
-                                setTimeout(function () {
-                                    $('#outline').hide()
-                                }, 500)
+                                if (cur < 1000) {
+                                    $('#outline').removeClass('content-in').addClass('content-out')
+                                    $('.widget').removeClass('blur')
+                                    setTimeout(function () {
+                                        $('#outline').hide()
+                                    }, 500)
+                                }
                             }
                         }
                         last = cur
