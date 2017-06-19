@@ -2,7 +2,7 @@
 title: es6 in depth 生成器 
 date: 2016-09-10 17:24:54
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 
 这篇文章我很激动. 今天我们将要讨论es6最魔性的特性.

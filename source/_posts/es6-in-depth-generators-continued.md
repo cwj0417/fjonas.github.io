@@ -2,7 +2,7 @@
 title: es6 in depth 生成器-续
 date: 2016-09-10 17:27:44
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 
 上一次我讲了生成器是es6里最有魔性的特性. 我讲了为什么他会是将来的异步编程. 然后我说了:

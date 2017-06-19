@@ -2,7 +2,7 @@
 title: es6 in depth 遍历器 和 for-of 循环
 date: 2016-09-10 17:21:37
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 
 你是如何循环一个数组的元素的呢？ 用javascript的话, 20年前你可能是这么做的: 

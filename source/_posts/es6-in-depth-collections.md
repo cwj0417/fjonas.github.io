@@ -2,7 +2,7 @@
 title: es6 in depth 集合
 date: 2016-09-10 17:27:21
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 
 es6的声明, 官方title为ECMA-262, 第六个版本, ECMAScript2015语言声明, 已经被最后确定并作为ECMA标准. 恭喜TC39和所有贡献的朋友们! es6已经转正了!

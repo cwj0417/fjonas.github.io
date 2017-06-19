@@ -2,7 +2,7 @@
 title: 用electron与vue构建应用--应用结构
 date: 2017-06-13 11:06:51
 categories: 胡乱编码
-tags: [vue,webpack,electron,实验]
+tags: [vue,webpack,electron,入门]
 ---
 
 electron越来越流行,  github也用起来写了个client, 之前写过用md做presentation的东西, 现在考虑结合一下试试做个md工具再加上博客发布功能等应用.

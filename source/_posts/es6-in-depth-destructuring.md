@@ -2,7 +2,7 @@
 title: es6 in depth 解构赋值
 date: 2016-09-10 17:25:56
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 
 解构赋值允许你通过和数组对象相近的语法来使用数组或对象的属性. 他的语法非常简单. 而且还比传统的获取属性方法更清晰.

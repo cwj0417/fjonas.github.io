@@ -2,7 +2,7 @@
 title: 关于Promise
 date: 2016-07-23 12:01:35
 categories: 胡乱编码
-tags: [javascript,promise,设计模式]
+tags: [javascript,代码组织]
 ---
 promise的理解于实践场景
 <!--more-->

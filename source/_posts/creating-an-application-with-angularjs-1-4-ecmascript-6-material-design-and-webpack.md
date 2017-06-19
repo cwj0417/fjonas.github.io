@@ -2,7 +2,7 @@
 title: 使用angular1.4, es2015, webpack, angular-material来搭建一个app 
 date: 2016-08-09 17:45:04
 categories: 胡乱编码
-tags: [翻译,webpack,angular 1.x]
+tags: [翻译,webpack,angular,入门]
 
 ---
 介绍了如何用webpack构建ng1+es6应用, 原文: [Creating an application with AngularJS 1.4, ECMAScript 6, Material Design and Webpack](http://julienrenaux.fr/2015/05/05/creating-an-application-with-angularjs-1-4-ecmascript-6-material-design-and-webpack/)

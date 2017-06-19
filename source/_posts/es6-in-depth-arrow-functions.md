@@ -2,7 +2,7 @@
 title: es6 in depth 箭头函数
 date: 2016-09-10 17:26:14
 categories: 胡乱编码
-tags: [ES2015,es6-in-depth,翻译]
+tags: [javascript,深入es6,翻译,入门]
 ---
 箭头从一开始就是javascript的一部分. 一开始javascript教程建议把脚本包起来作为注释. 这种表达会阻止浏览器把js代码错误地显示在html中. 你可能会写以下的代码:
 

@@ -2,7 +2,7 @@
 title: angular decorator
 date: 2016-10-20 17:31:48
 categories: 胡乱编码
-tags: [angular 1.x,设计模式,介绍]
+tags: [angular,代码组织,应用]
 ---
 许多知识点只在脑内有印象而并没有实际应用, 比如我ng的decorator, 今终于有机会来一把体验.
 
