@@ -1,7 +1,7 @@
 ---
 title: es6 in depth 类
 date: 2016-09-10 17:28:02
-categories: 代码
+categories: 胡乱编码
 tags: [ES2015,es6-in-depth,翻译]
 ---
 今天我们来讲一下一个老问题的语法: javascript中的object构造器创建.

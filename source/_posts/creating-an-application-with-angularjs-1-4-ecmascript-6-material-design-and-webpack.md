@@ -1,7 +1,7 @@
 ---
 title: 使用angular1.4, es2015, webpack, angular-material来搭建一个app 
 date: 2016-08-09 17:45:04
-categories: 试水
+categories: 胡乱编码
 tags: [翻译,webpack,angular 1.x]
 
 ---

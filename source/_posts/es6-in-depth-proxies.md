@@ -1,7 +1,7 @@
 ---
 title: es6 in depth Proxy
 date: 2016-09-10 17:27:56
-categories: 代码
+categories: 胡乱编码
 tags: [ES2015,es6-in-depth,翻译]
 ---
 下面的代码是我们今天要讲的内容:

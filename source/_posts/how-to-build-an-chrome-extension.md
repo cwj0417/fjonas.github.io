@@ -1,7 +1,7 @@
 ---
 title: 谷歌拓展程序初体验
 date: 2016-11-07 20:49:42
-categories: 试水
+categories: 胡乱编码
 tags: [chrome,vue,chrome extension]
 ---
 谷歌的拓展其实就是一(几)个网页而已拉, 1分钟就可以很容易弄起来一个谷歌拓展. 所以gogogo.

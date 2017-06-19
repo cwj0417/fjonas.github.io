@@ -1,7 +1,7 @@
 ---
 title: es6 in depth symbols
 date: 2016-09-10 17:26:39
-categories: 代码
+categories: 胡乱编码
 tags: [ES2015,es6-in-depth,翻译]
 ---
 

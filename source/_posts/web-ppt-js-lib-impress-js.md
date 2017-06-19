@@ -1,7 +1,7 @@
 ---
 title: 强力3D的PPT 介绍
 date: 2016-09-04 17:26:24
-categories: 试水
+categories: 胡乱编码
 tags: 介绍
 ---
 要做ppt, 从小都没做过, 怎么办, 本劳资好紧张, 看到个有意思的ppt lib, 赶紧试一发.

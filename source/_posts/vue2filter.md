@@ -1,7 +1,7 @@
 ---
 title: vue2.0 filter替代方案
 date: 2017-03-02 16:48:27
-categories: 代码
+categories: 胡乱编码
 tags: [vue 2.x,设计模式,函数式编程]
 ---
 vue2.0开始其实是准备取消filter, 最后保留了text的filter并取消内置filter. 作者本意是用原生更优雅, 灵活地替代filter的. 所以讨论并总结一下

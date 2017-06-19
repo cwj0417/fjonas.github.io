@@ -1,7 +1,7 @@
 ---
 title: 修改hexo主题(Jade版本)
 date: 2016-08-29 16:14:08
-categories: 试水
+categories: 胡乱编码
 tags: hexo
 ---
 hexo主题虽多, 但是都没让自己完全舒服的, 真的没什么意思, 就着现在用的主题来修改吧.
