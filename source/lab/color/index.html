@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #fff;
+        }
+        input {
+            width: 100%;
+            height: 30px;
+            margin: 0;
+        }
+        #display, .color-board{
+            height: 200px;
+        }
+        .wrapper {
+            float: left;
+        }
+        .color-board {
+            background-color: pink;
+            width: 200px;
+        }
+        .code {
+            width: 200px;
+            height: 120px;
+        }
+        .code-child {
+            height: 30px;
+        }
+        .option-wrap {
+            width: 25%;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro">
+
+    </div>
+    <div id="options">
+        <div class="option-wrap">
+            颜色个数 <input type="number" id="count" value="0" />
+        </div>
+        <div class="option-wrap">
+            色相差(空格隔开) <input type="text" id="hue" value="0" />
+        </div>
+        <div class="option-wrap">
+            饱和度差(空格隔开) <input type="text" id="saturation" value="0" />
+        </div>
+        <div class="option-wrap">
+            亮度(空格隔开) <input type="text" id="brightness" value="0" />
+        </div>
+    </div>
+    <div id="display">
+
+    </div>
+</body>
+
+<script src="./built.js"></script>
+</html>
