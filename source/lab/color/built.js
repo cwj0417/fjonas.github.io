@@ -134,7 +134,7 @@ function checkRGB() {
     });
 }
 function checkRange(target, min, max, msg) {
-    assert(+target <= max && +target >= min, "invalid " + msg + ": " + target);
+    assert(+target < max + 1 && +target > min - 1, "invalid " + msg + ": " + target);
 }
 
 var Color = function () {

@@ -82,7 +82,6 @@ $(function () {
     "use strict";
 
     module.exports = function getOffsetRect(elem) {
-
         // (1)
         var box = elem.getBoundingClientRect();
 
@@ -145,7 +144,6 @@ $(function () {
             var outLineHeight = $('#outline').height()
 
             util.bind(scrollTarget, 'scroll', function () {
-                spy(items, className);
                 var post = document.getElementsByClassName('post')[0]
                 var react = post.getBoundingClientRect()
                 var postScroll = - +react.top + 180
