@@ -33,32 +33,35 @@
             height: 30px;
         }
         .option-wrap {
-            width: 25%;
+            width: 20%;
             float: left;
         }
     </style>
 </head>
 <body>
-    <div id="intro">
+<div id="intro">
 
+</div>
+<div id="options">
+    <div class="option-wrap">
+        方案 <select id="scheme"></select>
     </div>
-    <div id="options">
-        <div class="option-wrap">
-            颜色个数 <input type="number" id="count" value="0" />
-        </div>
-        <div class="option-wrap">
-            色相差(空格隔开) <input type="text" id="hue" value="0" />
-        </div>
-        <div class="option-wrap">
-            饱和度差(空格隔开) <input type="text" id="saturation" value="0" />
-        </div>
-        <div class="option-wrap">
-            亮度(空格隔开) <input type="text" id="brightness" value="0" />
-        </div>
+    <div class="option-wrap">
+        颜色个数 <input type="number" id="count" value="0" />
     </div>
-    <div id="display">
+    <div class="option-wrap">
+        色相差(空格隔开) <input type="text" id="hue" value="0" />
+    </div>
+    <div class="option-wrap">
+        饱和度差(空格隔开) <input type="text" id="saturation" value="0" />
+    </div>
+    <div class="option-wrap">
+        亮度(空格隔开) <input type="text" id="brightness" value="0" />
+    </div>
+</div>
+<div id="display">
 
-    </div>
+</div>
 </body>
 
 <script src="./built.js"></script>
