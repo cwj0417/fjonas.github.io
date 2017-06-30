@@ -6,61 +6,52 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        body {
-            background: #fff;
-        }
-        input {
-            width: 100%;
-            height: 30px;
-            margin: 0;
-        }
-        #display, .color-board{
-            height: 200px;
-        }
-        .wrapper {
-            float: left;
-        }
-        .color-board {
-            background-color: pink;
-            width: 200px;
-        }
-        .code {
-            width: 200px;
-            height: 120px;
-        }
-        .code-child {
-            height: 30px;
-        }
-        .option-wrap {
-            width: 20%;
-            float: left;
-        }
-    </style>
+    <link href="//cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <div id="intro">
-
+    <p><span style="font-size: 25px; margin: 0 20px;">Jin</span> a professional color scheme generator</p>
+    <p style="padding-left: 350px;">heavily inspired by <a href="https://color.adobe.com/create/color-wheel/">Adobe
+        Color CC</a></p>
 </div>
 <div id="options">
-    <div class="option-wrap">
-        方案 <select id="scheme"></select>
+    <div class="option-wrap haveMargin">
+        <label for="scheme">scheme</label>
+        <select id="scheme"></select>
     </div>
-    <div class="option-wrap">
-        颜色个数 <input type="number" id="count" value="0" />
+    <div class="option-wrap haveMargin">
+        <label for="count">count</label>
+        <input type="number" id="count" value="0"/>
     </div>
-    <div class="option-wrap">
-        色相差(空格隔开) <input type="text" id="hue" value="0" />
+    <div class="option-wrap haveMargin">
+        <label for="hue">hue</label>
+        <input type="text" id="hue" value="0"/>
     </div>
-    <div class="option-wrap">
-        饱和度差(空格隔开) <input type="text" id="saturation" value="0" />
+    <div class="option-wrap haveMargin">
+        <label for="saturation">saturation</label>
+        <input type="text" id="saturation" value="0"/>
     </div>
-    <div class="option-wrap">
-        亮度(空格隔开) <input type="text" id="brightness" value="0" />
+    <div class="option-wrap haveMargin">
+        <label for="brightness">brightness</label>
+        <input type="text" id="brightness" value="0"/>
     </div>
+    <div class="clear"></div>
 </div>
 <div id="display">
 
+</div>
+<div id="footer">
+    <h5>Usage</h5>
+    <p>params:</p>
+    <ul>
+        <li>count: to select how many colors in your theme</li>
+        <li>hue/saturation/brightness: how much diffs from former color to later</li>
+        <li>input numbers separated with space</li>
+    </ul>
+    <p>scheme:</p>
+    <p>configurations of fixed themes</p>
+    <p>you can open a new <a target="_blank" href="https://github.com/fjonas/jin/issues/new">issue</a> adding to configs</p>
 </div>
 </body>
 

@@ -572,6 +572,13 @@
         "h": "39 21 60 90 30 33 87",
         "s": 0,
         "b": 0
+    }, {
+        "name": "black",
+        "base": "000",
+        "c": 5,
+        "h": 0,
+        "s": 0,
+        "b": 15
     }];
 
     var blocks = new ColorBlocks();
@@ -615,6 +622,16 @@
         if (blocks.blocks.length) {
             blocks.blocks[0].enableEdit();
             blocks.blocks[0].addHook(blocks.render.bind(blocks));
+        }
+        if (blocks.blocks.length > 1) {
+            setTimeout(function () {
+                document.body.style.background = "-webkit-linear-gradient(right," + blocks.blocks.map(function (_) {
+                        return _.jin.toString();
+                    }).join(",") + ")";
+                document.body.style.background = "linear-gradient(right," + blocks.blocks.map(function (_) {
+                        return _.jin.toString();
+                    }).join(",") + ")";
+            });
         }
     };
 
@@ -673,5 +690,7 @@
             }
         }
     });
+
+    document.title = "Jin - a professional color scheme generator";
 
 }());
