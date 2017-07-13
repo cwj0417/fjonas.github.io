@@ -1,7 +1,7 @@
 ---
 title: stage-3 rest函数和解构赋值
 date: 2016-12-02 08:20:33
-categories: 胡乱编码
+categories: 编码与分析
 tags: [javascript]
 ---
 已经使用了一段时间es的新标准, 很明显感受到编码的感觉与之前不同了. 一开始以为没什么用的rest和解构倒反而使用得较多. 所以来看一下他们的便利的例子.

@@ -1,7 +1,7 @@
 ---
 title: es6 in depth 类
 date: 2016-09-10 17:28:02
-categories: 胡乱编码
+categories: 编码与分析
 tags: [javascript,深入es6,翻译,入门]
 ---
 今天我们来讲一下一个老问题的语法: javascript中的object构造器创建.

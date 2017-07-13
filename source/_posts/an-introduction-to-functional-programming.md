@@ -1,7 +1,7 @@
 ---
 title: 函数式编程介绍
 date: 2016-11-21 09:58:43
-categories: 胡乱编码
+categories: 编码与分析
 tags: [翻译,代码组织,入门]
 ---
 许多函数式编程(以下简称fp for functional programming)文章都说一些抽象的fp技巧. 比如构造(composition), 管道操作(pipelining), 高阶函数(higher order functions). 本文不同. 这里会告诉大家一些平时大家平时每天都要写的命令式的, 非函数式的代码应该如何转换为fp风格的例子.

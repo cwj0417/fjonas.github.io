@@ -1,7 +1,7 @@
 ---
 title: electron介绍
 date: 2016-12-20 14:59:55
-categories: 胡乱编码
+categories: 编码与分析
 tags: [electron,入门]
 ---
 [electron](http://electron.atom.io/)是个可以通过html, css, js 技术制作桌面应用的项目. 于是读了一下guide了解了大概的流程.

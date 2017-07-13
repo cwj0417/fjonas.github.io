@@ -1,7 +1,7 @@
 ---
 title: es6 in depth symbols
 date: 2016-09-10 17:26:39
-categories: 胡乱编码
+categories: 编码与分析
 tags: [javascript,深入es6,翻译,入门]
 ---
 

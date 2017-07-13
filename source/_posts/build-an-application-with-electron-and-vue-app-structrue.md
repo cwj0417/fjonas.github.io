@@ -1,7 +1,7 @@
 ---
 title: 用electron与vue构建应用--应用结构
 date: 2017-06-13 11:06:51
-categories: 胡乱编码
+categories: 编码与分析
 tags: [vue,webpack,electron,入门]
 ---
 

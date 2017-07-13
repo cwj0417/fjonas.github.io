@@ -1,7 +1,7 @@
 ---
 title: 隐性动机
 date: 2016-08-02 17:06:41
-categories: 进步阶梯
+categories: 开拓与发现
 ---
 尤里.格尼茨-隐性动机
 <!--more-->

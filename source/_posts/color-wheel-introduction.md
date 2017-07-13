@@ -1,7 +1,7 @@
 ---
 title: 使用色轮设计系统主题色
 date: 2017-06-19 16:14:35
-categories: 瞎逼设计
+categories: 设计与感觉
 tags: [颜色,入门]
 ---
 从需求开始研究颜色. 工作中会遇到关于颜色的问题, 每次自己有权力选个颜色就选得超不和谐, 另外, 有的网页看久眼睛难受, 但现实生活里的东西看久不会难受, 带着这些问题来研究下颜色.
@@ -131,5 +131,5 @@ rgb全为0
 
 [adobe color](https://color.adobe.com/create/color-wheel/)
 
-[自制工具](/lab/color)
+[自制工具](https://j-i-n.github.io/)
 

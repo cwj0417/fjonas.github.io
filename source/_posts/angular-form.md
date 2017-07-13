@@ -1,7 +1,7 @@
 ---
 title: Angular表单
 date: 2016-08-08 14:45:37
-categories: 胡乱编码
+categories: 编码与分析
 tags: angular
 ---
 从零开始跟着文档学习angular表单
