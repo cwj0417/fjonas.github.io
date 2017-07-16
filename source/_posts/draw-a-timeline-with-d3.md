@@ -195,7 +195,50 @@ style="fill:white;stroke:red;stroke-width:2"/>
 
 ## 实战
 
-结合以上知识写了一个[demo](https://github.com/fjonas/d3-v4-learning/tree/master/timeline-2017-7-5)
+结合以上知识写了一个[demo](https://github.com/fjonas/d3-v4-learning/tree/master/timeline-2017-7-5). 在实现需求的过程中遇到了一些问题, 来总结一下是如何解决的. 以下问题的代码均在[demo](https://github.com/fjonas/d3-v4-learning/tree/master/timeline-2017-7-5)中.
+
+**brush需求**: brush要求不能改变选区, 只能拖动选区. 使用另一个brush来改变选区的宽度, 高度固定.
+
+### 问题一: 如何获得brush的选区数据
+
+使用`.on`方法, 在回调函数中获取第三个参数(回调函数的参数分别为`target`, `type`, `selection`), 使用`d3.brushSelection`来把获得的`selection`转化为一个表示范围的数组.
+
+### 问题二: 如何使两个brush联动
+
+先写好2个brush, 分别在2个brush的`.on`方法中使用`brush.move()`方法, 配合在问题一中获取到的数据来计算另外一个brush需要`.move`到哪儿.
+
+如此写会出现死循环的问题, 所以需要设置一个状态变量, 并在各自brush`.on('start')`和`.on('end')`上监听并改变状态变量, 在`.on('brush')`种判断当前状态来决定是否执行另一个brush的`.move()`方法.
+
+### 问题三: 如何禁用brush的改变选区
+
+要使得一个brush不能改变选区, 只有拖动选区功能, 来分析选区是如何改变的, brush改变选区有两个方式: 直接点击选区的边框来拖拽更改选区, 或是直接在brush的载体上用鼠标划出一个选区. 针对这两个行为要做两个行为:
+
+brush其实包含了8个边框, 分别为四条边和四个角. 每个边框都是一个dom, 只需要把对应的dom去掉, 就可以禁用对应的操作了.
+
+```js
+brushG.select(".handle--n").remove()
+brushG.select(".handle--e").remove()
+brushG.select(".handle--s").remove()
+brushG.select(".handle--w").remove()
+brushG.select(".handle--nw").remove()
+brushG.select(".handle--ne").remove()
+brushG.select(".handle--se").remove()
+brushG.select(".handle--sw").remove()
+```
+
+第二个问题, 需要使用brush的filter功能. filter的回调函数返回falsely的值就会阻止鼠标的点击事件. 我们可以根据`event`来判断鼠标点在哪里, 若不是在现存的选区中就return false. 
+
+```js
+.call(brush.filter(function () {
+        return event.target !== brushG._groups[0][0].firstElementChild
+    }))
+```
+
+注意的是`event`变量在linter中会报错, 可以使用 `// eslint-disable-line`来防止linter报错.
+
+### 问题四: 导航brush的拖动块偏外导致初始化显示不全
+
+brush的样式是所有的边框都向外3px, 如果想把边框往里, 可以使用css的`transform: translate`来改变位置.
 
 ---
 
