@@ -6,6 +6,8 @@ tags: [electron,应用]
 ---
 零基础使用electron编写记录/复习单词的软件[vocabook](https://github.com/fjonas/lock-on). 记录了第一次开发electron遇到的问题与如何组合使用api来实现通常的需求.
 
+这个项目是使用了[electron-vue](https://github.com/SimulatedGREG/electron-vue)作为模板的.
+
 <!--more-->
 
 *这个系列把问题作为标题, 实现过程作为内容*
@@ -123,3 +125,15 @@ ipcMain.on('themeChange', (event, arg) => {
 ## 如何切换主窗口与迷你面板
 
 切换窗口也是通过了ipc事件来做的, 需要在主进程保存当前打开的窗口的变量, 来决定关闭了窗口之后再次激活应用打开的是主窗口还是迷你面板.
+
+## 如何存储数据
+
+我用了[nedb](https://github.com/louischatriot/nedb)来储存数据, 使用main process的api`app`, `app.getPath('userData')`可以获取用户存储数据的路径来连接数据库.
+
+### nedb介绍
+
+nedb是个模仿mongoodb查询方式的node数据库, 在electron项目里把实例创建在文件上就行了, 介绍一些概念:
+
++ collection 对应 数据库的表, 一个collection为一个实例(一个文件)
++ document 对应 数据库的列
+
