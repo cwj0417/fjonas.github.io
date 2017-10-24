@@ -10,7 +10,7 @@ vue-i18n是vue代码贡献量第二的vue core team的一位日本小哥写的, 
 
 ## 故事背景
 
-​	今天的故事的主角repo是: [vue-i18n](https://github.com/kazupon/vue-i18n)与[iView](https://github.com/iview/iview). 在使用他们的时候报错了, 查看了[issue](https://github.com/kazupon/vue-i18n/issues/222),  在issue中获得到一段代码, 不明真相地解决了问题:
+今天的故事的主角repo是: [vue-i18n](https://github.com/kazupon/vue-i18n)与[iView](https://github.com/iview/iview). 在使用他们的时候报错了, 查看了[issue](https://github.com/kazupon/vue-i18n/issues/222),  在issue中获得到一段代码, 不明真相地解决了问题:
 
 ```js
 Vue.use(iView, {
@@ -18,11 +18,11 @@ Vue.use(iView, {
 })
 ```
 
-​	这可能是我第一次知道`Vue.use`可以传第二个参数, 所以想知道发生了什么.
+这可能是我第一次知道`Vue.use`可以传第二个参数, 所以想知道发生了什么.
 
-​	先说结果: 是因为`iView`做了对`vue-i18n`的集成, 是没有仔细看文档而使用不当导致的问题. 研究期间又看了element ui的代码. 发现`iView`的对`vue-i18n`的集成是抄他们的. (阻断吐槽). 
+先说结果: 是因为`iView`做了对`vue-i18n`的集成, 是没有仔细看文档而使用不当导致的问题. 研究期间又看了element ui的代码. 发现`iView`的对`vue-i18n`的集成是抄他们的. (阻断吐槽). 
 
-​	来说一下看完这篇文章能明白哪些几点:
+来说一下看完这篇文章能明白哪些几点:
 
 + `Vue.use()`做了些什么
 
@@ -36,9 +36,9 @@ Vue.use(iView, {
 
 ## Vue.use
 
-​	(接文章开头的故事), 以前使用`Vue.use()`的场景都是`Vue.use(vuex)`, `Vue.use(router)`等. 那么这次在第二个参数传入了`i18n: (key, value) => i18n.vm._t(key, value)`以后发生了什么事组织了程序报错呢.
+(接文章开头的故事), 以前使用`Vue.use()`的场景都是`Vue.use(vuex)`, `Vue.use(router)`等. 那么这次在第二个参数传入了`i18n: (key, value) => i18n.vm._t(key, value)`以后发生了什么事组织了程序报错呢.
 
-​	首先要明白`Vue.use()`是干什么用的, 接受的各个参数是干嘛的. 开始看vue的代码, 本文看的**Vue的版本为2.5.2**, 贴个代码, 文件位置: `src/core/global-api/use.js`
+首先要明白`Vue.use()`是干什么用的, 接受的各个参数是干嘛的. 开始看vue的代码, 本文看的**Vue的版本为2.5.2**, 贴个代码, 文件位置: `src/core/global-api/use.js`
 
 ```js
 /* @flow */
@@ -70,7 +70,7 @@ export function initUse (Vue: GlobalAPI) {
 }
 ```
 
-​	代码的语法解释已经写在注释中, 现在来直白的解释一下, 假设插件名字为`Cwj`:
+代码的语法解释已经写在注释中, 现在来直白的解释一下, 假设插件名字为`Cwj`:
 
 ```js
 // 使用的时候
@@ -90,13 +90,13 @@ Cwj.install(Vue, {
 })
 ```
 
-​	**总结**: `Vue.use()`的行为: 执行插件的`install()`方法, 第一个参数为Vue, 剩余的参数为`Vue.use()`接受的第二个及以后的参数.
+**总结**: `Vue.use()`的行为: 执行插件的`install()`方法, 第一个参数为Vue, 剩余的参数为`Vue.use()`接受的第二个及以后的参数.
 
-​	另外, 大部分ui组件的install方法大部分都在执行`Vue.component()`, 哈哈.
+另外, 大部分ui组件的install方法大部分都在执行`Vue.component()`, 哈哈.
 
 ## 分析避免集成发生错误的原理
 
-​	知道了`Vue.use()`干了什么, 那么我们要到`iView`的代码里去找`install()`方法了. 我这里看的**iView的版本为2.5.0-beta.1**, 在`src/index.js`中找到了install方法:
+知道了`Vue.use()`干了什么, 那么我们要到`iView`的代码里去找`install()`方法了. 我这里看的**iView的版本为2.5.0-beta.1**, 在`src/index.js`中找到了install方法:
 
 ```js
 const install = function(Vue, opts = {}) {
@@ -131,7 +131,7 @@ export const i18n = function(fn) {
 
 ## Vue.mixin
 
-​	那么我们传入的方法是`(key, value) => i18n.vm._t(key, value)`, 这里的`i18n.vm._t`是哪里来的, 看一下在我的项目中[出现问题的文件](https://github.com/fjonas/lock-on/blob/master/src/renderer/main.js)是如何加载他们的:
+那么我们传入的方法是`(key, value) => i18n.vm._t(key, value)`, 这里的`i18n.vm._t`是哪里来的, 看一下在我的项目中[出现问题的文件](https://github.com/fjonas/lock-on/blob/master/src/renderer/main.js)是如何加载他们的:
 
 ```js
 Vue.use(VueI18n)
@@ -216,13 +216,13 @@ export function initMixin (Vue: GlobalAPI) {
 
 ## $t是如何运作的
 
-​	进行了加载以后, 只需要在dom的插值表达中调用就可以翻译, 类似: `$t('hello')`, 那么`$t`方法是如何被加载到所有Vue的子组件中的呢. 我们需要重新开始理一下.
+进行了加载以后, 只需要在dom的插值表达中调用就可以翻译, 类似: `$t('hello')`, 那么`$t`方法是如何被加载到所有Vue的子组件中的呢. 我们需要重新开始理一下.
 
-​	之前的章节对于一些加载的方法有了了解, 那么现在从`vue-i18n`安装的时候开始分析, 以查出`$t`是如何进行翻译为目的来跟着`vue-i18n`的源码兜一圈.
+之前的章节对于一些加载的方法有了了解, 那么现在从`vue-i18n`安装的时候开始分析, 以查出`$t`是如何进行翻译为目的来跟着`vue-i18n`的源码兜一圈.
 
 ### 加载
 
-​	先看vue-i18n是如何被加载进来的.
+先看vue-i18n是如何被加载进来的.
 
 ```js
 Vue.use(VueI18n)
@@ -248,7 +248,7 @@ new Vue({
 
 ### install
 
-​	上文已经提到过, install里的核心四个方法:
+上文已经提到过, install里的核心四个方法:
 
 ```js
 Object.defineProperty(Vue.prototype, '$i18n', {
@@ -262,7 +262,7 @@ Vue.component(component.name, component)
 
 directive与component分别是注册指令和注册组件, 这里先不展开, 我们的目标是分析`$t`.
 
-​	来看extend.js中关于`$t`的代码: (文件中其他代码没有贴出来)
+来看extend.js中关于`$t`的代码: (文件中其他代码没有贴出来)
 
 ```js
 /* @flow */
@@ -350,7 +350,7 @@ export default function extend (Vue: any): void {
 
 (粗糙地一看), 就是Vue吧参数判断了一下然后塞进了自己的`.$options`属性. 也就是`Vue.$options.i18n` 现在是一个VueI18n实例.
 
-​	准备看一下VueI18n的构造吧. 代码有600行, 初始化的时候还是执行了
+准备看一下VueI18n的构造吧. 代码有600行, 初始化的时候还是执行了
 
 ```js
 const silent = Vue.config.silent
