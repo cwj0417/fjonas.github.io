@@ -1,5 +1,5 @@
 ---
-title: 弗洛伊德理论简介
+title: 弗洛伊德理论介绍
 date: 2017-10-15 12:19:20
 categories: 开拓与发现
 tags: 心理学
