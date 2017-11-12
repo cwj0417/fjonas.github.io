@@ -97,17 +97,17 @@ Xcode左上有个三角的"播放"按钮, 右边有个下拉列表, 选择设备
 
 [cordova文档](http://cordova.apache.org/docs/en/7.x/config_ref/images.html#ios)中也有说如何添加自定义图标, [苹果开发文档](https://developer.apple.com/library/content/qa/qa1686/_index.html)说了一些具体尺寸, 因为我暂时只考虑iPhone端, 那么很简单了.
 
-我从网上随便找了个图片, 调整了一下, 然后分别导出为60, 120, 180, 40, 80, 29, 58七种大小的**png** (苹果开发文档说明一定要带透明通道的png), 并放到cordova目录下. 然后在`config.xml`里配置如下:
+我从网上随便找了个图片, 调整了一下, 然后分别导出为60, 120, 180, 40, 80, 29, 58七种大小的**png** (苹果开发文档说明一定要带透明通道的png), 并放到对应的目录下. 然后在`config.xml`里配置如下:
 
 ```xml
 <platform name="ios">
-  <icon height="60" src="./Icon-60.png" width="60" />
-  <icon height="120" src="./Icon-60@2x.png" width="120" />
-  <icon height="180" src="./Icon-60@3x.png" width="180" />
-  <icon height="40" src="./Icon-40.png" width="40" />
-  <icon height="80" src="./Icon-40@2x.png" width="80" />
-  <icon height="29" src="./Icon-29.png" width="29" />
-  <icon height="58" src="./Icon-29@2x.png" width="58" />
+  <icon height="60" src="res/icon/ios/Icon-60.png" width="60" />
+  <icon height="120" src="res/icon/ios/Icon-60@2x.png" width="120" />
+  <icon height="180" src="res/icon/ios/Icon-60@3x.png" width="180" />
+  <icon height="40" src="res/icon/ios/Icon-40.png" width="40" />
+  <icon height="80" src="res/icon/ios/Icon-40@2x.png" width="80" />
+  <icon height="29" src="res/icon/ios/Icon-29.png" width="29" />
+  <icon height="58" src="res/icon/ios/Icon-29@2x.png" width="58" />
   <allow-intent href="itms:*" />
   <allow-intent href="itms-apps:*" />
 </platform>
@@ -116,6 +116,10 @@ Xcode左上有个三角的"播放"按钮, 右边有个下拉列表, 选择设备
 小插曲, 60是图标, 29是任务界面的缩略图, 这都是用血试出来的.
 
 然后运行`cordova build ios`, 在Xcode里run起来, app图标就变啦.
+
+### 图标工具
+
+因为适配各个图标太累, 想自己写个工具, 想在npm找注册名字的时候发现已经有小哥哥写好了工具, 名字叫`cordova-icon`和`cordova-splash`, 轮子可以造, 但不是在现在这种紧急的时候, 所以推荐使用噢, 很方便.
 
 ## trouble shooting
 
@@ -150,6 +154,10 @@ npm ER
 ### 连接手机失败
 
 在安装到手机的过程中, Xcode提示手机正忙. 这个是Xcode9的bug? 解决方案是重启Xcode, 重启手机, 也许只要重启一个就可以了, 我重启了2个, 问题解决了.
+
+### 构建以后白屏
+
+这个问题非常大, cordova构建了vue的dist文件以后进去是白屏, 最后发现原因是cordova构建的时候js引入的目录错误了. 最后查到原因是webpack配置里`assetsPublicPath`设成了`/`, build的时候把这个杠加进去所以路径错了.
 
 ## 以后
 
