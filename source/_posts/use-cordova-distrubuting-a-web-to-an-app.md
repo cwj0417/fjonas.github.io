@@ -159,6 +159,14 @@ npm ER
 
 这个问题非常大, cordova构建了vue的dist文件以后进去是白屏, 最后发现原因是cordova构建的时候js引入的目录错误了. 最后查到原因是webpack配置里`assetsPublicPath`设成了`/`, build的时候把这个杠加进去所以路径错了.
 
+### 状态栏设置失效
+
+cordova的[官方状态栏插件](http://cordova.apache.org/docs/en/7.x/reference/cordova-plugin-statusbar/index.html)不管如何调用都无效, 经过一番调查, 因为cordova没跟上ios11(看起来cordova也已经deprecated了), 于是安装`cordova-plugin-disable-ios11-statusbar`这个插件就搞定了. 以后官方应该会更新官方插件吧. 这个作为暂时解决方案.
+
+### fontawesome在手机上无效
+
+我判断是`@font-face`在webview上无效, 那么就把配置里url-loader的limit参数加了3个0, 搞定了.
+
 ## 以后
 
 把网页弄到移动设备上会产生许多问题, 设计不同/适配是小事, 前后端分离, 本地起server, 可能用到ssr等. 眼前最大的问题可能是数据储存到哪.
