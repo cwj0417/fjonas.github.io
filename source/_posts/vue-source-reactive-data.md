@@ -613,3 +613,148 @@ constructor (
 看完源码就不神秘了, 写得也算很清楚了. 当然还有很多细节没写, 因为冲着目标来.
 
 总结其实都在上一节的粗体里了.
+
+## 甜点
+
+我们只从data看了, 那么props和computed应该也是这样的, 因为props应该与组建相关, 下回分解吧, 我们来看看computed是咋回事吧.
+
+```js
+const computedWatcherOptions = { lazy: true }
+
+function initComputed (vm: Component, computed: Object) {
+  const watchers = vm._computedWatchers = Object.create(null)
+  // computed properties are just getters during SSR
+  const isSSR = isServerRendering()
+  for (const key in computed) {
+    // 循环每个computed
+    // ------------
+    // 格式滤错滤空
+    const userDef = computed[key]
+    const getter = typeof userDef === 'function' ? userDef : userDef.get
+    if (process.env.NODE_ENV !== 'production' && getter == null) {
+      warn(
+        `Getter is missing for computed property "${key}".`,
+        vm
+      )
+    }
+
+    if (!isSSR) {
+      // create internal watcher for the computed property.
+      // 为computed建立wathcer
+      watchers[key] = new Watcher(
+        vm,
+        getter || noop,
+        noop,
+        computedWatcherOptions
+      )
+    }
+
+    // component-defined computed properties are already defined on the
+    // component prototype. We only need to define computed properties defined
+    // at instantiation here.
+    // 因为没有被代理, computed属性是不能通过vm.xx获得的, 如果可以获得说明重复定义, 抛出异常.
+    if (!(key in vm)) {
+      defineComputed(vm, key, userDef)
+    } else if (process.env.NODE_ENV !== 'production') {
+      if (key in vm.$data) {
+        warn(`The computed property "${key}" is already defined in data.`, vm)
+      } else if (vm.$options.props && key in vm.$options.props) {
+        warn(`The computed property "${key}" is already defined as a prop.`, vm)
+      }
+    }
+  }
+}
+```
+
+已注释, 总结为:
+
++ 遍历每个computed键值, 过滤错误语法.
++ 遍历每个computed键值, 为他们建立watcher, options为`{ lazy: true}`.
++ 遍历每个computed键值, 调用defineComputed.
+
+那么继续看defineComputed.
+
+```js
+export function defineComputed (
+  target: any,
+  key: string,
+  userDef: Object | Function
+) {
+  const shouldCache = !isServerRendering()
+  // 因为computed除了function还有get set 字段的语法, 下面的代码是做api的兼容
+  if (typeof userDef === 'function') {
+    sharedPropertyDefinition.get = shouldCache
+      ? createComputedGetter(key)
+      : userDef
+    sharedPropertyDefinition.set = noop
+  } else {
+    sharedPropertyDefinition.get = userDef.get
+      ? shouldCache && userDef.cache !== false
+        ? createComputedGetter(key)
+        : userDef.get
+      : noop
+    sharedPropertyDefinition.set = userDef.set
+      ? userDef.set
+      : noop
+  }
+  // 除非设置setter, computed属性是不能被修改的, 抛出异常 (evan说改变了自由哲学, 要控制低级用户)
+  if (process.env.NODE_ENV !== 'production' &&
+      sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set = function () {
+      warn(
+        `Computed property "${key}" was assigned to but it has no setter.`,
+        this
+      )
+    }
+  }
+  // 其实核心就下面这步... 上面步骤的作用是和data一样添加一个getter, 增加append动作. 现在通过vm.xxx可以获取到computed属性啦!
+  Object.defineProperty(target, key, sharedPropertyDefinition)
+}
+
+function createComputedGetter (key) {
+  return function computedGetter () {
+    const watcher = this._computedWatchers && this._computedWatchers[key]
+    if (watcher) {
+      if (watcher.dirty) {
+        watcher.evaluate()
+      }
+      if (Dep.target) {
+        watcher.depend()
+      }
+      return watcher.value
+    }
+  }
+}
+```
+
+因为computed可以设置getter, setter, 所以computed的值不一定是function, 可以为set和get的function, 很大部分代码是做这些处理, 核心的事情有2件:
+
++ 使用Object.defineProperty在vm上挂载computed属性.
++ 为属性设置getter, getter做了和data一样的事: depend. 但是多了一步: `watcher.evalueate()`.
+
+看到这里, computed注册核心一共做了两件事:
+
+1. 为每个computed建立watcher(lazy: true)
+2. 建立一个getter来depend, 并挂到vm上.
+
+那么dirty成了疑问, 我们回到watcher的代码中去看, lazy和dirty和evaluate是干什么的.
+
+精选相关代码:
+
++ (构造函数中) `this.dirty = this.lazy`
+
++ (构造函数中) `this.value = this.lazy  ? undefined  : this.get()`
+
++ (evaluate函数) 
+
+  ```js
+  evaluate () {
+      this.value = this.get()
+      this.dirty = false
+    }
+  ```
+
+到这里已经很清楚了. 因为还没设置getter, 所以在建立watcher的时候不立即调用getter, 所以构造函数没有马上调用get, 在设置好getter以后调用evaluate来进行依赖注册.
+
+总结: computed是watch+把属性挂到vm上的行为组合.
+
