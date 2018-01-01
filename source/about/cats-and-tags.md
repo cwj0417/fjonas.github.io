@@ -22,6 +22,7 @@
 +   **d3** 一个数据可视化js库
 +   **svg** 
 +   **cordova** 原phonegap, app打包工具
++   **weex** 用vue语法编译到三端(安卓, iOS, web)
 
 ### 设计方向
 
