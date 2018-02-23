@@ -1,7 +1,7 @@
 ---
 title: 使用cordova来为web应用做app壳
 date: 2017-11-09 16:14:20
-categories: 代码与分析
+categories: 编码与分析
 tags: [入门,cordova]
 ---
 想把一个网页发布成app要怎么做, 经过一番调研: phonegap, cordova, react native, weex. 这些可能是根据时间来的, apache买下了phonegap重命名成cordova, rn和weex的爹分别是fb和阿里, 推的web框架是react和vue. 目前weex不成熟, rn又强制用react, 所以决定先用cordova来做个皮包app.
