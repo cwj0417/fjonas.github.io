@@ -2,7 +2,7 @@ $(function () {
     var titles = $('h2,h3,h4,h5');
 
     function escp(a) {
-        return a.replace(/([\s\.\*\=\+\>\,\[\]\:\~\?\'\"\(\)])/g, '\\$1');
+        return encodeURI(a)
     }
 
     function getOutLine(titles, startNum) {
@@ -177,6 +177,7 @@ $(function () {
                         timer = null
                     }, 200)
                 }
+                spy(items, className)
             });
         }
     };
@@ -198,7 +199,7 @@ $(function () {
         var find = 0;
 
         for (var i = 0, l = items.length; i < l; i++) {
-            if (document.body.scrollTop < items[i].top - items[i].height / 3) {
+            if (document.documentElement.scrollTop < items[i].top - items[i].height / 3) {
                 find = i;
                 break;
             }
