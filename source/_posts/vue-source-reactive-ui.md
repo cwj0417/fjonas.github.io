@@ -295,12 +295,180 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
 我们关心的部分其实就是`__patch()`的部分, `__patch()`做了对dom的操作, 在`_update()`里判断了是否是初次调用, 如果是的话创建新dom, 不是的话传入新旧node进行比较再操作.
 
+## vue的入口文件
+
+现在`render()`方法和`__patch__()`方法都不在`core`文件夹中被定义, 那么现在来一起看看我们最终引用的`vue`对象的整体.
+
+以webpack的vue项目为例, 用的是`vue.esm.js`, package.json的main字段不是他, 于是看build命令:
+
+```bash
+node scripts/build.js
+```
+
+是用rollup把配置中的所有字段都对应地编译, 配置如下:
+
+```js
+const builds = {
+  // Runtime only (CommonJS). Used by bundlers e.g. Webpack & Browserify
+  'web-runtime-cjs': {
+    entry: resolve('web/entry-runtime.js'),
+    dest: resolve('dist/vue.runtime.common.js'),
+    format: 'cjs',
+    banner
+  },
+  // Runtime+compiler CommonJS build (CommonJS)
+  'web-full-cjs': {
+    entry: resolve('web/entry-runtime-with-compiler.js'),
+    dest: resolve('dist/vue.common.js'),
+    format: 'cjs',
+    alias: { he: './entity-decoder' },
+    banner
+  },
+  // Runtime only (ES Modules). Used by bundlers that support ES Modules,
+  // e.g. Rollup & Webpack 2
+  'web-runtime-esm': {
+    entry: resolve('web/entry-runtime.js'),
+    dest: resolve('dist/vue.runtime.esm.js'),
+    format: 'es',
+    banner
+  },
+  // Runtime+compiler CommonJS build (ES Modules)
+  'web-full-esm': {
+    entry: resolve('web/entry-runtime-with-compiler.js'),
+    dest: resolve('dist/vue.esm.js'),
+    format: 'es',
+    alias: { he: './entity-decoder' },
+    banner
+  },
+    ... // 以下省略, 还有很多...
+}
+```
+
+我们找的文件`vue.esm.js`的入口文件找到啦, 是`web/entry-runtime-with-compiler.js`.
+
+而在`web/entry-runtime-with-compiler.js`中, 又从`./runtime/index`引入了Vue, 最后才从`core/index`中引入Vue.
+
+所以Vue的平台无关的内容放在`core`中, 最后打成dist的时候根据不同的发布平台(web, weex), 发布模式(browser, es-module)来给核心Vue对象挂载更多的方法和属性, 那么我们现在来看看web/es-module这条路添加了些什么~
+
+从`runtime/index`开始:
+
+```js
+// runtime/index.js 部分代码
+// install platform specific utils
+Vue.config.mustUseProp = mustUseProp
+Vue.config.isReservedTag = isReservedTag
+Vue.config.isReservedAttr = isReservedAttr
+Vue.config.getTagNamespace = getTagNamespace
+Vue.config.isUnknownElement = isUnknownElement
+
+// install platform runtime directives & components
+extend(Vue.options.directives, platformDirectives)
+extend(Vue.options.components, platformComponents)
+
+// install platform patch function
+Vue.prototype.__patch__ = inBrowser ? patch : noop
+
+// public mount method
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && inBrowser ? query(el) : undefined
+  return mountComponent(this, el, hydrating)
+}
+```
+
+挂载了一些常量和平台专属directive和component. 我们关心的`__patch__()`方法是在这里被挂上的, `$mount()`方法也是这个时候挂上的, 正是调用了`mountComponent()`.
+
+然后看`web/entry-runtime-with-compiler.js`:
+
+```js
+// web/entry-runtime-with-compiler.js 部分代码
+const mount = Vue.prototype.$mount
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && query(el)
+
+  /* istanbul ignore if */
+  if (el === document.body || el === document.documentElement) {
+    process.env.NODE_ENV !== 'production' && warn(
+      `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
+    )
+    return this
+  }
+
+  const options = this.$options
+  // resolve template/el and convert to render function
+  if (!options.render) { // 如果没有render方法就尝试把别的字段编译成render方法
+    let template = options.template
+    if (template) { // 尝试template字段, 没有的话就获取el字段并编译成template
+      if (typeof template === 'string') {
+        if (template.charAt(0) === '#') {
+          template = idToTemplate(template)
+          /* istanbul ignore if */
+          if (process.env.NODE_ENV !== 'production' && !template) {
+            warn(
+              `Template element not found or is empty: ${options.template}`,
+              this
+            )
+          }
+        }
+      } else if (template.nodeType) {
+        template = template.innerHTML
+      } else {
+        if (process.env.NODE_ENV !== 'production') {
+          warn('invalid template option:' + template, this)
+        }
+        return this
+      }
+    } else if (el) {
+      template = getOuterHTML(el)
+    }
+    if (template) {
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile')
+      }
+
+      // 把template编译成render函数
+
+      const { render, staticRenderFns } = compileToFunctions(template, {
+        shouldDecodeNewlines, // 检测浏览器的行为, 是否会把一些东西url-encode
+        shouldDecodeNewlinesForHref,
+        delimiters: options.delimiters, // 默认是双花括号 '{{' '}}', 用来编译模板的
+        comments: options.comments // 默认是false, 如果true就不丢弃注释
+      }, this)
+      options.render = render
+      options.staticRenderFns = staticRenderFns
+
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+        mark('compile end')
+        measure(`vue ${this._name} compile`, 'compile', 'compile end')
+      }
+    }
+    // 如果所有if都没走到, 那么就没有render方法, 异常将在$mount的时候抛出. 这里没有做处理
+  }
+  return mount.call(this, el, hydrating)
+}
+```
+
+注释都贴在上面的代码里了, 在这个文件里在`$mount()`方法里插入`render()`方法的注册, 总结为:
+
++ 如果有`render()`函数, 就用`render()`函数.
++ 如果没有, 就用`template`属性编译成`render()`函数.
++ 如果没有`template`属性, 就用找`el`属性所指的dom, 并把他编译成`template`.
++ 最后用`template`(原来的`template`或是`el`编译成的)编译出`render()`函数.
++ 如果是三无产品(`render()`, `template`, `el`都没有). 那么什么都不做, 这个Vue实例就没有`render()`函数, 但没有报错, 因为在`mountComponent()`的时候会报错.
+
 ## 结论
 
 + vue的视图渲染是一种特殊的Watcher, watch的内容是一个函数, 函数运行的过程调用了render函数, render又是由template或者el的dom编译成的(template中含有一些被observe的数据). 所以template中被observe的数据有变化触发Watcher的update()方法就会重新渲染视图.
++ Vue的平台无关的内容在`core`中, 最后打成dist的时候根据不同的发布平台(web, weex), 发布模式(browser, es-module)来给核心Vue对象挂载更多的方法和属性(代码在platforms中). `render()`和`__patch__()`是在platforms里挂上的.
 
 ## 遗留
 
-+ render函数是在哪里被编译的
-+ vue源码发布时引入不同平台最后打成dist的流程是什么
++ template编译成render的实现
 + `__patch__`和VNode的分析
