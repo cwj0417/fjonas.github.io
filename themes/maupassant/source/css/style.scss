@@ -282,7 +282,7 @@ div {
 	word-break: normal;
 	h2 {
 	  margin: 1.4em 0 1.1em;
-	  border-bottom: 1px solid #eee;
+	  border-bottom: 1px solid $border;
 	  overflow: hidden;
 	}
 	h3 {
@@ -297,7 +297,7 @@ div {
 		display: inline-block;
 		margin: 0 5px;
 		padding: 0 5px;
-		background: #f7f8f8;
+		background: $border;
 	  }
 	  a {
 		color: #01579f;
@@ -338,7 +338,7 @@ div {
 		display: inline-block;
 		margin: 0 5px;
 		padding: 0px 5px;
-		background: #f7f8f8;
+		background: $border;
 	  }
 	  a {
 		color: #01579f;
@@ -924,7 +924,7 @@ pre {
 /* syntax highlight*/
 figure.highlight,
 .codeblock {
-  background: #f7f8f8;
+  background: $border;
   margin: 10px 0;
   line-height: 1.1em;
   color: #333;
@@ -964,7 +964,7 @@ figure.highlight,
 	font-size: 13px;
 	padding: 0 15px 20px;
 	margin: 0;
-	background: #f7f8f8;
+	background: $borderActive;
 	color: #999999;
 
 	a {
@@ -974,8 +974,8 @@ figure.highlight,
   }
   // Gutter which contains line numbers
   .gutter {
-	background: #f7f8f8;
-	border-right: 1px solid #e6e6e6;
+	background: $borderHover;
+	border-right: 1px solid $borderActive;
 	padding: 0.3em 15px;
 
 	.line {
