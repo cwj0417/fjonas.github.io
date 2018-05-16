@@ -10,7 +10,7 @@
 
 ## 我的项目
 
-+ [jin](jin.yo-cwj.com) — 配色生成器
++ [jin](https://jin.yo-cwj.com/) — 配色生成器
 + [abandon](https://github.com/fjonas/abandon) — 记录坚持日记的app
 + [vocabook](https://github.com/fjonas/lock-on) — 背单词的桌面app
 + [yosoro](https://github.com/fjonas/yosoro) — chrome插件, 各种日常小工具
@@ -22,7 +22,7 @@
 ## 我在
 
 +   [github](https://github.com/fjonas)
-+   [segmentfault](https://segmentfault.com/u/rehapun)
++   [segmentfault](https://segmentfault.com/u/xpang)
 +   [微博](http://weibo.com/u/2719310113)
 +   [dribbble](https://dribbble.com/fjonas)
 

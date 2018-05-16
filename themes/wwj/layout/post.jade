@@ -1,0 +1,40 @@
+extends base
+
+block title
+  title= page.title + ' | ' + config.title
+
+block scripts
+  script(type='text/javascript',src='//cdn.bootcss.com/highlight.js/9.6.0/highlight.min.js')
+  link(rel='stylesheet', type='text/css', href='//cdn.bootcss.com/highlight.js/9.6.0/styles/default.min.css')
+  script(type='text/javascript', src=url_for(theme.js) + '/post.js')
+
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta= page.date.format('ll')
+      if page.categories.length > 0
+        span= ' | '
+        span.category
+          for category in page.categories.toArray()
+            a(href=url_for(category.path))= category.name
+      if theme.busuanzi == true
+        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
+        span#busuanzi_container_page_pv= ' | '
+          span#busuanzi_value_page_pv
+          span= ' ' + __('Hits')
+    if theme.disqus
+      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
+    if page.toc
+      div(class='clear')
+        div(id='toc' class='toc-article')
+          div(class='toc-title')= __('contents')
+          != toc(page.content)
+    .post-content
+      != page.content
+    if theme.shareto == true
+      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
+      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
+    include _partial/post_footer
+    include _partial/tag
+    include _partial/post_nav
+    include _partial/comments

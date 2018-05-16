@@ -1,4 +1,4 @@
-fancybox: true ## If you want to use fancybox please set the value to true.
+fancybox: false ## If you want to use fancybox please set the value to true.
 duoshuo: rehapun ## Your duoshuo_shortname, e.g. username
 disqus: ## Your disqus_shortname, e.g. username
 cyid: cyt1bgEED
@@ -21,6 +21,9 @@ menu:
     icon: fa-home
   - page: 归档
     directory: archives/
+    icon: fa-archive
+  - page: 项目
+    directory: projects/
     icon: fa-archive
   - page: 关于
     directory: about/
