@@ -9,9 +9,6 @@ mixin a_with_current(href, content, id)
   else if (href == 'archives/' && is_category())
     a.current(href=url)
       = ' ' + content
-  else if (href == 'projects/')
-    a.current(href=url)
-      = ' ' + content
   else
     a(href=url)
       = ' ' + content
