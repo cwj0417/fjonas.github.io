@@ -1,0 +1,11 @@
+.cats-nav
+	- for (var i in theme.cats)
+		if is_current(theme.cats[i].href) && theme.cats[i].href !== ''
+			a.pure-u-1.pure-u-md-1-4.current(href=url_for(theme.cats[i].href))
+				!= theme.cats[i].name
+		else if (theme.cats[i].href === '' && is_home())
+			a.pure-u-1.pure-u-md-1-4.current(href=url_for(theme.cats[i].href))
+				!= theme.cats[i].name
+		else
+			a.pure-u-1.pure-u-md-1-4(href=url_for(theme.cats[i].href))
+				!= theme.cats[i].name

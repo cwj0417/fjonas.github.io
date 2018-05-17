@@ -8,6 +8,8 @@ block title
     title= config.title
 block content
 
+  include _partial/cats_nav
+
   for post in page.posts.toArray()
     .post
       h2.post-title
