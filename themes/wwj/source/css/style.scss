@@ -43,7 +43,7 @@ body {
 .content_container {
   margin-right: 50px;
   margin-top: 20px;
-  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
   .cats-nav {
 	.nav-wrap {
 	  position: relative;
@@ -151,7 +151,7 @@ div {
   background-origin:content-box;
   background-position:center;
   padding-top: 5px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, .5);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, .1);
   .site-name {
 	margin-bottom: 20px;
 	text-align: center;
@@ -323,7 +323,11 @@ div {
 }
 
 .post {
-  padding: 25px 0 15px;
+  padding: 25px 15px 23px 25px;
+  background-color: #fafeff;
+  margin-bottom: 10px;
+  box-shadow: -1px 1px 10px rgba(0, 0, 0, .1);
+  border-radius: 5px;
   .post-title {
 	margin: 0;
 	color: $postTitle;
@@ -1024,21 +1028,37 @@ pre {
 
 /* read more*/
 .readmore a {
-  font-size: 14px;
-  color: $txtColor;
-  margin: -10px 0;
+  font-size: 12px;
+  color: #fff;
+  margin: -14px 0;
   padding: 5px 10px;
-  border: 1px solid $border;
-  border-radius: 5px;
+  border: 1px solid #d9f5ff;
+  border-radius: 20px;
   float: right;
+  font-family: PingFangSC-Regular;
+  background-color: #51c4fb;
+  position: relative;
+  &:before {
+	content: " ";
+	height: 1px;
+	width: 31px;
+	display: inline-block;
+	position: absolute;
+	background: #fff;
+	left: 16px;
+	top: 20px;
+	transform: translate(60px);
+	transition: all .2s ease-out;
+  }
   &:after {
 	font-family: "FontAwesome";
 	content: "\f101";
 	padding-left: 0.3em;
   }
   &:hover {
-	background: $border;
-	border-bottom-color: $darkBorer;
+	&:before {
+	  transform: translate(0px);
+	}
   }
 }
 
