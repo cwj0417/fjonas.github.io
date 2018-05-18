@@ -48,12 +48,12 @@ widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts
   - links
 
 links:
-  - title: github
-    url: https://github.com/fjonas
-  - title: segmentfault
-    url: https://segmentfault.com/u/xpang
-  - title: yanxu
-    url: http://blog.csdn.net/u010416101
+  - title: sean(大数据专家, 人工智能专家)
+    url: https://blog.csdn.net/u010416101
+  - title: abel(大数据专家, 人工智能专家)
+    url: https://blog.csdn.net/u012373815
+  - title: bruce(大数据专家, 人工智能专家)
+    url: https://di1shuai.com/
 
 timeline:
   - num: 1

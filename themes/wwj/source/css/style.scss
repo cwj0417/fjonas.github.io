@@ -31,6 +31,7 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-attachment: fixed;
+  user-select: none;
 }
 
 .body_container {
@@ -43,7 +44,9 @@ body {
 .content_container {
   margin-right: 50px;
   margin-top: 20px;
-  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
+  .post-list {
+	box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
+  }
   .cats-nav {
 	.nav-wrap {
 	  position: relative;
@@ -489,29 +492,29 @@ div {
 }
 
 .page-navigator {
-  border-top: 1px solid $border;
-  list-style: none;
-  margin-top: 25px;
-  padding: 25px 0 0;
   font-size: 14px;
   text-align: center;
+  margin: 10px;
+  padding: 10px;
   .page-number {
 	display: inline-block;
-	margin: 0 5px 5px 0;
+	margin: 0 6px;
   }
   a, span {
 	display: inline-block;
-	height: 25px;
-	line-height: 25px;
-	padding: 5px 9px;
-	border: 1px solid $border;
+	height: 32px;
+	width: 32px;
+	line-height: 32px;
 	text-align: center;
+	border-radius: 50%;
+	border: 1px solid #4AC3FE;
+	color: #4AC3FE;
+	transition: background-color .4s ease-out;
 	&:hover {
-	  background: $border;
-	  border-bottom-color: $darkBorer;
+	  background-color: #4AC3FE;
+	  color: #fff;
 	}
 	&.prev {
-	  float: left;
 	  &:before {
 		font-family: "FontAwesome";
 		content: "\f100";
@@ -519,7 +522,6 @@ div {
 	  }
 	}
 	&.next {
-	  float: right;
 	  &:after {
 		font-family: "FontAwesome";
 		content: "\f101";
@@ -528,12 +530,11 @@ div {
 	}
   }
   .current {
-	background: $border;
-	border-bottom-color: $darkBorer;
+	background-color: #4AC3FE;
+	color: #fff;
   }
   .space {
 	border: none;
-	padding: 5px 5px;
   }
 }
 
