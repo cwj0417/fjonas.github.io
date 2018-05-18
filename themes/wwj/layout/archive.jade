@@ -8,18 +8,43 @@ block title
   if page.archive
      title= __('archive') + ' | ' + config.title
 block content
-
+  .post-list
   include _partial/cats_nav
-
-  .post
-    .post-archive
-        //Use lodash to classify posts. See https://lodash.com/docs#groupBy
-        each posts, year in _.groupBy(page.posts.toArray(), function(p){return -p.date.format('YYYY')})
-          h2= -year
-          ul.listing
-            for post in posts
-              li
-                span.date= post.date.format('YYYY/MM/DD')
-                a(href=url_for(post.path), title=post.title)
-                  +title(post)
-  include _partial/paginator.jade
+  if is_category()
+    for post in page.posts.toArray()
+      .post
+        h2.post-title
+          include _partial/helpers
+          a(href=url_for(post.path))
+            +title(post)
+        .post-meta= post.date.format(config.date_format)
+        if theme.disqus
+          a.disqus-comment-count(data-disqus-identifier=post.path, href=url_for(post.path) + '#disqus_thread')
+        if post.description
+          .post-content
+            != post.description
+        else if post.excerpt
+          .post-content
+            != post.excerpt
+        else if post.content
+          - var br = post.content.indexOf('\n')
+          if br < 0
+            .post-content
+              != post.content
+          else
+            .post-content
+              != post.content.substring(0, br)
+        p(class='readmore')
+          a(href=url_for(post.path))= 'MORE'
+  else
+    .post
+      .post-archive
+          each posts, year in _.groupBy(page.posts.toArray(), function(p){return -p.date.format('YYYY')})
+            h2= -year
+            ul.listing
+              for post in posts
+                li
+                  span.date= post.date.format('YYYY/MM/DD')
+                  a(href=url_for(post.path), title=post.title)
+                    +title(post)
+  include _partial/paginator
