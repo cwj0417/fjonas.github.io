@@ -1,12 +1,18 @@
 .epcRecentComments {
   #cyWrapper {
+    padding: 5px 0 0 15px;
     ul {
       li {
         margin: 0 !important;
+        border-bottom: 1px dotted rgba(0, 0, 0, .1);
         .cont {
-          padding: 0;
-          span.reping-nickname {
-            color: #3e3e3e;
+          padding-left: 50px;
+          .reping-nickname {
+            color: #4BC4FF;
+            padding-top: 6px;
+          }
+          .reping-title a {
+            color: #4BC4FF;
           }
         }
         .reping-avatar {

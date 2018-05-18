@@ -42,7 +42,6 @@ body {
 }
 
 .content_container {
-  margin-right: 50px;
   margin-top: 20px;
   .post-list {
 	box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
@@ -151,8 +150,8 @@ div {
   position: relative;
   background-image: url('../img/head.png');
   background-size: 1300px;
-  background-origin:content-box;
-  background-position:center;
+  background-origin: content-box;
+  background-position: center;
   padding-top: 5px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, .1);
   .site-name {
@@ -244,37 +243,61 @@ div {
 }
 
 #sidebar {
-  border-left: 1px solid $border;
-  padding-left: 35px;
-  margin-top: 40px;
-  padding-bottom: 20px;
+  margin-top: 20px;
   word-wrap: break-word;
   .widget {
 	transition: all 1s ease-in-out;
-	margin-bottom: 30px;
+	box-shadow: -1px 0 2px #E0EEF6;
+	margin: 0 20px 10px 0;
 	.widget-title {
-	  color: #6E7173;
+	  color: #333;
 	  line-height: 2.7;
-	  margin-top: 0;
-	  font-size: 16px;
-	  border-bottom: 1px solid $border;
+	  font-size: 18px;
+	  background-color: #F4FBFF;
 	  display: block;
 	  font-weight: normal;
-	}
-	.comments-title {
-	  color: #6E7173;
-	  line-height: 2.7;
-	  margin-top: 0;
-	  font-size: 16px;
-	  border-bottom: 0px solid $border;
-	  display: block;
-	  font-weight: normal;
+	  box-shadow: 0 2px 4px #E0EEF6;
+	  padding-left: 5px;
+	  font-family: PingFangSC-Regular;
+	  position: relative;
+	  .fa {
+		margin: 0 15px;
+		color: #4BC4FF;
+	  }
+	  &:before {
+		content: ' ';
+		display: inline-block;
+		position: absolute;
+		width: 5px;
+		height: 20px;
+		background: linear-gradient(#4bc4ff, rgba(75, 196, 255, 0.5));
+		top: 13px;
+		left: 0;
+	  }
 	}
 	.tagcloud {
-	  margin-top: 10px;
+	  padding: 10px 20px;
 	  a {
-		line-height: 1.5;
-		padding: 5px;
+		font-family: PingFangSC-Regular;
+		color: rgb(102, 102, 102);
+		line-height: 30px;
+	  }
+	}
+	.links {
+	  padding-left: 20px;
+	  a {
+		border-bottom: 1px dotted rgba(0, 0, 0, .1);
+		display: inline-block;
+		font-size: 12px;
+		padding: 10px 0 10px 15px;
+		color: #999;
+		width: calc(100% - 20px);
+		&:first-child {
+		  padding-top: 16px;
+		}
+		&:last-child {
+		  border-bottom: 0;
+		}
 	  }
 	}
 	ul {

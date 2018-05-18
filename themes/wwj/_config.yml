@@ -40,10 +40,7 @@ cats:
     href: categories/开拓与发现/
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
-  - search
-  - category
   - tag
-  - recent_posts
   - recent_comments
   - links
 
