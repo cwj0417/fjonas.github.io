@@ -209,7 +209,7 @@ div {
 	  &:after {
 		content: ' ';
 		height: 15px;
-		width: 1.5px;
+		width: 2px;
 		background: #999;
 		position: relative;
 		display: inline-block;
@@ -613,12 +613,52 @@ div {
 	}
 	#nav-menu {
 	  position: relative;
-	  text-align: center;
+	  margin: 0;
+	  width: 312px;
 	  a {
-		padding: 0 15px;
-		line-height: 27px;
-		height: 27px;
+		padding: 0 13px;
+		line-height: 19px;
+		height: 19px;
 		font-size: 13px;
+		margin: 7px 10px;
+		&.current:before {
+		  left: 22px;
+		  top: 18px;
+		}
+		&:after {
+		  left: 24px;
+		  top: 2px;
+		}
+	  }
+	}
+	.site-name {
+	  margin-bottom: 5px;
+	  padding: 4px 0 0 75px;
+	  text-align: left;
+	  .avatar {
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+		border: 1px solid #33ccff;
+		position: absolute;
+		left: 30px
+	  }
+	  br {
+		display: none;
+	  }
+	  #logo {
+		font-size: 16px;
+	  }
+	  .description {
+		margin-top: 0.4em;
+		font-size: 12px;
+	  }
+	  .links {
+		margin: 7px -4px;
+		img {
+		  width: 15px;
+		  height: 15px;
+		}
 	  }
 	}
   }
