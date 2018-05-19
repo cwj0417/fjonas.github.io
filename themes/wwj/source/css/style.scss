@@ -599,6 +599,29 @@ div {
   }
   .content_container {
 	padding-right: 15px;
+	.cats-nav {
+	  .nav-wrap {
+		height: 42px;
+		.dis {
+		  display: none;
+		}
+		a {
+		  transform: rotateX(0deg);
+		  background: #57c5f9;
+		  font-size: 14px;
+		  color: #fff;
+		  &.current {
+			text-decoration: underline;
+		  }
+		}
+		&:nth-child(2n) {
+		  a {
+			color: #fff;
+			background: #abdff5;
+		  }
+		}
+	  }
+	}
   }
   .hidden_mid_and_down {
 	display: none !important;

@@ -1,6 +1,6 @@
 .cats-nav
 	- for (var i in theme.cats)
-		.pure-u-1.pure-u-md-1-4.nav-wrap
+		.pure-u-1-4.pure-u-md-1-4.nav-wrap
 			if is_current(theme.cats[i].href) && theme.cats[i].href !== ''
 				.dis.current
 					!= theme.cats[i].name
