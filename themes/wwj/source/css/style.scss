@@ -583,10 +583,68 @@ div {
   padding-bottom: .8em;
   h2 {
 	margin: 0;
-	font: bold 25px / 1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+	font: bold 25px / 1.1 "PingFang SC", Cambria, "Times New Roman", Georgia, Times, sans-serif;
   }
   .date {
 	padding-right: .7em;
+  }
+  .listing {
+	list-style: none;
+	padding: 0 20px;
+	li {
+	  border-left: 5px solid #fafeff;
+	  background: #edf6fa;
+	  padding-left: 10px;
+	  animation: .3s pop-in ease-out;
+	  transition: all .3s;
+	  &:nth-child(2n) {
+		background: #e1f2fa;
+	  }
+	  &:hover {
+		background: #7dd2fa;
+		color: #fff;
+		border-left: 5px solid #4bc3fa;
+		a {
+		  color: #fff;
+		}
+	  }
+	  &:nth-child(2) {
+		animation-delay: .1s;
+	  }
+	  &:nth-child(3) {
+		animation-delay: .2s;
+	  }
+	  &:nth-child(4) {
+		animation-delay: .3s;
+	  }
+	  &:nth-child(5) {
+		animation-delay: .4s;
+	  }
+	  &:nth-child(6) {
+		animation-delay: .5s;
+	  }
+	  &:nth-child(7) {
+		animation-delay: .6s;
+	  }
+	  &:nth-child(8) {
+		animation-delay: .7s;
+	  }
+	  &:nth-child(9) {
+		animation-delay: .8s;
+	  }
+	  &:nth-child(10) {
+		animation-delay: .9s;
+	  }
+	}
+  }
+}
+
+@keyframes pop-in {
+  from {
+	transform: translateX(500px);
+  }
+  to {
+	transform: translateX(0px);
   }
 }
 

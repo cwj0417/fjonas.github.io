@@ -175,7 +175,7 @@ $(function () {
                         last = cur
                         clearTimeout(timer)
                         timer = null
-                    }, 200)
+                    }, 60)
                 }
                 spy(items, className)
             });

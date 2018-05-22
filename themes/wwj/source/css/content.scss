@@ -16,27 +16,26 @@ img {
   transform-origin: 0 0 0;
   position: fixed;
   top: 0;
-  width: 25%;
   filter: none !important;
   a {
-    width: 80%;
+    width: 75%;
     color:inherit;
     display: inline-block;
     border-left:4px solid rgba(255,255,255,0);
     padding: 5px;
-    transition: background .35s;
+    transition: background .1s;
     -webkit-border-radius:2px;
     -moz-border-radius:2px;
     border-radius:2px;
   }
   a:hover {
-    background: #ccc;
+    background: #bdedfc;
   }
   .active{
     color: white !important;
     font-weight: 600;
-    border-left: 4px solid #000000 !important;
-    background: rgb(122, 122, 122) !important;
+    border-left: 4px solid #00c0fa !important;
+    background: #3ecdfd !important;
   }
   .active li {
     display: block !important;
