@@ -22,7 +22,7 @@ html, button, input, select, textarea,
 }
 
 body {
-  background-color: transparent;
+  background: linear-gradient(#fff 0%, #f2fcff 80%, #c2f1ff 100%);
   color: #444;
   font-family: "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -587,6 +587,7 @@ div {
   }
   .date {
 	padding-right: .7em;
+	color: #999;
   }
   .listing {
 	list-style: none;
@@ -597,6 +598,9 @@ div {
 	  padding-left: 10px;
 	  animation: .3s pop-in ease-out;
 	  transition: all .3s;
+	  a {
+		color: #333;
+	  }
 	  &:nth-child(2n) {
 		background: #e1f2fa;
 	  }
@@ -604,8 +608,12 @@ div {
 		background: #7dd2fa;
 		color: #fff;
 		border-left: 5px solid #4bc3fa;
+		.date {
+		  color: #fff;
+		}
 		a {
 		  color: #fff;
+		  font-weight: bold;
 		}
 	  }
 	  &:nth-child(2) {
