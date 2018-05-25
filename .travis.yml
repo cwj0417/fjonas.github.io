@@ -7,8 +7,8 @@ branches:
   - source
 before_install:
 - git config --global user.email "731028571@qq.com"
-- git config --global user.name "fjonas"
+- git config --global user.name "cwj0417"
 - sed -i'' "s~git@github.com:fjonas/fjonas.github.io.git~https://${REPO_TOKEN}:x-oauth-basic@github.com/fjonas/fjonas.github.io.git~" _config.yml
 env:
   global:
-    secure: rCj3m2YHw2fYjMHnnFDnog1yrXtzXk28OEV+b8gHh06k8UgC/JOGXGu9HMEFpyyHp7hoSZPpfRk0sjSt4VjEAqEL+SKqh5XKXMnQni+tnCe+fIo0hPX3juj+vqTfHHaaG8/TaJ4PFvBBBEU1z3nW2Mcu3epy7h9X/xGGem8Px/gLGl/vi4fI5PyexWl28l+RydPVUFWrK5KRNcXxPGA1kP0VDkjWsi6v4a7UxTixeheEihHtHCvdgb1PXlpcplkyL+74t4BobeJjOfZFVmpLQ3UI3mjJqeyRzsUf8P9f3O/0g2utp4OSzEpEyuHh5MBI8o4OGEgyOCsQL3D8YPIWr70J2TY+xLfpspGEi8XpBO2D9M0pDuHMpsOctho3jJZGAilWhE/9DmfAC85qlFhGyfVgs4x5VpeFzakAToIJPy7iwaGu3JwFmbDoECRxCOnNLif4moiMPTpz/bybSWZKeZZhLtDWltgi9hqpwMQduxxtwP5npAcXu6RX8oAqsk4KI3w4gF2kJYu+lLqAAi2INjZq/j8Sw0xxWs35chf8muYk735Tzx3b/9H/TSXKqH8+i4JnN/L1qmGkQu17eDst3dnwBRXROTbW5thrVWkfiLbyBZuROIs5anhz/pdsoicVaNkOAGbAmkrxtWjCmc95JRc2jxxbCGnZ9aY/mbdqB4Y=
+  secure: XzKP3/Ahp2iJORxaOHembhXBnqVtXYob0wg1rcbOrs0nneRoB+g8IBOJabQWplndphaXh1VjjwZ/BY    cin5SR3Y7DCAiueGgymwJA61w1FOmuqqnOx3Vggnd9ikE2bCe+gESDoX1ymxTylHg+d7q4cyZLzKUlZfONxP8adwZg    NotrJjUmGaVRBVvUzyRJVNlZH+Ec2MsODJSvO82a+2BRMQxh3p1Ti/kbdYVfxtmWOGZBtBjxzs23pDs1J0Cdkow56P    BdBBzTveWaDjlsbS2qTEWN8kY7uT2o81/ZecDc/d5NwMrvAfJS6Ma+Dr9rLMrAavjM24mddqtq545hfge7J+h/xM4B    3WyIv4msAF25ZICI/BMptLatEYLHQYCHw3X2oXjNyT8kg5KsoRL2yYfka5u3t0mgZB8otBs+ixU5jX88fBJDMTsVFQ    GPkzQwtGbYo6gzLI44Q75/3EpfUOOVR1ERlVqlrgHu+eLEg6ujJNU/KT8Uwm/pdVliC77dxCt1J/q4PxqXrqBOIPXa    goiF77+7ptn5evoHLviMNmPxz6XpOkvQLp0f/D/w7F3UAmtT9YNpe/UEXjx+/ubyqvEva9VtDMz5MiI6uj8uumMxsV    wFs3b867NCUgS7rKR6NZoNhFOOdgv0n5UHsCVCsKF8ypr3hWydQjecsgNSiBq+9kA=
