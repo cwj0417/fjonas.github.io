@@ -154,29 +154,29 @@ $(function () {
                         $('#outline').css("transform", "scale(1)")
                     }
                 }
-                if (!timer) {
-                    timer = setTimeout(function () {
-                        // var body = document.getElementsByTagName('body')[0]
-                        var cur = $('html').scrollTop()
-                        if (cur && last) {
-                            if (cur - last > 0) {
-                                $('#outline').show().removeClass('content-out').addClass('content-in')
-                                $('.widget').addClass('blur')
-                            } else {
-                                if (cur < 1000) {
-                                    $('#outline').removeClass('content-in').addClass('content-out')
-                                    $('.widget').removeClass('blur')
-                                    setTimeout(function () {
-                                        $('#outline').hide()
-                                    }, 500)
-                                }
+                // if (!timer) {
+                    // var body = document.getElementsByTagName('body')[0]
+                    var cur = $('html').scrollTop()
+                    if (cur && last) {
+                        if (cur - last > 0) {
+                            $('#outline').show().removeClass('content-out').addClass('content-in')
+                            $('.widget').addClass('blur')
+                        } else {
+                            if (cur < 1000) {
+                                $('#outline').removeClass('content-in').addClass('content-out')
+                                $('.widget').removeClass('blur')
+                                setTimeout(function () {
+                                    $('#outline').hide()
+                                }, 300)
                             }
                         }
-                        last = cur
-                        clearTimeout(timer)
-                        timer = null
-                    }, 60)
-                }
+                    }
+                    last = cur
+                    // timer = setTimeout(function () {
+                    //     clearTimeout(timer)
+                    //     timer = null
+                    // }, 2000)
+                // }
                 spy(items, className)
             });
         }
