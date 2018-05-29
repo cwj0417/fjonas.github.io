@@ -69,5 +69,5 @@ theme: wwj
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:fjonas/fjonas.github.io.git
+  repo: git@github.com:cwj0417/cwj0417.github.io.git
   branch: master
