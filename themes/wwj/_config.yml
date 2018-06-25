@@ -23,7 +23,7 @@ menu:
     directory: archives/
     icon: fa-archive
   - page: 项目
-    directory: projects/
+    directory: https://next.yo-cwj.com
     icon: fa-archive
   - page: 关于
     directory: about/
