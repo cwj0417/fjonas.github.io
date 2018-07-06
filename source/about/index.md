@@ -1,6 +1,6 @@
 ## 关于我
 
-91年, 心里上进身体懒惰, 喜欢过游戏\动漫\乐器\日语. [三观](./outlook.md)正正正.
+91年, 心里上进身体懒惰, 喜欢过游戏\动漫\乐器\日语. [三观](./outlook.html)正正正.
 
 ## 博客哲学
 
@@ -11,10 +11,8 @@
 ## [我的项目](https://next.yo-cwj.com)
 
 + [jin](https://jin.yo-cwj.com/) — 配色生成器
-+ [abandon](https://github.com/cwj0417/abandon) — 记录坚持日记的app
 + [vocabook](https://github.com/cwj0417/lock-on) — 背单词的桌面app
 + [yosoro](https://github.com/cwj0417/yosoro) — chrome插件, 各种日常小工具
-+ [yohane客户端](https://github.com/cwj0417/yohane-client) — md转ppt桌面app
 + [yohane](https://github.com/cwj0417/yohane) — md转ppt命令行工具
 + [aqours](https://github.com/cwj0417/aqours) — 检测后端数据是否符格式
 + [ng1-impress-ppt](https://github.com/cwj0417/ng1-impress-ppt) — angular实现3dppt
