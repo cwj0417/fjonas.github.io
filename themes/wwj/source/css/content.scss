@@ -16,10 +16,12 @@ img {
   transform-origin: 0 0 0;
   position: fixed;
   top: 0;
+  width: 20%;
   filter: none !important;
   box-shadow: -1px -2px 2px #E0EEF6 !important;
   a {
-    width: 75%;
+    box-sizing: border-box;
+    width: 100%;
     color:inherit;
     display: inline-block;
     border-left:4px solid rgba(255,255,255,0);
