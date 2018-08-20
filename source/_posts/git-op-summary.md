@@ -161,6 +161,12 @@ git log
 git log --stat
 ```
 
+或者查看代码的具体改动:
+
+```shell
+git log -p
+```
+
 那串很长的东西就是commit号, 作为操作依据.
 
 ### 回滚
