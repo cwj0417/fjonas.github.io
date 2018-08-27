@@ -229,3 +229,26 @@ git merge <branch> --no-ff
 ```
 
 `git checkout master`切换到master分支, `git merge <branch>`将<branch>的代码内容合并到master. `--no-ff`会使合并产生一个节点, 可以方便查错.
+
+## 打标签
+
+在大版本节点或是发布点打标签可以方便回滚(滑稽).
+
+```shell
+git tag 'tag-name'
+git push origin --tags // push所有标签
+git push origin 'tag-name' // push单个标签
+```
+
+## cherry-pick
+
+这个场景是用在要临时加急发布一个功能, 或是本来需要发布的功能之后又被提交了代码的情况.
+
+这个时候一般develop分支上有n个commit, 原先发布的动作可能是: 把分支切到master, merge develop. 但是现在不能把这n个commit全merge了, 只能选择某些commit来merge.
+
+```shell
+git checkout master
+git cherry-pick <commit>
+```
+
+这样做会产生一个cherry-pick的commit, 没有什么毛病, 但是如果要cherry-pick多个commit, 想一次性commit, 可以加上`-n`的参数来避免自动commit.
