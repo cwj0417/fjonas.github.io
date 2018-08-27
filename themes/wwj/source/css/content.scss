@@ -16,7 +16,7 @@ img {
   transform-origin: 0 0 0;
   position: fixed;
   top: 0;
-  width: 20%;
+  width: calc(1030px / 4);
   filter: none !important;
   box-shadow: -1px -2px 2px #E0EEF6 !important;
   a {
