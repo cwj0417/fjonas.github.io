@@ -200,7 +200,8 @@ git reset --hard <commit>
 ## 回滚已经提交的内容
 
 ```
-git revert <commit>
+git reset --hard <commit>
+git push -f
 ```
 
 效果和手动该文件一样
