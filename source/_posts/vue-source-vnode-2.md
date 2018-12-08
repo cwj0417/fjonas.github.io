@@ -232,3 +232,32 @@ case2和4进行了另一个类似的操作: `createComponent(tag, data, context,
 
 ### `.createComponent()`
 
+首先确定的是: 这个方法最后返回的是一个VNode.
+
+代码比较多, 功能比较杂, 简单地过一下看得懂的, 并确定这个返回的VNode中带了哪些信息.
+
++ 处理了data里的`v-model`. (众所周知v-model是个语法糖, 根据是否配置来转化为props和emit)
++ 处理了functional组件.
++ `installComponentHooks`. 给组件安装上属于组件的生命周期, 有init, prepatch, insert, destroy. 类似于重载生命周期方法, 因为在写好的方法里调用了options里的生命周期.
+
+最后new一个VNode:
+
+```js
+const vnode = new VNode(
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+    data, undefined, undefined, undefined, context,
+    { Ctor, propsData, listeners, tag, children },
+    asyncFactory
+  )
+```
+
+这里比其他地方多的是, 传了`ComponentOptions`, 注释中看到这是ssr相关的.
+
+总结: createComponent也只是返回了一个VNode, 但现在看得太粗, 组件相关的实现应该需要仔细看这里, 现在先跳过.
+
+那么其实render函数主要就是把options里的render函数塞到一个VNode里并返回, 交给patch处理.
+
+## patch
+
+据说vue3.0改写了这部分, 所以想看的欲望减少了.(为懒找了借口)
+
