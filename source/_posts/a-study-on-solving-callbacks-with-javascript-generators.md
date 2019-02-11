@@ -6,3 +6,4 @@ tags: [翻译,javascript]
 ---
 [原文](http://jlongster.com/A-Study-on-Solving-Callbacks-with-JavaScript-Generators)
 <!--more-->
+
