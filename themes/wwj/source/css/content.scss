@@ -2,15 +2,20 @@
   padding: 15px 0 0 15px;
   font-size: 1.4em;
 }
+
 img {
   max-width: 100%;
 }
+
 .sidebar a {
   color: #545454;
 }
+
 .blur {
   filter: blur(5px);
 }
+
+// 菜单
 #outline {
   display: none;
   transform-origin: 0 0 0;
@@ -20,73 +25,77 @@ img {
   filter: none !important;
   box-shadow: -1px -2px 2px #E0EEF6 !important;
   a {
-    box-sizing: border-box;
-    width: 100%;
-    color:inherit;
-    display: inline-block;
-    border-left:4px solid rgba(255,255,255,0);
-    padding: 5px;
-    transition: background .1s;
-    -webkit-border-radius:2px;
-    -moz-border-radius:2px;
-    border-radius:2px;
+	box-sizing: border-box;
+	width: 100%;
+	color: inherit;
+	display: inline-block;
+	border-left: 4px solid rgba(255, 255, 255, 0);
+	padding: 5px;
+	transition: background .1s;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
   }
   a:hover {
-    background: #bdedfc;
+	background: #bdedfc;
   }
-  .active{
-    color: white !important;
-    font-weight: 600;
-    border-left: 4px solid #00c0fa !important;
-    background: #3ecdfd !important;
+  .active {
+	color: white !important;
+	font-weight: 600;
+	border-left: 4px solid #00c0fa !important;
+	background: #3ecdfd !important;
   }
   .active li {
-    display: block !important;
+	display: block !important;
   }
   .depth2 > a {
-    text-indent: 1em;
-    font-size: 0.95em;
+	text-indent: 1em;
+	font-size: 0.95em;
   }
   .depth3 > a {
-    text-indent: 2em;
-    font-size: 0.9em;
+	text-indent: 2em;
+	font-size: 0.9em;
   }
   .depth4 > a {
-    text-indent: 3em;
-    font-size: 0.85em;
+	text-indent: 3em;
+	font-size: 0.85em;
   }
   .depth5 > a {
-    text-indent: 4em;
-    font-size: 0.8em;
+	text-indent: 4em;
+	font-size: 0.8em;
   }
-  .depth2 > li{
-    display: none;
-  }
-}
-.content-in {
-  animation: content-in .5s;
-}
-.content-out {
-  animation: content-out .5s;
-}
-@keyframes content-in {
-  from {
-    transform: translateY(-1000px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@keyframes content-out {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-1000px);
+  .depth2 > li {
+	display: none;
   }
 }
 
-//for 统计
+.content-in {
+  animation: content-in .5s;
+}
+
+.content-out {
+  animation: content-out .5s;
+}
+
+@keyframes content-in {
+  from {
+	transform: translateY(-1000px);
+  }
+  to {
+	transform: translateY(0);
+  }
+}
+
+@keyframes content-out {
+  from {
+	transform: translateY(0);
+  }
+  to {
+	transform: translateY(-1000px);
+  }
+}
+
+// 底部统计
 
 #cnzz_stat_icon_1273985214 {
   margin: 0 auto;
@@ -95,6 +104,36 @@ img {
   text-align: center;
   padding: 5px;
   a {
-    color: #0098d9;
+	color: #0098d9;
+  }
+}
+
+// summary
+
+.summary {
+  padding: 12px 24px 12px 30px;
+  margin: 2em 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+  background-color: #edf6fa;
+  position: relative;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  border-left-color: #23b6fa;
+  &::before {
+	content: "!";
+	background-color: #23b6fa;
+	position: absolute;
+	top: 14px;
+	left: -12px;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	text-align: center;
+	line-height: 20px;
+	font-weight: bold;
+	font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+	font-size: 14px;
   }
 }

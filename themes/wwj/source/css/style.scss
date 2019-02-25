@@ -449,9 +449,10 @@ div {
 		margin: 0 5px;
 		padding: 0 5px;
 		background: $border;
+		color: $bg2;
 	  }
 	  a {
-		color: #01579f;
+		color: #23b6fb;
 		padding-bottom: 2px;
 		word-break: break-all;
 		&:hover {
@@ -490,9 +491,10 @@ div {
 		margin: 0 5px;
 		padding: 0px 5px;
 		background: $border;
+		color: $bg2;
 	  }
 	  a {
-		color: #01579f;
+		color: #23b6fb;
 		padding-bottom: 2px;
 		word-break: break-all;
 		&:hover {
@@ -772,21 +774,25 @@ blockquote, .stressed {
   border-left: none;
 }
 
-blockquote:before, .stressed-quote:before {
-  content: "\201C";
-  display: block;
-  font-family: times;
-  font-style: normal;
-  font-size: 48px;
-  color: #444;
-  font-weight: bold;
-  line-height: 30px;
-  margin-left: -50px;
-  position: absolute;
+blockquote, .stressed-quote {
+  padding: 12px 24px;
+  margin: 2em 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+  background-color: #faf1ed;
+  position: relative;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  border-left-color: $bg2;
+  color: #000;
 }
 
-strong, b, em {
+strong, b {
   font-weight: bold;
+}
+
+em, strong {
+  padding: 0 2px;
 }
 
 pre {
@@ -1262,7 +1268,7 @@ figure.highlight,
 
 	a {
 	  float: right;
-	  color: #01579f;
+	  color: #23b6fb;
 	}
   }
   // Gutter which contains line numbers
@@ -1313,7 +1319,7 @@ figure.highlight,
 	color: #183691;
   }
   .keyword {
-	color: #a71d5d;
+	color: $bg2;;
   }
   // ApacheConf
   &.apacheconf .code {
@@ -1376,7 +1382,7 @@ figure.highlight,
 	  color: #df5000;
 	}
 	.meta-keyword {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.title {
 	  color: #795da3;
@@ -1409,7 +1415,7 @@ figure.highlight,
 	.at_rule,
 	.important,
 	.meta {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.attribute,
 	.hexcolor,
@@ -1458,7 +1464,7 @@ figure.highlight,
 	  color: #0086b3;
 	}
 	.request {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
   }
   // INI
@@ -1469,7 +1475,7 @@ figure.highlight,
 	}
 	.setting,
 	.attr {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.value,
 	.keyword {
@@ -1487,7 +1493,7 @@ figure.highlight,
 	.meta,
 	.annotation,
 	.javadoctag {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.number {
 	  color: #0086b3;
@@ -1507,7 +1513,7 @@ figure.highlight,
 	}
 	.tag,
 	.javadoctag {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.tag .title {
 	  color: #333;
@@ -1568,7 +1574,7 @@ figure.highlight,
   &.nginx .code {
 	.title,
 	.attribute {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.built_in,
 	.literal {
@@ -1585,7 +1591,7 @@ figure.highlight,
   &.objectivec .code {
 	.preprocessor,
 	.meta {
-	  color: #a71d5d;
+	  color: $bg2;;
 
 	  .title {
 		color: #df5000;
@@ -1619,7 +1625,7 @@ figure.highlight,
   &.php .code {
 	.phpdoc,
 	.doctag {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.regexp {
 	  color: #df5000;
@@ -1660,7 +1666,7 @@ figure.highlight,
   // SQL
   &.sql {
 	.built_in {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.number {
 	  color: #0086b3;
@@ -1692,7 +1698,7 @@ figure.highlight,
 	  color: #0086b3;
 	}
 	.name {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.attr {
 	  color: #0086b3;
@@ -1702,7 +1708,7 @@ figure.highlight,
   &.less {
 	.tag,
 	.at_rule {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.number,
 	.hexcolor,
@@ -1727,7 +1733,7 @@ figure.highlight,
 	.tag,
 	.at_rule,
 	.important {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.number,
 	.hexcolor,
@@ -1757,7 +1763,7 @@ figure.highlight,
   // Stylus
   &.stylus {
 	.at_rule {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.tag,
 	.selector-tag {
@@ -1782,7 +1788,7 @@ figure.highlight,
   // Go
   &.go {
 	.typename {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.built_in,
 	.constant {
@@ -1792,7 +1798,7 @@ figure.highlight,
   // Swift
   &.swift {
 	.preprocessor {
-	  color: #a71d5d;
+	  color: $bg2;;
 	}
 	.title {
 	  color: #795da3;
@@ -2043,7 +2049,7 @@ p.search-result {
 em.search-keyword {
   font-weight: bold;
   font-style: normal;
-  color: #01579f;
+  color: #23b6fb;
 }
 
 .post-footer {
