@@ -44,7 +44,7 @@ body {
 .content_container {
   margin-top: 20px;
   .post-list {
-	box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1);
+
   }
   .cats-nav {
 	.nav-wrap {
@@ -660,6 +660,28 @@ div {
 
 /* for archive page ends*/
 
+@media print, screen and (min-width: 48em) {
+  .post {
+	margin-bottom: -80px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+	border-radius: 15px;
+	position: relative;
+	transition: all .2s;
+	&:hover {
+	  margin-bottom: 10px;
+	  transform: translate(-15px);
+	}
+	.readmore {
+	  position: absolute;
+	  top: 30px;
+	  right: 20px;
+	}
+	&:last-child {
+	  margin-bottom: 0;
+	}
+  }
+}
+
 /* middle*/
 @media print, screen and (max-width: 48em) {
   .body_container {
@@ -1196,6 +1218,7 @@ pre {
   font-family: PingFangSC-Regular;
   background-color: #51c4fb;
   position: relative;
+  overflow: hidden;
   &:before {
 	content: " ";
 	height: 1px;
