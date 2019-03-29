@@ -4,6 +4,11 @@ date: 2019-03-26 14:24:53
 categories: 编码与分析
 tags: [应用]
 ---
+
+看到soul上的球, 尝试用css画一个球, 本想应用到博客标签栏, 还是感觉不合适, 这篇文章来讲一下用css transform画这个球对这个css的理解.
+
+<!--more-->
+
 {% raw %}
 
 <div class="stage"></div>
@@ -17,10 +22,10 @@ tags: [应用]
 		animation: rotate 10s infinite linear;
 	}
 	.spot {
-		width: 8px;
-		height: 8px;
-		top: 96px;
-		left: 96px;
+		width: 38px;
+		height: 38px;
+		top: 81px;
+		left: 81px;
 		background: #03A9F4;
 		box-shadow: 0 0 5px #000000;
 		border-radius: 50%;
@@ -43,8 +48,8 @@ tags: [应用]
 		spot.style.transform = `rotate3d(${Math.cos(angleLO)}, ${Math.sin(angleLO)}, 0, ${angleLA}deg) translateZ(100px)`
 		stage.appendChild(spot)
 	}
-	let longitudeNum = 20
-	let latitudeNum = 18
+	let longitudeNum = 10
+	let latitudeNum = 6
 	let radius = 100
 	for (let i = 0; i < latitudeNum; i++) {
 		for (let j = 0; j < longitudeNum; j++) {
@@ -121,13 +126,11 @@ tags: [应用]
 	}
 </style>
 
-看到soul上的球, 尝试用css画一个球, 本想应用到博客标签栏, 还是感觉不合适, 这篇文章来讲一下用css transform画这个球对这个css的理解.
-
-<!--more-->
+{% endraw %}
 
 ## 例子中的图像
 
-通过抄了一个正方体的例子, 模仿了一个球, 因为球的点比较多, 所以不得已使用了js. 通过正方体思考了球表面的点的通解, 代码直接审查元素即可, 可以通过修改参数来调整球的点的个数. *(远古浏览器看不到例子)*
+通过抄了一个正方体的例子, 模仿了一个球, 因为球的点比较多, 所以不得已使用了js. 通过正方体思考了球表面的点的通解, 代码直接审查元素即可, **可以通过修改参数和css来调整球的点的个数和大小.但点的个数提高会对性能造成影响** *(远古浏览器看不到例子)*
 
 另外, [webpack](<https://webpack.github.io/>)的logo也是一个理解transform的很好的例子, 有兴趣也可以抄一下试试.
 
