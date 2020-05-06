@@ -1,7 +1,7 @@
 ---
 title: gladwell的写作技巧
 date: 2019-05-21 17:51:42
-categories: 开拓与发现
+categories: 读后感
 tags: [翻译]
 ---
 之前在软老板博客看到的写作技巧摘要, 觉得有意思.

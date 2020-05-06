@@ -1,7 +1,7 @@
 ---
 title: es6 in depth rest参数与默认参数
 date: 2016-09-10 17:25:30
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript,深入es6,翻译,入门]
 ---
 今天,我们来讲一下es6让js语法更有表达性的两个特性: rest参数和默认参数.

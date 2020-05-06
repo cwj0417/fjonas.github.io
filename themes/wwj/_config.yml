@@ -32,12 +32,12 @@ menu:
 cats:
   - name: 最新文章
     href: ''
-  - name: 编码与分析
-    href: categories/编码与分析/
-  - name: 设计与感觉
-    href: categories/设计与感觉/
-  - name: 开拓与发现
-    href: categories/开拓与发现/
+  - name: 工作笔记
+    href: categories/工作笔记/
+  - name: 读后感
+    href: categories/读后感/
+  - name: 吐槽
+    href: categories/吐槽/
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - tag

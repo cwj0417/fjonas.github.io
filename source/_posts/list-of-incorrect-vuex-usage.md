@@ -1,7 +1,7 @@
 ---
 title: 阅读vuex example
 date: 2017-07-17 10:27:49
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,vuex,应用]
 ---
 阅读[vuex example](https://github.com/vuejs/vuex/tree/dev/examples)来感受与自己写法不同的细节.

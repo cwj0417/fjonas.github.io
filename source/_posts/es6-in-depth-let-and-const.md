@@ -1,7 +1,7 @@
 ---
 title: es6 in depth let 与 const
 date: 2016-09-10 17:28:12
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript,深入es6,翻译,入门]
 ---
 当Brendan Eich在1995年设计了第一版javascript, 他留下了很多错误, 包括至今还留着的部分, 包括`Date`object和object会在你试图乘他们的时候转换为`NaN`. 但他也有做得好的地方: object; prototypes; 等等. 让语言有了骨架. 使语言比看上去的更好.

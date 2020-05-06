@@ -1,7 +1,7 @@
 ---
 title: vue源码之virtual dom
 date: 2018-04-03 10:32:01
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,vue源码,分析]
 ---
 这次来看看vue的虚拟dom是咋肥色儿~

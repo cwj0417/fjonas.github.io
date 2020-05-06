@@ -1,7 +1,7 @@
 ---
 title: vue源码之数据控制视图
 date: 2018-03-26 17:35:16
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,vue源码,分析]
 ---
 分析vue是如何实现数据改变更新视图的.

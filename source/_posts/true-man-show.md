@@ -1,7 +1,7 @@
 ---
 title: 楚门的世界
 date: 2016-10-20 17:18:49
-categories: 开拓与发现
+categories: 读后感
 ---
 在es6 in depth系列的翻译中看见作者提到了true man show, 休息的时间看了下. 在此总(ju)结(tou)一下.
 

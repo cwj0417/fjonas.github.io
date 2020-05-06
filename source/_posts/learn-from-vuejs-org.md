@@ -1,7 +1,7 @@
 ---
 title: 借鉴vue文档改版博客
 date: 2019-02-22 16:28:41
-categories: 编码与分析
+categories: 工作笔记
 tags: [博客装饰]
 ---
 vue的文档是hexo写的, 我的博客也是hexo写的, 虽然性质不同但为什么别人的好看这么多呢.

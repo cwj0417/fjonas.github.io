@@ -1,7 +1,7 @@
 ---
 title: vue-i18n是如何工作的
 date: 2017-10-19 17:38:09
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,分析]
 ---
 vue-i18n是vue代码贡献量第二的vue core team的一位日本小哥写的, 虽是第三方插件, 用起来心里也舒服. github里搜了vue i18n, 结果有不少, 有一些很粗糙的, 甚至用jquery的lib都有六七十个star. (阻断吐槽). 厉害的人明显在设计上代码上都高很多档次吧.

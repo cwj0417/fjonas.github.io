@@ -1,7 +1,7 @@
 ---
 title: 用electron与vue构建应用—electron api
 date: 2017-06-13 11:07:10
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,webpack,electron,入门]
 ---
 一个electron应用只需要在全局安装electron, 并在`package.json`中声明main入口就可以启动, 那么如何从一个空的应用出现页面, 菜单等界面并调用各种web接口/node接口/os接口呢. 这里是[官方api例子](https://github.com/electron/electron-api-demos).

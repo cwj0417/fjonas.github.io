@@ -1,7 +1,7 @@
 ---
 title: es6 in depth 生成器-续
 date: 2016-09-10 17:27:44
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript,深入es6,翻译,入门]
 ---
 

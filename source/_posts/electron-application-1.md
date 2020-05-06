@@ -1,7 +1,7 @@
 ---
 title: electron实战vocabook(一)
 date: 2017-09-03 10:15:12
-categories: 编码与分析
+categories: 工作笔记
 tags: [electron,应用]
 ---
 零基础使用electron编写记录/复习单词的软件[vocabook](https://github.com/fjonas/lock-on). 记录了第一次开发electron遇到的问题与如何组合使用api来实现通常的需求.

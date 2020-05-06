@@ -1,7 +1,7 @@
 ---
 title: 三分钟精通webpack
 date: 2016-08-09 14:33:13
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript,webpack,翻译,入门]
 ---
 带有实例的webpack介绍, 原文: [Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/)

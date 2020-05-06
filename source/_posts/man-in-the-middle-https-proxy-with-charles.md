@@ -1,7 +1,7 @@
 ---
 title: 用charles进行https抓包
 date: 2017-10-25 15:42:08
-categories: 编码与分析
+categories: 工作笔记
 tags: [抓包,入门]
 ---
 之前用charles抓手机上的包做过一些小事情, 但是碰到https就停手了, 今天经同事指导成功地抓到了https的包.

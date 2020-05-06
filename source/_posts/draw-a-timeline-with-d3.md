@@ -1,7 +1,7 @@
 ---
 title: 用d3来画一个时间线
 date: 2017-07-13 11:37:04
-categories: 编码与分析
+categories: 工作笔记
 tags: [d3,svg,入门]
 ---
 数据可视化不再是简单的表格, 现在慢慢地接触了解到许多数据可视化的js库, d3, processing.js, three.js, highcharts, echarts等.

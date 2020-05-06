@@ -1,7 +1,7 @@
 ---
 title: git操作总结
 date: 2018-07-31 10:24:57
-categories: 编码与分析
+categories: 工作笔记
 tags: [git,应用]
 ---
 昨天在工作中需要把一个commit提交到另外一个比较老的分支上, 在解决问题以后决定对git操作进行整理, 之前的git操作有点随意了.

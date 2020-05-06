@@ -1,7 +1,7 @@
 ---
 title: 体验stage-3 async/await
 date: 2016-11-13 14:39:09
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript]
 ---
 ECMAScript官方提出的异步解决方案(可能是阶段性的终极方案), 原理是*generator*的执行器(官方逼死同人系列ww[*co*]). 越新的东西越傻瓜, 所以来体验下.

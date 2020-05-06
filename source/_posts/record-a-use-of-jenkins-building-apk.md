@@ -1,7 +1,7 @@
 ---
 title: 记录一次使用jenkins来打包apk
 date: 2018-05-23 10:56:06
-categories: 编码与分析
+categories: 工作笔记
 tags: [ci,jenkins,入门]
 ---
 两年前我入职现在工作的地方后第一次knowledge share一位同事分享了jenkins. 两年后的现在他已经是老同事并且也成为了前同事. 为了纪念离开的他我想试试折腾一下jenkins.(炉石的火车王也叫jenkins哦).

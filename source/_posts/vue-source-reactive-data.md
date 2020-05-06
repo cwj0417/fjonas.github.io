@@ -1,7 +1,7 @@
 ---
 title: vue源码之响应式数据
 date: 2017-12-22 06:35:47
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,vue源码,分析]
 ---
 分析vue是如何实现数据响应的.

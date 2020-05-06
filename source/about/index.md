@@ -1,6 +1,6 @@
 ## 关于我
 
-91年, 心里上进身体懒惰, 喜欢过游戏\动漫\乐器\日语. [三观](./outlook.html)正正正.
+91年, 心里上进身体懒惰, 喜欢过游戏\动漫\乐器\日语. 
 
 ## 博客哲学
 
@@ -25,8 +25,3 @@
 +   [segmentfault](https://segmentfault.com/u/xpang)
 +   [微博](http://weibo.com/u/2719310113)
 +   [dribbble](https://dribbble.com/fjonas)
-
-## 其他
-
-+   [看过的书](https://github.com/fjonas/readbook)
-+   [博客分类/标签介绍](./cats-and-tags.html)

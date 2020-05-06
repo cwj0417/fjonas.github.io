@@ -1,7 +1,7 @@
 ---
 title: es6 in depth 介绍
 date: 2016-09-10 17:17:55
-categories: 编码与分析
+categories: 工作笔记
 tags: [javascript,深入es6,翻译,入门]
 ---
 欢迎来到es6 in depth系列！ 这个系列我们将探索es6-将要到来的js新版本. es6包含了许多让js更强力更有表达性的新特性, 我们讲在系列中一一深入. 但在我们开始前, 也许可以花一些时间来说说es6是什么和你可以期待es6能干什么.

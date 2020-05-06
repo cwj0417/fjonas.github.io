@@ -1,7 +1,7 @@
 ---
 title: http1.1科普
 date: 2018-05-31 14:33:06
-categories: 编码与分析
+categories: 工作笔记
 tags: [http]
 ---
 因为工作碰到了一些疑惑所以看了[火狐的http文档](https://developer.mozilla.org/en-US/docs/Web/HTTP), 简单地看, 简单地总结了一下, 本文只介绍http1.1的概念, 不介绍具体让人心烦的细节(配置和行为).

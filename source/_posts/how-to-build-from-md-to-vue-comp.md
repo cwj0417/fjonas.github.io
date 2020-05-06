@@ -1,7 +1,7 @@
 ---
 title: element-ui如何在文档中加载md文件
 date: 2019-08-23 23:44:10
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,webpack,分析]
 ---
 上次看到element-ui的文档是一个vue项目, 注意到一个细节, 组件的文档是md文件, 并且能够展示组件的效果. 于是来仔细看一下其中的运行流程.

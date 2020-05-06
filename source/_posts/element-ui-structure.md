@@ -1,7 +1,7 @@
 ---
 title: element-ui项目结构概览
 date: 2019-07-18 10:07:29
-categories: [编码与分析]
+categories: [工作笔记]
 tags: [vue,webpack,分析]
 ---
 vue的生态环境的ui组件从一开始就只有element可以用, 因为有团队维护, 也慢慢发展到别的ui组件没有竞争能力的地位了. 来看看element是如何组织代码的. 代码是写作的时候新拉的`2.10.1`.

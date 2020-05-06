@@ -1,7 +1,7 @@
 ---
 title: 用electron与vue构建应用--应用结构
 date: 2017-06-13 11:06:51
-categories: 编码与分析
+categories: 工作笔记
 tags: [vue,webpack,electron,入门]
 ---
 

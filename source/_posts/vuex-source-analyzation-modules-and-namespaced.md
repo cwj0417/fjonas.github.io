@@ -1,7 +1,7 @@
 ---
 title: 从vuex源码分析module与namespaced
 date: 2017-05-31 15:18:18
-categories: 编码与分析
+categories: 工作笔记
 tags: [vuex,分析,vue]
 ---
 使用vue已经有半年有余, 在各种正式非正式项目中用过, 开始专注于业务比较多, 用到现在也遇见不少因为理解不深导致的问题. 有问题就有找原因的勇气, 所以带着问题搞一波.

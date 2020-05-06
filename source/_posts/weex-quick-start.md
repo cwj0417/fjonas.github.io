@@ -1,7 +1,7 @@
 ---
 title: weex开发尝试
 date: 2018-01-01 12:49:28
-categories: 编码与分析
+categories: 工作笔记
 tags: [weex,入门]
 ---
 经过尝试cordova, 发现一些不舒服的地方, 与预期又有比较大程度地违背了预期, 所以这次尝试使用weex.

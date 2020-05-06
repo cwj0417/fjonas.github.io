@@ -1,7 +1,7 @@
 ---
 title: d3源码之d3-scale
 date: 2018-04-23 16:46:10
-categories: 编码与分析
+categories: 工作笔记
 tags: [d3,分析]
 ---
 要尝试把之前用d3画的东西放到react-native上, 而rn是没有dom只有svg的lib, 那么就要研究下d3的实现了.
