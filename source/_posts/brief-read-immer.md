@@ -48,8 +48,8 @@ immutable性能比较好的原因就在这里, 深拷贝与`JSON`处理都会在
 
 大方向看: 
 
-	1.	immer创建一个draft对象, 来供recipe函数操作.
- 	2.	recipe函数执行完成后, immer再对被recipe操作过的draft对象进行整理, 产生返回值.
+1. immer创建一个draft对象, 来供recipe函数操作.
+2. recipe函数执行完成后, immer再对被recipe操作过的draft对象进行整理, 产生返回值.
 
 创建draft的思路是: 
 
