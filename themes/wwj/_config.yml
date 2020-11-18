@@ -1,7 +1,7 @@
 fancybox: false ## If you want to use fancybox please set the value to true.
 duoshuo: rehapun ## Your duoshuo_shortname, e.g. username
 disqus: ## Your disqus_shortname, e.g. username
-cyid: ## fuck cy yt1bgEED
+cyid: cyt1bgEED ## 2年多后 2020/11/18重新启用
 cyconf: prod_20e8d05c4d6b3ce62b89be98ae18390c
 google_search:  ## Use Google search, true/false.
 baidu_search: true ## Use Baidu search, true/false.
@@ -36,8 +36,8 @@ cats:
     href: categories/工作笔记/
   - name: 读后感
     href: categories/读后感/
-  - name: 吐槽
-    href: categories/吐槽/
+  - name: 生活吐槽
+    href: categories/生活吐槽/
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - tag

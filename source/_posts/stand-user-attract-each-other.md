@@ -1,7 +1,7 @@
 ---
 title: 替身使者互相吸引
 date: 2018-11-11 17:29:05
-categories: 吐槽
+categories: 生活吐槽
 tags: [心理学]
 ---
 > i reject my humanity, jojo!
