@@ -85,6 +85,18 @@ render props其实不一定要叫render, 也可以是其他的. 于是想到了�
 
 react三大抽组件方式, rp, hoc, hooks, 让人感觉最明显的是: react的组件就是一个函数(vue使用组件还需要注册, 很明显能感受到). react能更灵活的运用js的特性, rp, hoc, hooks其实都不是react特性, 而是js特性.
 
+另外, **react的使用者要自己做优化, 或者说是遵循一定规范.** 不然会导致预期外的bug和性能损耗, 而vue帮用户做了优化. (但自动优化本身是耗性能的)
+
+这里说一点经验中总结的规范, **要把不同更新频率的页面部分分成不同的组件, 并用scu阻断渲染树.** 这个在用redux connect的时候也要注意, 不要用点点点引入页面不相关的数据.
+
+原因是: react的render方法只能整体执行. (vue的render方法只是生成ast, 下一步还会patch. 而react???). 下面举一个具体例子:
+
+组件A 包含 组件B, 组件C. B, C分别依赖A的state.
+
+当setState改变C依赖的state时, B也会被重新渲染.
+
+所以方法是: 用pureComponent把B包起来, 这也是为什么ui组件库会尽量用pureComponent.
+
 ## 插件互用
 
 react跨组件的状态管理有redux, mobx, hox, recoil等. 而如果只是传递一个事件, 其实并不需要状态管理.
