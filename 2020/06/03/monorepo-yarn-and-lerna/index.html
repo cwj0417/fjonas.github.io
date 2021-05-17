@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>前端monorepo对依赖包的处理 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">前端monorepo对依赖包的处理</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">前端monorepo对依赖包的处理</h1><div class="post-meta">Jun 3, 2020<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>随着行业发展或者是公司发展, memorepo的概念走进了我的面前, 也许早就在行业里出现了. 不管memorepo会不会走下去, 先来了解一下.</p>
+<a id="more"></a>
+<h2 id="为什么会有monorepo"><a href="#为什么会有monorepo" class="headerlink" title="为什么会有monorepo"></a>为什么会有monorepo</h2><p>一个概念的出现一定是为了解决一些问题, 一个时代出现一个系列的工具是因为行业的生产工具发展到了一个阶段.</p>
+<p>在前端, 关于多仓库的问题也分成不同场景, 所以相对的monorepo的使用也是不同的, 我们在不同场景的开发中可能遇到以下问题:</p>
+<ul>
+<li><strong>仓库多</strong>: 新人接手难, 维护项目的时候记住仓库名字难, 挑战电脑性能.</li>
+<li><strong>重复安装npm依赖</strong>: 一个公司使用的基本框架大多是一样的. 有几个项目, react和antd或者vue和elementui就要装多少遍. 这些体积比较大的包重复装几十遍, 即使电脑硬盘够大, 让人心里也挺不舒服的.</li>
+<li><strong>升级公共组件</strong>: 若一个公共组件进行了升级, 那么所有引用他的项目都要升级依赖.</li>
+<li><strong>模块间的互相依赖</strong>: 在开发公共lib的时候需要调用其他模块, 要多次反复操作link, 还要记住各个包名.</li>
+</ul>
+<p>于是就出现了一个想法: 把多个仓库合成一个仓库, 每个仓库又可以独立运行, 有自己的<code>package.json</code>, 有自己的依赖和脚本, 复制出来是个可以独立运行的仓库.</p>
+<p>把仓库合在一起, root仓库就可以对子仓库的信息进行处理, 来简化与管理子仓库的常规操作.</p>
+<p>当然, 把仓库何在一起, 也会有一些显而易见的问题, 有的容易解决, 有的不容易解决, 有的可以通过工作流的上下游解决. 比如:</p>
+<ul>
+<li><strong>代码权限问题</strong>: 如果各个子仓库要控制代码权限, 那么git可能就不是monorepo契合的版本控制工具了.</li>
+<li><strong>git分支问题</strong>: 虽然子仓库可以独立运行, 但版本控制还是在root仓库的, 一个仓库的分支要影响其他项目的, 这显然有问题. 这个问题可能可以通过工作流上下游的工具, 或者git-submodule来解决.</li>
+</ul>
+<p>权限问题和分支问题, 也可以通过合理组合仓库, 把功能, 关系密切的仓库合成一个仓库.</p>
+<h2 id="yarn-workspace-vs-lerna"><a href="#yarn-workspace-vs-lerna" class="headerlink" title="yarn workspace vs lerna"></a>yarn workspace vs lerna</h2><p>前端的monorepo基本就靠这2个.</p>
+<p>他们的模式都是在root仓库下建一个文件夹, 一般是<code>packages</code>, 然后里面的每个文件夹里都是一个子仓库. 他们也都提供了一些cli命令来处理上节所提到的问题. 他们有相似的功能点, 也有不同的功能点.</p>
+<p>双方的官方都表示, 他们并不是同质竞争, 而是上下游合作关系, 在api体现了. 但就目前的情况看来, 还是有一些重复的api, 可能是lerna希望离开yarn也能活着.</p>
+<p>具体来说, yarn的功能更接近于基层(当然了, 因为他是个npm client), 在依赖管理上做得更好. 而lerna的主战场并不在依赖管理, 而在npm版本和git, 脚本层面.</p>
+<p>现在公司的使用场景里, 更需要的是对依赖包的管理, 所以用到lerna的地方比较少, 我尝试了下yarn的功能和效果, 进行了一些总结.</p>
+<h2 id="实践细节"><a href="#实践细节" class="headerlink" title="实践细节"></a>实践细节</h2><p>把yarn和lerna进行对比, 基于yarn的功能对比, lerna还有很多其他的功能.</p>
+<p>我的实验结果都基于yarn1.22.4版本.</p>
+<h3 id="定义workspace"><a href="#定义workspace" class="headerlink" title="定义workspace"></a>定义workspace</h3><p><code>package.json</code>里有2个特点yarn就认为是有workspace的repo: </p>
+<ol>
+<li><code>private: true</code>.</li>
+<li><code>workspaces: [&quot;packages/*&quot;]</code> 这是个快捷写法, 也可以在数组里写每个子workspace的name.</li>
+</ol>
+<p>在yarn0.x的版本里, workspace还要通过配置开启的. 1.x是默认开启的.</p>
+<p>lerna的话, <code>lerna init</code>就行了, 在目录下会产生一个<code>lerna.json</code></p>
+<h3 id="安装依赖的行为差异"><a href="#安装依赖的行为差异" class="headerlink" title="安装依赖的行为差异"></a>安装依赖的行为差异</h3><p>yarn安装<code>yarn</code>, lerna安装<code>lerna bootstrap</code>.</p>
+<p>lerna的行为比较粗暴, 直接cd到每个子目录, 运行装包命令.</p>
+<p>yarn就很智能, 分析每个<code>package.json</code>的内容, 智能安装, 后面细说.</p>
+<h3 id="lerna与yarn一起使用"><a href="#lerna与yarn一起使用" class="headerlink" title="lerna与yarn一起使用"></a>lerna与yarn一起使用</h3><p>yarn提供了2个方法, 可以在一些行为上使用yarn的特点.</p>
+<ol>
+<li>执行cli时加 <code>--use-workspaces</code>.</li>
+<li>lerna.json添加<code>{“npmClient”: “yarn”, “useWorkspaces”: true}</code>.</li>
+</ol>
+<h3 id="模块互相依赖"><a href="#模块互相依赖" class="headerlink" title="模块互相依赖"></a>模块互相依赖</h3><p>在这点上, yarn和lerna都做了处理, 只要定义了workspace或者lerna, 模块之间都可以通过软连接引用到, 并且优先内部引用.</p>
+<h3 id="操作子模块"><a href="#操作子模块" class="headerlink" title="操作子模块"></a>操作子模块</h3><p>yarn和lerna操作子模块的思路是不同的.</p>
+<p>yarn的思路: 指定一个模块, 然后执行命令; lerna的思路: 执行一个命令, 然后指定子模块.</p>
+<ul>
+<li><p>yarn: <code>yarn workspace (ws-name) add module</code>. </p>
+<p>yarn也可以手动cd到子模块进行操作, 我尝试了<code>yarn</code>命令, 结果是不会忽视root模块, 执行结果是等同根目录执行的.</p>
+<p>另外, <strong>yarn的workspace的子ws名字是根据<code>package.json</code>的name字段来的, 而不是文件夹名字.</strong> (别问我怎么知道的, 枯了)</p>
+</li>
+<li><p>lerna: <code>lerna add module --scope (ws-name)</code>. </p>
+<p>lerna的<a href="https://github.com/lerna/lerna/tree/master/core/filter-options" target="_blank" rel="noopener">filter-options</a>系统是支持glob的, 所以这点很明显强于yarn.</p>
+</li>
+</ul>
+<p>yarn在2.x版本也尝试用lerna的思路, 增加了<code>yarn foreach --include/--exclude</code>的api. (但我切到了rc版本并没有实现, yarn为啥做文档有却没发布这这烂事儿)</p>
+<h3 id="yarn是如何处理子模块依赖的"><a href="#yarn是如何处理子模块依赖的" class="headerlink" title="yarn是如何处理子模块依赖的"></a>yarn是如何处理子模块依赖的</h3><p>无论是在root层还是子ws层, 执行install和add的时候, yarn都会对模块依赖进行整理. 特点如下:</p>
+<ul>
+<li>依赖版本的记录只存在于root层的<code>yarn.lock</code>, 子ws不会有.</li>
+<li>所有依赖优先安装在root下, 只有当子ws依赖于不同版本的相同包, 才会在子ws下产生node_modules.</li>
+<li>如果有多个子ws, 拥有不同版本的相同包, 那么, 优先把相同版本多的安装到root下, 第二优先版本低的.</li>
+<li>在每次add/install操作后, yarn都会重新计算哪个版本的包应该在root, 并且进行文件移动操作. (也就是可能在一次add操作后, 某个子ws里的node_modules中的文件会减少)</li>
+</ul>
+<h3 id="yarn-add-W"><a href="#yarn-add-W" class="headerlink" title="yarn add -W"></a>yarn add -W</h3><p>最后, 有一些dev dependency, 需要在root里写在script里的, 可以通过这个命令硬装到最外层node_modules里.</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2020/06/03/monorepo-yarn-and-lerna/" data-id="ckossezht005o2xqmazg1an6l" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/monorepo/">monorepo</a></div><div class="post-nav"><a href="/2020/06/28/migrate-to-hooks-and-ts/" class="pre">将react项目迁移到hook和ts</a><a href="/2020/05/26/redux/" class="next">redux学习笔记</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>浅析immer | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">浅析immer</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">浅析immer</h1><div class="post-meta">Sep 16, 2020<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>immer是对js对象immutable的一种解决方案, 从rtk接触到的. 因为api非常简单, 所以来看一下是如何实现的.</p>
+<p>因为对object内存分配, immutablejs都没深入看, 所以无从比较.</p>
+<a id="more"></a>
+<h2 id="背景和目标"><a href="#背景和目标" class="headerlink" title="背景和目标"></a>背景和目标</h2><p>首先immer是一个看起来很帅的lib, 先硬解释一下为什么要使用他:</p>
+<ul>
+<li>immutable的必要性是增加程序的可控性, 避免出现debug难度高的bug.</li>
+<li>从api的设计和性能来说, 都比较优秀.</li>
+</ul>
+<p>api的设计来说: 比较容易继承到别的lib里(指redux, [狗头]), 并且非常优雅, 进行一些封装(指rtk)后可以无感使用.</p>
+<p>从性能来说: 在对象层次比较深的时候, 是比深拷贝和<code>JSON.parse(JSON.stringify(xxx))</code>性能好的, 越复杂越好.</p>
+<p>从兼容性来说: 一个lib是会比<code>JSON</code>兼容性好的, 现在我看的版本7.0beta是已经支持map, set的.</p>
+<p>于是来说一下这次<code>浅析</code>的目标: 模拟部分(核心)功能, 目标是:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> origin = &#123;<span class="attr">propA</span>: <span class="number">1</span>, <span class="attr">propB</span>: &#123; <span class="attr">propC</span>: <span class="string">'deep'</span> &#125;&#125;</span><br><span class="line"><span class="keyword">const</span> target = produce(origin, draft =&gt; &#123;</span><br><span class="line">  draft.propB.propC = <span class="string">'mutated'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>实现一个produce传2个参数, 实现plain object, 给一个比较深的属性赋值, 的immutable对象的产生.</p>
+<h2 id="准备思路"><a href="#准备思路" class="headerlink" title="准备思路"></a>准备思路</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>immer产生immutable对象的原理是<strong>递归浅拷贝</strong>.</p>
+<p>proxy只能算一个工具, 而这个工具达成了另一个特性, <strong>懒处理</strong>: 只对被touch的属性进行处理, 未被影响属性不会创建新的内存区.</p>
+<p>immutable性能比较好的原因就在这里, 深拷贝与<code>JSON</code>处理都会在内存区里产生一个和原对象一样大的占用, immer只在原对象被touch的属性才创建新的内存区.</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>大方向看: </p>
+<ol>
+<li>immer创建一个draft对象, 来供recipe函数操作.</li>
+<li>recipe函数执行完成后, immer再对被recipe操作过的draft对象进行整理, 产生返回值.</li>
+</ol>
+<p>创建draft的思路是: </p>
+<ol>
+<li><p>创建一个对象作为proxy的源, 把原对象放入, 并产生一些列辅助属性.</p>
+</li>
+<li><p>对draft的set拦截: 如果有set操作就产生一个浅拷贝, 对浅拷贝结果进行修改, 并保存在copy属性里.</p>
+</li>
+<li><p>对draft的get拦截: 如果有get操作, 就说明打算mutate更深一层进行set, 就产生一个递归draft放到copy的对应key里并返回.</p>
+<p>题外话: immer做了如果是一个不可以创建proxy的值(约等于基本类型)就直接返回, 所以: 打印draft的一个值会得到对应的值, 而打印一个draftable的值会得到draft.</p>
+<ol start="4">
+<li>拦截其他的一些操作, 使draft有合理的行为. 核心还是get和set.</li>
+</ol>
+</li>
+</ol>
+<h2 id="编写一produce"><a href="#编写一produce" class="headerlink" title="编写一produce"></a>编写一produce</h2><h3 id="api结构"><a href="#api结构" class="headerlink" title="api结构"></a>api结构</h3><p>produce函数有2个入参和一个返回值. <code>produce: &lt;T = any&gt;(originObj: T, recipe: (draft: T) =&gt; any) =&gt; T</code></p>
+<ul>
+<li>originObj: 第一个入参, immutable的目标对象.</li>
+<li>recipe: 第二个入参, 是函数, 唯一参数是目标对象的副本draft, 对副本draft进行任何改变会决定produce的返回值.</li>
+<li>返回值: immutable对象. 经过draft改变以后的结果值.</li>
+</ul>
+<p>所以我们的produce是这样的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> produce = <span class="function">(<span class="params">originObj, recipe</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> proxy = createProxy(originObj);</span><br><span class="line">    recipe(proxy);</span><br><span class="line">    <span class="keyword">return</span> readresult(proxy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分为3部: 根据originObj产生draft, 用recipe处理draft, 分析draft取出期望的返回值.</p>
+<h3 id="产生一个proxy"><a href="#产生一个proxy" class="headerlink" title="产生一个proxy"></a>产生一个proxy</h3><p>proxy有2个点, target和handler. handler的关键在于getter和setter.</p>
+<h4 id="构造target"><a href="#构造target" class="headerlink" title="构造target"></a>构造target</h4><p>因为元数据必须被保存, 又需要一份浅拷贝, 所以把这2个放在<code>base</code>和<code>copy</code>属性里. (immer里把这个target叫做state).</p>
+<p>在初始化的时候, base赋值为originObj, copy暂时不赋值, 如果没有被touch, 连浅拷贝都不需要, 在finalize的时候直接取base就行了, 提高性能.</p>
+<h4 id="setter"><a href="#setter" class="headerlink" title="setter"></a>setter</h4><p>因为setter的目标已经是被包装过的, 所以setter要把新的key, value. 设置到copy属性上.</p>
+<p>当然, 如果copy不存在, 就要浅拷贝base, 生成一份copy.</p>
+<h4 id="getter"><a href="#getter" class="headerlink" title="getter"></a>getter</h4><p>暂不考虑需要读取值的场景, 因为recipe函数的功能是mutate draft.</p>
+<p>所以触发getter的原因, 是想触发更深级别的setter, 所以必须保证这个getter拿到的是一个proxy, getter是递归入口.</p>
+<p>另外, 在finalize的时候必须获得真正值, 于是约定了一个symbol, 只要尝试获取这个symbol, 就把state返回给他.</p>
+<p>createProxy整体是这样的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> keyForState = <span class="built_in">Symbol</span>(<span class="string">'key-for-state'</span>);</span><br><span class="line"><span class="keyword">const</span> createProxy = <span class="function">(<span class="params">value: any</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state: state = &#123;</span><br><span class="line">        base: value,</span><br><span class="line">        copy: <span class="literal">null</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> handler = &#123;</span><br><span class="line">        <span class="keyword">set</span> (state: state, prop: string, v: any) &#123;</span><br><span class="line">            state.copy = state.copy ?? &#123;...state.base&#125;;</span><br><span class="line">            state.copy[prop] = v;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">get</span> (state: state, prop: string | symbol) &#123;</span><br><span class="line">            <span class="keyword">if</span> (prop === keyForState) <span class="keyword">return</span> state;</span><br><span class="line">            state.copy = state.copy ?? &#123;...state.base&#125;;</span><br><span class="line">            <span class="keyword">return</span> (state.copy[prop] = createProxy(value));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(state, handler);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> proxy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(immer中用了<code>Proxy.revocable</code>来产生proxy, 这个简单的demo无处安放revoke handler, 就简单地<code>new Proxy</code>了.)</p>
+<h3 id="整理返回值"><a href="#整理返回值" class="headerlink" title="整理返回值"></a>整理返回值</h3><p>生成draft以后, 会把draft作为参数, 让recipe函数调用. <code>recipe(proxy)</code></p>
+<p>被recipe处理以后的draft对象, 已经根据recipe被触发了对应的getter setter, draft对象的数据结构有以下特点:</p>
+<ul>
+<li>draft的target是一个被包装过的对象, 目前有base和copy属性. (immer中为了性能和case有更多属性)</li>
+<li>原数据储存在base中, 引用方式是引用地址的.</li>
+<li>经过修改的值存在copy中, 引用方式是浅拷贝. </li>
+<li>如果copy对象更深层次的值被改变, copy对象的值会是一个(递归的)proxy.</li>
+</ul>
+<p><strong>所以我们要做的事也很简单</strong>, 根据上面整理的draft的特点, 来获取期望的immutable数据:</p>
+<ol>
+<li><p>使用symbol读取draft对象. (如果不用symbol只能走getter, 无限获取proxy对象)</p>
+</li>
+<li><p>读取draft对象的copy属性.</p>
+</li>
+<li><p>遍历copy对象的键值, 如果值非draft, 则直接取, 如果值为draft, 则递归取.</p>
+<p>(“非draft”是递归出口, 判断draft的办法是判断是否有symbol属性)</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> readresult = <span class="function">(<span class="params">draft: any</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = draft[keyForState];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> state.copy) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isDraft(state.copy[key])) &#123;</span><br><span class="line">            <span class="keyword">const</span> result = readresult(state.copy[key]);</span><br><span class="line">            state.copy[key] = result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> state.copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到了这里, <a href="https://github.com/cwj0417/produce/blob/master/produce.ts" target="_blank" rel="noopener">所有”简化的produce”代码</a>已经全部贴出了, 直接执行就可以获取到immutable对象了.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>其实immer实现immutable的基础原理是和深拷贝一样的: 浅拷贝.</p>
+<p>特殊点是: 利用了proxy来实现懒处理, 没有被touch的对象不会创建新的浅拷贝, 依旧使用原对象的内存地址, 节省内存, 提高性能.</p>
+<p>并且produce的api设计, 更容易的嵌入到其他lib里整合. (虽然在我看来是proxy的语法特性导致只能这么写)</p>
+<h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><ol>
+<li><p>虽然immer是个非常简单的库, 但是在阅读源码的时候还是百度了immer源码解析, 发现很多解析都停留在语法级别. 即: 逐行分析语法, 最后直接说结论, 其实作者自己也不知道发生了什么, 只是码字累了草草收尾. 停留在了”看得懂字, 看不懂意思”的级别.</p>
+<p>我之前看vue源码的时候也是如此, 之后有2件事让我重新思考了学习方式:</p>
+<p>第一, 工作的时候看见很多不太好的代码, 都是因为没先思考, 直接ifelse导致的; 第二, 在学习redux的时候看到了一句话”不去写一遍就不会理解他”.</p>
+<p>所以现在都会尝试去实现一个最基本的功能. 其实lib作者开始也是如此的, 再根据各种边边角角来调整构架插入功能的.</p>
+</li>
+<li><p>从可用到完整lib的差距非常大.</p>
+<p>一个可用的功能的lib只要40行, 而功能完整, 考虑各种用户输入, 边缘case, 可拓展性的代码量和需要花的时间都.</p>
+<p>其实在日常工作中也是一样, 领导和qa看任务是否完成, 和代码质量真的好, 的距离, 和需要花的功夫, 是差很多的.</p>
+</li>
+</ol>
+<h2 id="尝试-写一个自动产生不存在属性的proxy"><a href="#尝试-写一个自动产生不存在属性的proxy" class="headerlink" title="尝试: 写一个自动产生不存在属性的proxy"></a>尝试: 写一个自动产生不存在属性的proxy</h2><p>之前尝试写一个方法, 可以让我们在写一些代码的时候不白屏. 如: <code>target.key1.key2.value = &#39;test&#39;</code>, 如果尝试读取undefined的属性, 浏览器就会白屏.</p>
+<p>然后尝试失败了, 现在学到了immer, 就可以尝试用这个模式来实现啦.</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2020/09/16/brief-read-immer/" data-id="ckossezek000m2xqmqxu9jagx" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/immer/">immer</a></div><div class="post-nav"><a href="/2020/09/30/build-a-vscode-extension/" class="pre">写一个简单的vscode插件</a><a href="/2020/08/16/redux-practice/" class="next">redux实践思考</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

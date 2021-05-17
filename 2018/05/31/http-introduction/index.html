@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>http1.1科普 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">http1.1科普</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">http1.1科普</h1><div class="post-meta">May 31, 2018<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>因为工作碰到了一些疑惑所以看了<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="noopener">火狐的http文档</a>, 简单地看, 简单地总结了一下, 本文只介绍http1.1的概念, 不介绍具体让人心烦的细节(配置和行为).</p>
+<a id="more"></a>
+<h2 id="什么是http"><a href="#什么是http" class="headerlink" title="什么是http"></a>什么是http</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>全称是超文本传输协议. 何为超文本? 超文本就是文本(文本不一定是超文本).</p>
+<p>http的本体是文本. 并且http2之前的版本(包含现在正在用的1.1)都是人类可读的文本.</p>
+<p>再说一下什么是协议? 协议就是双方约定一些东西, 使用的时候大家都遵照规则执行.</p>
+<p>我们来类比html, 超文本标记语言. 本身是文本(div, p, img). 放到浏览器里解析的时候就会被画成一个块, 一个图片等. 那么http也是如此, 普通的人类可读的文本, 进行了一系列约定, 协议双方根据一些关键词来执行某些约定的行为, 便是http了.</p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>那么http到底是在哪里发生的, http的三个属性:</p>
+<ul>
+<li>http是<a href="https://en.wikipedia.org/wiki/Application_layer" target="_blank" rel="noopener">应用层</a>协议.</li>
+<li>http是基于<a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model" target="_blank" rel="noopener">客户端/服务端模型</a>.</li>
+<li>http是<a href="https://en.wikipedia.org/wiki/Stateless_protocol" target="_blank" rel="noopener">无状态协议</a>.</li>
+</ul>
+<p>高中就学过了osi七层协议, http是最上层的协议, 下面是基于传输层的(不仅限于tcp/ip).</p>
+<p>客户端指浏览器, 服务端指服务器. 顺序是浏览器的某些动作(比如输入url并敲回车)触发http请求, 服务器接到请求返回, 形成了一次完整的http请求. http请求每次都是独立的, 所以是无状态协议.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>http就是<strong>浏览器使用传输层协议向服务器发出一些文本</strong>, 这些文本带有约定的东西, 服务器根据约定的规则来分析内容并作出响应. 学习http就是学习这些约定.</p>
+<h2 id="http消息"><a href="#http消息" class="headerlink" title="http消息"></a>http消息</h2><p>就像html是div, p, img一样, http长啥样, 平时使用浏览器的调试工具或是http抓包工具都能看到. (当然都是进行过可视化处理的).</p>
+<p>http消息分为请求(request)消息和响应(response)消息. 即浏览器发出请求的消息和服务器响应的消息.</p>
+<h3 id="消息组成"><a href="#消息组成" class="headerlink" title="消息组成"></a>消息组成</h3><p>request和response的消息组成是一样的.</p>
+<ol>
+<li>start-line: 请求/响应的基本信息.</li>
+<li>http header: 请求/响应的头信息.</li>
+<li>空行: 作为分隔符.</li>
+<li>body: 请求/响应的主体内容.</li>
+</ol>
+<p>request和response的每个部分的消息内容不同. 下面介绍每个部分的具体内容.</p>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><ol>
+<li><p>start-line: 方法(get/post等), 目标(通常是url), 协议版本. 例: <code>GET /background.png HTTP/1.1</code></p>
+</li>
+<li><p>header, 用冒号/换行隔开的键值对, request和response拥有不同的有效header键值, 详见文末链接.</p>
+</li>
+<li><p>大多数request的body为空, 比如get, delete, options方法. 一些需要上传数据的方法如post, put会有body. </p>
+<p>body有两种情况: 单个资源: 此时header要定义<code>content-type</code>和<code>content-length</code>. 多个资源: 在<code>content-type</code>里定义<code>boundary</code>, 然后在body中用<code>boundary</code>来分隔多个资源. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#multipartform-data" target="_blank" rel="noopener">例子链接</a></p>
+</li>
+</ol>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><ol>
+<li>start-line: 协议版本, 状态码, 状态描述. 例: <code>HTTP/1.1 404 Not Found</code>.</li>
+<li>header, 同request.</li>
+<li>response的body也不是必须的, 与request类似, 也分为单个资源和多个资源. 多了一个情况, 不知道文件长度的时候可以把<code>transfer-encoding</code>设为<code>chunked</code>.</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>至此, http已经介绍完了. 我来举一个简单的http的例子.</p>
+<p>我打开了浏览器, 敲入<code>yo-cwj.com</code>. 浏览器发出了http request.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET https://yo-cwj.com HTTP/1.1</span><br><span class="line">Host: yo-cwj.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: en-us,en;q=0.5</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<p>这个简单的get请求没有body, header都是浏览器默认带上的.</p>
+<p>然后收到了回复:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 01 Dec 2008 00:23:53 GMT</span><br><span class="line">Server: Apache/2.0.61 </span><br><span class="line">Keep-Alive: timeout=2, max=100</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Type: application/xml</span><br><span class="line"></span><br><span class="line">&lt;html&gt;陈文俊的博客&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>200, ok 代表请求成功, 倒数第二行空行代表header和body的分隔, 具体返回内容是<code>&lt;html&gt;xxx&lt;/html&gt;</code>, 浏览器获得结果就可以去渲染页面啦, 完美.</p>
+<p>是的, http就是这么简单, <strong>http的结构就是start-line, header, body三部分.</strong> 而协议复杂的地方大部分就在header了. header有一万个字段, 每个字段能研究一年. (所以要搞懂http需要一万年). 那么下面的章节简述一下经常接触的协议规则.</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>http是无状态协议, 但网站的登录状态/购物车等是有状态的, 就要借助cookie来实现. cookie是储存在浏览器上的信息. 会在向服务器发起请求的时候带着, 以代表浏览器当前的状态.</p>
+<p>cookie原先的作用除了登录/购物车, 还有储存用户主题, 分析用户行为等. 但浏览器的行为会将cookie都带到http请求中, 所以现在推荐使用现代storage api来储存部分信息. </p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>两个关键点: cookie传输是通过http的header, cookie的储存的地方是浏览器.</p>
+<p>response header可以设置cookie:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;</span><br></pre></td></tr></table></figure>
+<p>然后浏览器收到set-cookie头以后会储存cookie, 在发送请求时把对应的cookie带在request header的<code>Cookie</code>中, 格式是: <code>k=v; k2=v2</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: yummy_cookie=choco; tasty_cookie=strawberry</span><br></pre></td></tr></table></figure>
+<p>那么浏览器中会有很多cookie, 因为我们经常同时浏览不同的网页. 浏览器进行request的时候把所有cookie带上是不对的, 那么会带上哪些cookie呢, 就涉及到cookie的作用范围.</p>
+<h3 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h3><p>控制cookie作用范围的关键字是Domain和Path, 如果都没设置默认行为是<strong>只向当前路由发送cookie</strong>, 我的理解是什么路由接到set-cookie的就只向这个路由发送.</p>
+<p>domain和path的语法是<code>Domain=mozilla.org</code>, <code>Path=/docs</code>. domain被设置的时候会向domain的所有子domain发送, 所以希望发送范围越小就要设置得越细. path相同.</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>cookie的生命周期是浏览器关闭, 也可以在response header里通过设置expire来改变cookie的过期时间.</p>
+<h3 id="xss与csrf"><a href="#xss与csrf" class="headerlink" title="xss与csrf"></a>xss与csrf</h3><p>因为浏览器通过<code>document.cookie</code>可以获取自己的cookie. 通过一些手段发出一些请求并带上cookie就可以获取cookie来做不好的事情. 这也是http的特点: 无状态. 所以理论上一切请求都是可以模拟的. (只要获取了关键信息, 任何人都可以在他的电脑上模拟你正在登陆某网上银行甚至进行操作).</p>
+<p>这些操作有: 让页面执行一段js, 让页面append一个img, src的target是恶意网站. 所以防止xss攻击只要做到控制用户可进行的操作或转移用户输入就可以了.</p>
+<p>题外话, 因为js和css和html都是明文的, 所以安全必须通过加密手段来强化.</p>
+<h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><p>跨域好像是每隔一段时间都会被问到的问题, 先来定义一下什么是跨域请求.</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>违反<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">同源策略</a>的请求就叫跨域. 同源策略一句话就能说完: <strong>协议, 主机, 端口都相同的url是同源url</strong>. 强调是<strong>都</strong>相同, 即使<code>http</code>和<code>https</code>的区别也算跨域. 左边的链接举了一些例子, 一看就明白. </p>
+<p>那么从一个页面向一个非同源的target发起了http请求, 这个请求就是跨域请求了.</p>
+<h3 id="触发对象"><a href="#触发对象" class="headerlink" title="触发对象"></a>触发对象</h3><p>那么什么情况下会发起跨域请求呢? 我的印象里百分之90的情况是js代码发起的, 也就是或经过框架包装的xmlhttprequest. 下面这些都会触发http请求:</p>
+<ul>
+<li>js代码发起的, xmlhttprequest, fetch. 因为fetch存在兼容问题, 基本所有的框架封装都是通过前者的.</li>
+<li>web字体. 通过<code>@font-face</code>.</li>
+<li>webgl texture.</li>
+<li>canvas用<code>drawImage</code>画的Image或者Video.</li>
+<li>css和script标签.</li>
+</ul>
+<h3 id="跨域请求需要做的事情"><a href="#跨域请求需要做的事情" class="headerlink" title="跨域请求需要做的事情"></a>跨域请求需要做的事情</h3><p>说了半天什么情况是跨域, 那么为什么要讨论跨域呢? 当然是报错了才会讨论了.</p>
+<p>因为安全关系, http是默认阻止跨域请求的, 想要顺利地进行跨域请求, 必须在浏览器和服务器都进行一些header设置, 来确认这次跨域请求是双方都认同的. 就像你要删除社交工具的好友前会进行提示: 你是否要删除好友xxx.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">跨域相关的request和response的header</a>都在左边的链接里了, 这里只提一个作为例子:</p>
+<p>(开始讲故事)</p>
+<p>我的<strong>博客</strong>(<a href="https://yo-cwj.com)需要加载一些图片来丰富博客内容">https://yo-cwj.com)需要加载一些图片来丰富博客内容</a>, 因为博客托管的服务器对博客大小有限制, 所以我把图片放在了另外一个<strong>图库</strong>(<a href="https://picture-cwj.com)" target="_blank" rel="noopener">https://picture-cwj.com)</a>. (下文就用<code>博客</code>和<code>图库</code>来代表2个地址).</p>
+<p>博客使用了img标签来请求了图库的图片. 图库返回的图片response header 带有:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://yo-cwj.com</span><br></pre></td></tr></table></figure>
+<p>博客进行请求的request header带有:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://yo-cwj.com</span><br></pre></td></tr></table></figure>
+<p>图库的response header告诉所有过来的请求: 我只给<code>yo-cwj.com</code>跨域. 博客的request header带着表明身份的<code>Origin</code> header. 这样一次不被阻止的跨域就完成了.</p>
+<p>(故事完)</p>
+<p>故事讲完了, 博客是存在的, picture-cwj.com是不存在的. 简单的2个header就让浏览器放行了跨域请求. 别的header都在故事前贴出来的链接中.</p>
+<h3 id="preflight-request"><a href="#preflight-request" class="headerlink" title="preflight request"></a>preflight request</h3><p>强行翻译: 跨域准备请求.</p>
+<p>当跨域请求满足了某些条件以后, 浏览器在跨域请求前会发起一次preflight request, 用来确认即将发送的请求是否被允许.</p>
+<p>preflight请求的method是options, 之前说的跨域相关的header大部分是和preflight相关的.</p>
+<p>下面介绍发起preflight请求的触发条件:</p>
+<ol>
+<li>method不是<code>get</code>, <code>post</code>, <code>head</code>的.</li>
+<li>request header 带有指定字段之外的. </li>
+<li><code>cotent-type</code>头的值在指定范围之外的.</li>
+</ol>
+<p>只要满足任何一个条件就会发起preflight请求. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">具体条件</a>在左边的链接中.</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>关于<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching" target="_blank" rel="noopener">缓存</a>暂时只做概念介绍, 缓存的控制也都是header控制的.</p>
+<h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>什么是缓存? 当同一个请求进行了2次以上, 浏览器不真正向浏览器发起请求而直接返回之前储存的结果.</p>
+<h3 id="缓存哲学"><a href="#缓存哲学" class="headerlink" title="缓存哲学"></a>缓存哲学</h3><p>缓存的好处是: 提高浏览器响应速度, 节省服务器带宽. 因为没有与服务器真正数据交互, 也获得了期望里的数据.</p>
+<p>缓存的问题也非常明显, 获得的数据是缓存里的, 而不是最新的. 所以缓存的关键就在于猜测哪些数据是不经常更新的. 猜测什么类型的数据的更新频率是多少, 并使用缓存相关的header来控制. 比如某门户网站的首页html是不经常更新的, 或者是每小时一更新, 而首页轮播的图片是十分钟更新的.</p>
+<h3 id="缓存类型"><a href="#缓存类型" class="headerlink" title="缓存类型"></a>缓存类型</h3><p>缓存类型分为本地缓存和共享缓存.</p>
+<p>我们概念中的, 或者说我们经常使用的都是本地缓存.</p>
+<p>共享缓存是指ISP对服务器的缓存, 之前听说淘宝怎么能让网速更快, 离用户最近的地方是ISP机房, 所以把淘宝首页放在ISP机房就行了.</p>
+<h3 id="新鲜度检查"><a href="#新鲜度检查" class="headerlink" title="新鲜度检查"></a>新鲜度检查</h3><p>有一种缓存的机制是新鲜度检查. 之前说的缓存response是: 200 OK (from disk cache). 新鲜度检查是根据<code>cache-control: max-age=xxx</code>向服务器发起新鲜度检查. 如果返回结果是304(not modified), 服务器将不返回数据, 使用浏览器缓存的数据, 从而节省数据下载时间和带宽.</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers" target="_blank" rel="noopener">http header</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noopener">request methods</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noopener">response status</a></li>
+</ul>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2018/05/31/http-introduction/" data-id="ckossezh9004i2xqmb8jdnone" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/http/">http</a></div><div class="post-nav"><a href="/2018/07/05/diary-june/" class="pre">六月流水账</a><a href="/2018/05/29/chrome-extension-issues/" class="next">chrome拓展应用bug修复记录</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

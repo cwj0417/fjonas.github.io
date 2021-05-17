@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>弗洛伊德理论介绍 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">弗洛伊德理论介绍</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">弗洛伊德理论介绍</h1><div class="post-meta">Oct 15, 2017<span> | </span><span class="category"><a href="/categories/读后感/">读后感</a></span></div><div class="post-content"><p>⟪人格心理学⟫中指出, 心理学家对人格的分析有如”盲人摸象”, 十九世纪西方产生了大量心理学派, 各个学派是看这个世界的各个角度, 没有对错, 在看书过程难免遗忘, 本文记录一下弗洛伊德学派的主要理论. 在书中的对应章节为第三章与第四章.</p>
+<a id="more"></a>
+<h2 id="弗洛伊德简介"><a href="#弗洛伊德简介" class="headerlink" title="弗洛伊德简介"></a>弗洛伊德简介</h2><p>弗洛伊德是十九世纪伟大的神经学家, 他引领了一场重大的精神运动, 改变了之后各个领域的人多年来对人的看法, 之后西方的许多心理学派都是以弗洛伊德理论为基础展开或修整的.</p>
+<p>弗洛伊德原本是医生, 在治疗一种”歇斯底里症”的病的首个成功案例以后开始慢慢对心理研究产生兴趣, 这种病症在一开始被当做外科病, 而弗洛伊德通过心理角度治好了一例患者从而走上了精神分析的道路.</p>
+<h2 id="弗洛伊德理论"><a href="#弗洛伊德理论" class="headerlink" title="弗洛伊德理论"></a>弗洛伊德理论</h2><h3 id="人格模型"><a href="#人格模型" class="headerlink" title="人格模型"></a>人格模型</h3><p>弗洛伊德的人格模型分为解剖模型和结构模型.</p>
+<p>解剖模型分为<strong>意识</strong>, <strong>前意识</strong>, <strong>无意识</strong>. 分别代表: 正在想的内容, 可以想起来的内容, 想不起来的内容. 无意识, 也就是”想不起来的内容”是弗洛伊德的发现, 无意识会操纵人的行为.</p>
+<p>结构模型分为<strong>本我</strong>, <strong>自我</strong>, <strong>超我</strong>. 分别代表: 原始欲望的意识, <em>现实原则</em>处理后的意识, 道德规范(社会规范)后的意识. 举例来说是在朋友家看到桌上有5元钱, <em>本我</em>是想拿走的, 而<em>自我</em>意识到拿走可能会导致问题, 于是试图寻找拿走钱也不为人知的办法. 但即使有拿走且不为人知的方法, <em>超我</em>也将阻止这一行为, 因为拿走不属于自己的东西是违反社会规范的, 有人把超我直译为<em>良心</em>.</p>
+<p>两种模型是基于不同角度, 两种模型之间是互相有交集的, 比如我们在朋友家看到钱不会想要拿走, 也就是<em>本我</em>处于<em>无意识</em>中. 人的一生自己的<em>本我</em>, <em>自我</em>, <em>超我</em>都在不断斗争, 而本我几乎全藏在<em>无意识</em>中, <em>自我</em>和<em>超我</em>在三中解剖模型中都存在, 这是两个模型的关系.</p>
+<h3 id="人的本能"><a href="#人的本能" class="headerlink" title="人的本能"></a>人的本能</h3><p>人的本能分为<strong>生的本能</strong>和<strong>死的本能</strong>. 生的本能也叫性本能, 是指以获得快乐为目的的行为. 人有死去回归大地的愿望, 而死的愿望一直在无意识中, 大多会转化为外部表现为对他人的攻击, 所以攻击性也是人的本能.</p>
+<p>弗洛伊德认为人的心理能量是有限的, 如果一个人的自我必须耗费大量的精力来控制本我, 那么他的其他心理机能就会因为没有能量而受损. 所以弗洛伊德的治疗方法是发现患者的无意识并释放无意识冲动, 来释放能量用于日常心理功能的发挥.</p>
+<h3 id="防御机制"><a href="#防御机制" class="headerlink" title="防御机制"></a>防御机制</h3><p>人在生活中会产生许多不好的无意识主题, 比如对父母的憎恨, 对配偶的攻击性, 乱伦年头, 对儿时创伤经历的回忆, 以及类似的对<em>意识</em>具威胁性的想法. <em>自我</em>会试图把这些内容排除在<em>意识</em>之外, 从而<em>自我</em>有许多处理非期望想法和欲望的方法, 成为<strong>防御机制</strong>. </p>
+<p>这些<strong>防御机制</strong>大部分是在<em>无意识</em>中的, 只有一些<em>防御机制</em>我们自己可以意识到.</p>
+<p>另外除了下面要说的<strong>升华</strong>, 所有<em>防御机制</em>都是不同程度消耗心理能量的.</p>
+<p>为了快速解释, 下面的防御机制都通过”例子+定义”的方式来介绍.</p>
+<h4 id="压抑"><a href="#压抑" class="headerlink" title="压抑"></a>压抑</h4><p><strong>压抑</strong>是一种积极的努力, 自我通过这种努力, 把那些有威胁的内容排除在意识之外, 或者使这些内容不能接近意识. 例如一个男孩看见父亲殴打母亲, 事后被询问这次经历时, 男孩称从未见过这样的事情. (男孩自己也这么认为的).</p>
+<p>关于压抑这种防御机制要稍微多介绍一下, 因为压抑是”整个精神分析理论结构的基石”, 压抑是一个稳定, 主动的过程, 他需要自我持续地消耗能量, 压抑大量的想法和冲动使自我没有剩余能量可以运作.</p>
+<h4 id="升华"><a href="#升华" class="headerlink" title="升华"></a>升华</h4><p><strong>升华</strong>是把危险的无意识冲动转化为社会认可的行为. 例如橄榄球, 冰球这些运动, 运动员把对方运动员推倒是社会承认和赞赏的.</p>
+<h4 id="替代"><a href="#替代" class="headerlink" title="替代"></a>替代</h4><p><strong>替代</strong>是将冲动导入一个无威胁的目标物. 例如一个女人遭虐待后, 无意识中会非常愤怒. 如果向施虐者发泄会有危险, 他就将怒气指向同事或孩子.</p>
+<p>弗洛伊德认为, <strong>人们的许多不合理的害怕或恐惧, 都不过是象征性替代</strong>. 例如一位患者的儿子害怕马. 他推测孩子是用害怕马来替代对父亲的害怕.</p>
+<h4 id="否认"><a href="#否认" class="headerlink" title="否认"></a>否认</h4><p><strong>否认</strong>是否认接受某些事实的存在. 与<em>压抑</em>不同, 否认没有忘记事实, 而是认为某些事实是不真实的, 在旁人看来是患者的逻辑有问题. 例如一位深爱妻子的丈夫, 在妻子死后一直表现为妻子还活着的样子. 自我使用否认不让某些想法达到意识.</p>
+<h4 id="反向作用"><a href="#反向作用" class="headerlink" title="反向作用"></a>反向作用</h4><p><strong>反向作用</strong>指我们会按照无意识欲望相反的方式行动, 以躲开可怕的念头或欲望. 例如一个女人反复告诉别人他多爱他自己的母亲, 其实他在隐藏无意识中对母亲的强烈憎恨.</p>
+<h4 id="理智化"><a href="#理智化" class="headerlink" title="理智化"></a>理智化</h4><p>对可怕的无意识念头进行自我控制的一种方法是, 在他进入意识之前, 先从中去掉感情的内容. 这样进入意识以后就不会感到焦虑. 例如一个女人装作思考系安全带的重要性, 也许是在想象她的丈夫会遭遇可怕的车祸. 弗洛伊德认为她对丈夫怀有某种无意识的敌意.</p>
+<h4 id="投射"><a href="#投射" class="headerlink" title="投射"></a>投射</h4><p><strong>投射</strong>是指我们把一种无意识冲动归于别人, 而非自己, 就可以摆脱”我自己就这样想”的观念. 例如一个认为她周围的邻居私生活都不检点的女人, 也许对隔壁的已婚男人怀有性欲望. 宣称世界充满猜疑和欺骗的人, 其实在无意识中承认他自己就是不可信的人和骗子.</p>
+<h3 id="心里性欲发展阶段"><a href="#心里性欲发展阶段" class="headerlink" title="心里性欲发展阶段"></a>心里性欲发展阶段</h3><p>弗洛伊德描述人在儿童阶段经历各个心理性欲阶段而发展了人格. 如果儿童在某个阶段遇到困难, 或者某个阶段非常满足, 使他们想停留在这个阶段, 就造成了<strong>固着</strong>, 即心理能量被绑定, 这些人成人后还会表现其心理能量被固着阶段的行为特征.</p>
+<p><strong>口唇期</strong>在0~18个月, 固着结果是嗜酒, 嗜烟, 咬手指.</p>
+<p><strong>肛门期</strong>在18个月以后, 性格是很强的秩序感, 固执或过于慷慨.</p>
+<p><strong>性器器</strong>, 大约发生于3~6岁,  儿童将经历恋母情结. 弗洛伊德提示人们, 恋母欲望永远不会完全消失. 只是被压抑了, 以后的生活中还会以各种方式对人的行为造成影响.</p>
+<h3 id="研究无意识内容"><a href="#研究无意识内容" class="headerlink" title="研究无意识内容"></a>研究无意识内容</h3><p>那么弗洛伊德认为最重要的心理材料在无意识中, 那么如何分析无意识呢.</p>
+<h4 id="梦"><a href="#梦" class="headerlink" title="梦"></a>梦</h4><p>弗洛伊德认为梦看似奇怪无聊的内容, 但每个出现的东西都代表了一些东西. 弗洛伊德说睡眠如此重要, 我们是不会让对自己不重要的东西打扰他的.</p>
+<h4 id="投射测试"><a href="#投射测试" class="headerlink" title="投射测试"></a>投射测试</h4><p>投射测试的原理是用<strong>模糊</strong>的图像让患者描述. 就像我们小时候看云朵来说像什么东西一样.</p>
+<h4 id="自由联想"><a href="#自由联想" class="headerlink" title="自由联想"></a>自由联想</h4><p>花一点时间把自己脑子里的念头都清理干净, 然后开始纵情畅想, 畅所欲言, 哪怕说出来的话出乎意料. 因为人能想出的东西都是脑子里的, 和梦一样, 再以为离奇的东西其实都是无意识中存在的东西.</p>
+<h4 id="弗洛伊德口误"><a href="#弗洛伊德口误" class="headerlink" title="弗洛伊德口误"></a>弗洛伊德口误</h4><p>所有人都难免会口误. 丈夫在提到妻子时, 用的是他婚前的姓. 在弗洛伊德眼里, 这代表一时脱口而出的无意识内容. 用婚前姓称呼妻子的丈夫, 或许在无意识里希望自己从未娶过这个女人. 我们把这种错误陈述成为<strong>弗洛伊德口误</strong>.</p>
+<h4 id="催眠"><a href="#催眠" class="headerlink" title="催眠"></a>催眠</h4><p>在深度催眠的状态下, <em>自我</em>会进入暂停状态, 从而直接达到无意识.</p>
+<h4 id="意外"><a href="#意外" class="headerlink" title="意外"></a>意外</h4><p>例如你和一个朋友在争论问题, 你”意外”地撞倒了朋友的一个塑料架而且无法修复. 你道歉, 说你不是故意的. 但这真的是一次意外吗? 在弗洛伊德来看, 许多看似意外的行为, 其实是无意识冲动驱使的.</p>
+<p>我们也许有很多”忘记”, “推延”的动作, 其实都是无意识的不愿意.</p>
+<h4 id="象征行为"><a href="#象征行为" class="headerlink" title="象征行为"></a>象征行为</h4><p>例如有一个母亲喜欢菊花图案, 孩子回家在菊花图案的擦鞋店上不停地踩, 其实是对母亲怀有敌意.</p>
+<h2 id="相关研究"><a href="#相关研究" class="headerlink" title="相关研究"></a>相关研究</h2><h3 id="梦的功能"><a href="#梦的功能" class="headerlink" title="梦的功能"></a>梦的功能</h3><p>睡眠有一个阶段为”快速动眼”, 在快速动眼的时候, 人的大脑活动仍与清醒一样. 研究发现快速动眼阶段充满了梦.</p>
+<p>说一个实验来说梦的功能:</p>
+<p>实验让被试者分为两批, 分别在睡前和睡后看一个医生解剖尸体的可怕细节. 睡前看的被试者明显比睡后看的产生了更多焦虑情绪, 并且睡前看的被试者当天晚上增加了快速动眼睡眠.</p>
+<p>实验结论是快速动眼, 做梦是为被压抑的想法提供了发泄的出口. 遭受心理创伤, 在白天总是回避想创伤的人, 夜晚经常会做反应创伤性事件的梦. 有另外一个研究:</p>
+<p>被试者在睡觉前进行一个意识流写作练习, 要求在练习中故意不去想他们认识的某人. 当晚, 要求不要想那个熟人的被试者更多的梦到了这个人.</p>
+<h3 id="防御风格"><a href="#防御风格" class="headerlink" title="防御风格"></a>防御风格</h3><p>每个人都会较多地使用一些防御机制而较少的使用另一些, 这种个人化的方式叫做<strong>防御风格</strong>.</p>
+<p>不同的年龄, 防御风格会产生变化.</p>
+<p>防御风格形成的原因是, 使用者的经历关系某些防御机制特别好用, 使用者遇到了别的事情也会继续使用, 就形成了防御风格.</p>
+<h3 id="幽默"><a href="#幽默" class="headerlink" title="幽默"></a>幽默</h3><p>弗洛伊德认为人因为笑话而笑是因为这种笑是无意识的发泄. 许多笑话都是带有黄色或者攻击性的. </p>
+<p>一直压抑着性的人更会因为黄色笑话而笑.</p>
+<p>对别人敌意更大的更会因为攻击性的笑话而笑. 试想象如果攻击性的笑话(出丑)的主角是自己亲近的人, 是不是想笑的欲望就减少了. 因为人天生对所有人有攻击性(死的本能), 所以听到攻击性笑话会笑. 所以人可能希望除了自己亲近的人其他人都去死是一种本能.</p>
+<p><strong>用敌意的笑话可以降低攻击性</strong>. 也就是旁人嘲笑你生气的对象会让你对他的生气减少. 而其他的笑话则不能减少你的生气.</p>
+<p><strong>人越紧张越容易笑</strong>. 实验是: 被试者分为两批, 一批被要求: 摸实验老鼠5秒, 并被告知这些老鼠很温顺. 另一批被要求: 用针筒吸取2毫升老鼠的血液, 并被告知老鼠很凶小心被咬到. 最后当被试者打开盖子发现是玩具老鼠, 被要求吸血的被试者笑了, 另外的被试者觉得没有那么好笑. 原因是压抑紧张让自己表现正常被释放了. </p>
+<p>所以笑和做梦是有积极意义的, 释放心理能量.</p>
+<h2 id="读后感"><a href="#读后感" class="headerlink" title="读后感"></a>读后感</h2><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>弗洛伊德认为, 我们身上多数真实的东西都不是意识的, 而我们意识中的多数东西都不是真实的.</li>
+<li>清白无邪的梦, 是披着羊皮的狼. 当我们对这些梦进行分析时, 他们的含义可能与其表面正相反. —弗洛伊德</li>
+<li>梦从来都与琐事无关: 我们不会允许无关紧要的事打扰我们的睡眠. —弗洛伊德</li>
+<li>一个人因为听了黄色笑话而大笑, 就仿佛他在旁观一场性侵略而大笑. —弗洛伊德</li>
+</ul>
+<h3 id="对世界新的认识"><a href="#对世界新的认识" class="headerlink" title="对世界新的认识"></a>对世界新的认识</h3><p>在知道了一件事以后就再也不会当不知道了. </p>
+<p>人的无意识操纵了人的很多行为, 需要注意的是, 我们自己意识不到, 我们会被广告, 被运营, 被qq空间的黄色擦边球的文章吸引, 自己也觉得很无聊, 但是就买了, 点了, 看了, 那都是因为自己的无意识操作了自己的行为.</p>
+<p>从弗洛伊德的理论我也感受到了: <strong>空的脑子是没有任何输出的</strong>, 所以<strong>以为是随意的或者是无意义的想法和行为, 都是自己无意识的表现</strong>. 而无意识有一部分是遗传的, 成为<em>集体无意识</em>(是后面章节弗洛伊德延伸派的理论), 另一部分是自己输入的无意识, 只是被自我排除了. </p>
+<p>举例, 上文有奇怪的行为(对马的害怕), 人的梦, 口误. 这些看似无意义的, 奇怪的行为, 都是人的愿望的表现. 人越大越成熟就知道很多事不能说, 不能做. 网络流行说人都是带着面具生活, 可怕的是, 我们骗了别人一部分, 也骗了自己, 自己还信了. 这就是自我把认为不好的事(想攻击亲人, 想乱伦, 想出轨). 这些事情自己也觉得是错的, 所以就骗自己事实不是这样的.</p>
+<h3 id="对自己行为的影响"><a href="#对自己行为的影响" class="headerlink" title="对自己行为的影响"></a>对自己行为的影响</h3><p>弗洛伊德提到了防御风格, 越成熟的人使用的防御风格越好(防御风格是有好坏的, 刚才提到的升华是几乎不消耗心理能量的). </p>
+<p>对自己的认识是: 不要在任何时候相信自己, 在遇到不爽的时候努力分析是否使用了防御机制, 防御机制是暂时的, 如果能面对问题, 解决问题, 就可以解放心理能量的使用而把能量投入更积极的心理机能里.</p>
+<p>另外要对自己输入更好的无意识: 也就是养成好习惯. 小时候会有个想法: “到时候认真做就可以了”. 对自己, 对事, 对人都用真心真态度. 因为如果用了假的态度, 以为自己表现得很像了, 还是会做出自己真实想做的事. 例子是看书学习, 为什么我会想好学习一天, 结果学习2小时玩2小时呢, 原因是对自己的心理暗示不够. 许多人看书都是”我知道看书好”, 或者是”我要让别人知道我在看书”而发了个朋友圈. 所以要用”真”的态度对待自己, 把”我应该这么做”, 换成”我必须这么做”.</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2017/10/15/freud-brief/" data-id="ckossezgm003d2xqm8slrylg7" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/心理学/">心理学</a><a href="/tags/人格心理学/">人格心理学</a></div><div class="post-nav"><a href="/2017/10/19/how-vue-i18n-work/" class="pre">vue-i18n是如何工作的</a><a href="/2017/09/27/overtime-or-efficiency/" class="next">加班与效率</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

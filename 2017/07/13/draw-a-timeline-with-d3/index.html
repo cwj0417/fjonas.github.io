@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>用d3来画一个时间线 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">用d3来画一个时间线</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">用d3来画一个时间线</h1><div class="post-meta">Jul 13, 2017<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>数据可视化不再是简单的表格, 现在慢慢地接触了解到许多数据可视化的js库, d3, processing.js, three.js, highcharts, echarts等.</p>
+<p>本文将用基于svg的时间线例子使用d3, 先介绍api随后介绍实例中api的应用.</p>
+<a id="more"></a>
+<h2 id="D3"><a href="#D3" class="headerlink" title="D3"></a>D3</h2><p><a href="https://github.com/d3/d3" target="_blank" rel="noopener">d3</a>是一个粒度很细的的lib, 比起echart算是工具类的lib. 之后的例子会有感性认识.</p>
+<p>d3的<a href="https://github.com/d3/d3/blob/master/API.md" target="_blank" rel="noopener">api</a>在4.0版本被划分成多个子模块了. 这些子模块其实功能各异, 下面例子要画的时间线使用了操作dom的模块, 数学计算的模块, 选区的模块, 各个模块的性质都是不同的.</p>
+<p>d3官方有一个<a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">作品展</a>有的需要购买, 可以看到效果和代码, 用作出作品或者学习.</p>
+<p>按照惯例, 我开了一个<a href="https://github.com/fjonas/d3-v4-learning" target="_blank" rel="noopener">repo</a>来放一些学的时候的demo. 下面开始来看看一部分画时间线用到的模块.</p>
+<h3 id="d3-selection"><a href="#d3-selection" class="headerlink" title="d3-selection"></a>d3-selection</h3><h4 id="select"><a href="#select" class="headerlink" title="select"></a>select</h4><p><a href="https://github.com/d3/d3-selection" target="_blank" rel="noopener">d3-selection</a>是一个操作dom的模块. 选择器有2个方法, <code>d3.select()</code>与<code>d3.selectAll()</code>, 结果类似于<code>document.querySelector</code>和<code>document.querySelectorAll</code>, 选择器也相同, d3的selector返回的是一个<code>selection</code>, <code>selection</code>也拥有<code>selection.select()</code>和<code>selection.selectAll()</code>方法, 区别是在当前selection查找.</p>
+<p><code>d3.select()</code>也可以把普通dom转化为d3<code>selection</code>.</p>
+<h4 id="modifying"><a href="#modifying" class="headerlink" title="modifying"></a>modifying</h4><p>d3<code>selection</code>有一些修改节点属性的方法: <code>.attr()</code>, <code>.style()</code>, <code>.text()</code>, <code>.html()</code>, <code>.append()</code>, <code>.insert()</code>… 直到这里, d3-select 还是浓重的jquery味道,</p>
+<p>还有一些<code>.on</code>处理事件, 用法也是不看文档就能猜到的.</p>
+<h4 id="data-joining"><a href="#data-joining" class="headerlink" title="data joining"></a>data joining</h4><p>这个特性就比较有意思, 是data driven的特性. 流程是: 选择dom =&gt; 绑定数据 =&gt; 渲染子dom. 渲染子dom的时候每个dom都带着了绑定了的数据.</p>
+<p>一开始对三个东西比较疑惑: <code>.enter()</code>的意义其实是”获取被装载过data的空selection”, 而不是”进入”这个动作.</p>
+<p>而<code>.exit()</code>的意义是”获取已经没有数据并正被渲染的dom”, 而不是”退出”这个动作. 另外<code>.merge()</code>也不是想象力的merge. </p>
+<p>官方推荐了一个<a href="https://bost.ocks.org/mike/join/" target="_blank" rel="noopener">博客</a>和一个<a href="https://bl.ocks.org/mbostock/3808218" target="_blank" rel="noopener">示例</a>. 我们来看一下每次渲染的代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = g.selectAll(<span class="string">"text"</span>)</span><br><span class="line">   .data(data);</span><br><span class="line"><span class="comment">// 选择现存的dom, 并绑定数据</span></span><br><span class="line"><span class="comment">// 如果没有旧的dom, 选择器将返回带有数据的空的selection, 注意带有数据的selection就有enter和exit方法</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 如果存在旧dom, 更新class属性</span></span><br><span class="line"> text.attr(<span class="string">"class"</span>, <span class="string">"update"</span>);</span><br><span class="line"></span><br><span class="line"> text.enter().append(<span class="string">"text"</span>) <span class="comment">// 获得需要插入的dom, 在这些dom上新增text节点</span></span><br><span class="line">     .attr(<span class="string">"class"</span>, <span class="string">"enter"</span>)</span><br><span class="line">     .attr(<span class="string">"x"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d, i</span>) </span>&#123; <span class="keyword">return</span> i * <span class="number">32</span>; &#125;)</span><br><span class="line">     .attr(<span class="string">"dy"</span>, <span class="string">".35em"</span>)</span><br><span class="line">   .merge(text) <span class="comment">// 更新数据</span></span><br><span class="line">     .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line">text.exit().remove(); <span class="comment">// 获取到已经没有数据的dom, 并移除</span></span><br></pre></td></tr></table></figure>
+<h3 id="d3-scale"><a href="#d3-scale" class="headerlink" title="d3-scale"></a>d3-scale</h3><p><a href="https://github.com/d3/d3-scale" target="_blank" rel="noopener">d3-scale</a>是一个计算刻度比例的计算库. 数据中的年份/距离/颜色需要映射到实际屏幕尺寸.</p>
+<p>scale有许多类型. 线性, 幂, 对数等scale类型. 在示例中我用了线性scale, 应该也是最常用, 最简单的scale.</p>
+<h4 id="linear-scale"><a href="#linear-scale" class="headerlink" title="linear scale"></a>linear scale</h4><p>线性scale顾名思义, 把数据进行线性映射, 画一个<code>y = kx + b</code>的直线来映射数据与实际尺寸的关系.</p>
+<h4 id="创建scale"><a href="#创建scale" class="headerlink" title="创建scale"></a>创建scale</h4><p>每个scale都需要被创建, 我们以linear为例.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scale = d3.scaleLinear()</span><br><span class="line">    .domain([<span class="number">10</span>, <span class="number">130</span>])</span><br><span class="line">    .range([<span class="number">0</span>, <span class="number">960</span>])</span><br></pre></td></tr></table></figure>
+<p>其中<code>.domain()</code>接受数据的范围, <code>.range()</code>接受实际尺寸的范围. <code>.range()</code>还接受颜色, 可以把颜色与数据对应来把数据显示成对应关系的颜色.</p>
+<h4 id="使用scale"><a href="#使用scale" class="headerlink" title="使用scale"></a>使用scale</h4><p>刚才的代码我们获取了<code>scale</code> . 直接调用<code>scale()</code>传入数据值, 返回对应的实际尺寸值.</p>
+<p>而如果通过<a href="#d3-brush">brush</a>获得了当前屏幕的尺寸, 需要知道对应了什么数据. 可以调用<code>scale.invert()</code>来获得反函数的值.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scale.invert(<span class="number">80</span>); <span class="comment">// 20</span></span><br><span class="line">scale.invert(<span class="number">320</span>); <span class="comment">// 50</span></span><br></pre></td></tr></table></figure>
+<h3 id="d3-brush"><a href="#d3-brush" class="headerlink" title="d3-brush"></a>d3-brush</h3><p><a href="https://github.com/d3/d3-brush" target="_blank" rel="noopener">brush</a>是用来在d3的selection中创建选区, 配合scale的<code>.invert()</code>方法来获取选中的数据并作处理.</p>
+<p>下面来说一些概念.</p>
+<h4 id="创建brush"><a href="#创建brush" class="headerlink" title="创建brush"></a>创建brush</h4><p>创建brush有3个方法, 对应着3种brush, 分别为<code>d3.brush()</code>, <code>d3.brushX()</code>, <code>d3.brushY()</code>. </p>
+<h4 id="brush的方法"><a href="#brush的方法" class="headerlink" title="brush的方法"></a>brush的方法</h4><ul>
+<li><strong>move</strong>: 设置brush的选区. 拖动brush即可改变选区, 而move方法可以通过代码改变brush的选区.</li>
+<li><strong>extent</strong>: 设置brush的选区范围.</li>
+<li><strong>filter</strong>: 设置哪些地方是不可以新建选区的.</li>
+<li><strong>handleSize</strong>: 设置brush尺寸</li>
+<li><strong>on</strong>: 监听时间, 分别有<code>start</code>, <code>brush</code>, <code>end</code>三个事件, 一般只用<code>brush</code>, 在brush互相调用的时候需要使用别的事件来防止无限循环.</li>
+<li><strong>brushSelection</strong>: 获取selection的值. 这个是用在brush事件回调里, 有个参数是node, 调用这个方法就可以获得brush状态, 并用<a href="#d3-scale">scale</a>.invert来获取圈选的对应的数据.</li>
+</ul>
+<h4 id="装载brush"><a href="#装载brush" class="headerlink" title="装载brush"></a>装载brush</h4><p>在需要装载brush的<code>selection</code>上调用<code>.call()</code>方法来装载brush.</p>
+<h2 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h2><p>svg是一个用xml定义的矢量图形. svg有各种标签, 各种标签有各种style. 来介绍一下时间线用到的svg标签.</p>
+<h3 id="line"><a href="#line" class="headerlink" title="line"></a>line</h3><p>line是画一条线. 俗话说得好, 两点确定一线.</p>
+<p><strong>属性</strong></p>
+<ul>
+<li>x1 属性在 x 轴定义线条的开始</li>
+<li>y1 属性在 y 轴定义线条的开始</li>
+<li>x2 属性在 x 轴定义线条的结束</li>
+<li>y2 属性在 y 轴定义线条的结束</li>
+</ul>
+<h3 id="rect"><a href="#rect" class="headerlink" title="rect"></a>rect</h3><p>画一个正方形. 属性比想象的多一点点.</p>
+<p><strong>属性</strong></p>
+<ul>
+<li>rect 元素的 width 和 height 属性可定义矩形的高度和宽度</li>
+<li>style 属性用来定义 CSS 属性</li>
+<li>x 属性定义矩形的左侧位置（例如，x=”0” 定义矩形到浏览器窗口左侧的距离是 0px）</li>
+<li>y 属性定义矩形的顶端位置（例如，y=”0” 定义矩形到浏览器窗口顶端的距离是 0px）</li>
+<li>rx 和 ry 属性可使矩形产生圆角。</li>
+</ul>
+<h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><p>随意画线.</p>
+<p>类似于canvas的lineTo moveTo画线.</p>
+<p>path接受一个attribute<code>d</code>, 有以下语法:</p>
+<ul>
+<li>M = moveto</li>
+<li>L = lineto</li>
+<li>H = horizontal lineto</li>
+<li>V = vertical lineto</li>
+<li>C = curveto</li>
+<li>S = smooth curveto</li>
+<li>Q = quadratic Belzier curve</li>
+<li>T = smooth quadratic Belzier curveto</li>
+<li>A = elliptical Arc</li>
+<li>Z = closepath</li>
+</ul>
+<p>例子:</p>
+<figure class="highlight svg"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M153 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C153 334 151 334 151 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C151 339 153 344 156 344</span></span></span><br><span class="line"><span class="tag"><span class="string">C164 344 171 339 171 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C171 322 164 314 156 314</span></span></span><br><span class="line"><span class="tag"><span class="string">C142 314 131 322 131 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C131 350 142 364 156 364</span></span></span><br><span class="line"><span class="tag"><span class="string">C175 364 191 350 191 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C191 311 175 294 156 294</span></span></span><br><span class="line"><span class="tag"><span class="string">C131 294 111 311 111 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C111 361 131 384 156 384</span></span></span><br><span class="line"><span class="tag"><span class="string">C186 384 211 361 211 334</span></span></span><br><span class="line"><span class="tag"><span class="string">C211 300 186 274 156 274"</span></span></span><br><span class="line"><span class="tag"><span class="attr">style</span>=<span class="string">"fill:white;stroke:red;stroke-width:2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="svg通用样式"><a href="#svg通用样式" class="headerlink" title="svg通用样式"></a>svg通用样式</h3><ul>
+<li>stroke: 描边颜色</li>
+<li>stroke-width: 描边粗细</li>
+<li>fill: 填充颜色</li>
+<li>stroke-opacity: 描边透明度</li>
+<li>fill-opacity: 填充透明度</li>
+<li>opacity: 整个元素透明度</li>
+</ul>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>结合以上知识写了一个<a href="https://github.com/fjonas/d3-v4-learning/tree/master/timeline-2017-7-5" target="_blank" rel="noopener">demo</a>. 在实现需求的过程中遇到了一些问题, 来总结一下是如何解决的. 以下问题的代码均在<a href="https://github.com/fjonas/d3-v4-learning/tree/master/timeline-2017-7-5" target="_blank" rel="noopener">demo</a>中.</p>
+<p><strong>brush需求</strong>: brush要求不能改变选区, 只能拖动选区. 使用另一个brush来改变选区的宽度, 高度固定.</p>
+<h3 id="问题一-如何获得brush的选区数据"><a href="#问题一-如何获得brush的选区数据" class="headerlink" title="问题一: 如何获得brush的选区数据"></a>问题一: 如何获得brush的选区数据</h3><p>使用<code>.on</code>方法, 在回调函数中获取第三个参数(回调函数的参数分别为<code>target</code>, <code>type</code>, <code>selection</code>), 使用<code>d3.brushSelection</code>来把获得的<code>selection</code>转化为一个表示范围的数组.</p>
+<h3 id="问题二-如何使两个brush联动"><a href="#问题二-如何使两个brush联动" class="headerlink" title="问题二: 如何使两个brush联动"></a>问题二: 如何使两个brush联动</h3><p>先写好2个brush, 分别在2个brush的<code>.on</code>方法中使用<code>brush.move()</code>方法, 配合在问题一中获取到的数据来计算另外一个brush需要<code>.move</code>到哪儿.</p>
+<p>如此写会出现死循环的问题, 所以需要设置一个状态变量, 并在各自brush<code>.on(&#39;start&#39;)</code>和<code>.on(&#39;end&#39;)</code>上监听并改变状态变量, 在<code>.on(&#39;brush&#39;)</code>种判断当前状态来决定是否执行另一个brush的<code>.move()</code>方法.</p>
+<h3 id="问题三-如何禁用brush的改变选区"><a href="#问题三-如何禁用brush的改变选区" class="headerlink" title="问题三: 如何禁用brush的改变选区"></a>问题三: 如何禁用brush的改变选区</h3><p>要使得一个brush不能改变选区, 只有拖动选区功能, 来分析选区是如何改变的, brush改变选区有两个方式: 直接点击选区的边框来拖拽更改选区, 或是直接在brush的载体上用鼠标划出一个选区. 针对这两个行为要做两个行为:</p>
+<p>brush其实包含了8个边框, 分别为四条边和四个角. 每个边框都是一个dom, 只需要把对应的dom去掉, 就可以禁用对应的操作了.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">brushG.select(<span class="string">".handle--n"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--e"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--s"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--w"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--nw"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--ne"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--se"</span>).remove()</span><br><span class="line">brushG.select(<span class="string">".handle--sw"</span>).remove()</span><br></pre></td></tr></table></figure>
+<p>第二个问题, 需要使用brush的filter功能. filter的回调函数返回falsely的值就会阻止鼠标的点击事件. 我们可以根据<code>event</code>来判断鼠标点在哪里, 若不是在现存的选区中就return false. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.call(brush.filter(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event.target !== brushG._groups[<span class="number">0</span>][<span class="number">0</span>].firstElementChild</span><br><span class="line">    &#125;))</span><br></pre></td></tr></table></figure>
+<p>注意的是<code>event</code>变量在linter中会报错, 可以使用 <code>// eslint-disable-line</code>来防止linter报错.</p>
+<h3 id="问题四-导航brush的拖动块偏外导致初始化显示不全"><a href="#问题四-导航brush的拖动块偏外导致初始化显示不全" class="headerlink" title="问题四: 导航brush的拖动块偏外导致初始化显示不全"></a>问题四: 导航brush的拖动块偏外导致初始化显示不全</h3><p>brush的样式是所有的边框都向外3px, 如果想把边框往里, 可以使用css的<code>transform: translate</code>来改变位置.</p>
+<hr>
+<p>参考: </p>
+<p><a href="http://bl.ocks.org/rengel-de/5603464" target="_blank" rel="noopener">例子</a></p>
+<p><a href="http://www.simile-widgets.org/timeline/" target="_blank" rel="noopener">例子</a></p>
+<p><a href="http://bl.ocks.org/bunkat/1962173" target="_blank" rel="noopener">例子</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2017/07/13/draw-a-timeline-with-d3/" data-id="ckossezff001x2xqmn0pdkm2e" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/入门/">入门</a><a href="/tags/d3/">d3</a><a href="/tags/svg/">svg</a></div><div class="post-nav"><a href="/2017/07/17/list-of-incorrect-vuex-usage/" class="pre">阅读vuex example</a><a href="/2017/06/19/color-wheel-introduction/" class="next">使用色轮设计系统主题色</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

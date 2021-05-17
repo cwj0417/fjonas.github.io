@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>webpack一些基本概念补课 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">webpack一些基本概念补课</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">webpack一些基本概念补课</h1><div class="post-meta">Oct 22, 2020<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>一直对webpack的一些功能概念比较模糊, 所以过一次文档的guide来看看这些功能: code spliting, tree shaking, hot module replacement, require.context.</p>
+<a id="more"></a>
+<h2 id="code-splitting和懒加载"><a href="#code-splitting和懒加载" class="headerlink" title="code splitting和懒加载"></a>code splitting和懒加载</h2><h3 id="why"><a href="#why" class="headerlink" title="why"></a>why</h3><p>先理解下为什么要做<a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="noopener">code splitting</a>.(下文简称cs)</p>
+<p>在不配置的情况下, 一个入口只会打出一个bundle文件. 一个普通的spa, 普遍就一个入口, 这个入口来引入整个app及css, 也就是<strong>整个应用都在一个js文件里</strong>, 加载的时候也会加载整个应用, 如果项目大, 白屏时间就长了.</p>
+<p>那一般做cs通常的场景有:</p>
+<ul>
+<li>多个入口文件. 比如chrome插件就有多个独立页面.</li>
+<li>首屏不需要的组件, 或者通过点击才加载的组件, 分到不同的bundle里按需加载.</li>
+<li>不同的组件都需要的lib, 独立出来打包, 避免在各处引用的时候重复打包.</li>
+</ul>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>那文档里说cs的方法有3个:</p>
+<ul>
+<li>手动设置多个入口.</li>
+<li>使用插件SplitChunksPlugin</li>
+<li>动态import.</li>
+</ul>
+<p>下面简单介绍一下这三种情况.</p>
+<p>手动设置多入口: 就是entry里多配一个键就多一个入口, 但可能存在一个情况: a文件依赖c, b文件也依赖c. 这样打包结果就是: 一个bundle含有<code>a+c</code>, 另一个bundle含有<code>b+c</code>, <code>c</code>被重复打了, 这种情况可以通过entry的一些简单配置来解决. (具体配置不说了).</p>
+<p>插件: 第一种case可以直接用SplitChunksPlugin来解决, css可以用mini-css-extract-plugin来解决.</p>
+<p>动态import: 通过<code>import().then</code>的语法, 把import理解成我们经常做的http请求就可以了. 这个功能可能是webpack先做的, 现在已经被列入了es规范, 在浏览器里也可以直接<code>import()</code>了.</p>
+<p>动态import以后, webpack编译的结果是: 通过用户操作触发了<code>import()</code>函数以后, <strong>通过<code>document.createElement(&#39;script&#39;);</code>来动态加载js的.</strong> 并且直接使用了Promise, 所以低版本浏览器使用这个功能要自加shim. vue, react, angular的组件/路由懒加载, 都是通过webpack的这个功能实现的.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>code splitting的意义是一个入口不止打出一个bundle文件, 而是根据依赖树和业务合理地打出多个文件来提高用户体验. (为什么说合理地, 因为分成多个bundle是增加请求消耗的)</li>
+<li>常用的方法是: 使用webpack插件和使用vue/react/angular的懒加载插件.</li>
+<li>手动配多入口和手动动态import不常用, 是根据具体业务来的. (因为需要这样做的业务不常见)</li>
+</ul>
+<h2 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h2><h3 id="why-1"><a href="#why-1" class="headerlink" title="why"></a>why</h3><p>tree shaking(下文简称ts)的故事是: 有用的代码就像树上绿色的叶子, 没用的像灰色的, 摇一下树, 就把灰色的叶子(没用的代码)去除出bundle了, 这个名词是rollup先发明的.</p>
+<p>那么为什么会写没用的代码呢? 所以ts的基本场景是: 第三方lib提供了很多功能, 但是使用的时候未使用全部, 打包的时候不需要把未使用的功能都打进来.</p>
+<h3 id="how-1"><a href="#how-1" class="headerlink" title="how"></a>how</h3><p>既然是<strong>打包的时候</strong>去除代码死区, 那么ts就是webpack完成的. 但因为webpack的功能还没有登峰造极, 所以<strong>使用者也需要配合webpack, 才能让ts完成得更合理</strong>.</p>
+<p>在webpack现在(5.3.2)文档里, 提了3个必须条件:</p>
+<ul>
+<li>使用es module导出模块. (import 和 export)</li>
+<li>在<code>package.json</code>中添加<code>sideEffects</code>字段. 或者在代码里添加<code>/*#__PURE__*/</code>注释.</li>
+<li>webpack配置<code>mode: &#39;production&#39;</code>.</li>
+</ul>
+<p>那么接下来的疑问就是: 为什么需要esm和设置标识, webpack才能进行treeshaking呢?</p>
+<p>答: 因为esm是静态的, 所以只有esm是可分析的, 才能进行DCE(dead code elimination). 因为js语言的特性(如object引用地址, prototype引起的sideeffect), 一些地方还无法确定是可以判定成死区的.</p>
+<p>而ts的本质是优化, 所以不改变代码执行效果是根本原则. <em>虽然我们这些初级程序员经常把feature优化掉:(</em></p>
+<p>下面来说说相关的内容.</p>
+<h3 id="amd-cmd-umd-cjs-esm-动态-静态"><a href="#amd-cmd-umd-cjs-esm-动态-静态" class="headerlink" title="amd? cmd? umd? cjs? esm? 动态? 静态?"></a>amd? cmd? umd? cjs? esm? 动态? 静态?</h3><p>众所周知, 以前js是没模块的, 不同lib之间要通过把变量挂在window上交互, 还涉及到加载顺序问题, 也就10年前的情况.</p>
+<p>于是, 为了解决模块问题, 这些东西就出现了.</p>
+<p>amd, cmd 是运行在浏览器上的.</p>
+<p>cjs是运行在node.js上的.</p>
+<p>umd是以上一切的结合, 方式是判断是否有一些关键字, 然后用对应的方法导出模块.</p>
+<p>esm是es6的module规范, 特点是静态的, 但尴尬的是, 浏览器不支持, 还是需要编译成umd.</p>
+<p>所以现在的lib库一般打包出三个版本: umd (for 浏览器), cjs(for node.js, 但如果是web库目标还是编译成umd), esm(让认识esm的编译工具使用).</p>
+<p>终于回到了正题: 为啥只有esm可以进行tree shaking?  答: 因为esm是静态的.</p>
+<p>什么是静态? 在编译的时候, 已经加载完了需要的依赖. 动态是运行的时候还可以加载依赖.</p>
+<p>esm是静态的, 在进行编译的时候, 这个项目的依赖树已经确定了. 编译器就可以把代码整理成ast进行分析了.</p>
+<p>(为啥esm是静态的, 因为es6规范规定他是静态的, 就是想到了会有这些好处, 所以import必须全部写在代码之前)</p>
+<h3 id="side-effect"><a href="#side-effect" class="headerlink" title="side effect?"></a>side effect?</h3><p>大概在16年的时候当时同事都在说函数式编程(fp). 于是学了一波还翻译了一篇教程写在博客里.</p>
+<p>tree shaking的side effect和fp的是不同的.</p>
+<p>比如<code>function go(url) { location.href = url }</code>. 这个在fp里肯定是算side effect, 但是在做tree shaking的情况里, 不算side effect. 因为没有这个方法, 完全不会影响其他函数.</p>
+<p>另外, 对于各种编程范式来说, 面向过程的(imperative program), 面向对象的(object oriented program), 还是函数式(functional program). 甚至代码是否要简洁. 他们的根本都是为了好维护, 易debug, 脱离实际, 硬追求一个范式都是幼稚的行为, 不知道自己目的是什么的行为而已.</p>
+<h3 id="总结和展望"><a href="#总结和展望" class="headerlink" title="总结和展望"></a>总结和展望</h3><p>tree shaking本质是编译软件做的事, webpack5的更新日志也表示已经能自动分析更多的”side effect”而不需要自己配置了.</p>
+<p>上一小节的总结, side effect的case其实不多, 大部分场景就是polyfill, 如果穷举场景, 编译器是可以做得更多的. 并且就算是代码要做处理, 也是第三方库作者要了解的东西. 所以对业务编码者的影响几乎是没有.</p>
+<p>也希望编译器会越来越强, 或者ts这样的结构化系统推行得更好, 让tree shaking也零配置, 无感知.</p>
+<h2 id="hmr"><a href="#hmr" class="headerlink" title="hmr"></a>hmr</h2><p>hmr是webpack可以探测文件改变, 不刷新页面更新部分页面. </p>
+<p>好处是可以保留页面状态, 和快.</p>
+<p>因为上一份工作用vue, 一直以为hmr是自动的, 写了一年react项目, 每次保存后都会刷新页面, 也一直没仔细思考. 于是看了下hmr文档.</p>
+<p>大概流程是:</p>
+<ul>
+<li>webpack的dev-server起一个http服务, 并把编译结果放在内存里吐给页面.</li>
+<li>页面与服务端建立websocket准备通信.</li>
+<li>服务端监听文件改变, 把改变通过ws告诉页面.</li>
+<li>页面接到信息, 执行预制的行为.</li>
+</ul>
+<p>那页面接到信息, 执行啥行为呢? 是需要去写的.</p>
+<p>那为什么vue和css会自动hmr呢? 因为<code>style-loader</code>和<code>vue-loader</code>里集成了hmr的api. 而react有第三方插件, 使用了就可以成功hmr了.</p>
+<p>另外, hmr是根据<code>module</code>来的, 如果一个module没有编写指定的行为, hmr引擎就会向他的父级module找, 直至顶层, 如果都没有, 就刷新页面了.</p>
+<p>所以: hmr是需要写代码的, 写得越多, 越细节, 热加载效果就越好(到最小的module). 写得越少, 越靠近根组件, 热加载效果越差, 所需时间也越少.</p>
+<h2 id="require-context"><a href="#require-context" class="headerlink" title="require.context"></a>require.context</h2><p>批量引入功能, 第一次看到是几年前的electron-vue的脚手架里, 当时没在意, 以为是node语法.</p>
+<p>这个功能常用语中心化的状态管理系统, vuex和redux, 一般项目都会有个文件, 引入类似文件结构的文件, 然后一起输出, 如果使用了<code>require.context</code>, 就可以避免”新增一个模块, 要去这个文件里复制粘贴修改”的问题.</p>
+<p>当然缺点是, 这个项目只能用webpack了. 但这个缺点几乎不存在, 因为其实打包工具和项目是整体, 迁移成本极大的.</p>
+<h2 id="build性能"><a href="#build性能" class="headerlink" title="build性能"></a>build性能</h2><p>build性能其实和tree shaking非常相像, 因为核心思想都是: <strong>使开发和打包更合理.</strong></p>
+<p>开发的时候要debug方便, 修改以后反应快.</p>
+<p>打包的时候要包小.</p>
+<p>所以其实都可以猜出要做几点:</p>
+<ul>
+<li>尽量使用新版本的webpack, 因为内部在优化, 更多的东西会更自动和快. 其实就是更好的算法.</li>
+<li>更合理的在不同情况(dev和prod)下加载loader和插件.</li>
+<li>代码质量更好.</li>
+<li>其他零零碎碎插件的具体用法.</li>
+</ul>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>这次对webpack浏览非常浅. 下次尝试深入: loader和plugin, webpack打包后各个module在浏览器里是大致如何通信的.</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2020/10/22/webpack-basic-concept/" data-id="ckosseziy00862xqm788y8pfb" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/webpack/">webpack</a></div><div class="post-nav"><a href="/2020/11/15/talk-about-our-being/" class="pre">聊聊生命</a><a href="/2020/09/30/build-a-vscode-extension/" class="next">写一个简单的vscode插件</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

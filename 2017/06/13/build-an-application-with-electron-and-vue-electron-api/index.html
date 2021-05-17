@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>用electron与vue构建应用—electron api | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">用electron与vue构建应用—electron api</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">用electron与vue构建应用—electron api</h1><div class="post-meta">Jun 13, 2017<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>一个electron应用只需要在全局安装electron, 并在<code>package.json</code>中声明main入口就可以启动, 那么如何从一个空的应用出现页面, 菜单等界面并调用各种web接口/node接口/os接口呢. 这里是<a href="https://github.com/electron/electron-api-demos" target="_blank" rel="noopener">官方api例子</a>.</p>
+<a id="more"></a>
+<h2 id="应用进程"><a href="#应用进程" class="headerlink" title="应用进程"></a>应用进程</h2><p>electron应用的进程分为<code>Main Process</code>(主进程)和<code>Renderer Process</code>(渲染进程), 主进程是整个应用的进程, 控制窗口的建立消除/应用菜单/后台行为等, 渲染进程其实就是网页进程(窗口进程), 控制界面的行为和与主进程的交互. 写到这里感觉与之前的<a href="/2016/11/07/how-to-build-an-chrome-extension/">使用vue编写chrome拓展</a>的应用结构几乎一样, 只是api和发布平台不同.</p>
+<h2 id="Electron-API-分类-使用-介绍"><a href="#Electron-API-分类-使用-介绍" class="headerlink" title="Electron API 分类/使用 介绍"></a>Electron API 分类/使用 介绍</h2><p><a href="https://electron.atom.io/docs/" target="_blank" rel="noopener">文档</a>的中间那列API Reference, 被分为了主进程api, 渲染进程api和共享api.</p>
+<p>使用api的方法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;apiName1, apiName2&#125; = <span class="built_in">require</span>(<span class="string">"electron"</span>)</span><br></pre></td></tr></table></figure>
+<p>在介绍API前, 先用<a href="https://github.com/electron/electron-quick-start" target="_blank" rel="noopener">官方quick start</a>的例子(作用是打开一个窗口并加载html页面)来对api的使用有感性认识.</p>
+<p>在入口<code>main.js</code>中, 引用了两个api: <code>app</code> 和 <code>BrowserWindow</code>.</p>
+<p><code>app</code>指的是主进程应用, 例子中监听了<code>ready</code>事件并执行<code>createWindow</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
+<p>在<code>createWindow</code>中, 调用了<code>BrowserWindow</code>来创建window对象, 并加载html到窗口中:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create the browser window.</span></span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// and load the index.html of the app.</span></span><br><span class="line">  mainWindow.loadURL(url.format(&#123;</span><br><span class="line">    pathname: path.join(__dirname, <span class="string">'index.html'</span>),</span><br><span class="line">    protocol: <span class="string">'file:'</span>,</span><br><span class="line">    slashes: <span class="literal">true</span></span><br><span class="line">  &#125;))</span><br></pre></td></tr></table></figure>
+<p>如此, 在当前目录下运行<code>electron .</code>就可以看到自己编写的<code>index.html</code>页面了.</p>
+<h2 id="API走马观花"><a href="#API走马观花" class="headerlink" title="API走马观花"></a>API走马观花</h2><p>经过了刚才的例子, 对api的调用场景有了概念, 来看一看常用的api能干些啥.</p>
+<h3 id="app与BrowserWindow"><a href="#app与BrowserWindow" class="headerlink" title="app与BrowserWindow"></a><code>app</code>与<code>BrowserWindow</code></h3><p><code>app</code>是用来控制整个应用的事件, 分为event和methods.</p>
+<p>event包含应用的各个事件, 如创建窗口/关闭窗口/打开文件/获得焦点/退出等. </p>
+<p>methods包含应用的退出/激活/显示隐藏/设置图表/获得应用的当前状态.</p>
+<p><code>BrowserWindow</code>的使用方法是<code>new BrowserWindow(options)</code>. 根据不同的参数会得到不同性质的窗口, 窗口实例也有监听event和自己的methods, events都是对窗口的操作(点击/拖动/全屏)和关闭, methods有显示隐藏/关闭等等, 和app相似.</p>
+<p>来说几个创建对象的参数:</p>
+<ul>
+<li><code>parent</code>: 子窗口会随着父窗口一起被拖动. 猜想使用场景是应用的settings.</li>
+<li><code>modal</code>: 顾名思义, 子窗口在父窗口中. 我们在需要modal的时候可以不用html模拟了.</li>
+</ul>
+<h3 id="Menu与MenuItems"><a href="#Menu与MenuItems" class="headerlink" title="Menu与MenuItems"></a><code>Menu</code>与<code>MenuItems</code></h3><p>这对api是用来创建应用菜单的. 菜单产生如下:</p>
+<ul>
+<li><p><code>MenuItem</code>是menu class, new <code>MenuItem</code>或<code>Menu.buildFromTemplate()</code>使用是产生menu对象的方法.</p>
+</li>
+<li><p><code>MenuItem</code>是一个数组, <code>label</code>是菜单名, <code>click</code>方法是点击以后执行的方法. 还有一些别的选项, 另外<code>submenu</code>是递归子菜单的选项, 不同的是可以不接受manu对象, 可以直接传option, electron会自动parse成menu对象.</p>
+</li>
+<li><p><code>MenuItem</code>还提供了个快捷选项<code>role</code>, electron有一些内置的菜单, 比如只要<code>role: &quot;copy&quot;</code> electron就会产生一个复制菜单, 并有我们期待中的一切效果.</p>
+</li>
+<li><p>把产生的Menu使用<code>Menu.setApplicationMenu</code>设成菜单就可以, 官方文档的写法(用了<code>Menu.buildFromTemplate</code>来产生menu):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menu = Menu.buildFromTemplate(template)</span><br><span class="line">Menu.setApplicationMenu(menu)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>最后, 要注意的是, 如果系统是mac, 那么要unshift一个menu, 因为mac的第一个菜单是应用标题.</p>
+<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a><code>shell</code></h3><p>这是一个公用api, 作用是系统(桌面)集成. (有一个段子是总把shell翻译成”壳”, 那么这里的shell可能真的是”壳”的意思了)</p>
+<p>方法介绍:</p>
+<ul>
+<li><code>shell.showItemInFolder(fullPath)</code> 在文件夹中显示</li>
+<li><code>shell.openItem(fullPath)</code> 用系统默认打开文件</li>
+<li><code>shell.openExternal(url[, options, callback])</code> 打开网页</li>
+<li><code>shell.moveItemToTrash(fullPath)</code> 扔进回收站</li>
+<li><code>shell.beep()</code> 让系统叫一下</li>
+<li>(windows) <code>shell.writeShortcutLink(shortcutPath[, operation], options)</code> 创建快捷方式</li>
+<li>(windows)<code>shell.readShortcutLink(shortcutPath)</code> 读取快捷方式</li>
+</ul>
+<h3 id="dialog"><a href="#dialog" class="headerlink" title="dialog"></a>dialog</h3><p>操作文件与各种其他弹窗, 是主程序api, 如果需要在渲染进程中调用, 可以:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;dialog&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote</span><br><span class="line"><span class="built_in">console</span>.log(dialog)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>dialog.showOpenDialog([browserWindow, ]options[, callback])</code> 选择文件. 选项可以调整目标文件的范围, 在callback中获得选择的文件, 如果不指定callback, 选择的文件将作为函数的返回值.</p>
+</li>
+<li><p><code>dialog.showSaveDialog([browserWindow, ]options[, callback])</code> 同上, 只是按钮变成保存. 实际操作都得自己做.</p>
+</li>
+<li><p><code>dialog.showMessageBox([browserWindow, ]options[, callback])</code> 弹出框, 选项中只有<code>message</code>是required的. </p>
+<p>callback的内容有两个字段, <code>response</code> 如果设置了多个按钮, 被点击的按钮的索引, <code>checkboxChecked</code> 如果设置了<code>checkboxLabel</code> 这里是checkbox的值, 默认是false. (经尝试<code>checkboxLabel</code>在mac上没有显示出来). 如果没有设置callback, 那么<code>response</code>将会作为函数的返回值.</p>
+</li>
+<li><p><code>dialog.showErrorBox(title, content)</code> 这是错误提示, 只有两个简单的参数.</p>
+</li>
+</ul>
+<h3 id="ipcMain与ipcRenderer"><a href="#ipcMain与ipcRenderer" class="headerlink" title="ipcMain与ipcRenderer"></a><code>ipcMain</code>与<code>ipcRenderer</code></h3><p>这两个是主进程与渲染进程通信的方式. </p>
+<ul>
+<li>发送事件没有callback, <code>sendSync()</code>方法可以获取监听端的<code>event.returnValue</code>值.</li>
+<li>监听端可以使用<code>evnet.sender.send()</code>或另外一个api<code>webContents.send</code>来向渲染进程发, 但没有<code>sendSync()</code>方法. <code>webContents.send</code>在下回分解.</li>
+</ul>
+<h2 id="告一段落"><a href="#告一段落" class="headerlink" title="告一段落"></a>告一段落</h2><p>如此构造文件结构, 调用api, 已经可以把自己的web应用增加系统集成并发布到mac, windows, linux平台了, 剩下的标准流程的配置, 测试就和web开发一样了.</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2017/06/13/build-an-application-with-electron-and-vue-electron-api/" data-id="ckossezep000w2xqmtx3ejzby" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/入门/">入门</a><a href="/tags/vue/">vue</a><a href="/tags/webpack/">webpack</a><a href="/tags/electron/">electron</a></div><div class="post-nav"><a href="/2017/06/19/color-wheel-introduction/" class="pre">使用色轮设计系统主题色</a><a href="/2017/06/13/build-an-application-with-electron-and-vue-app-structrue/" class="next">用electron与vue构建应用--应用结构</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

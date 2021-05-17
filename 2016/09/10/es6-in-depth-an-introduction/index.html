@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>es6 in depth 介绍 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a href="/." class="current"> 主页</a><a href="/archives/"> 归档</a><a href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img src="/./img/avatar.png" class="avatar"><br><h1 class="hidden">es6 in depth 介绍</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div id="layout" class="pure-g"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/深入es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/年终总结/" style="font-size: 15px;">年终总结</a> <a href="/tags/代码组织/" style="font-size: 15px;">代码组织</a> <a href="/tags/入门/" style="font-size: 15px;">入门</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/心理学/" style="font-size: 15px;">心理学</a> <a href="/tags/人格心理学/" style="font-size: 15px;">人格心理学</a> <a href="/tags/博客装饰/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue源码/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/颜色/" style="font-size: 15px;">颜色</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/分析/" style="font-size: 15px;">分析</a> <a href="/tags/资本论/" style="font-size: 15px;">资本论</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/抓包/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/道德情操论/" style="font-size: 15px;">道德情操论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/vite/" style="font-size: 15px;">vite</a> <a href="/tags/相对论/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/阿德勒/" style="font-size: 15px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div id="cyReping" role="cylabs" data-use="reping" class="epcRecentComments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">es6 in depth 介绍</h1><div class="post-meta">Sep 10, 2016<span> | </span><span class="category"><a href="/categories/工作笔记/">工作笔记</a></span></div><div class="post-content"><p>欢迎来到es6 in depth系列！ 这个系列我们将探索es6-将要到来的js新版本. es6包含了许多让js更强力更有表达性的新特性, 我们讲在系列中一一深入. 但在我们开始前, 也许可以花一些时间来说说es6是什么和你可以期待es6能干什么.</p>
+<h2 id="ESMAScript的研究带来了什么？"><a href="#ESMAScript的研究带来了什么？" class="headerlink" title="ESMAScript的研究带来了什么？"></a>ESMAScript的研究带来了什么？</h2><p>javascript编程语言是基于ECMA标准的（就像html是基于W3C）, 叫做EMACScript. ECMAScript在这里定义了: </p>
+<ul>
+<li>语法 - parse规则, 关键字, 语句, 声明, 操作等.</li>
+<li>类型 - 布尔, 数字, 字符串, 对象等.</li>
+<li>prototype和继承</li>
+<li>内置对象和函数的标准api - <code>JSON</code>,<code>Math</code>,<code>Array</code>方法, 对象内置方法等</li>
+</ul>
+<p>而没有定义任何<code>HTML</code>,<code>CSS</code>或者<code>Web API</code>, 比如<code>DOM</code>. 他们被分开维护. ECMAScript 覆盖的标准是:  不仅存在于浏览器切能用于非浏览器环境的js比如<code>node.js</code> 这种方面的js.</p>
+<h2 id="新标准"><a href="#新标准" class="headerlink" title="新标准"></a>新标准</h2><p>上周, ECMAScript版本6的最终草案被提交到了<code>Ecma General Assembly</code>来review了. 这意味着什么？</p>
+<p>这意味着这个夏天, <em>我们会有一个新的Javascript的语言标准了.</em></p>
+<p>这是一个大新闻. 不是每天都会发布一个新的js版本的. 上一个版本, es5, 是在2009年发布的. 之后es标准委员会就一直在进行es6的工作了.</p>
+<p>es6的主要更新在语法上. 同时你之前的js代码也能运行. es6的设计最大程度得与现有代码契合. 其实已经有很多浏览器支持各种各样的es特性, 并且在继续实现更多特性. 这代表你的js代码已经可以在有用es6特性的浏览器上运行啦！ 如果你至今没有遇到es6和之前版本的兼容问题, 那可能以后也不会有哦.</p>
+<h2 id="数到6"><a href="#数到6" class="headerlink" title="数到6"></a>数到6</h2><p>之前的的ECMAScript标准版本号是 1 2 3 5.</p>
+<p>版本4怎么了呢？ 版本4曾经被规划过 – 而且已经完成了很多版本4的工作 – 然后最终因为改动太大被废弃了. （比如他曾经设计了复杂的接口类型的内置静态类型属性）</p>
+<p>es4是有争议的. 当标准委员会最终停止es4的工作, 委员会成员赞成发布一个相对稳健的es5版本并开发稳定的新特性. 这个明确的, 商讨过的协议被称为 “harmony”. 这也是为什么es5的说明会有这样的话: </p>
+<blockquote>
+<p> ECMAScript 是一个充满活力的语言, 并且语言的进化还未完成.今后的版本会有显著的技术提升.</p>
+</blockquote>
+<p>这句话可以被看成一种保证.</p>
+<h2 id="承诺实现"><a href="#承诺实现" class="headerlink" title="承诺实现"></a>承诺实现</h2><p>2009年更新的es5语言有了<code>Object.create()</code>,<code>Object.defineProperty()</code>,<code>getters</code>和<code>setter</code>,<code>strict mode</code>, 和<code>JSON</code>对象. 我们已经使用了所有这些特性, 我很喜欢es5对语言做的事. 但还很难说这让我写js代码的方式有很大的变化. 对我来说最大的发明是新的数组方法: <code>.map()</code>, <code>.filter()</code>等.</p>
+<p>然后呢, es6很不同. 他是多年“harmony”工作的结果. 他是一个新语法特性的宝藏, 是js有史以来最大的更新. 新特性包含了受欢迎的方便性, 比如箭头函数和简单的字符串插值, 和烧脑的新概念, 比如代理和生成器. </p>
+<p>es6会改变你编写js的方式.</p>
+<p>这个系列会通过深入es6提供给程序员的新特性来给你看es6的面貌.</p>
+<p>我们会从经典的‘缺失的特性’（我们早就希望在js特性里出现的特性）来开始说. 所以下周的主题是es6的<code>iterator</code>和新的<code>for-of</code>循环. </p>
+<hr>
+<p>es in depth 系列 <a href="/2016/09/10/es6-in-depth-content/">目录</a> <a href="https://hacks.mozilla.org/category/es6-in-depth/" target="_blank" rel="noopener">原文地址</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yo-cwj.com/2016/09/10/es6-in-depth-an-introduction/" data-id="ckossezfm00272xqm4bpx8bm7" class="article-share-link">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><p> 博客于2020/11/19重新使用畅言, 欢迎留言评论</p><div class="post-footer"></div><div class="tags"><a href="/tags/翻译/">翻译</a><a href="/tags/入门/">入门</a><a href="/tags/javascript/">javascript</a><a href="/tags/深入es6/">深入es6</a></div><div class="post-nav"><a href="/2016/09/10/es6-in-depth-iterators-and-the-for-of-loop/" class="pre">es6 in depth 遍历器 和 for-of 循环</a><a href="/2016/09/04/web-ppt-js-lib-impress-js/" class="next">强力3D的PPT 介绍</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"></p></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>
