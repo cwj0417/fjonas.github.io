@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  build:
+  steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: "6.x"
+      - name: install
+        - run:  git config --global user.email "731028571@qq.com"
+        - run:  git config --global user.name "cwj0417"
+        - run:  sed -i'' "s~git@github.com:cwj0417/fjonas.github.io.git~https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/cwj0417/fjonas.github.io.git~" _config.yml
+        - run:  cnpm i
+      - name: build
+        run: hexo d -g
