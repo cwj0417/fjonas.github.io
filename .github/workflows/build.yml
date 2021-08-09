@@ -15,5 +15,5 @@ jobs:
       - run: git config --global user.email "731028571@qq.com"
       - run: git config --global user.name "cwj0417"
       - run: sed -i'' "s~git@github.com:cwj0417/fjonas.github.io.git~https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/cwj0417/fjonas.github.io.git~" _config.yml
-      - run: npm ci
+      - run: npm i
       - run: hexo d -g
