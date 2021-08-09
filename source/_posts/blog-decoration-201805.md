@@ -49,13 +49,13 @@ tags: [博客装饰]
 
 jade的新名字是pug, 是一个node的html模板. 好像是因为jade这个名字早就被注册掉了. 一开始不太习惯, 其实用了还好. 简而言之, **jade用缩进来表现html结构, 去除了尖括号, 并提供了一些遍历和继承的语法. ** 可能ejs更让人舒服, 总的来说他们一类东西, 只是jade上手难一些(其实根本不难, 只是看起来不习惯).
 
-[这里](https://github.com/cwj0417/fjonas.github.io/blob/source/themes/wwj/layout/base.jade)是代码链接, 下面说一下jade相关的功能实现.
+[这里](https://github.com/cwj0417/fjonas.github.io/blob/source/themes/wwj/layout/base.pug)是代码链接, 下面说一下jade相关的功能实现.
 
 ### 应用结构
 
-在主题的layout目录下都是模板文件. 首页对应的就是`index.jade`. 下面一边流水一边介绍几个关键词.
+在主题的layout目录下都是模板文件. 首页对应的就是`index.pug`. 下面一边流水一边介绍几个关键词.
 
-`index.jade`开头就**`extend`**了`base.jade`. 到`base.jade`里看, 内容是最基础的html结构, doctype, html, body, script等这些. 另外一个关键词**`block`**. `base.jade`中的block部分由`index.jade`中的block部分替换.
+`index.pug`开头就**`extend`**了`base.pug`. 到`base.pug`里看, 内容是最基础的html结构, doctype, html, body, script等这些. 另外一个关键词**`block`**. `base.pug`中的block部分由`index.pug`中的block部分替换.
 
 另外一个语法**`include`**, 引入一些widget和partial, 效果就是引入的文件替代当前的include语句.
 

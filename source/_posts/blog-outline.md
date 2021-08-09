@@ -10,7 +10,7 @@ tags: 博客装饰
 
 ## 放置
 
-由于每个文章目录不同, 第一想法是必须有js来生成, 所以没有放在widget中, 暂时选择放在`post.jade`中引入的`post.js`中来用jquery强行append一个目录.
+由于每个文章目录不同, 第一想法是必须有js来生成, 所以没有放在widget中, 暂时选择放在`post.pug`中引入的`post.js`中来用jquery强行append一个目录.
 
 ## 检索标题
 

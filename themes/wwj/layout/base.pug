@@ -65,15 +65,15 @@ html(lang='#{config.language}')
       if theme.widgets_on_small_screens
         .pure-u-1.pure-u-md-1-4: #sidebar
           each item in theme.widgets
-            != partial('_widget/' + item + '.jade')
+            != partial('_widget/' + item + '.pug')
       else
         .pure-u-1-4.hidden_mid_and_down: #sidebar
           each item in theme.widgets
-            != partial('_widget/' + item + '.jade')
+            != partial('_widget/' + item + '.pug')
       .pure-u-1.pure-u-md-3-4: .content_container
         block content
       .pure-u-1.pure-u-md-4-4
-        != partial('_partial/footer.jade')
+        != partial('_partial/footer.pug')
 
     include _partial/totop
     include _partial/after_footer
