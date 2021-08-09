@@ -4,7 +4,7 @@ if theme.fancybox == true
   link(rel='stylesheet', type='text/css', href=url_for(theme.css) + '/jquery.fancybox.css' + '?v=' + theme.version)
 
 if theme.cyid
-  script(type='text/javascript', src='https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=#{theme.cyid}', async)
+  script(type='text/javascript', src='https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=' + theme.cyid, async)
   script.
       (function () {
           var appid = '#{theme.cyid}';
