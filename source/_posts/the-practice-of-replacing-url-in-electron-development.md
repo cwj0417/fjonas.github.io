@@ -2,7 +2,7 @@
 title: electron开发模式中替换url实践
 date: 2021-05-12 01:00:04
 categories: 工作笔记
-tags: [electron,esbuild,vite]
+tags: [electron,esbuild]
 ---
 在开发流程中, 会遇到根据环境判断url的问题, 像这样的代码(真实代码):
 
