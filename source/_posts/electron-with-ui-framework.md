@@ -87,7 +87,7 @@ preload可以理解为node端供前端调用的api, 方式是通过`electron.con
 
 ### 打包时
 
-参考代码[在这里](https://github.com/cwj0417/schedule-pro/blob/main/scripts/run-build.js).
+参考代码[在这里](https://github.com/cwj0417/schedule-pro/blob/main/scripts/run-build.js). esbuild的插件细节在上篇文章中.
 
 1. 打包渲染进程的页面.
 2. 打包主进程脚本.
