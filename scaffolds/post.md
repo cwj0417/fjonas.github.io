@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-categories:
+categories: 工作笔记 读后感
 tags:
 ---
 <!--more-->
