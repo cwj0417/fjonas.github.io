@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="#{config.language}"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>写一个简单的前端脚手架 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><br><h1 class="hidden">写一个简单的前端脚手架</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 15px;">年终总结</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15px;">代码组织</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 15px;">应用</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15px;">心理学</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 15px;">入门</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 15px;">颜色</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 15px;">翻译</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 15px;">分析</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15px;">资本论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/github-action/" style="font-size: 15px;">github action</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 15px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 15px;">阿德勒</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 15px;">道德情操论</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">邓雪(全栈开发专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">写一个简单的前端脚手架</h1><div class="post-meta">Nov 26, 2021<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span></div><div class="post-content"><p>之前写了一些写electron, 浏览器插件, vscode插件这样的项目. 这些项目其实是有一些固定模板的, 但又没有主流脚手架, 于是观察了一些其他脚手架, 写个<a target="_blank" rel="noopener" href="https://github.com/cwj0417/haha">自己的脚手架</a>来快速启动项目.</p>
+<span id="more"></span>
+
+<h2 id="脚手架的来历和构成"><a href="#脚手架的来历和构成" class="headerlink" title="脚手架的来历和构成"></a>脚手架的来历和构成</h2><p>脚手架是前端工程化的一个部分.</p>
+<p>前端工程化的起点是nodejs.</p>
+<p>脚手架就是用nodejs写一些脚本, 来提高日常开发的效率.</p>
+<p>提高效率的方式是: 把日常要”复制-粘贴-修改”的动作做成”命令+配置”的形式.</p>
+<p>接下来看看脚手架的具体工作.</p>
+<h2 id="脚手架的进化"><a href="#脚手架的进化" class="headerlink" title="脚手架的进化"></a>脚手架的进化</h2><p>与任何软件一样, <strong>一个复杂的东西都是由一个简单的核心功能开始的.</strong></p>
+<h3 id="封装一下cv操作"><a href="#封装一下cv操作" class="headerlink" title="封装一下cv操作"></a>封装一下cv操作</h3><p>如果每次新项目都要找老项目复制, 那么我们就写一个固定的初始模板, 然后封装一个node命令来一键复制指定模板粘贴到新项目里.</p>
+<p>我认为<strong>复制/粘贴的脚本是脚手架最核心的功能</strong>, 之后花来呼哨的进化都是为了<strong>功能更多, 更灵活</strong>.</p>
+<h3 id="模板的灵活性"><a href="#模板的灵活性" class="headerlink" title="模板的灵活性"></a>模板的灵活性</h3><p>比如vue的项目是否用vuex, 是否用router, 是否用ts等, 一个固定的模板就不行了. 除了设置多个模板外, 有(可能是)yoeman发明的generator写模板的方法, 也可以是js模板字符串, ejs, 或是任何js来灵活生成模板的方法.</p>
+<h3 id="模板来源的灵活性"><a href="#模板来源的灵活性" class="headerlink" title="模板来源的灵活性"></a>模板来源的灵活性</h3><p>模板接受更多的来源, 就可以有更大的社区拓展性, 除了在npm包内部写好模板, 还可以从git, http, 文件, 其他npm包等方式读取. 只要遵守一些规定, 很多地方的模板都可以被加载.</p>
+<h3 id="scripts与template分离与配置读取"><a href="#scripts与template分离与配置读取" class="headerlink" title="scripts与template分离与配置读取"></a>scripts与template分离与配置读取</h3><p>模板除了一些html文件, 还会有dev, build, test等scripts.</p>
+<p>这些scripts需要和很多配置文件(比如webpack配置/babel配置等)配合使用. 而这些配置文件在一些脚手架会被封装起来.</p>
+<p>封装起来以后, 用户看不到, 也不能操作配置文件. 那有一些简单的自定义配置就需要封装后的scripts去读取用户目录下的配置文件. cra还提供了eject方法不可逆的把配置吐出来.</p>
+<blockquote>
+<p>​    不知道scripts与template的分离的主要作用是不是看起来更高端, 配置文件露在外面真的有多少影响用户使用吗?</p>
+</blockquote>
+<h3 id="更多的业务集成-插件系统"><a href="#更多的业务集成-插件系统" class="headerlink" title="更多的业务集成, 插件系统"></a>更多的业务集成, 插件系统</h3><p>而脚手架有更高阶的形式(指umi). 把更多业务场景集成落地, 除了配置还能灵活使用插件来使更多的项目都可以使用他.</p>
+<p>与<code>复杂的东西都是由简单的核心功能开始</code>一样, 前端组件系统, 也会从组件, 到高级组件, 到模板市场.</p>
+<h2 id="写一个普通脚手架的步骤"><a href="#写一个普通脚手架的步骤" class="headerlink" title="写一个普通脚手架的步骤"></a>写一个普通脚手架的步骤</h2><p>看了一些别人脚手架, 其实核心部分不多, 很多是读取参数, 判断参数等提升用户体验的代码.</p>
+<p>所以完成一个可用脚手架poc还是很简单的. </p>
+<p>下面说说<a target="_blank" rel="noopener" href="https://github.com/cwj0417/haha">我这个简单的脚手架</a>的完全开发流程. 效果是执行<code>npx create-haha-app &lt;项目名称&gt;</code>就可以产生一个可以dev, build的electron应用了.</p>
+<p>我主要参考的是cra来写了这个脚手架. 主要流程是:</p>
+<ol>
+<li>在create-app包中: 读取参数, 确定template和script. template和script都是npm包. (template也可以是别的)</li>
+<li>在create-app包中: 使用npm安装template和script. 并调用script中的init方法.</li>
+<li>在script包中: init方法复制template(此时已经被安装)到项目文件夹中.</li>
+<li>在script包中: 移除template.</li>
+</ol>
+<p>然后具体实施的流程如下:</p>
+<ol>
+<li>创建monorepo. create-app包和script包, template包是不用的npm包, 并且script和template还是可以多份的. <code>lerna init</code>来创建, <code>lerna create &lt;package&gt;</code>来新增一个包.</li>
+<li>create-app包以<code>create-</code>开头, 除了npx可以执行, 便于<code>npm init</code> 和<code>yarn create</code>执行. 并在指定bin文件第一行声明执行语言.</li>
+<li>在create-app包的入口里: 读取参数, 安装script和template. 安装后使用script的init方法初始化项目文件.</li>
+</ol>
+<p>(完)</p>
+<p>是的, 一个create-app的脚手架就完成, 算上换行和日志不到100行. 之后要编写更多别的模板, 在monorepo里新增包就可以了!</p>
+<p>而template和script的具体内容, 其实就属于工程化的另一个范畴了. (通常是dev, build和test)</p>
+<h2 id="调试模板时的思考"><a href="#调试模板时的思考" class="headerlink" title="调试模板时的思考"></a>调试模板时的思考</h2><p>因为我的目的是做electron, chrome插件这样的脚手架, 意识到市面上的很多脚手架还是相当行业定制化的.</p>
+<p><strong>template与script应当是1对1关系.</strong> electron的脚本一定运行不了chrome, 反之亦然.</p>
+<p>而cra是同一个script可以运行2个template: 普通的和使用ts的. script也就是判断了是否是ts然后加一些配置. 在我看来这个灵活性还是有问题的. 看了一下别的cra-based脚手架, 也<strong>都没有明确指出template和script对应关系</strong>.</p>
+<p>另外, 在调试模板时, 我选择了用monorepo特性在template文件夹里直接调试, 也不知道cra和其他脚手架是如何调试的.</p>
+<p>最后, 看了下cra的测试用例, 非常明显是不能保证自己功能的, 只是写了几个js方法的测试. 看来脚手架的测试和模板的调试目前也算是个没明确解决方案的问题.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>脚手架是一段nodejs的脚本, 封装日常开发的重复事项, 发布到npm来方便使用.</li>
+<li>脚手架的开发模式其实并没有固定的, 根据作用粒度和针对的业务来创造代码结构.</li>
+<li>脚手架本身的开发流程和测试用例还处于继续探索阶段.</li>
+</ol>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="#{page.permalink}" data-id="#{page._id}">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"></div><div class="post-nav"><a class="next" href="/2021/08/23/how-to-get-your-four-pillars/">如何排出自己的八字</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"/></p></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>
