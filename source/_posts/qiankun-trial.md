@@ -85,6 +85,22 @@ start();
 
 方法: 判断作为乾坤子应用时使用history路由, 并且设置好base.
 
+### 关闭hmr
+
+原因: hmr会建立websocket链接, 可能webpack还没给二开配置所以会404导致报错.
+
+caveat: 如果加载了社区版的fast-refresh插件, 关闭了hmr是会报错的. 并且要同时关闭react-refresh/babel插件, 他们都是强依赖, 少了互相就会白屏. 这就想到了umi设计的精妙之处.
+
+如果通过webpack-chain关闭还需要注意首字母小写. 这个还是通过log了config对象看到的.
+
+并且webpack-chain的api移除babel插件好像不好操作, umi里没使用webpack-chain来操作, 因为公司脚手架没那么厉害, 所以只能硬干了一串长代码, 还是解决了问题. 
+
+```js
+config.module.rules.store.get('js').uses.store.get('babel').store.get('options').plugins = config.module.rules.store.get('js').uses.store.get('babel').store.get('options').plugins.filter(item => !item[0] || item[0] !== 'react-refresh/babel');
+```
+
+当然也可以通过新写一个plugin来给react-refresh/bable调用的函数写一个空函数. (react-refresh相关知识后续补充)
+
 ## 我们why乾坤
 
 我们公司之前一直使用js-entry的方式从菜单加载应用. 很显然把所有资源只加载到一个js和css中会产生问题.
