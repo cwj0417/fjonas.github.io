@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="#{config.language}"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>react-refresh介绍 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 5.4.1"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><br><h1 class="hidden">react-refresh介绍</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 15px;">年终总结</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15px;">代码组织</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 15px;">应用</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15px;">心理学</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 15px;">博客装饰</a> <a href="/tags/immer/" style="font-size: 15px;">immer</a> <a href="/tags/vscode/" style="font-size: 15px;">vscode</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 15px;">vue源码</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 15px;">入门</a> <a href="/tags/chrome-extension/" style="font-size: 15px;">chrome extension</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 15px;">颜色</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 15px;">翻译</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 15px;">分析</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15px;">资本论</a> <a href="/tags/ci/" style="font-size: 15px;">ci</a> <a href="/tags/github-action/" style="font-size: 15px;">github action</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 15px;">深入es6</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 15px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 15px;">抓包</a> <a href="/tags/hook/" style="font-size: 15px;">hook</a> <a href="/tags/typescript/" style="font-size: 15px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 15px;">monorepo</a> <a href="/tags/haha/" style="font-size: 15px;">haha</a> <a href="/tags/jenkins/" style="font-size: 15px;">jenkins</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 15px;">正则</a> <a href="/tags/esbuild/" style="font-size: 15px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 15px;">相对论</a> <a href="/tags/cordova/" style="font-size: 15px;">cordova</a> <a href="/tags/weex/" style="font-size: 15px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 15px;">阿德勒</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 15px;">道德情操论</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">邓雪(全栈开发专家)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="#{theme.links[i].url}" title="#{theme.links[i].title}" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">react-refresh介绍</h1><div class="post-meta">Jan 29, 2022<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span></div><div class="post-content"><p>公司一个业务框架在修改代码后竟然没有自动更新页面. 于是想尝试解决这个问题, 还是失败了.</p>
+<p>出现问题的框架使用的是react-refresh来进行hmr, 虽然失败但记录下过程.</p>
+<span id="more"></span>
+
+<h2 id="react-refresh现状"><a href="#react-refresh现状" class="headerlink" title="react-refresh现状"></a>react-refresh现状</h2><p>hmr是hundler提供的一种功能, 是需要配合具体业务来实现的.</p>
+<p>比如css通过css-loader, vue通过vue-loader. 而react没有官方支持, 社区有个react-hot-loader.</p>
+<p>2年前react提供了官方hmr支持. 但是提供给rn的. 虽然react-refresh代码在react仓库里, 但react文档是搜不到ract-refresh的, rn文档里可以搜到.</p>
+<p>react-refresh的react集成又是社区做的, 叫react-refresh-webpack-plugin.</p>
+<p>umi的fast-refresh是用这个插件做的, vite的实现方法是基于那个<code>react-hot-loader退役issue</code>做的.</p>
+<h2 id="react-refresh组成部分"><a href="#react-refresh组成部分" class="headerlink" title="react-refresh组成部分"></a>react-refresh组成部分</h2><h3 id="react-refresh-runtime"><a href="#react-refresh-runtime" class="headerlink" title="react-refresh/runtime"></a>react-refresh/runtime</h3><p>这部分代码在react包里, 所以react-refresh的最低react版本要求是要有这个文件.</p>
+<p>除了runtime, react-dom里也新增了代码来配合runtime更新fiber. 这react内部的支持能比之前的react-hot-loader包一层组件更好地支持hmr.</p>
+<h3 id="hmr机制"><a href="#hmr机制" class="headerlink" title="hmr机制"></a>hmr机制</h3><p>runtime提供了更新fiber的方法, 也必须触发点去调用他, 这就需要hmr机制了.</p>
+<p>hmr机制流程是: watch文件改动 =&gt; 重新运行这个文件包含的module =&gt; 运行module中的更新逻辑.(runtime的代码应该在此执行).</p>
+<p> (这是最小实现流程, 全部机制还包含各种向下退级操作, 拒绝后寻找父模块更新逻辑)</p>
+<h3 id="react-refresh-babel"><a href="#react-refresh-babel" class="headerlink" title="react-refresh/babel"></a>react-refresh/babel</h3><p>下一个问题, runtime更新fiber, 需要知道哪个fiber改动过需要更新. 而代码是顺序执行的, runtime没法知道当前module执行的是哪个fiber.</p>
+<p>解决思路: hmr时会重新执行module, 初始化会执行所有module. 那么最后特点是: 需要更新的module执行了2次, 其他的module执行一次.</p>
+<p>所以需要在每个react组件声明完增加一个注册动作. 如果发现了重复注册, 就说明这个module是被hmr机制重新运行的, 就需要更新了, 于是把他推到<code>待更新节点</code>的队列里.</p>
+<p>这需要把所有的react组件都增加注册的动作, 所以这个功能用babel插件来完成. (因为jsx也是依赖babel的, 所以用babel不会引入额外流程)</p>
+<h3 id="串起全流程的实现逻辑"><a href="#串起全流程的实现逻辑" class="headerlink" title="串起全流程的实现逻辑"></a>串起全流程的实现逻辑</h3><p>以上说的内容, 都需要在编译时在代码里修改, 那么如果用webpack, 就是<code>react-refresh-webpack-plugin</code>这个插件做的, vite里是vite写的. </p>
+<p>这个实现逻辑是和hmr系统强相关的, 基本流程说明在<code>react-hot-loader退役issue</code>里写了.</p>
+<p>当然我们只要直接用webpack或者vite的插件就行了.</p>
+<h2 id="与真实业务的关系"><a href="#与真实业务的关系" class="headerlink" title="与真实业务的关系"></a>与真实业务的关系</h2><p>其实说完组成部分, react-refresh的流程也说完了. 下面总结一下, 再结合实际问题聊聊.</p>
+<h3 id="一般开启react-refresh方法"><a href="#一般开启react-refresh方法" class="headerlink" title="一般开启react-refresh方法"></a>一般开启react-refresh方法</h3><ul>
+<li>遵循<code>react-refresh-webpack-plugin</code>文档, 三步走: 开启webpack hmr =&gt; babel配置新增react-refresh/babel =&gt; webpack-plugin新增react-refresh-webpack-plugin.</li>
+<li>umi: 配置fast-refresh插件. (内置插件配置即可)</li>
+<li>vite: 使用react插件, 天然开启.</li>
+</ul>
+<h3 id="react-refresh执行角度全流程"><a href="#react-refresh执行角度全流程" class="headerlink" title="react-refresh执行角度全流程"></a>react-refresh执行角度全流程</h3><ol>
+<li>代码dev阶段经过编译, 所有react组件被增加了一系列hmr的逻辑.</li>
+<li>初次运行, 所有的react组件都被注册到了一张大表中.</li>
+<li>修改文件, 被监测到, hmr机制重新运行被改动的module.</li>
+<li>在重新运行时, 注册方法又被调用了一次, 于是更新过的组件, 被推到了<code>待更新队列</code>.</li>
+<li>module最后被添加的代码会执行performRefresh尝试hmr.</li>
+<li><code>待更新队列</code>的组件会被分析, 需要热更新还是直接替换, 分别调用scheduleRefresh或者scheduleRoot方法.</li>
+<li>调用成功, 更新完成.</li>
+<li>失败流程还没看.</li>
+</ol>
+<h3 id="最初发生问题的场景-为什么修改配置没有hmr"><a href="#最初发生问题的场景-为什么修改配置没有hmr" class="headerlink" title="最初发生问题的场景: 为什么修改配置没有hmr"></a>最初发生问题的场景: 为什么修改配置没有hmr</h3><p>因为react-refresh是基于<code>组件文件</code>的hmr系统. 如果大组件内部是基于props在render时运行产生组件的话, hmr触发时会invalid并向上级组件抛出, 最后重新整个渲染大组件.</p>
+<p>(在我遇到的业务场景中, 业务组件比较复杂, 出于性能考虑组织了props更改重新渲染)</p>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>react源码相比vue遇到一个困难: 函数定义时很多是空, 不知道何时给函数赋值, 这个问题可以用浏览器下断点来解决.</p>
+<p>可以看到类组件, 函数组件和hmr都是通过调用<code>scheduleUpdateOnFiber()</code>来进行更新视图的, 这个函数涉及到调用的fiber和一些全局变量, 打算之后再分析</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="#{page.permalink}" data-id="#{page._id}">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/webpack/">webpack</a><a href="/tags/react/">react</a></div><div class="post-nav"><a class="next" href="/2022/01/23/qiankun-trial/">乾坤初尝试</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"/></p></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div><script type="text/javascript"> var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></html>

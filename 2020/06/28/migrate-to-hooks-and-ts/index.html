@@ -48,7 +48,7 @@
 <li><p>定义类型.</p>
 <p>基本类型只有那几个, 那如果有一些项目特有的实体, 接口等. 就会自己定义一些, 使用<code>type</code>或者<code>interface</code>关键字.</p>
 <p>如: </p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> phoneSeries &#123;</span><br><span class="line">	<span class="attr">series</span>: <span class="built_in">string</span></span><br><span class="line">	<span class="attr">version</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> iphoneX: phoneSeries = &#123; <span class="attr">serires</span>: <span class="string">&#x27;iphone&#x27;</span>, <span class="attr">version</span>: <span class="number">10</span> &#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> phoneSeries &#123;</span><br><span class="line">	<span class="attr">series</span>: <span class="built_in">string</span></span><br><span class="line">	<span class="attr">version</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">iphoneX</span>: phoneSeries = &#123; <span class="attr">serires</span>: <span class="string">&#x27;iphone&#x27;</span>, <span class="attr">version</span>: <span class="number">10</span> &#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>所以ts比js就多了这2部分内容. 其他需要学习的就只是一些类型之间互相关系的概念.</p>
 <p>接下来说我在用ts过程中思考过的2个问题.</p>
@@ -56,7 +56,7 @@
 <p>使用泛型是一些预定义的泛型接口或者泛型类, 在学习概念的时候没理解这点, 以为所有尖括号都是定义泛型, 于是没理解.</p>
 <h4 id="type和interface的区别"><a href="#type和interface的区别" class="headerlink" title="type和interface的区别"></a>type和interface的区别</h4><ol>
 <li><p>定义直接的变量, 只能用type. 例如:</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> age = <span class="built_in">number</span></span><br><span class="line"><span class="keyword">type</span> add = (base: <span class="built_in">number</span>, <span class="attr">increasement</span>: <span class="built_in">number</span>): <span class="built_in">number</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> age = <span class="built_in">number</span></span><br><span class="line"><span class="keyword">type</span> add = (<span class="attr">base</span>: <span class="built_in">number</span>, <span class="attr">increasement</span>: <span class="built_in">number</span>): <span class="built_in">number</span></span><br></pre></td></tr></table></figure></li>
 <li><p>联合类型只能type.</p>
 </li>
 <li><p>implements 只能interface.</p>
