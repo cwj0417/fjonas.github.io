@@ -73,7 +73,7 @@ vue的自动更新是以effect为节点的, 而vue选择的effect粒度是: comp
 
 ### 编译优化
 
-vue的编译优化其实是对标react的fiber的. vue在编译时加了静态标记, 和渲染器配合减少patch的复杂度.
+vue的编译优化其实是对标react的fiber的. vue在编译时加了静态标记, 和渲染器配合减少patch的复杂度. 要注意的是, 这个编译优化是在sfc的编译做的, render function有没有要看vue的更新, jsx有没有要看jsx插件的更新. 所以vue的主推开发方式还是sfc, 虽然可以用jsx写.
 
 为什么react不做? 21年react conf里hux说在做编译时给react自动加useMemo, useCallback的工具. 可能和框架设计理念有关.
 
