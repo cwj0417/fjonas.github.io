@@ -39,8 +39,15 @@
 <p>经过调试, vue和react的更新节点都是组件.</p>
 <p>react的setState, useState, hmr都调用了<code>scheduleUpdateOnFiber</code>方法, 在三个情况下, 这个方法的第一个参数<code>fiber</code>都接收到了被改动状态组件所在的fiber.</p>
 <p>vue的自动更新是以effect为节点的, 而vue选择的effect粒度是: component. vue的组件数在运行时其实就是多个watch effect的嵌套, 如何做到子effect的更新不触发父effect, 也是响应式做的处理: activeEffect是个栈.</p>
+<p>vue比react性能好的点是: vue只更新当前组件, 不会深入到子组件, 子组件的更新依靠对props的effect, 所以没有合理写scu的react项目会比vue的更新性能差很多.</p>
 <p>另外, 经简单测试, vue的hmr是会更新整个vdom的, 这个暂不深入探索了, 但这对dx还是有影响的, 可能需要一些配置.</p>
 <h3 id="编译优化"><a href="#编译优化" class="headerlink" title="编译优化"></a>编译优化</h3><p>vue的编译优化其实是对标react的fiber的. vue在编译时加了静态标记, 和渲染器配合减少patch的复杂度. 要注意的是, 这个编译优化是在sfc的编译做的, render function有没有要看vue的更新, jsx有没有要看jsx插件的更新. 所以vue的主推开发方式还是sfc, 虽然可以用jsx写.</p>
+<p>静态标记有3种:</p>
+<ol>
+<li>纯html会被提取(hoist), 永久复用.</li>
+<li>绑定了props的组件会被记录下改动了什么props. (patchFlag) 这里的二进制写法还很优雅, 并且runtime的renderer使用二进制判断很快.</li>
+<li>block tree. 除了v-if和v-for不影响结构的都会被看作一个block, block里的可能的改变会被打平存着. 有v-if或者v-for就产生新的block, 所以vnode最后形成了一颗block tree.</li>
+</ol>
 <p>为什么react不做? 21年react conf里hux说在做编译时给react自动加useMemo, useCallback的工具. 可能和框架设计理念有关.</p>
 <p>vue为什么不写fiber? 我认为最大的原因还是实现时间, 第二才是fiber带来的性能消耗, vue认为只要足够快就不需要fiber.</p>
 </div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="#{page.permalink}" data-id="#{page._id}">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/vue%E6%BA%90%E7%A0%81/">vue源码</a><a href="/tags/vue/">vue</a><a href="/tags/react/">react</a></div><div class="post-nav"><a class="next" href="/2022/02/09/power-of-present/">如何处理负面情绪和拖延习惯</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"/></p></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
