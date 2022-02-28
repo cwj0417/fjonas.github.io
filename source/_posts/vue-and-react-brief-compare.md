@@ -69,11 +69,19 @@ react的setState, useState, hmr都调用了`scheduleUpdateOnFiber`方法, 在三
 
 vue的自动更新是以effect为节点的, 而vue选择的effect粒度是: component. vue的组件数在运行时其实就是多个watch effect的嵌套, 如何做到子effect的更新不触发父effect, 也是响应式做的处理: activeEffect是个栈.
 
+vue比react性能好的点是: vue只更新当前组件, 不会深入到子组件, 子组件的更新依靠对props的effect, 所以没有合理写scu的react项目会比vue的更新性能差很多.
+
 另外, 经简单测试, vue的hmr是会更新整个vdom的, 这个暂不深入探索了, 但这对dx还是有影响的, 可能需要一些配置.
 
 ### 编译优化
 
 vue的编译优化其实是对标react的fiber的. vue在编译时加了静态标记, 和渲染器配合减少patch的复杂度. 要注意的是, 这个编译优化是在sfc的编译做的, render function有没有要看vue的更新, jsx有没有要看jsx插件的更新. 所以vue的主推开发方式还是sfc, 虽然可以用jsx写.
+
+静态标记有3种:
+
+1. 纯html会被提取(hoist), 永久复用.
+2. 绑定了props的组件会被记录下改动了什么props. (patchFlag) 这里的二进制写法还很优雅, 并且runtime的renderer使用二进制判断很快.
+3. block tree. 除了v-if和v-for不影响结构的都会被看作一个block, block里的可能的改变会被打平存着. 有v-if或者v-for就产生新的block, 所以vnode最后形成了一颗block tree.
 
 为什么react不做? 21年react conf里hux说在做编译时给react自动加useMemo, useCallback的工具. 可能和框架设计理念有关.
 
