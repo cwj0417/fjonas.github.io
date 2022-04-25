@@ -71,7 +71,19 @@ a b [e d c h] f g
 1. 找出可以复用, 并不需要移动的元素, patch他们的attributes.
 2. 移动可以复用但需要移动的元素, patch他们的attributes.
 3. 新增或卸载节点.
+4. 如果需要移动节点, 则移动节点.
 
 具体方法:
-
-
+1. 遍历新数组, 创建一个新数组的key-value的map`keyToNewIndexMap`.
+2. 创建一个数组`newIndexToOldIndexMap`, 长度为新数组的长度, 内容是"新元素在老数组里是第几个", 初始值为0. 代表"新元素在老数组里不存在"
+3. 遍历老数组, 利用第一步创建的`keyToNewIndexMap`寻找每个老元素是否有对应的新数组.
+4. 如果老元素在新数组中存在, patch这个元素的attributes, 并更新第二步创建的`newIndexToOldIndexMap`.
+5. 如果老元素在新数组中不存在, 则卸载当前老元素.
+6. 建立一个变量来计数被patch的数量, 如果新元素已经都被patch, 就卸载当前老元素.(这个算算法优化)
+7. 建立一个变量`moved`, 初始值为false, 如果每次从`keyToNewIndexMap`取出的不是递增, 就将`moved`设为true, 后续根据`moved`来判断是否移动节点.
+8. 至此, 老元素的卸载已完成, 并且我们获得了每个新元素对应了哪个老元素的信息`newIndexToOldIndexMap`.
+9. 从`newIndexToOldIndexMap`里获取一个最长递增子序列. 意义是: 新数组和最长递增子序列重合的部分是不需要移动的. (lss: longest stable subsequence)
+10. 反向遍历新数组. 同时增加一根lss的指针, 一起遍历.
+11. 如果新元素符合lss, 则不动. 并向上移动lss的指针.
+12. 如果新元素在`newIndexToOldIndexMap`里的索引是0, 则新增元素.
+13. 如果都不是, 则将这个新元素移动到当前的指针位置.
