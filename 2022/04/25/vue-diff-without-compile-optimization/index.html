@@ -29,8 +29,24 @@
 <li>找出可以复用, 并不需要移动的元素, patch他们的attributes.</li>
 <li>移动可以复用但需要移动的元素, patch他们的attributes.</li>
 <li>新增或卸载节点.</li>
+<li>如果需要移动节点, 则移动节点.</li>
 </ol>
 <p>具体方法:</p>
+<ol>
+<li>遍历新数组, 创建一个新数组的key-value的map<code>keyToNewIndexMap</code>.</li>
+<li>创建一个数组<code>newIndexToOldIndexMap</code>, 长度为新数组的长度, 内容是”新元素在老数组里是第几个”, 初始值为0. 代表”新元素在老数组里不存在”</li>
+<li>遍历老数组, 利用第一步创建的<code>keyToNewIndexMap</code>寻找每个老元素是否有对应的新数组.</li>
+<li>如果老元素在新数组中存在, patch这个元素的attributes, 并更新第二步创建的<code>newIndexToOldIndexMap</code>.</li>
+<li>如果老元素在新数组中不存在, 则卸载当前老元素.</li>
+<li>建立一个变量来计数被patch的数量, 如果新元素已经都被patch, 就卸载当前老元素.(这个算算法优化)</li>
+<li>建立一个变量<code>moved</code>, 初始值为false, 如果每次从<code>keyToNewIndexMap</code>取出的不是递增, 就将<code>moved</code>设为true, 后续根据<code>moved</code>来判断是否移动节点.</li>
+<li>至此, 老元素的卸载已完成, 并且我们获得了每个新元素对应了哪个老元素的信息<code>newIndexToOldIndexMap</code>.</li>
+<li>从<code>newIndexToOldIndexMap</code>里获取一个最长递增子序列. 意义是: 新数组和最长递增子序列重合的部分是不需要移动的. (lss: longest stable subsequence)</li>
+<li>反向遍历新数组. 同时增加一根lss的指针, 一起遍历.</li>
+<li>如果新元素符合lss, 则不动. 并向上移动lss的指针.</li>
+<li>如果新元素在<code>newIndexToOldIndexMap</code>里的索引是0, 则新增元素.</li>
+<li>如果都不是, 则将这个新元素移动到当前的指针位置.</li>
+</ol>
 </div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="#{page.permalink}" data-id="#{page._id}">分享到</a><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/vue%E6%BA%90%E7%A0%81/">vue源码</a><a href="/tags/vue/">vue</a></div><div class="post-nav"><a class="next" href="/2022/04/10/create-vite-server-in-react-project/">用vite来起公司的react项目</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by cutie</p><p>  <img src="https://s01.flagcounter.com/count/SNs9/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_4/viewers_3/labels_1/pageviews_0/flags_0/percent_0/"/></p></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
     var appid = 'cyt1bgEED';
     var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
