@@ -2,7 +2,7 @@
 title: 编写一个eslint rule
 categories: 工作笔记
 date: 2022-08-29 23:42:27
-tags:
+tags: [eslint]
 ---
 上周参加了职业生涯来第一次code review, 我的老板收集了好几个问题. review结束后我产生个想法, 是不是可以把这些rule写到公司的eslint里. 
 
@@ -113,12 +113,6 @@ module.exports = {
         return {
             BinaryExpression(node) {
                 if (node.operator === '===') {
-                    if (node.left.type === 'MemberExpression' && node.right.type === 'Literal') {
-                        context.report({
-                            node,
-                            message: 'magic string was not desirable',
-                        })
-                    }
                     if (node.left.type === 'Identifier' && node.right.type === 'Literal') {
                         context.report({
                             node,
