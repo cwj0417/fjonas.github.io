@@ -88,6 +88,8 @@ create: function(context) {
 2. 使用`context.report`方法来报错. (如果判断到代码不符合rule的话)
 3. 使用`fix`方法提供的`fixer`对象来进行修复. `fixer`的方法很少, 就简单的新增/替换/移除操作.
 
+ast的查看方式到[这个网站](https://astexplorer.net/), 选一个eslint的parser, 不同parser的ast结构有所不同.
+
 我猜想的执行方式是: 每个文件会新建一个context对象和一个新闭包, 遍历ast, 执行对应的create里的方法.
 
 由此得出结论: 
