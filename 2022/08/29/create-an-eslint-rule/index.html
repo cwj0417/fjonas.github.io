@@ -45,6 +45,7 @@
 <li>使用<code>context.report</code>方法来报错. (如果判断到代码不符合rule的话)</li>
 <li>使用<code>fix</code>方法提供的<code>fixer</code>对象来进行修复. <code>fixer</code>的方法很少, 就简单的新增/替换/移除操作.</li>
 </ol>
+<p>ast的查看方式到<a target="_blank" rel="noopener" href="https://astexplorer.net/">这个网站</a>, 选一个eslint的parser, 不同parser的ast结构有所不同.</p>
 <p>我猜想的执行方式是: 每个文件会新建一个context对象和一个新闭包, 遍历ast, 执行对应的create里的方法.</p>
 <p>由此得出结论: </p>
 <ol>
