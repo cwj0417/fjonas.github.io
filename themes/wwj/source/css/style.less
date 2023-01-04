@@ -1,16 +1,3 @@
-/**
- *
- * @package Maupassant
- * @author cho
- * @version 2.0
- * @link http://chopstack.com
- */
-/*
-pure css setting
-When setting the primary font stack, apply it to the Pure grid units along
-with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
-specific font stacks to ensure the greatest OS/browser compatibility.
-*/
 @import "custom";
 @import "content";
 @import "theme";
@@ -18,7 +5,7 @@ specific font stacks to ensure the greatest OS/browser compatibility.
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
   /* Set your content font stack here: */
-  font-family: Arial, Tahoma, "Microsoft YaHei", \5fae\8f6f\96c5\9ed1, "Hiragino Sans GB", "Microsoft JhengHei", 微軟正黑體, sans-serif;
+  font-family: Arial, Tahoma, "Microsoft YaHei", "Hiragino Sans GB", "Microsoft JhengHei", "微軟正黑體", sans-serif;
 }
 
 body {
@@ -35,7 +22,7 @@ body {
 }
 
 .body_container {
-  background: $containerBg;
+  background: @containerBg;
   padding: 0 60px;
   max-width: 1150px;
   margin: 0 auto;
@@ -147,7 +134,7 @@ div {
 
 #header {
   text-align: left;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid @border;
   position: relative;
   background-image: url('../img/head.png');
   background-size: 1300px;
@@ -162,7 +149,7 @@ div {
 	  height: 80px;
 	  width: 80px;
 	  border-radius: 50%;
-	  border: 3px solid $darkBorer;
+	  border: 3px solid @darkBorer;
 	}
 	h1 {
 	  padding: 0;
@@ -172,14 +159,14 @@ div {
 	}
 	#logo {
 	  font: bold 28px/1.12 "PingFang Sc", Georgia, Times, sans-serif;
-	  color: $logoColor;
+	  color: @logoColor;
 	  span, &:hover {
 		text-shadow: 3px 3px 2px rgba(0, 0, 0, .5);
 	  }
 	}
 	.description {
 	  margin: .2em 0 0;
-	  color: $subTitleColor;
+	  color: @subTitleColor;
 	  font-size: 16px;
 	}
 	.links {
@@ -224,8 +211,8 @@ div {
 		font-weight: 500;
 	  }
 	  &.current {
-		background-color: $darkBorer;
-		color: $footColor;
+		background-color: @darkBorer;
+		color: @footColor;
 		font-weight: bold;
 		text-shadow: 0 0 0 black;
 	  }
@@ -326,7 +313,7 @@ div {
 		background: #fff 8px 8px no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6%2BR8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG11AABzoAAA%2FN0AAINkAABw6AAA7GgAADA%2BAAAQkOTsmeoAAAESSURBVHjajNCxS9VRGMbxz71E4OwgoXPQxVEpXCI47%2BZqGP0LCoJO7UVD3QZzb3SwcHB7F3Uw3Zpd%2FAPCcJKG7Dj4u%2FK7Pwp94HDg5Xyf5z1Pr9YKImKANTzFXxzjU2ae6qhXaxURr%2FAFl9hHDy%2FwEK8z89sYVEp5gh84wMvMvGiSJ%2FEV85jNzLMR1McqfmN5BEBmnmMJFSvtpH7jdJiZv7q7Z%2BZPfMdcF6rN%2FT%2F1m2LGBkd4HhFT3dcRMY2FpskxaLNpayciHrWAGeziD7b%2BVfkithuTk8bkGa4wgWFmbrSTZOYeBvjc%2BucQj%2FEe6xHx4Taq1nrnKaW8K6XUUsrHWuvNevdRRLzFGwzvDbXAB9cDAHvhedDruuxSAAAAAElFTkSuQmCC);
 		padding: 7px 11px 7px 28px;
 		line-height: 16px;
-		border: 1px solid $border;
+		border: 1px solid @border;
 		width: 65%;
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -357,11 +344,11 @@ div {
   border-radius: 5px;
   .post-title {
 	margin: 0;
-	color: $postTitle;
+	color: @postTitle;
 	text-align: left;
 	font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
 	a {
-	  color: $postTitle;
+	  color: @postTitle;
 	}
   }
   .post-meta {
@@ -434,7 +421,7 @@ div {
 	word-break: normal;
 	h2 {
 	  margin: 1.4em 0 1.1em;
-	  border-bottom: 1px solid $border;
+	  border-bottom: 1px solid @border;
 	  overflow: hidden;
 	}
 	h3 {
@@ -449,8 +436,8 @@ div {
 		display: inline-block;
 		margin: 0 5px;
 		padding: 0 5px;
-		background: $border;
-		color: $bg2;
+		background: @border;
+		color: @bg2;
 	  }
 	  a {
 		color: #23b6fb;
@@ -472,7 +459,7 @@ div {
 	hr {
 	  margin: 2.4em auto;
 	  border: none;
-	  border-top: 1px solid $border;
+	  border-top: 1px solid @border;
 	  position: relative;
 	}
 	img {
@@ -491,8 +478,8 @@ div {
 		display: inline-block;
 		margin: 0 5px;
 		padding: 0px 5px;
-		background: $border;
-		color: $bg2;
+		background: @border;
+		color: @bg2;
 	  }
 	  a {
 		color: #23b6fb;
@@ -663,15 +650,15 @@ div {
 
 @media print, screen and (min-width: 48em) {
   .post {
-	margin-bottom: -20px;
-	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-	border-radius: 15px;
+	// margin-bottom: -20px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+	border-radius: 10px;
 	position: relative;
-	transition: all .2s;
-	&:hover {
-	  margin-bottom: 10px;
-	  transform: translate(-5px);
-	}
+	// transition: all .2s;
+	// &:hover {
+	//   margin-bottom: 10px;
+	//   transform: translate(-5px);
+	// }
 	.readmore {
 	  position: absolute;
 	  top: 30px;
@@ -806,7 +793,7 @@ blockquote, .stressed-quote {
   position: relative;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
-  border-left-color: $bg2;
+  border-left-color: @bg2;
   color: #000;
 }
 
@@ -1247,7 +1234,7 @@ pre {
 /* syntax highlight*/
 figure.highlight,
 .codeblock {
-  background: $border;
+  background: @border;
   margin: 10px 0;
   line-height: 1.1em;
   color: #333;
@@ -1287,7 +1274,7 @@ figure.highlight,
 	font-size: 13px;
 	padding: 0 15px 20px;
 	margin: 0;
-	background: $borderActive;
+	background: @borderActive;
 	color: #999999;
 
 	a {
@@ -1297,8 +1284,8 @@ figure.highlight,
   }
   // Gutter which contains line numbers
   .gutter {
-	background: $borderHover;
-	border-right: 1px solid $borderActive;
+	background: @borderHover;
+	border-right: 1px solid @borderActive;
 	padding: 0.3em 15px;
 
 	.line {
@@ -1343,7 +1330,7 @@ figure.highlight,
 	color: #183691;
   }
   .keyword {
-	color: $bg2;;
+	color: @bg2;
   }
   // ApacheConf
   &.apacheconf .code {
@@ -1406,7 +1393,7 @@ figure.highlight,
 	  color: #df5000;
 	}
 	.meta-keyword {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.title {
 	  color: #795da3;
@@ -1439,7 +1426,7 @@ figure.highlight,
 	.at_rule,
 	.important,
 	.meta {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.attribute,
 	.hexcolor,
@@ -1488,7 +1475,7 @@ figure.highlight,
 	  color: #0086b3;
 	}
 	.request {
-	  color: $bg2;;
+	  color: @bg2;
 	}
   }
   // INI
@@ -1499,7 +1486,7 @@ figure.highlight,
 	}
 	.setting,
 	.attr {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.value,
 	.keyword {
@@ -1517,7 +1504,7 @@ figure.highlight,
 	.meta,
 	.annotation,
 	.javadoctag {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.number {
 	  color: #0086b3;
@@ -1537,7 +1524,7 @@ figure.highlight,
 	}
 	.tag,
 	.javadoctag {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.tag .title {
 	  color: #333;
@@ -1598,7 +1585,7 @@ figure.highlight,
   &.nginx .code {
 	.title,
 	.attribute {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.built_in,
 	.literal {
@@ -1615,7 +1602,7 @@ figure.highlight,
   &.objectivec .code {
 	.preprocessor,
 	.meta {
-	  color: $bg2;;
+	  color: @bg2;
 
 	  .title {
 		color: #df5000;
@@ -1649,7 +1636,7 @@ figure.highlight,
   &.php .code {
 	.phpdoc,
 	.doctag {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.regexp {
 	  color: #df5000;
@@ -1690,7 +1677,7 @@ figure.highlight,
   // SQL
   &.sql {
 	.built_in {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.number {
 	  color: #0086b3;
@@ -1722,7 +1709,7 @@ figure.highlight,
 	  color: #0086b3;
 	}
 	.name {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.attr {
 	  color: #0086b3;
@@ -1732,7 +1719,7 @@ figure.highlight,
   &.less {
 	.tag,
 	.at_rule {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.number,
 	.hexcolor,
@@ -1757,7 +1744,7 @@ figure.highlight,
 	.tag,
 	.at_rule,
 	.important {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.number,
 	.hexcolor,
@@ -1787,7 +1774,7 @@ figure.highlight,
   // Stylus
   &.stylus {
 	.at_rule {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.tag,
 	.selector-tag {
@@ -1812,7 +1799,7 @@ figure.highlight,
   // Go
   &.go {
 	.typename {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.built_in,
 	.constant {
@@ -1822,7 +1809,7 @@ figure.highlight,
   // Swift
   &.swift {
 	.preprocessor {
-	  color: $bg2;;
+	  color: @bg2;
 	}
 	.title {
 	  color: #795da3;
@@ -2078,7 +2065,7 @@ em.search-keyword {
 
 .post-footer {
   height: 0;
-  border-top: 1px solid $border;
+  border-top: 1px solid @border;
   margin-bottom: 10px;
 }
 
