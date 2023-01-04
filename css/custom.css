@@ -1,28 +1,36 @@
 .epcRecentComments #cyWrapper {
-  padding: 5px 0 0 15px; }
-  .epcRecentComments #cyWrapper ul li {
-    margin: 0 !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.1); }
-    .epcRecentComments #cyWrapper ul li .cont {
-      padding-left: 50px; }
-      .epcRecentComments #cyWrapper ul li .cont .reping-nickname {
-        color: #4BC4FF;
-        padding-top: 6px; }
-      .epcRecentComments #cyWrapper ul li .cont .reping-title a {
-        color: #4BC4FF; }
-    .epcRecentComments #cyWrapper ul li .reping-avatar {
-      display: block; }
-      .epcRecentComments #cyWrapper ul li .reping-avatar img {
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        margin: 5px;
-        transition: all 1s ease-in-out; }
-      .epcRecentComments #cyWrapper ul li .reping-avatar img:hover {
-        transform: rotate(360deg); }
-
+  padding: 5px 0 0 15px;
+}
+.epcRecentComments #cyWrapper ul li {
+  margin: 0 !important;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+}
+.epcRecentComments #cyWrapper ul li .cont {
+  padding-left: 50px;
+}
+.epcRecentComments #cyWrapper ul li .cont .reping-nickname {
+  color: #4BC4FF;
+  padding-top: 6px;
+}
+.epcRecentComments #cyWrapper ul li .cont .reping-title a {
+  color: #4BC4FF;
+}
+.epcRecentComments #cyWrapper ul li .reping-avatar {
+  display: block;
+}
+.epcRecentComments #cyWrapper ul li .reping-avatar img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  transition: all 1s ease-in-out;
+}
+.epcRecentComments #cyWrapper ul li .reping-avatar img:hover {
+  transform: rotate(360deg);
+}
 .head-img-gw a img {
-  transition: all 1s ease-in-out; }
-
+  transition: all 1s ease-in-out;
+}
 .head-img-gw a img:hover {
-  transform: rotate(360deg); }
+  transform: rotate(360deg);
+}
