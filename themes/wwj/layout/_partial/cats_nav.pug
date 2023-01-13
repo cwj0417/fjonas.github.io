@@ -2,17 +2,11 @@
 	- for (var i in theme.cats)
 		.pure-u-1-4.pure-u-md-1-4.nav-wrap
 			if is_current(theme.cats[i].href) && theme.cats[i].href !== ''
-				.dis.current
-					!= theme.cats[i].name
 				a.current(href=url_for(theme.cats[i].href))
 					!= theme.cats[i].name
 			else if (theme.cats[i].href === '' && is_home())
-				.dis.current
-					!= theme.cats[i].name
 				a.current(href=url_for(theme.cats[i].href))
 					!= theme.cats[i].name
 			else
-				.dis
-					!= theme.cats[i].name
 				a(href=url_for(theme.cats[i].href))
 					!= theme.cats[i].name

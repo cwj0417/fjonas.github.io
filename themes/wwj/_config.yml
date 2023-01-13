@@ -2,15 +2,21 @@ fancybox: false ## If you want to use fancybox please set the value to true.
 cyid: cyt1bgEED ## 2年多后 2020/11/18重新启用
 cyconf: prod_20e8d05c4d6b3ce62b89be98ae18390c
 google_search:  ## Use Google search, true/false.
-baidu_search: true ## Use Baidu search, true/false.
+baidu_search: ## Use Baidu search, true/false.
 swiftype: ## Your swiftype_key, e.g. m7b11ZrsT8Me7gzApciT
 tinysou: ## Your tinysou_key, e.g. 4ac092ad8d749fdc6293
-self_search: ## Use a jQuery-based local search engine, true/false.
+self_search: true ## Use a jQuery-based local search engine, true/false.
 google_analytics: ## Your Google Analytics tracking id, e.g. UA-42425684-2
 baidu_analytics: ## Your Baidu Analytics tracking id, e.g. 8006843039519956000
 show_category_count: false ## If you want to show the count of categories in the sidebar widget please set the value to true.
 busuanzi: true ## If you want to use Busuanzi page views please set the value to true.
 widgets_on_small_screens: false ## Set to true to enable widgets on small screens.
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  template: ./search.xml
 
 menu:
   - page: 主页
@@ -37,6 +43,7 @@ cats:
     href: categories/生活吐槽/
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
+  - search
   - tag
   - recent_comments
   - links
