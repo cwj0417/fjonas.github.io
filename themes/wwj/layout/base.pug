@@ -5,16 +5,8 @@ if page.title
 else
   - var current_title = config.title
 
-if config.feed
-  case config.feed.type
-    when 'rss2'
-      - var feed_type='application/rss+xml'
-    when 'atom'
-    default
-      - var feed_type='application/atom+xml'
-
 doctype html
-html(lang='#{config.language}')
+html(lang=config.language)
   head
     meta(http-equiv='content-type', content='text/html; charset=utf-8')
     meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
@@ -31,12 +23,8 @@ html(lang='#{config.language}')
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
     script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js')
     link(rel='Shortcut Icon', type='image/x-icon', href=url_for('favicon.ico'))
-    link(rel='apple-touch-icon', href=url_for('apple-touch-icon.png'))
-    link(rel='apple-touch-icon-precomposed', href=url_for('apple-touch-icon.png'))
     script(type='text/javascript', src=url_for(theme.js) + '/main.js')
     block scripts
-    if config.feed
-      link(rel='alternate', type=feed_type, href=url_for(config.feed.path))
 
   body
   #header
@@ -77,4 +65,3 @@ html(lang='#{config.language}')
 
     include _partial/totop
     include _partial/after_footer
-  script(type='text/javascript')  var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273985214'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273985214%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
