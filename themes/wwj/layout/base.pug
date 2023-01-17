@@ -34,6 +34,10 @@ html(lang=config.language)
           +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)
       .site-name
         img.avatar(src=url_for('./img/avatar.png'))
+        .theme-selector
+          .selector(onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')", style="background: #00c7ff;")
+          .selector(onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')", style="background: #ffe100;")
+          .selector(onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')", style="background: #55ff00;")
         br
         h1.hidden= current_title
         a#logo(href=url_for('.'))= config.title
@@ -62,6 +66,9 @@ html(lang=config.language)
         block content
       .pure-u-1.pure-u-md-4-4
         != partial('_partial/footer.pug')
+  
+  script.
+      document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
 
-    include _partial/totop
-    include _partial/after_footer
+  include _partial/totop
+  include _partial/after_footer
