@@ -682,7 +682,7 @@ div {
         height: 42px;
         a {
           transform: rotateX(0deg);
-          background: #57c5f9;
+          background: var(--theme-1);
           font-size: 14px;
           color: #fff;
           &.current {
@@ -692,7 +692,7 @@ div {
         &:nth-child(2n) {
           a {
             color: #fff;
-            background: #abdff5;
+            background: var(--theme-2);
           }
         }
       }
@@ -741,6 +741,19 @@ div {
         position: absolute;
         left: 30px;
       }
+	  .theme-selector {
+		width: 20px;
+		height: 50px;
+		display: inline-block;
+		position: absolute;
+		left: 10px;
+		.selector {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			margin: 3px;
+		}
+	}
       br {
         display: none;
       }
