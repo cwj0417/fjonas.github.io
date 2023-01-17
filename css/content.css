@@ -33,13 +33,13 @@ img {
   border-radius: 2px;
 }
 #outline a:hover {
-  background: #bdedfc;
+  background: var(--theme-3);
 }
 #outline .active {
   color: white !important;
   font-weight: 600;
-  border-left: 4px solid #00c0fa !important;
-  background: #3ecdfd !important;
+  border-left: 4px solid var(--theme-1) !important;
+  background: var(--theme-2) !important;
 }
 #outline .active li {
   display: block !important;

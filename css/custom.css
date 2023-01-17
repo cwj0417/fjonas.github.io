@@ -9,11 +9,11 @@
   padding-left: 50px;
 }
 .epcRecentComments #cyWrapper ul li .cont .reping-nickname {
-  color: #4BC4FF;
+  color: var(--theme-1);
   padding-top: 6px;
 }
 .epcRecentComments #cyWrapper ul li .cont .reping-title a {
-  color: #4BC4FF;
+  color: var(--theme-1);
 }
 .epcRecentComments #cyWrapper ul li .reping-avatar {
   display: block;
