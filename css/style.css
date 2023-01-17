@@ -787,7 +787,7 @@ div {
   }
   .content_container .cats-nav .nav-wrap a {
     transform: rotateX(0deg);
-    background: #57c5f9;
+    background: var(--theme-1);
     font-size: 14px;
     color: #fff;
   }
@@ -796,7 +796,7 @@ div {
   }
   .content_container .cats-nav .nav-wrap:nth-child(2n) a {
     color: #fff;
-    background: #abdff5;
+    background: var(--theme-2);
   }
   .hidden_mid_and_down {
     display: none !important;
@@ -840,6 +840,19 @@ div {
     border: 1px solid #33ccff;
     position: absolute;
     left: 30px;
+  }
+  #header .site-name .theme-selector {
+    width: 20px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+  }
+  #header .site-name .theme-selector .selector {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 3px;
   }
   #header .site-name br {
     display: none;
