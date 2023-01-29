@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>ae表达式基础</title>
+      <link href="/2023/01/25/ae-expression-basic/"/>
+      <url>/2023/01/25/ae-expression-basic/</url>
+      
+        <content type="html"><![CDATA[<p>老婆画了几个微信表情, 在我看来相当机器, 在我追问下, 听说有ae表达式这东西.</p><p>网上查询了相关东西, 质量相当差, 只会”复制-粘贴-修改”的人竟然还在出教程, 一些地方说不过去就硬混.</p><p>于是我看了遍文档, 简单总结一下, 我相信比网上容易搜到的教程都好懂.</p><span id="more"></span><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><ul><li><p>ae的整个项目由多个composition(合成)组成. 单个composition由多个layer(图层)组成, layer之间通过parent link形成无限级父子关系.</p></li><li><p>每个layer其实就是一个对象. layer若干个枚举类型. 不同类型的layer拥有自己若干个属性. (比如矩形layer有宽高&#x2F;位置&#x2F;角度等属性)</p></li><li><p>每个属性都可以单独在时间轴上设关键帧数值.</p></li><li><p>在时间轴上的任何一帧, 每个属性都可以根据关键帧和时间函数来确定一个值.</p><p>而layer只要通过所有属性确定的值, 就可以画出这个layer的样子.</p></li><li><p>每一帧把所有composition的所有layer都渲染出来, 就形成了动画.</p></li></ul><h2 id="表达式的意义"><a href="#表达式的意义" class="headerlink" title="表达式的意义"></a>表达式的意义</h2><p>表达式其实是一种关键帧的加强.</p><p>即使关键帧已经有时间函数的加强了, 但在一些情况下, 通过表达式可以完成更灵活的效果.</p><p>并且表达式也可以保存复用, 所以一些特定的表达式也可以多抽象提高复用性.</p><p>关键帧是针对属性的, 所以表达式也是针对属性的.</p><p>表达式可以理解为**layer某个属性的通项公式. ** 表达式的返回值决定了layer在这帧的属性值.</p><h2 id="变化的变量"><a href="#变化的变量" class="headerlink" title="变化的变量"></a>变化的变量</h2><p>表达式的值一定是变化的才是有意义的. 所以表达式中一定有变化的值, 所以表达式可以理解为一个多元的函数. y &#x3D; f(x, y, z, …)</p><p>常见的变化的变量有:</p><ul><li>time: 每一帧的时间都是不同的, 单位是秒. rotate的表达式记得要让最后一帧的返回值是360的倍数哦.</li><li>其他元素的属性值. 可以通过composition和layer的名字获取到其他元素, 并获取任意属性的当前值. 这里的变量就非常多, 详见<a href="https://helpx.adobe.com/after-effects/using/expression-language-reference.html">文档</a>.</li><li>如果已经设置了关键帧和时间函数, 那么value就也是一个随帧数变化的值. 这表示关键帧和表达式是可以同时运作的.</li><li>最后是一些随机函数. 但导出表情的时候应该还是会固定, 这个可以推论表达式可以减少aep文件的体积, 但不能减少导出文件的体积.</li></ul><h2 id="一些常见手段和api"><a href="#一些常见手段和api" class="headerlink" title="一些常见手段和api"></a>一些常见手段和api</h2><p>表达式的概念就说完了, 很简单. 剩下的去文档里查api就行了.</p><p>而下面的就是真正的设计创造工作了. (或者对于新手来说是经验性的工作)</p><p>所以我根本不会, 只好稍微收集几个常用的路子.</p><h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p> 调用内置api. wiggle, loop等. 都是内置函数, 根据属性返回不同类型的值. (因为不同属性的值类型不同, 有字符串和不同长度的tuple)</p><h3 id="调试方法"><a href="#调试方法" class="headerlink" title="调试方法"></a>调试方法</h3><p>建立一个调试图层, 类型是text layer, 把文字表达式使用<code>comp</code>和<code>layer</code>方法指到调试对象的属性, 就可以在每一帧打印出当前的值了.</p><p>另外一个是, 点图表的图表, 是可以看到自己表达式的y-t函数图像的.</p><h3 id="阻尼运动"><a href="#阻尼运动" class="headerlink" title="阻尼运动"></a>阻尼运动</h3><p>ae表达式界流传着一个万能弹性公式, 是一个阻尼公式. 简单地来说是一个阻尼回弹的值-时间函数. 这个函数的推导需要回一下微分方程的解法, 就留到以后再展开了.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ae exp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>博客的搜索功能</title>
       <link href="/2023/01/14/search-ability-in-blog/"/>
       <url>/2023/01/14/search-ability-in-blog/</url>
