@@ -16,15 +16,18 @@ console.log('fetch git log...');
 
 git().log({ 'maxCount': 1, '--stat': true }).then(res => {
     try {
-        console.log('fetched');
+        console.log('fetched', res.all[0].diff.files[0].file);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
-        console.log('content read');
+        console.log('content read', content);
         const titleRegex = /---\ntitle:\s+(.*)\n/;
         const dateRegex = /date:\s+(\d{4}-\d{2}-\d{2})/;
         const breifRegex = /\n---\n((:?.|\n)*)<!--more-->\n/;
         const title = titleRegex.exec(content)[1];
+        console.log({ title });
         const breif = breifRegex.exec(content)[1];
+        console.log({ breif });
         const date = dateRegex.exec(content)[1];
+        console.log({ date });
         const url = `https://yo-cwj.com/${date.replace(/-/g, '/')}/${res.all[0].diff.files[0].file.replace(/.*\/([^/]*)\.md/, '$1')}`
         console.log('wechat actions start');
         request({
