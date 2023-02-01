@@ -12,9 +12,13 @@ if (!appid || !appsecret) {
 
 const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7';
 
+console.log('fetch git log...');
+
 git().log({ 'maxCount': 1, '--stat': true }).then(res => {
     try {
+        console.log('fetched');
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
+        console.log('content read');
         const titleRegex = /---\ntitle:\s+(.*)\n/;
         const dateRegex = /date:\s+(\d{4}-\d{2}-\d{2})/;
         const breifRegex = /\n---\n((:?.|\n)*)<!--more-->\n/;
@@ -22,6 +26,7 @@ git().log({ 'maxCount': 1, '--stat': true }).then(res => {
         const breif = breifRegex.exec(content)[1];
         const date = dateRegex.exec(content)[1];
         const url = `https://yo-cwj.com/${date.replace(/-/g, '/')}/${res.all[0].diff.files[0].file.replace(/.*\/([^/]*)\.md/, '$1')}`
+        console.log('wechat actions start');
         request({
             url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${appsecret}`
         }).then(res => {
