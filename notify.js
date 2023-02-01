@@ -16,9 +16,9 @@ const git = sg();
 console.log('fetch git log...');
 
 (async () => {
-    let branches = git.branch();
+    let branches = await git.branch();
     console.log(branches);
-    await git.checkout('source')
+    // await git.checkout('source')
     const res = git.log({ 'maxCount': 1, '--stat': true })
     try {
         console.log('fetched', res.latest.diff);
@@ -62,6 +62,6 @@ console.log('fetch git log...');
             }).then(res => console.log(res.data.media_id))
         })
     } catch (e) { }
-    await git.checkout('master').then(console.log)
+    // await git.checkout('master').then(console.log)
 
 })()
