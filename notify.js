@@ -17,9 +17,7 @@ console.log('fetch git log...');
 
 (async () => {
     let branches = await git.branch();
-    console.log(branches);
-    // await git.checkout('source')
-    const res = await git.log({ 'maxCount': 1, '--stat': true })
+    const res = await git.log({ 'maxCount': 1, '--patch': true })
     console.log(res)
     try {
         console.log('fetched', res.latest.diff);
@@ -63,6 +61,5 @@ console.log('fetch git log...');
             }).then(res => console.log(res.data.media_id))
         })
     } catch (e) { }
-    // await git.checkout('master').then(console.log)
 
 })()
