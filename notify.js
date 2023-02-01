@@ -16,9 +16,7 @@ const git = sg();
 console.log('fetch git log...');
 
 (async () => {
-    let branches = await git.branch();
-    const res = await git.log({ 'maxCount': 1, '--patch': true })
-    console.log(res)
+    const res = await git.log({ 'maxCount': 1, '--stat': true })
     try {
         console.log('fetched', res.latest.diff);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
