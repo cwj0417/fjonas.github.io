@@ -14,7 +14,7 @@ const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7
 
 console.log('fetch git log...');
 
-git().log({ 'maxCount': 1, '--stat': true }).then(res => {
+git().log({ 'maxCount': 1, '--stat': true, 'source': true }).then(res => {
     try {
         console.log('fetched', res.latest.diff);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
