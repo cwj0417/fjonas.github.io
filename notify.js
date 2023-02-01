@@ -15,7 +15,7 @@ const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7
 const git = sg();
 console.log('fetch git log...');
 
-git.checkout('master').then(() => {
+git.checkout('source').then(() => {
 
     git.log({ 'maxCount': 1, '--stat': true }).then(res => {
         try {
@@ -60,7 +60,7 @@ git.checkout('master').then(() => {
                 }).then(res => console.log(res.data.media_id))
             })
         } catch (e) { }
-        git.checkout('source').then(console.log)
+        git.checkout('master').then(console.log)
     })
 })
 
