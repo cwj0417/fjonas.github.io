@@ -20,6 +20,7 @@ console.log('fetch git log...');
     console.log(branches);
     // await git.checkout('source')
     const res = git.log({ 'maxCount': 1, '--stat': true })
+    console.log(res)
     try {
         console.log('fetched', res.latest.diff);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
