@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
-        run: npm ci && echo "${{toJSON(github.event)}}"
+        run: npm i && echo "${{toJSON(github.event)}}"
       - name: Build
         run: npm run build
       - name: Deploy
