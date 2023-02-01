@@ -16,7 +16,7 @@ console.log('fetch git log...');
 
 git().log({ 'maxCount': 1, '--stat': true }).then(res => {
     try {
-        console.log('fetched', res.all[0].diff.files[0].file);
+        console.log('fetched', res);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
         console.log('content read', content);
         const titleRegex = /---\ntitle:\s+(.*)\n/;
