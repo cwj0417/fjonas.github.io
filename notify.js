@@ -19,7 +19,7 @@ console.log('fetch git log...');
     let branches = await git.branch();
     console.log(branches);
     // await git.checkout('source')
-    const res = git.log({ 'maxCount': 1, '--stat': true })
+    const res = await git.log({ 'maxCount': 1, '--stat': true })
     console.log(res)
     try {
         console.log('fetched', res.latest.diff);
