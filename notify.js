@@ -1,5 +1,5 @@
 const request = require('axios');
-const git = require('simple-git');
+const sg = require('simple-git');
 const fs = require('fs-extra');
 ''
 const appid = process.argv[2];
@@ -12,9 +12,12 @@ if (!appid || !appsecret) {
 
 const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7';
 
+const git = sg();
 console.log('fetch git log...');
 
-git().log({ 'maxCount': 1, '--stat': true, '--branches': /source/ }).then(res => {
+git.checkout('source');
+
+git.log({ 'maxCount': 1, '--stat': true }).then(res => {
     try {
         console.log('fetched', res.latest.diff);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
@@ -58,3 +61,5 @@ git().log({ 'maxCount': 1, '--stat': true, '--branches': /source/ }).then(res =>
         })
     } catch (e) { }
 })
+
+git.checkout('master');
