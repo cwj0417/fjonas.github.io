@@ -2521,9 +2521,9 @@
       
         <tags>
             
-            <tag> 翻译 </tag>
-            
             <tag> 代码组织 </tag>
+            
+            <tag> 翻译 </tag>
             
             <tag> 入门 </tag>
             
@@ -2631,9 +2631,9 @@
       
         <tags>
             
-            <tag> 代码组织 </tag>
-            
             <tag> angular </tag>
+            
+            <tag> 代码组织 </tag>
             
             <tag> 应用 </tag>
             
@@ -3132,11 +3132,11 @@
       
         <tags>
             
+            <tag> angular </tag>
+            
             <tag> 翻译 </tag>
             
             <tag> 入门 </tag>
-            
-            <tag> angular </tag>
             
             <tag> webpack </tag>
             
