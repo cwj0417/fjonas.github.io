@@ -20,7 +20,6 @@ console.log('fetch git log...');
     try {
         console.log('fetched', res.latest.diff);
         const content = fs.readFileSync(res.all[0].diff.files[0].file).toString();
-        console.log('content read', content);
         const titleRegex = /---\ntitle:\s+(.*)\n/;
         const dateRegex = /date:\s+(\d{4}-\d{2}-\d{2})/;
         const breifRegex = /\n---\n((:?.|\n)*)<!--more-->\n/;
