@@ -16,7 +16,6 @@ specifiers:
   hexo-renderer-pug: ^3.0.0
   hexo-renderer-stylus: ^2.0.1
   hexo-server: ^3.0.0
-  simple-git: ^3.16.0
 
 dependencies:
   axios: 1.3.0
@@ -33,7 +32,6 @@ dependencies:
   hexo-renderer-pug: 3.0.0
   hexo-renderer-stylus: 2.1.0
   hexo-server: 3.0.0
-  simple-git: 3.16.0
 
 devDependencies:
   fs-extra: 10.1.0
@@ -65,18 +63,6 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@kwsites/file-exists/1.1.1:
-    resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
-    dependencies:
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@kwsites/promise-deferred/1.1.1:
-    resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: false
 
   /@tootallnate/once/2.0.0:
@@ -1776,16 +1762,6 @@ packages:
   /shebang-regex/3.0.0:
     resolution: {integrity: sha1-rhbxZE2HPsrYQ7AwexQzYtTEIXI=}
     engines: {node: '>=8'}
-    dev: false
-
-  /simple-git/3.16.0:
-    resolution: {integrity: sha512-zuWYsOLEhbJRWVxpjdiXl6eyAyGo/KzVW+KFhhw9MqEEJttcq+32jTWSGyxTdf9e/YCohxRE+9xpWFj9FdiJNw==}
-    dependencies:
-      '@kwsites/file-exists': 1.1.1
-      '@kwsites/promise-deferred': 1.1.1
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /source-map-resolve/0.6.0:

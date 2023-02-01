@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
-        run: npm i && echo "${{toJSON(github.event)}}"
+        run: npm i
       - name: Build
         run: npm run build
       - name: Deploy
@@ -32,4 +32,4 @@ jobs:
           publish_dir: ./public
           publish_branch: master  # deploying branch
       - name: Wechat
-        run: node notify.js ${{ secrets.WECHAT_ID }} ${{ secrets.WECHAT_SECRET }}
+        run: node notify.js ${{ secrets.WECHAT_ID }} ${{ secrets.WECHAT_SECRET }} ${{ github.event.head_commit.message }}
