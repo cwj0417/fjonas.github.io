@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>分析ae阻尼振动表达式 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">分析ae阻尼振动表达式</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/vue/" style="font-size: 19.5px;">vue</a> <a href="/tags/javascript/" style="font-size: 19.5px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 19px;">翻译</a> <a href="/tags/webpack/" style="font-size: 18.5px;">webpack</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 18px;">深入es6</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.5px;">应用</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.5px;">vue源码</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 17px;">心理学</a> <a href="/tags/electron/" style="font-size: 17px;">electron</a> <a href="/tags/react/" style="font-size: 16.5px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 16px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 16px;">博客装饰</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.5px;">代码组织</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.5px;">资本论</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/ae-exp/" style="font-size: 14.5px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.5px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.5px;">chrome extension</a> <a href="/tags/vite/" style="font-size: 14.5px;">vite</a> <a href="/tags/ci/" style="font-size: 14.5px;">ci</a> <a href="/tags/http/" style="font-size: 14.5px;">http</a> <a href="/tags/haha/" style="font-size: 14.5px;">haha</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.5px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.5px;">vuex</a> <a href="/tags/redux/" style="font-size: 14.5px;">redux</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/github-action/" style="font-size: 14px;">github action</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/webpack-plugin/" style="font-size: 14px;">webpack-plugin</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/monorepo/" style="font-size: 14px;">monorepo</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 14px;">道德情操论</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">分析ae阻尼振动表达式</h1><div class="post-meta">Feb 10, 2023<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>接上回, 网上广为流传的ae万能弹性表达式, 在完全不理解的情况下, 其实不一定生效.</p>
+<p>本文会通过解释表达式, 来分析表达式的效果, 什么情况下使用表达式.</p>
+<p>更深一步可以知道如何修改表达式来应用到本不可以用到的场景.</p>
+<span id="more"></span>
+
+<h2 id="表达式解析"><a href="#表达式解析" class="headerlink" title="表达式解析"></a>表达式解析</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> amp = <span class="number">0.1</span>;</span><br><span class="line"><span class="keyword">const</span> freq = <span class="number">2.0</span>;</span><br><span class="line"><span class="keyword">const</span> decay = <span class="number">2.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (numKeys &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	n = <span class="title function_">nearestKey</span>(time).<span class="property">index</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_">key</span>(n).<span class="property">time</span> &gt; time) &#123; n--; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (n == <span class="number">0</span>) &#123; <span class="keyword">var</span> t = <span class="number">0</span>; &#125; <span class="keyword">else</span> &#123; <span class="keyword">var</span> t = time - <span class="title function_">key</span>(n).<span class="property">time</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> v = <span class="title function_">velocityAtTime</span>(<span class="title function_">key</span>(n).<span class="property">time</span> - thisComp.<span class="property">frameDuration</span> / <span class="number">10</span>);</span><br><span class="line">	value + v * amp * <span class="title class_">Math</span>.<span class="title function_">sin</span>(freq * t * <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>) / <span class="title class_">Math</span>.<span class="title function_">exp</span>(decay * t);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表达式先贴出来, 接下来我们会逐行读代码分析意义并总结使用效果和场景.</p>
+<p>代码的运行环境和意义要去看上篇文章.</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>这是一个与阻尼振动的s-t函数结合的ae表达式, 阻尼振动的场景用在表情角色的身体抖动上.</p>
+<p>身体进行了一定加速后突然停止, 皮肤表面的振动就很接近阻尼振动.</p>
+<p>另外荡秋千&#x2F;钟摆的物品形成的接近简谐运动就是阻尼振动, 阻尼为0时的函数.</p>
+<p>首先我们要明确简谐运动的s-t函数是个余弦函数, 阻尼振动是在此基础上变化, 所以会有余弦函数的一些变量.</p>
+<h3 id="变量介绍"><a href="#变量介绍" class="headerlink" title="变量介绍"></a>变量介绍</h3><p>表达式里有一些变量, 我们要明白他们的意义:</p>
+<ul>
+<li>amp(amplitude): 振幅系数. amp本身是振幅, 但在这个表达式里解释为振幅系数, 之后会细说.</li>
+<li>freq(frequence): 频率.</li>
+<li>decay: 减速系数.</li>
+</ul>
+<p>上面这些是与正弦函数相关的参数, 还有一些表达式里使用的变量, 在看变量前要先理解表达式做了什么:</p>
+<ol>
+<li>假设一个动效, 人物的脸从a移动到了b.</li>
+<li>那么b点人物制动以后, 脸上的肉会因为惯性开始振动. (受力分析和方向先不讨论)</li>
+<li>那么我们把b点(运动结束的kf)称作”起振点”.</li>
+<li>无论b点以后是否有后续kf, 表达式会把”以b点初速度方向的阻尼位移”作为后续属性值的增量. (如果没有后续kf, 表现就是在b点的属性值上做加减.)</li>
+</ol>
+<p>我们以刚才的”起振点”概念, 来继续理解其他3个变量:</p>
+<ul>
+<li>n: 起振点的kf索引. 即”起振点是第几个关键帧”.</li>
+<li>t: 以起振点作为原点, t轴的值.</li>
+<li>v: 起振点初速度.</li>
+</ul>
+<h3 id="读代码"><a href="#读代码" class="headerlink" title="读代码"></a>读代码</h3><p>第一部分: 正弦函数参数的变量设置, 使用者可以调整这些变量来修改效果.</p>
+<p>第二部分: 把上一个kf作为”起振点”, 算出n和t的值.</p>
+<p>第三部分: 把<code>起振点初速度 * 振幅系数</code>作为振幅, 代入阻尼振动的s-t函数. 作为增量加到属性值上.</p>
+<p>那么为什么要把<code>起振点初速度 * 振幅系数</code>作为振幅呢, 这点我觉得值得深入讨论一下.</p>
+<h3 id="初速度的讨论"><a href="#初速度的讨论" class="headerlink" title="初速度的讨论"></a>初速度的讨论</h3><p>这个初速度需要深入说两点: </p>
+<ul>
+<li>初速度是个矢量, 其实s-t图的s也是个矢量, 所以公式里光乘以振幅系数是得不到矢量的. </li>
+<li>如果b点后面还有kf, 那么b点是不可导的, 这个速度其实是s关于t在b点的左导数.</li>
+</ul>
+<p>说到这里, 没有理解ae表达式执行环境的读者已经坐不住了.</p>
+<p>这里的value根据不同属性, 可以是值, 也可以是数组. (表达式最后的value也比较特殊, 还是得去前一篇文章看执行环境的介绍)</p>
+<p>当value是一个数组(比如表达式是关于位置的情况下), <code>+</code>操作符的执行其实还附带<code>map()</code>的效果.</p>
+<p>当<code>velocityAtTime()</code>的返回结果是个数组(矢量), value的<code>+</code>也会获取<code>v</code>的对应维度来进行加减.</p>
+<p>如此这样, 位置属性被有方向地加上了 由t经过函数得到的s 的增量 了.</p>
+<h3 id="表达式效果总结和使用场景"><a href="#表达式效果总结和使用场景" class="headerlink" title="表达式效果总结和使用场景"></a>表达式效果总结和使用场景</h3><p>由上面的分析可以知道, 这个弹性公式是适用于不同属性的. 在二维属性上, 还是支持矢量增量的.</p>
+<p>除了位置, 弹性公式还可以应用到缩放上. (其他属性还不知道, 因为我电脑没有ae)</p>
+<p>表达式功能总结: <strong>根据每个关键帧的初速度, 给后续帧加上阻尼振动公式产生的增量</strong>. 并且有以下特点:</p>
+<ul>
+<li>如果只有2个kf, 效果是第二个kf后属性值会正负振动, 减缓到0.</li>
+<li>如果有多个kf, 第二个后的每个kf都会振动, 这个振动会叠加到属性值的变化上.</li>
+<li>如果有多个kf, 在振动还未减缓到0前就进入了下一个kf, 这个振动不会带入下一个kf.</li>
+</ul>
+<p>这个公式应该还可以用到角度, 透明度, 缩放, 锚点上. 颜色行不行我还不知道.</p>
+<p>在理解了这个公式的含义后, 进行操作, 应该可以做到路径&#x2F;颜色的弹性, 也可以做到确定某个kf后做弹性.</p>
+<h2 id="阻尼函数简单解释"><a href="#阻尼函数简单解释" class="headerlink" title="阻尼函数简单解释"></a>阻尼函数简单解释</h2><p>那么还剩一个问题, 阻尼函数是怎么得到的? 公式的正确性是很重要的, 公式不对动效就会不自然, 虽然用户说不上哪里有问题, 但用户会说”感觉不生动”.</p>
+<p>要推出物体的s-t函数, 就需要一定程度的物理知识和数学知识, 我对数学知识忘记得比较多, 于是看了&lt;&lt;普林斯顿微积分读本&gt;&gt;来复习并记录一下, 这里微分和积分的概念引入都会用运动物体s-t变化为例讨论.</p>
+<h3 id="微分"><a href="#微分" class="headerlink" title="微分"></a>微分</h3><p>有一个物体在运动, <code>路程-时间</code> (s - t) 的关系是: $$s &#x3D; f(t)$$. (如果全程能脑子里想着图像会更好理解)</p>
+<p>现在我们想求一个 <code>瞬时速度-路程</code> (v - t) 的函数. 于是在t轴上取一小段时间, 称作 d.</p>
+<p>来算一下 v - t 关系: $$v_{瞬}&#x3D;\frac{f(t + d) - f(t)}{d}$$. 这个式子中, d越小, 瞬时速度就越精确.</p>
+<p>当d趋向于无穷小的时候, 这个(v - t)函数就是精确的了: $$v&#x3D;\lim_{d \to 0}\frac{f(t + d) - f(t)}{d}$$.</p>
+<p>而每次都写limit很麻烦, 我们用$$\mathrm{d} s$$和$$\mathrm{d} t$$来代表 d 趋向于0的时候, s 和 t 的变化.</p>
+<p>上面的式子有了个<strong>等价</strong>的写法: $$v&#x3D;\frac{\mathrm{d} s}{\mathrm{d} t}$$. 意思是速度等于在很小的时间段里, 路程和时间的比值.</p>
+<hr>
+<p>故事说完了, 接下来我们总结一下并提炼一些概念.</p>
+<ul>
+<li>上面这种关于原函数 $$f(t)$$ 的”斜率函数”, 称作 $$f(t)$$ 的导函数, 记作 f’(t).</li>
+<li>导数的计算方法是, 取一段 $$f(t)$$ 的变化, 除以 $$t$$ 的变化, 计算变化值趋向于0的极限.</li>
+</ul>
+<p>所以, 基于 $$s &#x3D; f’(t)$$,  以下几个概念是等价的:</p>
+<p> $$v&#x3D;f’(t)&#x3D;\lim_{d \to 0}\frac{f(t + d) - f(t)}{d}&#x3D;\frac{\mathrm{d} s}{\mathrm{d} t}$$. </p>
+<p>描述为: <code>v是s关于t的导数.</code></p>
+<hr>
+<p>我们会发现, 速度也是会随着时间变化而变化的, 这种变化用导数表示也很容易, 只要把$$\frac{\mathrm{d} s}{\mathrm{d} t}$$当做之前的$$s$$处理.</p>
+<p>学过物理的我们已经知道这正是加速度, 这种把导数关于$$t$$再次求导数的结果成为二次导数, 记作$$f’’(t)$$:</p>
+<p>$$a&#x3D;f’’(t)&#x3D;\frac{\mathrm{d}\frac{\mathrm{d}s}{\mathrm{d}t}}{\mathrm{d}t}$$. 这个式子其实是没法简化的, 于是我们把他规定写成: $$\frac{\mathrm{d}^2s}{\mathrm{d}t^2}$$.</p>
+<p>描述为: <code>a是s关于t的二阶导数.</code></p>
+<p>导数是可以多阶的, 可以记作: $$f^{(n)}(t)&#x3D;\frac{\mathrm{d}^ns}{\mathrm{d}t^n}$$.</p>
+<hr>
+<p>导数的求法有2种, 一种是根据定义代入求极限, 另外一种是根据定义得出的一些运算法则, 基于第一种的结果求导.</p>
+<h3 id="积分"><a href="#积分" class="headerlink" title="积分"></a>积分</h3><p>积分的主角变成了 $$v&#x3D;g(t)$$. 在知道 (v - t) 函数的前提下, 我们想求 t 从 a 到 b, 物体经过的路程.</p>
+<p>如果速度是个常数, 保持不变的, 我们是知道 $$s&#x3D;v*t$$的, 但在别的任何情况下, 我们就要进一步思考了.</p>
+<p>于是我们的思路是: <strong>把面积切成一个个长条, 计算长条的面积和.</strong> </p>
+<p>在长条的宽无限小, 数量无限大的情况下, 长条的面积是个长方形了, 而面积的和就等于要求的面积. (非常不严谨, 要用夹逼定理)</p>
+<p>并且我们(并不是)又发明了一个新符号来表示积分: $$\int_{a}^{b}f(t)\mathrm{d}t&#x3D;\lim_{n \to \infty} \sum_{j &#x3D; 1}^{n}g(c_{j})(t_{j}-t_{j - 1})  $$.</p>
+<p>其中, $$c_{j}$$代表在$$[t_{j}, t_{j - 1}]$$区间里的时间, 并且 $$a &lt; t_{0} &lt; … &lt; t_{n} &lt; b$$.</p>
+<p>这个式子挺复杂的, 还需要下面的话描述, 才是完整的式子.</p>
+<hr>
+<p>和微分一样, 第一种求积分的方法, 就是利用定义求积分了, 定义里无限方块的面积和叫做黎曼和.</p>
+<p>使用这种方法求积分相当麻烦, 需要一边代入, 一边思考式子的意义, 再采取正确的简化.</p>
+<hr>
+<p>还有一个别的求积分的方法, 需要用到微积分的2个基本定理.</p>
+<p>第一条: 图形面积的变化, 其实就等于围面积那条函数. </p>
+<p>我们用之前的例子举例. 路程s随着时间t的变化, 其实就是速度, 就是函数v.</p>
+<p>假设 $$s&#x3D;f(t), v&#x3D;g(t)$$ , 那么 $$s’&#x3D;f’(t)&#x3D;g(t)&#x3D;v$$ .</p>
+<hr>
+<p>我们再来观察$$s&#x3D;f(t)$$, 通过时间t求面积的时候, 自变量实际意义上是积分的上限, 而长方形的面积的表示可以换一个字母来区别于自变量t了: $$s&#x3D;f(t)&#x3D;\int_{a}^{t}g(x)\mathrm{d}x $$.</p>
+<hr>
+<p>第二条定理是: 一个函数从 a 到 b 的定积分, 等于 反导数(b) - 反导数(a).</p>
+<p>用图像来看就是 0~b 的面积 减去 0~a 的面积, 就是 a~b 的面积了, 比较好理解.</p>
+<hr>
+<p>其实不写积分的上下限也可以表示”函数的反函数”, 不确定积分的上下限, 只会差一个常数C.</p>
+<p>这种形式叫做不定积分, 我们用这个形式来表示”函数的反函数集合”.</p>
+<p>即: $$\int g(t)&#x3D;f(t)+ C$$,  可以用这个理解下: $$\int v &#x3D; s + C$$</p>
+<h3 id="微分方程"><a href="#微分方程" class="headerlink" title="微分方程"></a>微分方程</h3><p>微分方程是方程的一种, 所以方程是干嘛的, 他就是干嘛的, 只是有微积分的符号.</p>
+<p>那微积分符号是用来干嘛的? 用来把一个物理量拆解成基础量, 减少变量的.</p>
+<p>相对地, 微分方程会有一些被推出来的定理和运算规则, 偶尔能解决一些问题, 但总的来说, 微分方程比较难解, 符号不容易化开.</p>
+<p>下面开始阻尼的公式分析, 就会对微分方程有所体会了.</p>
+<h3 id="阻尼振动分析"><a href="#阻尼振动分析" class="headerlink" title="阻尼振动分析"></a>阻尼振动分析</h3><p>理想的阻尼振动受力分析很简单, 弹簧的力和阻力. 设位移是x.</p>
+<p>弹簧的力和位移有关: $$F&#x3D;-kx$$. 阻力和速度相关: $$f_{阻}&#x3D;-\gamma v_{x}$$. 这2个式子和牛二联立:</p>
+<p>$$F&#x3D;ma&#x3D;-kx-\gamma v$$ . $$m\frac{\mathrm{d}^2x}{\mathrm{d}t^2}&#x3D;-kx-\gamma \frac{\mathrm{d}x}{\mathrm{d}t}$$.</p>
+<p>怎么解方程好复杂不想看了, 方程的解是 $$x&#x3D;Ae^{-\beta t}cos(\omega t+\varphi) $$. </p>
+<p>如果能看到这里, 你肯定发现这个解和ae表达式里的不同.</p>
+<p>表达式里的公式是: value +&#x3D; $$vAe^{-\beta t}sin(2\pi f t)$$. 有三处不同, 稍作解释:</p>
+<ol>
+<li>A乘了一个v, 上面有提到, 原函数的x是忽略方向的, 需要v来提供表达式的位移方向.</li>
+<li>$$\omega$$ 是角频率, 所以要把我们设置的f乘一个$$2\pi$$.</li>
+<li>原函数是余弦函数, $$t&#x3D;0$$处的值是A. 我们令$$\varphi &#x3D; \frac{\pi}{2}$$, 余弦就变正弦了.</li>
+</ol>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/ae-exp/">ae exp</a></div><div class="post-nav"><a class="next" href="/2023/01/25/ae-expression-basic/">ae表达式基础</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  styles: {'.MJXc-display': {display: 'inline-block !important'}}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
