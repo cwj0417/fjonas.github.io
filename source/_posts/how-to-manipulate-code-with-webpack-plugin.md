@@ -176,7 +176,7 @@ compiler.hooks.normalModuleFactory.tap(pluginname, (factory) => {
 1. 我们依旧可以通过`parser.state.module`里的属性来过滤需要处理的文件.
 2. 上文提到的, 这里修改ast是不起作用的.
 3. 如果在`program`钩子遍历拿到的ast, 需要用`acron`的api, 用babel的是会报错的.
-4. 如果`program`钩子设置了返回值, parser就不会遍历ast了, 在不需要遍历ast的项目里, 通过这个钩子可以提升wp性能.
+4. 如果`program`钩子设置了返回值, parser就不会遍历ast了, 在不需要遍历ast的项目里, 通过这个钩子可以提升wp性能. (2023/3/2更新: 这个是错的, parser遍历的时候有副作用, 详见2023/3/1的文章)
 
 关于第二点和第四点, 想看代码去wp代码里搜`program.call`就行了.
 
