@@ -2,7 +2,7 @@
 title: 在公司的打包脚本中使用svgr
 categories: 工作笔记
 date: 2023-04-19 11:31:46
-tags: [webpack-plugin]
+tags: [webpack]
 ---
 有同事在迁移到公司打包脚本的时候遇到了不支持svg作为组件引入的问题. 
 

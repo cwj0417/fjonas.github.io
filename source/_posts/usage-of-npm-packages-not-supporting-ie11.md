@@ -2,7 +2,7 @@
 title: 处理不支持ie11的第三方包
 categories: 工作笔记
 date: 2023-03-01 15:21:33
-tags: [webpack-plugin]
+tags: [webpack]
 ---
 公司一些客户需要支持ie11, 而有一些第三方包表示不爱支持ie11了. 所以使用的时候需要一些额外的工作.
 

@@ -2,7 +2,7 @@
 title: 如何通过webpack插件修改代码
 categories: 工作笔记
 date: 2023-01-04 01:06:05
-tags: [webpack,webpack-plugin]
+tags: [webpack]
 ---
 工作遇到要写webpack插件的情况, 记录一下是如何完成需求的.
 
