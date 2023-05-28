@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>简单说一嘴asset module</title>
+      <link href="/2023/05/23/asset-module-brief/"/>
+      <url>/2023/05/23/asset-module-brief/</url>
+      
+        <content type="html"><![CDATA[<p>续上次接了svgr插件, 产生的疑问, 可不可以不实用<code>file-loader</code>的情况来加载svgr, 简单的看了下记录个结论.</p><span id="more"></span><h2 id="目标和问题"><a href="#目标和问题" class="headerlink" title="目标和问题"></a>目标和问题</h2><p>前面的文章已经提到, 因为迁移关系, 我们期望的目标是: 通过<code>&#123; ReactComponent &#125;</code>来把svg作为组件引入, 并且default引入行为是base64.</p><p>为了达到目的, 除了加载svgr外, 还需要依赖file-loader.</p><p>而在公司脚手架里是没有使用file-loader的, 使用的是webpack的asset module.</p><p>而在文档里, webpack的asset module只能通过<code>resouceQuery</code>来区分base64还是组件. 这样需要用户改代码, 这是不可接受的. 所以只能加file-loader的依赖了.</p><h2 id="原因总结"><a href="#原因总结" class="headerlink" title="原因总结"></a>原因总结</h2><p>看了下文档和代码, 一句话总结: <strong>配置了rule.type的会被识别为对应的asset module, 并被设置对应的parser和generator, asset module对资源的处理在generate时, 所以一定晚于loader, 不符合svgr的要求.</strong></p><p>细一步说一下同时配置了<code>rule.type</code>和svg-loader的时候, 引入到svg module的大概流程:</p><ol><li>webpack在处理option的时候注册了asset module插件, 为asset module设置了对应的parser和generator.</li><li>在module build的时候会先运行loader. svg-loader在此时生效, 效果根据前面的文章分析, 是把svg作为组件, 并作为default export输出.</li><li>module在parse的时候处理一些参数, 并在generate的时候处理, 最后根据参数来决定把svg-loader处理结果进行类似file-loader的处理.(奇怪的是generate的时候type竟然是javascript, 没深看)</li></ol><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>说了原因, 这里再说一下具体是哪几个点, 调用了相关的东西的. (以上面说的同时设置rule.type和loader为例)</p><p>在<code>lib/webpackOptionsApply.js</code>中调用插件:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">AssetModulesPlugin</span>().<span class="title function_">apply</span>(compiler);</span><br></pre></td></tr></table></figure><p>插件中, 在<code>type</code>属于asset module的<code>createParser</code>和<code>createGenerator</code>的hook里返回<code>AssetParser</code>和<code>getAssetGenerator</code>:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">normalModuleFactory.<span class="property">hooks</span>.<span class="property">createParser</span></span><br><span class="line">  .<span class="title function_">for</span>(<span class="variable constant_">ASSET_MODULE_TYPE</span>)</span><br><span class="line">  .<span class="title function_">tap</span>(plugin, <span class="function"><span class="params">parserOptions</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AssetParser</span>(dataUrlCondition);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">normalModuleFactory.<span class="property">hooks</span>.<span class="property">createGenerator</span></span><br><span class="line">  .<span class="title function_">for</span>(type)</span><br><span class="line">  .<span class="title function_">tap</span>(plugin, <span class="function"><span class="params">generatorOptions</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AssetGenerator</span>(</span><br><span class="line">      dataUrl,</span><br><span class="line">      filename,</span><br><span class="line">      publicPath,</span><br><span class="line">      outputPath,</span><br><span class="line">      generatorOptions.<span class="property">emit</span> !== <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><p>在<code>lib/NormalModuleFactory.js</code>中的resolve.TapAsync里, 在遍历了<code>this.ruleSet.exec()</code>的结果后, 设置asset module 的type为”asset”, 在之后的<code>this.getParser(type, settings.parser)</code>, 和<code>this.getGenerator(type, settings.generator)</code>的时候, 因为type是”asset”而在module上注册到了asset module的parser和generator. </p><p>在<code>lib/NormalModule.js</code>的build方法调用了_doBuild中调用了<code>runLoaders()</code>让svgr-loader处理了文件.</p><p>并随后在_doBuild的回调中调用了<code>parse</code>, 在codeGeneration里调用了<code>generate</code>.</p><p>最后在<code>lib/asset/AssetGenerator.js</code>的<code>generate</code>方法中输出了结果. 但asset module在这里的type竟然是javascript, 这个还没深入看, 对我们现在问题来说不太重要.</p><h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2><p>说到这里, 我认为有2个点: 一是东西很浅没进入细节, 二是对一些基础概念没解释.</p><p>但说了一些应该已经对一个module的流程先后有一定的概念了: module create -&gt; build -&gt; loader -&gt; parse -&gt; codegen. 这些步骤都是webpack的make阶段, 之后还有seal和emit阶段.</p><p>所以如果有时间, 打算(按顺序)深入写一下以下内容:</p><ul><li>webpack简单流程以及一些基础概念, 阶段名字, webpack内部互相调用的代码风格.</li><li>resolve和run-loader进一步深入.</li><li>其他功能的深入. (比如asset module具体实现或者是别的功能dynamic import&#x2F;module federation&#x2F;lazy compilation)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>monorepo的子模块依赖声明的问题</title>
       <link href="/2023/05/13/dependency-declaration-of-monorepo-subpackages/"/>
       <url>/2023/05/13/dependency-declaration-of-monorepo-subpackages/</url>
@@ -70,7 +95,7 @@
       
         <tags>
             
-            <tag> webpack-plugin </tag>
+            <tag> webpack </tag>
             
         </tags>
       
@@ -120,7 +145,7 @@
       
         <tags>
             
-            <tag> webpack-plugin </tag>
+            <tag> webpack </tag>
             
         </tags>
       
@@ -221,8 +246,6 @@
         <tags>
             
             <tag> webpack </tag>
-            
-            <tag> webpack-plugin </tag>
             
         </tags>
       
@@ -915,11 +938,11 @@
       
         <tags>
             
+            <tag> webpack </tag>
+            
             <tag> immer </tag>
             
             <tag> vue </tag>
-            
-            <tag> webpack </tag>
             
             <tag> react </tag>
             
@@ -1355,9 +1378,9 @@
       
         <tags>
             
-            <tag> vue </tag>
-            
             <tag> webpack </tag>
+            
+            <tag> vue </tag>
             
             <tag> 分析 </tag>
             
@@ -1384,9 +1407,9 @@
       
         <tags>
             
-            <tag> vue </tag>
-            
             <tag> webpack </tag>
+            
+            <tag> vue </tag>
             
             <tag> 分析 </tag>
             
@@ -2484,9 +2507,9 @@
             
             <tag> 入门 </tag>
             
-            <tag> vue </tag>
-            
             <tag> webpack </tag>
+            
+            <tag> vue </tag>
             
             <tag> electron </tag>
             
@@ -2515,9 +2538,9 @@
             
             <tag> 入门 </tag>
             
-            <tag> vue </tag>
-            
             <tag> webpack </tag>
+            
+            <tag> vue </tag>
             
             <tag> electron </tag>
             
@@ -2727,9 +2750,9 @@
             
             <tag> 入门 </tag>
             
-            <tag> vue </tag>
-            
             <tag> webpack </tag>
+            
+            <tag> vue </tag>
             
             <tag> chrome extension </tag>
             
