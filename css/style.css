@@ -548,7 +548,6 @@ div {
   margin: 0 0 1.234em;
 }
 .post .post-content p code {
-  display: inline-block;
   margin: 0 5px;
   padding: 0 5px;
   background: var(--theme-4);
@@ -587,7 +586,6 @@ div {
 }
 .post .post-content ul code,
 .post .post-content ol code {
-  display: inline-block;
   margin: 0 5px;
   padding: 0px 5px;
   background: var(--theme-4);
