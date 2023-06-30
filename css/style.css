@@ -552,6 +552,7 @@ div {
   padding: 0 5px;
   background: var(--theme-4);
   color: #fa6723;
+  word-break: break-all;
 }
 .post .post-content p a {
   color: var(--theme-1);
@@ -590,6 +591,7 @@ div {
   padding: 0px 5px;
   background: var(--theme-4);
   color: #fa6723;
+  word-break: break-all;
 }
 .post .post-content ul a,
 .post .post-content ol a {
