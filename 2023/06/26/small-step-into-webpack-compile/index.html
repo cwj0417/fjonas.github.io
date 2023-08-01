@@ -60,15 +60,25 @@
 </ul>
 <p>总的来说, module是基本单位, chunk中包含了module并且是最后输出一个文件的单位.</p>
 <p>而moduleGraph记录着module间的关系, 这个是不能改变的, 因为是项目代码决定的.</p>
-<p>chunkGraph记录着chunk和module的包含关系, 初始有算法, 但是可以通过调用api来改变的. (以后再展开)</p>
+<p>chunkGraph记录着chunk和module的包含关系, 初始有算法, 但是可以通过调用api来改变的.</p>
+<p>调用了很多hook, 主要是修改modulegraph, dependency. </p>
+<p>modulegraph会影响下一步chunkgraph的关系建立, dependency会影响codegen的结果. (也影响一些别的hook)</p>
+<p>然后调用<code>buildChunkGraph()</code>来建立chunkgraph和modulegraph之间的关系.</p>
+<p>然后调用了很多hook, 这里是关于修改chunkgraph的hook.</p>
 <p>走完这段流程, chunkGraph被建立起来, chunk, module之间都有了确定的联系. (而这里有一大坨hooks可以操作chunk, 但不在主流程讨论范围)</p>
 <h3 id="codeGeneration"><a href="#codeGeneration" class="headerlink" title="codeGeneration"></a>codeGeneration</h3><p>遍历modules和各个情况, 让所有的模块都调用<code>module.codeGenerate()</code>, 并把所有结果存到<code>compilation.codeGenerationResults</code>里.</p>
-<p>codeGenerate的结果是<code>_source</code>(经过loader处理的字符串)再经过各个插件, 或是特殊的generator等处理, 进一步的结果.</p>
+<p>javascript的codeGenerate的输入是运行过loaders的结果<code>_source</code>.</p>
+<p>然后遍历module的dependency, 最后执行<code>sourceDependency()</code>.</p>
+<p><code>sourceDependency()</code>做的事也很简单, 根据dependency去compilation里取一个template. 然后调用template.apply.</p>
+<p>compilation里dep和template的关系都是plugin给的. 一般plugin都会在compilation阶段设置关系(通过<code>compilation.dependencyTemplates.set()</code>, 并且在别的生命周期给module增加dependency. (通过<code>addDependency()</code>)来影响codegen结果.</p>
 <h3 id="createChunkAssets"><a href="#createChunkAssets" class="headerlink" title="createChunkAssets"></a>createChunkAssets</h3><p>遍历chunk, 通过<code>renderManifest</code>这个hooks和其他内置plugin联动, 获取产生最后assets的<code>render()</code>方法.</p>
 <p><code>renderManifest</code>是一个waterfall hook, 会轮流调用, 把上一个的结果传给下一个.</p>
 <p>直接在webpack代码里搜索, 很多plugin都注册了, 然后判断当前module归不归自己管, 如果归自己管就处理.</p>
 <p>以javascriptModulePlugin为例, __webpack_require__xx之类的方法都是这里被加上的.</p>
-<p><code>renderManifest</code>运行完后, 调用运行结果的<code>render()</code>函数就获取到了一个<code>source</code>.(可以理解为字符串, 只是为处理方便弄的数据结构)</p>
+<p><code>renderManifest</code>的运行是为了生成一个<code>render()</code>方法.</p>
+<p><code>render()</code>方法的生成, 依赖之前<code>buildChunkGraph</code>整理出的chunkGraph. </p>
+<p>具体行为是: 通过<code>chunkGraph.getOrderedChunkModulesIterableBySourceType</code>来获取chunkgraph的chunkgraphchunk(cgc)中的modules, 再读取每个module的codegen结果, 并用<code>Template.renderChunkModules</code>拼接起来.</p>
+<p>这个<code>render()</code>函数执行后就能获得可以最终输出的<code>source</code>了.(可以理解为字符串, 只是为处理方便弄的数据结构)</p>
 <p>最后调用<code>emitAsset()</code>来向<code>assets</code>里添加键值. 这个api也是webpack文档的plugin demo介绍的api.</p>
 <p>至此, <code>compilation</code>里已经有<code>assets</code>了, 也就是最终要写到磁盘数据的信息.</p>
 <h2 id="emit"><a href="#emit" class="headerlink" title="emit"></a>emit</h2><p>seal阶段结束后, 回到<code>compiler</code>, 调用<code>compiler.emitAssets()</code>.</p>
