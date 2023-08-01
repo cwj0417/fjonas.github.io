@@ -135,7 +135,15 @@ seal开始前, 我们只有moduleGraph来维护module间的关系.
 
 而moduleGraph记录着module间的关系, 这个是不能改变的, 因为是项目代码决定的.
 
-chunkGraph记录着chunk和module的包含关系, 初始有算法, 但是可以通过调用api来改变的. (以后再展开)
+chunkGraph记录着chunk和module的包含关系, 初始有算法, 但是可以通过调用api来改变的.
+
+调用了很多hook, 主要是修改modulegraph, dependency. 
+
+modulegraph会影响下一步chunkgraph的关系建立, dependency会影响codegen的结果. (也影响一些别的hook)
+
+然后调用`buildChunkGraph()`来建立chunkgraph和modulegraph之间的关系.
+
+然后调用了很多hook, 这里是关于修改chunkgraph的hook.
 
 走完这段流程, chunkGraph被建立起来, chunk, module之间都有了确定的联系. (而这里有一大坨hooks可以操作chunk, 但不在主流程讨论范围)
 
@@ -143,7 +151,13 @@ chunkGraph记录着chunk和module的包含关系, 初始有算法, 但是可以�
 
 遍历modules和各个情况, 让所有的模块都调用`module.codeGenerate()`, 并把所有结果存到`compilation.codeGenerationResults`里.
 
-codeGenerate的结果是`_source`(经过loader处理的字符串)再经过各个插件, 或是特殊的generator等处理, 进一步的结果.
+javascript的codeGenerate的输入是运行过loaders的结果`_source`.
+
+然后遍历module的dependency, 最后执行`sourceDependency()`.
+
+`sourceDependency()`做的事也很简单, 根据dependency去compilation里取一个template. 然后调用template.apply.
+
+compilation里dep和template的关系都是plugin给的. 一般plugin都会在compilation阶段设置关系(通过`compilation.dependencyTemplates.set()`, 并且在别的生命周期给module增加dependency. (通过`addDependency()`)来影响codegen结果.
 
 ### createChunkAssets
 
@@ -155,7 +169,13 @@ codeGenerate的结果是`_source`(经过loader处理的字符串)再经过各个
 
 以javascriptModulePlugin为例, \_\_webpack_require\_\_xx之类的方法都是这里被加上的.
 
-`renderManifest`运行完后, 调用运行结果的`render()`函数就获取到了一个`source`.(可以理解为字符串, 只是为处理方便弄的数据结构)
+`renderManifest`的运行是为了生成一个`render()`方法.
+
+`render()`方法的生成, 依赖之前`buildChunkGraph`整理出的chunkGraph. 
+
+具体行为是: 通过`chunkGraph.getOrderedChunkModulesIterableBySourceType`来获取chunkgraph的chunkgraphchunk(cgc)中的modules, 再读取每个module的codegen结果, 并用`Template.renderChunkModules`拼接起来.
+
+这个`render()`函数执行后就能获得可以最终输出的`source`了.(可以理解为字符串, 只是为处理方便弄的数据结构)
 
 最后调用`emitAsset()`来向`assets`里添加键值. 这个api也是webpack文档的plugin demo介绍的api.
 
