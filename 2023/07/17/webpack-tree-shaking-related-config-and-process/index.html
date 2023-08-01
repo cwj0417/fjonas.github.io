@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>tree-shaking相关的配置和流程介绍 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">tree-shaking相关的配置和流程介绍</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/webpack/" style="font-size: 19.5px;">webpack</a> <a href="/tags/vue/" style="font-size: 19px;">vue</a> <a href="/tags/javascript/" style="font-size: 19px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 18.5px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 18px;">深入es6</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.5px;">应用</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.5px;">vue源码</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 17px;">心理学</a> <a href="/tags/electron/" style="font-size: 17px;">electron</a> <a href="/tags/react/" style="font-size: 16.5px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 16px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 16px;">博客装饰</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.5px;">代码组织</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.5px;">资本论</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/ae-exp/" style="font-size: 14.5px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.5px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.5px;">chrome extension</a> <a href="/tags/vite/" style="font-size: 14.5px;">vite</a> <a href="/tags/ci/" style="font-size: 14.5px;">ci</a> <a href="/tags/monorepo/" style="font-size: 14.5px;">monorepo</a> <a href="/tags/http/" style="font-size: 14.5px;">http</a> <a href="/tags/haha/" style="font-size: 14.5px;">haha</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.5px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.5px;">vuex</a> <a href="/tags/redux/" style="font-size: 14.5px;">redux</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E6%91%A9%E6%89%98%E8%BD%A6/" style="font-size: 14px;">摩托车</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/codemirror/" style="font-size: 14px;">codemirror</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/github-action/" style="font-size: 14px;">github action</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 14px;">道德情操论</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">tree-shaking相关的配置和流程介绍</h1><div class="post-meta">Jul 17, 2023<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>关于treeshaking我之前只知道个概念, 把mode设为production就开启了treeshaking.</p>
+<p>还知道一些”esm”, “sideEffect”. 但具体的其实很模糊.</p>
+<p>(这其实归功于文档一般般, 中文文档更有问题)</p>
+<p>这次就来更深入一步. (这篇post需要一些前置知识, 有概念不清楚的需要去webpack系列看一下.)</p>
+<span id="more"></span>
+
+<h2 id="什么是treeshaking"><a href="#什么是treeshaking" class="headerlink" title="什么是treeshaking"></a>什么是treeshaking</h2><p>大家都知道个概念, 但其实在webpack中, ts是由多功能点配合完成的.</p>
+<p>我写了一个<a target="_blank" rel="noopener" href="https://github.com/cwj0417/webpack-explorer/tree/main/treeshaking">demo</a>, 是有一些dead-code的最简单示例. <strong>下面的内容都会围绕例子展开, 请看一下代码.</strong></p>
+<p>平时我们把mode设置为production, 会开启很多配置, 也就不知道是哪几个配置完成ts了.</p>
+<p>在demo中, 我摸索了几个相关的配置. </p>
+<p>在第一部分中会逐个介绍每个配置的作用与联合作用.</p>
+<p>在第二部分里会指出每个配置是在webpack的哪些流程中的. (但会比较浅, 并避开具体算法)</p>
+<h3 id="usedExports"><a href="#usedExports" class="headerlink" title="usedExports"></a>usedExports</h3><p>开启后, 没有被别的模块使用的export, 将不会在打包结果中导出.</p>
+<p>在我的demo中, <code>sub</code>方法没有被别的module引用, 开启配置后就没有被导出.</p>
+<p>这个配置已经讲完了, 他只是控制了”被使用的才导出”, 所以有了这个名字.</p>
+<p>但<code>sub</code>方法还是被打包了. 因为webpack不能确定<code>sub</code>方法是不是有副作用.</p>
+<p> (我认为以后可能会直接把<code>sub</code>去掉, 现在是terser去的, 而terser获得的信息是比webpack少的, 所以webpack理论是可以去掉他的)</p>
+<h3 id="sideEffects"><a href="#sideEffects" class="headerlink" title="sideEffects"></a>sideEffects</h3><p>开启了这个配置(或是在package.json开启, 或是rules中开启), 没有被使用的module会被从依赖树中去除.</p>
+<p>在我的demo中, <code>fnWillNotBeUsed</code>没有被使用, 所以<code>shouldbeshaked</code>整个module都被去除了.</p>
+<p>这个配置也讲完了, 要注意的是, sideEffects是针对整个module的, 所以上面的<code>sub</code>方法是无法用这个配置去除的.</p>
+<h3 id="innerGraph"><a href="#innerGraph" class="headerlink" title="innerGraph"></a>innerGraph</h3><p>开启这个配置, 并在方法执行前写pure注释, 打包结果会产生<code>unused pure expression or super</code>的标记, 来表示这个方法没被用到.</p>
+<p>这里要强调2点:</p>
+<ol>
+<li>即使使用了innerGraph, demo中的<code>sub</code>方法仍被打包了.</li>
+<li>需要开启usedExports, innerGraph分析的时候才知道<code>sub</code>没有被使用.</li>
+</ol>
+<p>所以粗略看来, 这个配置在我们的场景上是没用的.</p>
+<h3 id="concatenateModules"><a href="#concatenateModules" class="headerlink" title="concatenateModules"></a>concatenateModules</h3><p>开启了这个配置后, 每个chunk的可合并module, 会被合并成一个module. 也就是大名鼎鼎的scope hoisting. 具体行为比较复杂, 自行看文档, <a target="_blank" rel="noopener" href="https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5">作者说了动机和难点</a>, 我稍微做一下总结.</p>
+<p>优点: 减少函数和闭包, 减少代码体积. (关于webpack打包结果分析之前的post也有)</p>
+<p>缺点: 打包变慢.</p>
+<p>难点: 算法. 因为合module的时候可能有相同变量名. (但具体算法我看不动后面部分也不会介绍.)</p>
+<p>然后他的先后顺序是在分chunk之后的, 所以是对每个chunk做scope hoisting. (这个后面部分会分析)</p>
+<p>在我demo开启配置后, <code>webpack_modules</code>变量直接没了, 因为每个module都没有被bailout. (这个概念看文档)</p>
+<p>补充一下, 开启这个配置后, usedExports的效果也达成了. sideEffects的效果也可以配合terser达成. (但不是说其他2个配置没意义, 只是在大部分情况下. 在module被bailout的时候效果是不同的)</p>
+<h3 id="minimize"><a href="#minimize" class="headerlink" title="minimize"></a>minimize</h3><p>开启这个配置后, 会开启terser的plugin. terser很强大, 但不在我分析范围中. 除了压缩代码, 我的demo中他明显还做了2件事:</p>
+<ol>
+<li>去除没用的函数<code>sub</code>.</li>
+<li>直接执行了<code>add</code>方法, 把打包结果变成<code>console.log(3)</code>. 之前我一直以为是scope hoisting做的, 其实是terser做的.</li>
+</ol>
+<p>另外, 他也会读取pure注释来辅助判断函数的副作用.</p>
+<h3 id="联合使用效果总结"><a href="#联合使用效果总结" class="headerlink" title="联合使用效果总结"></a>联合使用效果总结</h3><ul>
+<li>usedExports + minimize 可以去除单个文件中没被使用的函数.</li>
+<li>scope hoisting在没有bailout的情况下是功能覆盖usedExports的.</li>
+<li>scope hoisting + minize 可以覆盖 sideEffects. (情况同上)</li>
+<li>usedExports  可以去掉 scope hoisting 的声明esm的部分. (原因我不懂)</li>
+<li>在我的例子中, 开启usedExports + scope hoisting + minimize等于mode:production.</li>
+</ul>
+<h3 id="关于sideEffects"><a href="#关于sideEffects" class="headerlink" title="关于sideEffects"></a>关于sideEffects</h3><p>sideEffects比较搞人, 这里说几个点.</p>
+<ul>
+<li>webpack的sideEffect和fp的sideEffect定义相同但标准不同.</li>
+<li>webpack.config中的sideEffect: true表示开启, package.json中false表示没有副作用.</li>
+<li>webpack sideEffects的作用范围是module. (文件内要用innerGraph, 但并不好用)</li>
+<li>pure标签是给innerGraph或terser用的. 和 webpack sideEffects 并没有关系.</li>
+</ul>
+<h2 id="各个步骤在webpack的哪些流程中"><a href="#各个步骤在webpack的哪些流程中" class="headerlink" title="各个步骤在webpack的哪些流程中"></a>各个步骤在webpack的哪些流程中</h2><p>下面深入一些的部分需要一些前置知识, 可以翻看webpack系列的前几篇post.</p>
+<p><strong>每个配置在不同的hook阶段执行的, 在说完所有配置的流程后, 会在后面总结所有涉及到的hook的时间线.</strong></p>
+<h3 id="useExports流程"><a href="#useExports流程" class="headerlink" title="useExports流程"></a>useExports流程</h3><p><code>ModuleGraph</code>中有个属性<code>exports</code>, 是一个<code>ExportsInfo</code>实例. </p>
+<p><code>ExportsInfo</code>实例的属性中保存了<code>ModuleGraph</code>中的exports信息.</p>
+<p><code>ExportsInfo</code>提供了一些api, 所以就不深入内部属性了.</p>
+<p>简单的说配置开启后的流程:</p>
+<ol>
+<li>在optimizeDependencies阶段, 遍历所有module, 把使用到的export记录下来.  (使用api: <code>exportInfo.setUsedConditionally()</code>)</li>
+<li>在codegen阶段, 读取export信息, 只生成被使用过的export. (使用api: <code>moduleGraph.getExportsInfo(module).getUsedName(dep.name, runtime)</code>)</li>
+</ol>
+<p>我还稍微看了下详细的流程, 如下:</p>
+<ol>
+<li><p>配置开启后, 加载插件<code>lib/FlagDependencyUsagePlugin.js</code>, 在<code>optimizeDependencies</code>hook进行后面的分析.</p>
+</li>
+<li><p>建立一个队列<code>queue</code>. 从入口<code>compilation.entries</code>读取依赖, 并加入队列<code>queue</code>.</p>
+<p>(代码解释: <code>processEntryDependency()</code>调用<code>processReferencedModule()</code>的时候会传入一个空的usedExports, 所以就等于直接把当前module推入<code>queue</code>)</p>
+</li>
+<li><p>开始遍历<code>queue</code>, 调用<code>processModule()</code>来处理每个module.</p>
+</li>
+<li><p>遍历module的dependencies. 通过<code>getDependencyReferencedExports()</code>调用dependencies的<code>getReferencedExports()</code>方法来获取使用过的export. </p>
+<p>(不是每个dependency都会输出, 在我的例子中, 是harmonyImportSpecifierDependency输出的usedExports的)</p>
+</li>
+<li><p>再遍历每个module(代码里是通过<code>map</code>), 并遍历上一步获得的usedExports.</p>
+<p>获取到moduleGraph中, 当前module的<code>exportInfo</code>, 调用<code>exportInfo.setUsedConditionally()</code>来标记”使用过”状态.</p>
+<p>(如果usedExports为空, 也就不会标记了)</p>
+</li>
+<li><p>找到需要继续遍历的module, 并加入<code>queue</code>, 开始重复步骤3~步骤6. </p>
+<p>(到这里, 标记部分结束)</p>
+</li>
+<li><p>经过了很多步骤, 到了codegen阶段, 调用了<code>lib/JavascriptGenerator.js</code>的<code>generate()</code>方法.</p>
+</li>
+<li><p>调用<code>sourceModule()</code>, 遍历dependencies, 调用<code>sourceDependency()</code>. </p>
+</li>
+<li><p>然后调用<code>template.apply()</code>. 与步骤4一样, 在harmonyExportSpecifierDependency的template的<code>apply()</code>方法中调用了<code>moduleGraph.getExportsInfo(module).getUsedName(dep.name, runtime)</code>, 获得了”是否被使用”的信息, 判断被使用, 才推入<code>initFragments</code>数组.</p>
+</li>
+<li><p>在<code>InitFragment.addToSource()</code>中, 遍历<code>initFragments</code>来产生export的代码. </p>
+<p>(因为在步骤9中只有<code>add()</code>被推入数组, 没有<code>sub()</code>, 所以最后codegen的结果就没有<code>sub()</code>了)</p>
+</li>
+</ol>
+<h3 id="sideEffects流程"><a href="#sideEffects流程" class="headerlink" title="sideEffects流程"></a>sideEffects流程</h3><p>插件在<code>lib/optimize/SideEffectsFlagPlugins.js</code>. 步骤有2个.</p>
+<p>首先在<code>normalModuleFactory.hooks.module</code>这个hook通过package.json或者配置来判断是否被手动设置sideEffect, 如果是的话, 修改变量<code>module.factoryMeta.sideEffectFree</code>, 以便下个步骤读取. (这个hook的执行在新建normalModuleFactory实例之后)</p>
+<p>另外, <code>_analyseSource</code>这个参数默认是true, 所以会通过parse阶段的hook来判断sideEffect, 并且写入modulegraph的跳过optimize原因中来阻止当前module进行optimize.</p>
+<p>第二个步骤在<code>optimizeDependencies</code>阶段:</p>
+<p>遍历modules, 通过读取前一个步骤打的标记, 来决定跳过有sideEffect的module.</p>
+<p>然后读取moduleGraph指定的dependency(<code>HarmonyImportSpecifierDependency</code>)来对moduleGraph里module的连接做对应的改动. (把判断不需要的module切除)</p>
+<p>这个改动会最后在<code>buildChunkGraph</code>的时候被写入chunkGraph的cgc的modules里. (cgc指chunkgraphchunk, cg的一个属性).</p>
+<p>最后在<code>createChunkAssets()</code>的时候, 在javascriptmodulesplugin的renderManifest里通过<code>chunkGraph.getOrderedChunkModulesIterableBySourceType</code>获取到cgc里的modules, 产生最后输出. (详见上篇post)</p>
+<h3 id="innerGraph流程"><a href="#innerGraph流程" class="headerlink" title="innerGraph流程"></a>innerGraph流程</h3><p>插件在<code>lib/optimize/InnerGraphPlugin.js</code>, 在配置开启时加载.</p>
+<p>这个插件的实现有三个点:</p>
+<ol>
+<li>在<code>compilation</code>注册<code>PureExpressionDependency</code>的template.</li>
+<li>在javascript parse阶段遍历ast的时候分析语法, 并为合适的module增加<code>PureExpressionDependency</code>.</li>
+<li>在codegen阶段, 通过sourceModule, sourceDependency, 调用<code>template.apply()</code>, 为codegen结果增加标记.</li>
+</ol>
+<p>dependency和codegen的关系可以去前面的post细看, 这里稍微展开下步骤2.</p>
+<p>innergraph维护了2个变量来保存innergraph的状态: <code>parserStateMap</code>, <code>topLevelSymbolTag</code>.</p>
+<p>一个是关于state和(innergraph map, 当前symbol, callback map)的map. 另一个是用来更新当前symbol的临时变量.</p>
+<p>然后说几个innergraph的关键api:</p>
+<ul>
+<li>enable&#x2F;bailout&#x2F;isEnabled: 因为一些别的插件也会调用innergraph的方法, 以此来拦截本配置未开启的情况下, 别的插件的调用.</li>
+<li>onUsage: 在插件中调用这个方法, 把 “为module添加PureExpressionDependency” 添加到<code>parserStateMap</code>的callback map中.</li>
+<li>inferDependencyUsage: 调用callback, 为合适的module添加<code>PureExpressionDependency</code>.</li>
+</ul>
+<p>所以innergraph插件在步骤2的展开流程是:</p>
+<ol>
+<li>在js parse开始遍历时候调用enable.</li>
+<li>在parse的各个hook, 调用innergraph的一些api来保存信息. 其他插件也可以调用.</li>
+<li>在parse的各个hook, 在合适的时候调用onUsage注册需要添加<code>PureExpressionDependency</code>的module.</li>
+<li>在parse结束的时候调用<code>inferDependencyUsage</code>落地callback.</li>
+</ol>
+<h3 id="concatenateModules流程"><a href="#concatenateModules流程" class="headerlink" title="concatenateModules流程"></a>concatenateModules流程</h3><p>插件<code>lib/ModuleConcatenationPlugin.js</code>在<code>optimizeChunkModules</code>hook进行了主要的流程:</p>
+<ol>
+<li><p>遍历modules, 这次遍历的目的是判断哪些module可以被合并, 并判断哪些是module可能是入口, 哪些是被合并的.</p>
+<p>不能被合并的都会设置bailout原因, 便于后面的打印. 原因可以去文档上看.</p>
+<p>这次遍历会填充一个数组<code>relevantModules</code>和一个set<code>possibleInners</code>, 分别是”合并后的入口”和”被合并的”module.</p>
+</li>
+<li><p>遍历<code>relevantModules</code>(入口, 代码里叫root), 经过一些算法, 使用<code>ConcatConfiguration</code>实例(合并配置)填充了<code>concatConfigurations</code>数组.</p>
+</li>
+<li><p>遍历<code>concatConfigurations</code>数组, 并使用配置实例化<code>ConcatenatedModule</code>.</p>
+</li>
+<li><p><code>newModule.build()</code>. 这里concatenatedModule的build没有运行loader, 也没有更新<code>_source</code>, 当然也不需要parse, 只是更新了<code>buildInfo</code>. (这些是我之前分析module.build的作用, 看来build只要与codegen配合就可以了)</p>
+</li>
+<li><p>在<code>integrate()</code>方法里, 调用api, 把<code>compilation.modules</code>, <code>ChunkGraph</code>, <code>ModuleGraph</code>中老的module删掉, 替换成新生成的module. (删除的比新增的多, 因为是多合一)</p>
+</li>
+</ol>
+<p>总结是在<code>optimizeChunkModules</code>这个hook分析了modules, 新建了concatenatedModule来替代原来的module.</p>
+<p>所以在后面codegen的阶段, 也会调用concatenatedModule的generate方法.</p>
+<p>具体的数据结构和算法我还没能力看, 可能以后再单独深入一篇.</p>
+<h3 id="terser插件流程"><a href="#terser插件流程" class="headerlink" title="terser插件流程"></a>terser插件流程</h3><p>在开启minimize配置, 并没有指定minimizer的时候, webpack就会开启<code>terser-webpack-plugin</code>插件.</p>
+<p>插件注册的hook是<code>processAssets</code>. 我们关心的流程很简单:</p>
+<ol>
+<li>从hook拿到assets.</li>
+<li>根据配置过滤需要被压缩的assets. 并遍历他们.</li>
+<li>调用<code>getWorker().transform(getSerializeJavascript()(options))</code>来获取压缩结果.</li>
+<li>调用<code>compilation.updateAsset(name, source, newInfo)</code>来更新assets.</li>
+</ol>
+<p>所以terser一次处理的内容是一个assets. 也就是一个chunk, 一个最终会被输出的文件.</p>
+<h3 id="流程先后串起来"><a href="#流程先后串起来" class="headerlink" title="流程先后串起来"></a>流程先后串起来</h3><p>这是最后一个部分, 把前面说的流程穿起来.</p>
+<p>这里只会整理本文提到的流程, 完整流程还是要看之前的post.</p>
+<h4 id="make-module-creation"><a href="#make-module-creation" class="headerlink" title="(make) module creation"></a>(make) module creation</h4><p>sideEffect: normalModule被实例化后调用, 在<code>normalModuleFactory.hooks.module</code>hook, 读取package.json和webpack配置, 来给module标记是否含有sideEffect. (<code>module.factoryMeta.sideEffectFree</code>)</p>
+<h4 id="make-javascript-parse"><a href="#make-javascript-parse" class="headerlink" title="(make) javascript parse"></a>(make) javascript parse</h4><p>(运行完loader后进行的parse, 只有js的module才会运行javascript的parse)</p>
+<p>innerGraph: parse阶段分析语法, 并在parse完为命中的module增加dependency: <code>PureExpressionDependency</code>, 给codegen用.</p>
+<p>sideEffect: parse阶段分析语法, 尝试调用<code>isPure</code>hook, 如果命中, 就给modulegraph标记bailout原因.</p>
+<h4 id="seal-optimizeDependencies"><a href="#seal-optimizeDependencies" class="headerlink" title="(seal) optimizeDependencies"></a>(seal) optimizeDependencies</h4><p>usedExports: 分析modules, 通过<code>exportInfo.setUsedConditionally()</code>记录module的exports是否被别的module使用.</p>
+<p>sideEffect: 分析modules, 并根据exportInfo来修改moduleGraph中module的连接关系.</p>
+<h4 id="seal-afterOptimizeChunkModules"><a href="#seal-afterOptimizeChunkModules" class="headerlink" title="(seal) afterOptimizeChunkModules"></a>(seal) afterOptimizeChunkModules</h4><p>在这个hook, usedExport已经分析完毕, 在这里操作module的exportInfo可以自定义哪些函数不被usedExports过滤掉, 方法可以是调用<code>exportsInfo.setUsedInUnknownWay()</code>.</p>
+<h4 id="seal-optimizeChunks"><a href="#seal-optimizeChunks" class="headerlink" title="(seal) optimizeChunks"></a>(seal) optimizeChunks</h4><p>在这个hook, chunk已经在之前的<code>buildChunkGraph()</code>生成完了, 所以在这里可以调用chunk的api来修改最终结果的分包.</p>
+<h4 id="seal-optimizeChunkModules"><a href="#seal-optimizeChunkModules" class="headerlink" title="(seal) optimizeChunkModules"></a>(seal) optimizeChunkModules</h4><p>concatenateModules: 在这里, 每个chunk的modules会被分析, 可优化的modules会合并成一个module, 并执行concatenateModule的build方法.</p>
+<p>需要注意的是, 手动分chunk推荐<code>optimizeChunks</code>进行, 在如果concatenate配置开启了, 在这个hook之后module已经被合并了.</p>
+<h4 id="seal-codegen"><a href="#seal-codegen" class="headerlink" title="(seal) codegen"></a>(seal) codegen</h4><p>concatenateModules: 执行自己的codegen, 配合自己的build. 和javascript的内部数据不太一样.</p>
+<p>usedExports: 在<code>harmonyExportSpecifierDependency</code>的template.apply中根据之前的标记, 跳过未使用的export, 生成module的代码.</p>
+<p>innerGraph: 在<code>innergraph的pureExpressionDependency</code>的template.apply中根据之前的标记, 给代码加上一点注释.</p>
+<p>(当然, 这些dependency是在compilation的hook里被plugin加入的. 关于codegen和dependency的东西也请看前面的post.)</p>
+<h4 id="seal-createChunkAssets"><a href="#seal-createChunkAssets" class="headerlink" title="(seal) createChunkAssets"></a>(seal) createChunkAssets</h4><p>sideEffect: 在javascriptModulePlugin中, 通过读取前面几个步骤整理到chunkGraph的chunkgraphchunk.modules, 产生最后的代码.</p>
+<h4 id="seal-processAssets"><a href="#seal-processAssets" class="headerlink" title="(seal) processAssets"></a>(seal) processAssets</h4><p>terser: 这里已经是可以最终输出的代码, terser拿到代码进行压缩, 并调用updateAsset来替换asset.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/webpack/">webpack</a></div><div class="post-nav"><a class="next" href="/2023/06/26/small-step-into-webpack-compile/">webpack compile深入一小步</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>

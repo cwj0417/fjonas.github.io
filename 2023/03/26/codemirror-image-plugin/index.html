@@ -52,7 +52,7 @@
 <li><code>createImage(view)</code>, 接受<code>EditorView</code>, 创建decoration. 从view的api里用正则抓所有的md图片语法. 在对应的地方创建widget.</li>
 <li><code>ImageWidget</code>是<code>WidgetType</code>的子类, 实例化的时候接受了url和alt存起来, eq方法来决定编辑器更新后是否重新渲染, toDOM方法就是widget的本体.</li>
 </ul>
-<h4 id="paste-x2F-drop事件处理"><a href="#paste-x2F-drop事件处理" class="headerlink" title="paste&#x2F;drop事件处理"></a>paste&#x2F;drop事件处理</h4><p>使用<code>EditorView.domEventHandlers</code>来监听paste和drop事件, 把文件存到缓存目录里, 再使用<code>EditorView</code>的api来把md图片语法插入编辑器.</p>
+<h4 id="paste-drop事件处理"><a href="#paste-drop事件处理" class="headerlink" title="paste&#x2F;drop事件处理"></a>paste&#x2F;drop事件处理</h4><p>使用<code>EditorView.domEventHandlers</code>来监听paste和drop事件, 把文件存到缓存目录里, 再使用<code>EditorView</code>的api来把md图片语法插入编辑器.</p>
 <p>需要注意的是, paste事件不能有返回值, 写了返回值原来的paste事件就没效果了.(编辑器不能粘贴了)</p>
 <h4 id="编辑器删除动作处理"><a href="#编辑器删除动作处理" class="headerlink" title="编辑器删除动作处理"></a>编辑器删除动作处理</h4><p>用<code>keymap.of()</code>绑定Backspace键, 在方法里用参数<code>EditorView</code>的api获取文本, 判断光标是不是在图片的右边.</p>
 <p>如果在图片右边, 就把整个md图片语法都删除, 如果图片是file协议, 再尝试删除缓存图片.</p>

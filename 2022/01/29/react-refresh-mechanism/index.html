@@ -7,12 +7,12 @@
 <p>2年前react提供了官方hmr支持. 但是提供给rn的. 虽然react-refresh代码在react仓库里, 但react文档是搜不到ract-refresh的, rn文档里可以搜到.</p>
 <p>react-refresh的react集成又是社区做的, 叫react-refresh-webpack-plugin.</p>
 <p>umi的fast-refresh是用这个插件做的, vite的实现方法是基于那个<code>react-hot-loader退役issue</code>做的.</p>
-<h2 id="react-refresh组成部分"><a href="#react-refresh组成部分" class="headerlink" title="react-refresh组成部分"></a>react-refresh组成部分</h2><h3 id="react-refresh-x2F-runtime"><a href="#react-refresh-x2F-runtime" class="headerlink" title="react-refresh&#x2F;runtime"></a>react-refresh&#x2F;runtime</h3><p>这部分代码在react包里, 所以react-refresh的最低react版本要求是要有这个文件.</p>
+<h2 id="react-refresh组成部分"><a href="#react-refresh组成部分" class="headerlink" title="react-refresh组成部分"></a>react-refresh组成部分</h2><h3 id="react-refresh-runtime"><a href="#react-refresh-runtime" class="headerlink" title="react-refresh&#x2F;runtime"></a>react-refresh&#x2F;runtime</h3><p>这部分代码在react包里, 所以react-refresh的最低react版本要求是要有这个文件.</p>
 <p>除了runtime, react-dom里也新增了代码来配合runtime更新fiber. 这react内部的支持能比之前的react-hot-loader包一层组件更好地支持hmr.</p>
 <h3 id="hmr机制"><a href="#hmr机制" class="headerlink" title="hmr机制"></a>hmr机制</h3><p>runtime提供了更新fiber的方法, 也必须触发点去调用他, 这就需要hmr机制了.</p>
 <p>hmr机制流程是: watch文件改动 &#x3D;&gt; 重新运行这个文件包含的module &#x3D;&gt; 运行module中的更新逻辑.(runtime的代码应该在此执行).</p>
 <p> (这是最小实现流程, 全部机制还包含各种向下退级操作, 拒绝后寻找父模块更新逻辑)</p>
-<h3 id="react-refresh-x2F-babel"><a href="#react-refresh-x2F-babel" class="headerlink" title="react-refresh&#x2F;babel"></a>react-refresh&#x2F;babel</h3><p>下一个问题, runtime更新fiber, 需要知道哪个fiber改动过需要更新. 而代码是顺序执行的, runtime没法知道当前module执行的是哪个fiber.</p>
+<h3 id="react-refresh-babel"><a href="#react-refresh-babel" class="headerlink" title="react-refresh&#x2F;babel"></a>react-refresh&#x2F;babel</h3><p>下一个问题, runtime更新fiber, 需要知道哪个fiber改动过需要更新. 而代码是顺序执行的, runtime没法知道当前module执行的是哪个fiber.</p>
 <p>解决思路: hmr时会重新执行module, 初始化会执行所有module. 那么最后特点是: 需要更新的module执行了2次, 其他的module执行一次.</p>
 <p>所以需要在每个react组件声明完增加一个注册动作. 如果发现了重复注册, 就说明这个module是被hmr机制重新运行的, 就需要更新了, 于是把他推到<code>待更新节点</code>的队列里.</p>
 <p>这需要把所有的react组件都增加注册的动作, 所以这个功能用babel插件来完成. (因为jsx也是依赖babel的, 所以用babel不会引入额外流程)</p>

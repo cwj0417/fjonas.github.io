@@ -2,7 +2,7 @@
 <span id="more"></span>
 
 <h2 id="应用进程"><a href="#应用进程" class="headerlink" title="应用进程"></a>应用进程</h2><p>electron应用的进程分为<code>Main Process</code>(主进程)和<code>Renderer Process</code>(渲染进程), 主进程是整个应用的进程, 控制窗口的建立消除&#x2F;应用菜单&#x2F;后台行为等, 渲染进程其实就是网页进程(窗口进程), 控制界面的行为和与主进程的交互. 写到这里感觉与之前的<a href="/2016/11/07/how-to-build-an-chrome-extension/">使用vue编写chrome拓展</a>的应用结构几乎一样, 只是api和发布平台不同.</p>
-<h2 id="Electron-API-分类-x2F-使用-介绍"><a href="#Electron-API-分类-x2F-使用-介绍" class="headerlink" title="Electron API 分类&#x2F;使用 介绍"></a>Electron API 分类&#x2F;使用 介绍</h2><p><a target="_blank" rel="noopener" href="https://electron.atom.io/docs/">文档</a>的中间那列API Reference, 被分为了主进程api, 渲染进程api和共享api.</p>
+<h2 id="Electron-API-分类-使用-介绍"><a href="#Electron-API-分类-使用-介绍" class="headerlink" title="Electron API 分类&#x2F;使用 介绍"></a>Electron API 分类&#x2F;使用 介绍</h2><p><a target="_blank" rel="noopener" href="https://electron.atom.io/docs/">文档</a>的中间那列API Reference, 被分为了主进程api, 渲染进程api和共享api.</p>
 <p>使用api的方法:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;apiName1, apiName2&#125; = <span class="built_in">require</span>(<span class="string">&quot;electron&quot;</span>)</span><br></pre></td></tr></table></figure>
 

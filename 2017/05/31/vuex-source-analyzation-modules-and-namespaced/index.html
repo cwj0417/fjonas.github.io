@@ -55,7 +55,7 @@
 <h5 id="modulesNamespaceMap"><a href="#modulesNamespaceMap" class="headerlink" title="._modulesNamespaceMap"></a><code>._modulesNamespaceMap</code></h5><p>根据namespace为key来存放子module</p>
 <h4 id="初始化Store-VM"><a href="#初始化Store-VM" class="headerlink" title="初始化Store VM"></a>初始化Store VM</h4><p>这里会新建一个Vue实例并赋值给Store对象的<code>._vm</code>属性, 把整个vuex的状态放进去. 并判断严格模式, 如果为严格模式会在非法改变状态的时候抛出异常.</p>
 <p>这样整个构建动作已经完成了, 那么这个<code>._vm</code>在什么时候用的, 请看下面的章节.</p>
-<h3 id="Store对象的属性-amp-方法"><a href="#Store对象的属性-amp-方法" class="headerlink" title="Store对象的属性&amp;方法"></a>Store对象的属性&amp;方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L64">line64</a> state的getter方法, 会获取<code>._vm</code>的vue实例的state. 所以我们在vue代码中<code>this.$store.state.xxx</code>获取到的东西就是这个vue的实例的数据.</p>
+<h3 id="Store对象的属性-方法"><a href="#Store对象的属性-方法" class="headerlink" title="Store对象的属性&amp;方法"></a>Store对象的属性&amp;方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L64">line64</a> state的getter方法, 会获取<code>._vm</code>的vue实例的state. 所以我们在vue代码中<code>this.$store.state.xxx</code>获取到的东西就是这个vue的实例的数据.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/vuejs/vuex/blob/v2.3.0/src/store.js#L68">line68</a> 当直接set Store的state时报错, 只能通过设置<code>._vm</code>来进行.</p>
 <p>剩余的方法的是vuex的进阶用法, 是可以在使用时对vuex状态进行操作的方法, 详见<a target="_blank" rel="noopener" href="http://vuex.vuejs.org/en/api.html#vuexstore-instance-methods">文档</a></p>
 <h3 id="ModuleCollection对象"><a href="#ModuleCollection对象" class="headerlink" title="ModuleCollection对象"></a>ModuleCollection对象</h3><p>我们来看下<code>ModuleCollection</code>的构造方法.</p>

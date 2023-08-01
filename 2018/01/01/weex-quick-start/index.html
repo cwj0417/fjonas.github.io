@@ -13,7 +13,7 @@
 <p>那么weex是如何的呢. 把1和2合并了, 其实不是合并, 是直接把vue语法的文件编译成平台相关的原生文件了. 所以可以把weex叫做vue native.</p>
 <p>而之前cordova的做法其实是把整个项目都作为webview. 这样性能上是无法和weex比的.</p>
 <p>我们知道vue使用了virtual dom, 实际已经把逻辑(数据&#x2F;js&#x2F;业务)和渲染分开了, 只要劫持vdom的render方法就能不把vdom渲染到dom上, 相应的, web里的bom也不存在, 相关的api也是不存在的, html便签也就不存在了. 后面的章节会来讲一下weex和vue的区别.</p>
-<h2 id="项目的开发-x2F-发布流程"><a href="#项目的开发-x2F-发布流程" class="headerlink" title="项目的开发&#x2F;发布流程"></a>项目的开发&#x2F;发布流程</h2><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>首先和<a href="/2017/11/09/use-cordova-distrubuting-a-web-to-an-app/">cordova</a>一样, 需要XCode IDE, cocoapod, node, npm等非常基础的东西. 然后要安装weex-toolkit和weexpack.</p>
+<h2 id="项目的开发-发布流程"><a href="#项目的开发-发布流程" class="headerlink" title="项目的开发&#x2F;发布流程"></a>项目的开发&#x2F;发布流程</h2><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>首先和<a href="/2017/11/09/use-cordova-distrubuting-a-web-to-an-app/">cordova</a>一样, 需要XCode IDE, cocoapod, node, npm等非常基础的东西. 然后要安装weex-toolkit和weexpack.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g weex-toolkit weexpack</span><br></pre></td></tr></table></figure>
 
 <h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weexpack create projectName</span><br></pre></td></tr></table></figure>
@@ -34,7 +34,7 @@
 <p>还有一些内置的js方法. 总的来说, 其实是模拟vue语法的一个新的语法. 所以同样的也会遇到各种问题.</p>
 <h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>开发中会碰到一些与web开发不同的东西.</p>
 <h3 id="text标签"><a href="#text标签" class="headerlink" title="text标签"></a>text标签</h3><p>因为没有html标签, weex中封装的div或a也不能有inner字, 是不显示的, 要加上text标签.</p>
-<h3 id="icon-x2F-字体"><a href="#icon-x2F-字体" class="headerlink" title="icon&#x2F;字体"></a>icon&#x2F;字体</h3><p>weex(官方)推荐阿里的矢量图标库. <a href="iconfont.cn">iconfont</a>来加载icon.</p>
+<h3 id="icon-字体"><a href="#icon-字体" class="headerlink" title="icon&#x2F;字体"></a>icon&#x2F;字体</h3><p>weex(官方)推荐阿里的矢量图标库. <a href="iconfont.cn">iconfont</a>来加载icon.</p>
 <p>把喜欢的icon加入购物车或者自己上传icon, 然后添加到自己的project(如果没有就创建). 然后查看<code>view the link</code>获得cdn地址, 我们选择ttf的地址来加载. 代码如下:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> modal = weex.requireModule(<span class="string">&#x27;modal&#x27;</span>)</span><br></pre></td></tr></table></figure>
 

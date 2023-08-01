@@ -12,7 +12,7 @@
 </ul>
 <p>swiper就相当简单, 在组件中用一些本地数据控制写到style中, 操作数据就能操作样式了.</p>
 <h2 id="写一个swiper的思路"><a href="#写一个swiper的思路" class="headerlink" title="写一个swiper的思路"></a>写一个swiper的思路</h2><p>写一个swiper, 首先要知道划动的基本环境, 那就是:</p>
-<h3 id="template结构-x2F-dom结构"><a href="#template结构-x2F-dom结构" class="headerlink" title="template结构&#x2F;dom结构"></a>template结构&#x2F;dom结构</h3><p>一个swiper的dom结构基本就是:</p>
+<h3 id="template结构-dom结构"><a href="#template结构-dom结构" class="headerlink" title="template结构&#x2F;dom结构"></a>template结构&#x2F;dom结构</h3><p>一个swiper的dom结构基本就是:</p>
 <ul>
 <li>一个wrapper, 作用是控制整个组件的样式和计算高度, 并使内部元素有更多实现方式.</li>
 <li>内部元素wrapper, 这个元素会包含所有swiper-item, 所以长度&#x2F;高度是溢出的, 划动的核心就是操作这个元素的位置. 或者用transform, 或者用absolute定位(此时需要外部wrapper相对定位, 这个情况外部wrapper是必须存在的).</li>
