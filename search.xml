@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>简单介绍tapable</title>
+      <link href="/2023/08/10/brief-introduce-tapable/"/>
+      <url>/2023/08/10/brief-introduce-tapable/</url>
+      
+        <content type="html"><![CDATA[<p>调试webpack一定避免不了tapable.</p><p>有时走进一段不认识的代码, step into烦了, 就选择step over, 然后就直接跑完了.</p><p>所以最好简单看下tapable才能更好调试webpack.</p><span id="more"></span><p>所以本文目的就是简单看下流程并解决调试时的困惑. 内容很简单, 看代码大概就花了零碎的2<del>3小时. (前几篇webpack都花了2</del>3周了)</p><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>tapable输出了若干个hook的构造函数, 但所有构造函数的流程是大同小异的, 所以这里就用<code>SyncHook</code>来说.</p><ol><li><code>import &#123; SyncHook &#125; from &#39;tapable&#39;</code>  tapable的输出是个构造函数.</li><li><code>const hook = new SyncHook()</code> 实例化.</li><li><code>hook.tap(&#39;id&#39;, console.log)</code> 在实例化上注册.</li><li><code>hook.call(&#39;hello&#39;)</code> 调用.</li></ol><p>很明显就是个订阅发布系统, 所以就是在<code>tap</code>的时候把方法存起来, <code>call</code>的时候拿出来调用.</p><p>比普通订阅发布还简单的是, tapable的订阅不需要根据key查找, 因为不同hook是需要主动声明, 不存在动态创建的.</p><p>具体的最佳实践看文档就行了, 但我相信稍微看过点webpack的都比较了解了.</p><h3 id="tapable输出对象观察"><a href="#tapable输出对象观察" class="headerlink" title="tapable输出对象观察"></a>tapable输出对象观察</h3><p>不同的hook输出的构造函数, 都会实例化一个<code>Hook</code>. 并且修改一些实例的方法.</p><p>每个hook都会修改<code>compile</code>方法, 可以说是每个hook区别的关键.</p><p>另外, 不同hook可以调用的tap和call方法不同, 所以要把不能调用的禁用掉, 这些操作都不重要.</p><p>所以总结是: **所有输出的hook, 都是<code>Hook</code>的实例, 主要是<code>compile</code>方法不同. **</p><p>接下来就看看<code>Hook</code>的tap和call系列的方法. </p><h3 id="tap"><a href="#tap" class="headerlink" title="tap"></a>tap</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">tap</span>(<span class="params">options, fn</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_tap</span>(<span class="string">&quot;sync&quot;</span>, options, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">tapAsync</span>(<span class="params">options, fn</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_tap</span>(<span class="string">&quot;async&quot;</span>, options, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">tapPromise</span>(<span class="params">options, fn</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_tap</span>(<span class="string">&quot;promise&quot;</span>, options, fn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>进入到<code>_tap()</code>方法, 可以看到tap系列的方法的区别, 只是<code>type</code>不同.</p><p>经过一波整理和拦截器加载, 可以看到每个tap都是以对象的形式保存起来的.</p><p>tap的主要的信息有<code>name</code>, <code>type</code>, <code>fn</code>, 高级信息有<code>before</code>, <code>stage</code>. (高级用法可以在webpack代码里看到, 看起来是控制执行顺序)</p><p>然后调用<code>_insert()</code>方法, 根据<code>before</code>和<code>stage</code>把每个tap放到<code>Hook.taps</code>里.</p><h3 id="call"><a href="#call" class="headerlink" title="call"></a>call</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">CALL_DELEGATE</span> = <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">call</span> = <span class="variable language_">this</span>.<span class="title function_">_createCall</span>(<span class="string">&quot;sync&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">call</span>(...args);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">CALL_ASYNC_DELEGATE</span> = <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">callAsync</span> = <span class="variable language_">this</span>.<span class="title function_">_createCall</span>(<span class="string">&quot;async&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">callAsync</span>(...args);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PROMISE_DELEGATE</span> = <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">promise</span> = <span class="variable language_">this</span>.<span class="title function_">_createCall</span>(<span class="string">&quot;promise&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">promise</span>(...args);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>可以看到, call系列的方法和tap系列的很像, 也是调用了同一个方法, 传了不同的type而已.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">_createCall</span>(<span class="params">type</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">compile</span>(&#123;</span><br><span class="line">    <span class="attr">taps</span>: <span class="variable language_">this</span>.<span class="property">taps</span>,</span><br><span class="line">    <span class="attr">interceptors</span>: <span class="variable language_">this</span>.<span class="property">interceptors</span>,</span><br><span class="line">    <span class="attr">args</span>: <span class="variable language_">this</span>.<span class="property">_args</span>,</span><br><span class="line">    <span class="attr">type</span>: type</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>而<code>_createCall()</code>方法, 就是调用了<code>compile()</code>方法, 用实例中保存的几个信息, 把多个tap合成一个方法. 供上一级方法调用.</p><p>这里的<code>compile</code>之前已经提到, 每个hook都不同.</p><p><code>compile</code>方法是通过使用<code>HookCodeFactory</code>的一些方法, 根据taps和类型, 合成单个方法. (具体方法不展开, 我没细看, 主要是字符串拼接)</p><p>至于为什么用new Function, 为什么要合成一个方法, <a href="https://github.com/webpack/tapable/issues/162">讨论</a>的不少, 我也不想站立场, 这里有个<a href="https://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html">monomorphic方法</a>的概念.</p><h3 id="总结-调试webpack时遇到tapable应该如何处理"><a href="#总结-调试webpack时遇到tapable应该如何处理" class="headerlink" title="总结: 调试webpack时遇到tapable应该如何处理"></a>总结: 调试webpack时遇到tapable应该如何处理</h3><p>当我们调试webpack方法进入了一个临时方法, 就不慌了, 我们已经知道了他是被compile出来的.</p><p>在临时方法的<code>_x</code>里是可以通过tap的name看到当前hook注册了哪些tap的.</p><p>总结一下, 在调试webpack时进入call方法以后: </p><ul><li>要step over <code>compile()</code>方法.</li><li>在临时方法里可以查看到当前hook还有哪些tap. (通过tap的name)</li><li>可以根据需求step over.</li><li>如果想跳过所有, 在run to临时方法的最后一行, 再step into就行了.</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>tree-shaking相关的配置和流程介绍</title>
       <link href="/2023/07/17/webpack-tree-shaking-related-config-and-process/"/>
       <url>/2023/07/17/webpack-tree-shaking-related-config-and-process/</url>
@@ -2794,9 +2819,9 @@
       
         <tags>
             
-            <tag> 代码组织 </tag>
-            
             <tag> 翻译 </tag>
+            
+            <tag> 代码组织 </tag>
             
             <tag> 入门 </tag>
             
@@ -2904,9 +2929,9 @@
       
         <tags>
             
-            <tag> angular </tag>
-            
             <tag> 代码组织 </tag>
+            
+            <tag> angular </tag>
             
             <tag> 应用 </tag>
             
@@ -3405,11 +3430,11 @@
       
         <tags>
             
-            <tag> angular </tag>
-            
             <tag> 翻译 </tag>
             
             <tag> 入门 </tag>
+            
+            <tag> angular </tag>
             
             <tag> webpack </tag>
             
