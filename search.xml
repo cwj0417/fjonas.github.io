@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>增强你使用的网页</title>
+      <link href="/2023/10/11/boost-your-webpage/"/>
+      <url>/2023/10/11/boost-your-webpage/</url>
+      
+        <content type="html"><![CDATA[<p>有一些刚需网页不好用, 经常有重复操作, 自己来修改是比向网站拥有者提需求容易的.</p><p>分享一下最近对2个网站的修改. 这些修改确实节省了我很多日常重复操作的时间.</p><span id="more"></span><h2 id="用什么工具来修改你的网页"><a href="#用什么工具来修改你的网页" class="headerlink" title="用什么工具来修改你的网页"></a>用什么工具来修改你的网页</h2><p>我选择的是arc浏览器的<code>boost</code>功能. 在网页上新建一个<code>boost</code>, 点击<code>code</code>, 选到<code>js</code>的tab就可以把编写的js插入到当前host的网页里运行了. 还有辅助功能<code>zag</code>可以帮你抓dom.</p><p>对于没有用arc浏览器的大家, 可以写一个chrome extension, 只需要使用<code>content_scripts</code>功能, 可以实现和arc的<code>boost</code>类似的功能: match网址url并且加载一段js. (其实功能是比arc多且灵活的)</p><h2 id="修改jira页面"><a href="#修改jira页面" class="headerlink" title="修改jira页面"></a>修改jira页面</h2><p>jira是个必须用, 且很多重复操作的网站. 我做了这些修改:</p><h3 id="站会看板过滤器顺序调整"><a href="#站会看板过滤器顺序调整" class="headerlink" title="站会看板过滤器顺序调整"></a>站会看板过滤器顺序调整</h3><p>每天站会轮到的人的顺序和jira看板上不一致, 导致站会轮下一个人的时候得去找下一个人的位置. 只要获取一下看板过滤器, 调整一下子元素就行了.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> container = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;aui-expander-content ghx-quick-content&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">container.<span class="property">children</span>[<span class="number">6</span>].<span class="title function_">remove</span>()</span><br><span class="line">container.<span class="property">children</span>[<span class="number">10</span>].<span class="title function_">remove</span>()</span><br><span class="line">container.<span class="property">children</span>[<span class="number">6</span>].<span class="title function_">after</span>(container.<span class="property">children</span>[<span class="number">2</span>])</span><br><span class="line">container.<span class="property">children</span>[<span class="number">9</span>].<span class="title function_">after</span>(container.<span class="property">children</span>[<span class="number">1</span>])</span><br></pre></td></tr></table></figure><h3 id="看板过滤器多选改单选"><a href="#看板过滤器多选改单选" class="headerlink" title="看板过滤器多选改单选"></a>看板过滤器多选改单选</h3><p>jira看板的过滤器是多选的, 所以切换下一个人的时候必须把前一个人取消了, 这样每次都多一次操作.</p><p>我们只要给每个过滤器加一个点击事件, 把其他active的过滤器都点击一下就行了.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> child = <span class="literal">null</span></span><br><span class="line">container.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (child) <span class="keyword">return</span></span><br><span class="line">  child = e.<span class="property">target</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; container.<span class="property">children</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (container.<span class="property">children</span>[i].<span class="property">children</span>[<span class="number">0</span>] &amp;&amp; container.<span class="property">children</span>[i].<span class="property">children</span>[<span class="number">0</span>].<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&#x27;ghx-active&#x27;</span>) &amp;&amp; container.<span class="property">children</span>[i].<span class="property">children</span>[<span class="number">0</span>].<span class="property">innerHTML</span> !== child.<span class="property">innerHTML</span>) &#123;</span><br><span class="line">      container.<span class="property">children</span>[i].<span class="property">children</span>[<span class="number">0</span>].<span class="title function_">click</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  child = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="关闭bug的时候必须填写原因"><a href="#关闭bug的时候必须填写原因" class="headerlink" title="关闭bug的时候必须填写原因"></a>关闭bug的时候必须填写原因</h3><p>公司有个规定, 关闭jira必须填写一些字段. 其实每次填写的内容都一样的, 自动填写可以节省非常多时间.</p><p>实现也非常简单, 定时器来寻找指定dom, 然后为这些dom附上指定的值.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">setInputValue</span> = (<span class="params">id, value</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(id)) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(id).<span class="property">value</span> = value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">setInputValue</span>(<span class="string">&#x27;resolution&#x27;</span>, <span class="number">10000</span>)</span><br><span class="line"><span class="title function_">setInputValue</span>(<span class="string">&#x27;customfield_10903&#x27;</span>, <span class="number">12502</span>)</span><br><span class="line"><span class="title function_">setInputValue</span>(<span class="string">&#x27;customfield_12301&#x27;</span>, <span class="string">`故障原因：代码错误</span></span><br><span class="line"><span class="string">解决方式：修复</span></span><br><span class="line"><span class="string">影响范围：界面</span></span><br><span class="line"><span class="string">故障处理人：yo-cwj.com`</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure><h2 id="获取vue应用的实例来修改界面"><a href="#获取vue应用的实例来修改界面" class="headerlink" title="获取vue应用的实例来修改界面"></a>获取vue应用的实例来修改界面</h2><p>老婆画了几套微信表情, 于是我经常登录上去看数据.</p><p>但dashboard上信息很少, 需要点到每个表情的详情中才能查看.</p><p>通过网络请求, 我看到其实在dashboard的界面, 数据已经请求到了, 于是开始我们的修改.</p><h3 id="从dom中寻找vue实例"><a href="#从dom中寻找vue实例" class="headerlink" title="从dom中寻找vue实例"></a>从dom中寻找vue实例</h3><p>通过基础的vue知识, 我们知道vue实例是会挂在dom上的. </p><p>(vue作者说可以认为他是可用的, 因为vue的devtool也是依赖这个特性的, 那我们一个小脚本是更可用了)</p><p>那么哪些dom上有vue实例, 有点像个面试题, 写个简单的脚本就可以找到:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="title function_">traverse</span> = (<span class="params">dom</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (dom.<span class="property">__vue__</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(dom.<span class="property">__vue__</span>.<span class="property">_data</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dom.<span class="property">children</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="title function_">traverse</span>(dom.<span class="property">children</span>[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">traverse</span>()</span><br></pre></td></tr></table></figure><p>找到目标数据所在的dom, 正式的脚本就这样获取vue实例就可以了.</p><h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><p>首先通过vue实例的<code>_data</code>属性获取到数据:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.page_mod_page_simple.page_home&#x27;</span>).<span class="property">__vue__</span>.<span class="property">$parent</span>.<span class="property">currentList</span>;</span><br></pre></td></tr></table></figure><p>然后把数据贴到对应的dom上:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> emotion_dom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.table_wrp_emotion_list&#x27;</span>).<span class="title function_">querySelector</span>(<span class="string">&#x27;.table_body&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; emotion_dom.<span class="property">children</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">emotion_dom.<span class="property">children</span>[i].<span class="property">children</span>[<span class="number">2</span>].<span class="property">innerHTML</span> += <span class="string">`(<span class="subst">$&#123;list[i].SendNum&#125;</span> - <span class="subst">$&#123;list[i].DataTime&#125;</span>)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>到这里脚本就写完了, 其他的vue应用其实还可以调用vue实例中的方法获取数据, 或自己获取数据放进vue实例.</p><h3 id="解决执行环境的问题"><a href="#解决执行环境的问题" class="headerlink" title="解决执行环境的问题"></a>解决执行环境的问题</h3><p>但把这段代码放到boost中会出现拿不到dom的<code>\_\_vue\_\_</code>实例的问题, 因为boost和chrome extension的执行环境并不是浏览器执行环境. 可以通过创建script并执行的方式.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">script.<span class="property">textContent</span> = <span class="string">&quot;const list = document.querySelector(&#x27;.page_mod_page_simple.page_home&#x27;).__vue__.$parent.currentList;&quot;</span> +</span><br><span class="line">  <span class="string">&quot;const emotion_dom = document.querySelector(&#x27;.table_wrp_emotion_list&#x27;).querySelector(&#x27;.table_body&#x27;);&quot;</span> +</span><br><span class="line">  <span class="string">&quot;for (let i = 0; i &lt; emotion_dom.children.length; i++) &#123;&quot;</span> +</span><br><span class="line">  <span class="string">&quot; emotion_dom.children[i].children[2].innerHTML += `($&#123;list[i].SendNum&#125; - $&#123;list[i].DataTime&#125;)`&quot;</span> +</span><br><span class="line">  <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+            <tag> chrome-extension </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack-dev-server热加载proxy设置</title>
       <link href="/2023/09/24/webpack-dev-server-hot-reload-proxy-config/"/>
       <url>/2023/09/24/webpack-dev-server-hot-reload-proxy-config/</url>
@@ -730,9 +757,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
         </tags>
       
@@ -757,9 +784,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
         </tags>
       
@@ -784,9 +811,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
         </tags>
       
@@ -838,9 +865,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
             <tag> react </tag>
             
@@ -1115,9 +1142,9 @@
             
             <tag> webpack </tag>
             
-            <tag> immer </tag>
-            
             <tag> vue </tag>
+            
+            <tag> immer </tag>
             
             <tag> react </tag>
             
@@ -1921,9 +1948,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
             <tag> 分析 </tag>
             
@@ -2192,9 +2219,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
             <tag> 分析 </tag>
             
@@ -2221,9 +2248,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
             <tag> 分析 </tag>
             
@@ -2277,9 +2304,9 @@
       
         <tags>
             
-            <tag> vue源码 </tag>
-            
             <tag> vue </tag>
+            
+            <tag> vue源码 </tag>
             
             <tag> 分析 </tag>
             
