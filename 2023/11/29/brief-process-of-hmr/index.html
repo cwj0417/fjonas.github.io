@@ -41,7 +41,11 @@
 <h3 id="server检测到module更新"><a href="#server检测到module更新" class="headerlink" title="server检测到module更新"></a>server检测到module更新</h3><p>webpack编译完会触发<code>this._done()</code>, 再触发<code>this.watch()</code>. </p>
 <p>这里用<code>watchpack</code>来检测文件更新, 更新后会触发<code>this._invalidate()</code>, 继而重复以上流程.</p>
 <h3 id="server重新编译"><a href="#server重新编译" class="headerlink" title="server重新编译"></a>server重新编译</h3><p>当再次调用<code>compiler.compile()</code>, 也还会从入口开始整个流程, 但在<code>module.needBuild()</code>会过滤没有变化的文件. 重新编译的文件会产生新的hash. </p>
-<p>编译时产生的hash会被hmrplugin取到并保存, 并使用<code>emitFile()</code>来产生menifest文件和更新后的模块内容文件.</p>
+<p>经过debug可以看到, 在<code>.needBuild()</code>过程中, 第一次编译会走到<code>forceBuild</code>而直接编译.</p>
+<p>之后会对比needBuild参数的<code>valueCacheVersions</code>和<code>this.buildInfo.valueDependencies</code>的hash值.</p>
+<p>最后hmr的重新build是被<code>fileSystemInfo.checkSnapshotValid</code>返回了<code>false</code>而进行重新编译的.</p>
+<h3 id="产生menifest文件和更新内容文件"><a href="#产生menifest文件和更新内容文件" class="headerlink" title="产生menifest文件和更新内容文件"></a>产生menifest文件和更新内容文件</h3><p>hmrplugin在<code>compilation.hooks.processAssets</code>钩子调用<code>emitAsset()</code>先后产生了新模块内容文件(js文件)和menifest文件(json文件).</p>
+<p>可以看到在<code>processAssets</code>的钩子里, 获取了compilation的<code>chunkGraph</code>, <code>modules</code>, <code>records</code>中的信息进行了之后的处理. 输出了这2个类型的文件供之后client调用获取更新信息和更新内容.</p>
 <h3 id="server向client推送信息"><a href="#server向client推送信息" class="headerlink" title="server向client推送信息"></a>server向client推送信息</h3><p><code>.watch()</code>方法的<code>invalid</code>钩子和<code>.compile()</code>完成后的<code>done</code>钩子都在<code>Server.js</code>里的<code>setupHooks()</code>被注册了脚本.</p>
 <p>最后调用了3次<code>this.sendMessage()</code>先后向clients广播了<code>invalid</code>, <code>hash</code>, <code>ok</code>事件.</p>
 <h3 id="client收到module更新信息"><a href="#client收到module更新信息" class="headerlink" title="client收到module更新信息"></a>client收到module更新信息</h3><p>让我们回到client的<code>onSocketMessage</code>里找到对应的事件.</p>
