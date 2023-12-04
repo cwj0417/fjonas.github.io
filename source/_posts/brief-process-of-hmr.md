@@ -97,7 +97,17 @@ webpack编译完会触发`this._done()`, 再触发`this.watch()`.
 
 当再次调用`compiler.compile()`, 也还会从入口开始整个流程, 但在`module.needBuild()`会过滤没有变化的文件. 重新编译的文件会产生新的hash. 
 
-编译时产生的hash会被hmrplugin取到并保存, 并使用`emitFile()`来产生menifest文件和更新后的模块内容文件.
+经过debug可以看到, 在`.needBuild()`过程中, 第一次编译会走到`forceBuild`而直接编译.
+
+之后会对比needBuild参数的`valueCacheVersions`和`this.buildInfo.valueDependencies`的hash值.
+
+最后hmr的重新build是被`fileSystemInfo.checkSnapshotValid`返回了`false`而进行重新编译的.
+
+### 产生menifest文件和更新内容文件
+
+hmrplugin在`compilation.hooks.processAssets`钩子调用`emitAsset()`先后产生了新模块内容文件(js文件)和menifest文件(json文件).
+
+可以看到在`processAssets`的钩子里, 获取了compilation的`chunkGraph`, `modules`, `records`中的信息进行了之后的处理. 输出了这2个类型的文件供之后client调用获取更新信息和更新内容.
 
 ### server向client推送信息
 
