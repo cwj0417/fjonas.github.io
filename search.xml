@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>改写git历史</title>
+      <link href="/2023/12/29/rewriting-git-history/"/>
+      <url>/2023/12/29/rewriting-git-history/</url>
+      
+        <content type="html"><![CDATA[<p>前阵给webpack-dev-server提了pr, 好不容易等到老板来approve了, 结果因为commit作者信息错误而不能被merge.</p><p>对git一直啥都不懂, 所以<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">看了一下文档</a>, 并记录一下如何改写git历史.</p><span id="more"></span><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>改写git历史可以做到实现任何效果: <strong>修改commit内容, 修改作者, 为commit增加文件, 拆分commit成多个, 删除commit</strong>.</p><p>另外有一点要注意的是, <strong>如果代码已经push到remote, 那么需要使用 -f 参数来push修改后的代码</strong>, 并且需要 -f 的仓库权限, 同事可能也会因为commit的修改感到迷惑.</p><p>如果不使用 -f 来push, 那么需要先 pull 再 push, 这样会产生一些平行的commit, 也会让人感到疑惑.</p><p>所以改写历史操作最好在push到remote前操作, 这是我们最后的机会.</p><h2 id="amend"><a href="#amend" class="headerlink" title="amend"></a>amend</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure><p>执行这个修改最近的一条commit的内容.</p><p>执行完后会进入文本编辑, 修改完保存即可.</p><p>因为amend可以实现任何修改效果, 可以这样:</p><ul><li>先<code>add</code>再<code>amend</code>可以把新add的内容合并到最近的commit.</li><li>可以配合<code>--author=&lt;xxx&gt;</code>来修改作者, 或者配合其他commit的参数.</li></ul><h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>如果要对多个commit进行操作, 就需要用到rebase.</p><p>rebase是用来手动整理commit的, 如果使用在当前分支上, 就可以满足修改多个commit的需求.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i head~x</span><br></pre></td></tr></table></figure><p>这是我们场景中rebase的用法, x是指修改的commit数量. </p><p>rebase后会出现文本编辑器, 大概是这样:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick f7f3f6d Change my name a bit</span><br><span class="line">pick 310154e Update README formatting and add blame</span><br><span class="line">pick a5f4a0d Add cat-file</span><br></pre></td></tr></table></figure><p>需要注意到的是, <strong>rebase交互文本的commit顺序是和git log相反的</strong>. 越早的提交在越前面.</p><p>我们需要修改的是, 每行的第一列(操作)和最后一列(commit内容).</p><p>主要需要了解的, 就是操作. 下面说四个常用的操作. </p><h3 id="删除commit和交换commit位子"><a href="#删除commit和交换commit位子" class="headerlink" title="删除commit和交换commit位子"></a>删除commit和交换commit位子</h3><p>操作设置为 d (drop), 可以删除commit, 交换commit的顺序, 就可以交换commit的顺序. 举个例子.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick a5f4a0d Add cat-file</span><br><span class="line">d 310154e Update README formatting and add blame</span><br><span class="line">pick f7f3f6d Change my name a bit</span><br></pre></td></tr></table></figure><p>如果这样修改文件并保存, 中间的commit将会被删除. (代码改动会被删除)</p><p>并且剩余的2个commit会交换位子.</p><p>要注意的是, 交换commit位子是可能产生冲突的, 因为rebase过程就是模拟修改代码并commit.</p><h3 id="编辑commit"><a href="#编辑commit" class="headerlink" title="编辑commit"></a>编辑commit</h3><p>如果把操作改成 e (edit), 在保存文件后, 会进入编辑模式.</p><p>编辑模式会把git的状态切换到每个你设置 edit 操作的 commit. 我们可以在这里执行 <code>git commit --amend</code> 来做任何修改.</p><p>这里的修改也包括上文所说的”插入一个新的commit”和”修改作者”等.</p><p>在对一个 edit 的commit操作完成后, 可以输入<code>git rebase --continue</code>来进行下一条edit 的commit的编辑. 直到全部完成, 会自动退出rebase.</p><p>当然也可以<code>git rebase --abort</code>来主动退出rebase.</p><h3 id="合并commit"><a href="#合并commit" class="headerlink" title="合并commit"></a>合并commit</h3><p>如果把操作符改成 s (squash), 在保存文件后, squash 的 commit 会合并进前一个commit, 并进入 合并后的commit 的编辑文本界面. 再次保存后, squash的commit 和 上一行的commit 就合并成了一个新的commit.</p><h3 id="拆分commit"><a href="#拆分commit" class="headerlink" title="拆分commit"></a>拆分commit</h3><p>拆分commit是在edit的时候进行的.</p><p>其实是一种实践方式, 插入commit也是这个原理.</p><p>在edit的时候, 可以进行 <code>git remove</code>, <code>git commit</code>, <code>git add</code>, <code>git commit</code>的操作, 将当前commit拆分成多个.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>测量webpack编译速度</title>
       <link href="/2023/12/14/measuring-webpack-build-speed/"/>
       <url>/2023/12/14/measuring-webpack-build-speed/</url>
