@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>webpack cache实践与原理 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">webpack cache实践与原理</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/webpack/" style="font-size: 19.54px;">webpack</a> <a href="/tags/vue/" style="font-size: 19.08px;">vue</a> <a href="/tags/javascript/" style="font-size: 18.62px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 18.15px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 17.69px;">深入es6</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.23px;">应用</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.23px;">vue源码</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.23px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 16.77px;">心理学</a> <a href="/tags/electron/" style="font-size: 16.77px;">electron</a> <a href="/tags/react/" style="font-size: 16.31px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15.85px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 15.85px;">博客装饰</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.38px;">代码组织</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.38px;">资本论</a> <a href="/tags/angular/" style="font-size: 14.92px;">angular</a> <a href="/tags/d3/" style="font-size: 14.92px;">d3</a> <a href="/tags/haha/" style="font-size: 14.92px;">haha</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 14.92px;">小程序</a> <a href="/tags/ae-exp/" style="font-size: 14.46px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.46px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.46px;">chrome extension</a> <a href="/tags/vite/" style="font-size: 14.46px;">vite</a> <a href="/tags/ci/" style="font-size: 14.46px;">ci</a> <a href="/tags/monorepo/" style="font-size: 14.46px;">monorepo</a> <a href="/tags/http/" style="font-size: 14.46px;">http</a> <a href="/tags/git/" style="font-size: 14.46px;">git</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.46px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.46px;">vuex</a> <a href="/tags/redux/" style="font-size: 14.46px;">redux</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E6%91%A9%E6%89%98%E8%BD%A6/" style="font-size: 14px;">摩托车</a> <a href="/tags/chrome-extension/" style="font-size: 14px;">chrome-extension</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/codemirror/" style="font-size: 14px;">codemirror</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/github-action/" style="font-size: 14px;">github action</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 14px;">道德情操论</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%9A%84%E9%9B%A8%E4%BC%9E%E4%B8%8B/" style="font-size: 14px;">数学的雨伞下</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">webpack cache实践与原理</h1><div class="post-meta">Feb 21, 2024<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>webpack cache 发布3年多了, 在历史包袱中的项目中其实非常好用.</p>
+<p>本文会介绍 cache 在一个项目中的实践经验, 和实现流程, 以及了解流程后的一些推论.</p>
+<span id="more"></span>
+
+<h2 id="webpack-cache-实践经验"><a href="#webpack-cache-实践经验" class="headerlink" title="webpack cache 实践经验"></a>webpack cache 实践经验</h2><p>我的实践经验是基于公司的一个 monorepo 老项目.</p>
+<p>效果是单个子项目的<strong>dev速度从110秒减少到了7秒, 单个文件改动10秒</strong>.</p>
+<p>下面说的经验也都是基于这个例子.</p>
+<h3 id="合适的使用场景"><a href="#合适的使用场景" class="headerlink" title="合适的使用场景"></a>合适的使用场景</h3><p>webpack cache 的效果是用磁盘空间换 compile 速度.</p>
+<p>所以在我看来, webpack cache 更合适在本地 dev 的场景使用, 因为本地 dev 触发 compile 比 ci 服务器频繁得多, 并且改动更小, 可以命中更多缓存, 也能大幅提升开发体验.</p>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>在实践中, 缓存的命中率没什么可操作性. 优化空间都在减少占用磁盘空间上. 在我的项目中, 我做了以下配置:</p>
+<ol>
+<li><p>如果配置 cache 的文件是读取配置文件的, 要将<code>buildDependencies</code> 配置为你的文件, 而不是 <code>__filename</code>. 在我们公司打包脚本中是一个 webpack-chain 文件.</p>
+</li>
+<li><p>monorepo 子包会有一些公共依赖, 在 module resolve 的时候也会指到主包的 node_modules, 在这种情况下 cache 配置的 <code>cacheDirectory</code> 可以让多个子包指到同一个文件夹, 来节省cache空间. (在 dev 的时候 react-refresh 会产生大几百m的缓存, 是起码可以节省的)</p>
+</li>
+<li><p>合理设置 <code>maxAge</code>, 超过 <code>maxAge</code> 的未被使用的缓存会被清除. </p>
+<p>我的看法是生产设置小, dev看自己电脑空间, 如果足够的话可以不设置. (默认一个月)</p>
+</li>
+</ol>
+<h2 id="webpack-cache-实现流程"><a href="#webpack-cache-实现流程" class="headerlink" title="webpack cache 实现流程"></a>webpack cache 实现流程</h2><p>下面会深入一下 cache 的实现流程, 了解流程除了满足好奇心, 还可以:</p>
+<ul>
+<li>根据特殊场景优化配置.</li>
+<li>了解什么边缘情况会造成缓存占用磁盘大.</li>
+<li>根据自己需求二开 cache.</li>
+</ul>
+<p>webpack cache 的实现流程职能分层非常清晰, 并且只有一个分层比较复杂, 其他都很简单. </p>
+<p>我们从 compile 时调用 cache 说起.</p>
+<h3 id="在-compile-流程中读取与保存-cache"><a href="#在-compile-流程中读取与保存-cache" class="headerlink" title="在 compile 流程中读取与保存 cache"></a>在 compile 流程中读取与保存 cache</h3><p>webpack流程相关的前置知识如果不清楚, 需要先看以往的文章来补一下, 再继续回这里.</p>
+<p>在<code>compilation</code>里有三个变量: <code>_modulesCache</code>, <code>_assetsCache</code>, <code>_codeGenerationCache</code>. 分别在对应的时间点读取和写入 cache:</p>
+<ul>
+<li><p>_modulesCache 读取: 在 addModule 的时候读取. module 的 build 在读取之后, 如果命中 cache, 那么<code>needBuild</code>就会是false, 跳过这个 module 的 build, 来节省时间. (build 做的事是运行 loader 和 parse 并分析 ast )</p>
+</li>
+<li><p>_modulesCache 写入: 在 module 的 build 完成之后, 把 build 后的 module 结果按照 module 的 id 存储起来.</p>
+</li>
+<li><p>_codeGenerationCache: 读取和写入分别在<code>module.codeGeneration()</code>的前后.</p>
+</li>
+<li><p>_assetsCache: 在最终生成 assets 的阶段, 在获取 manifest 以后读取 cache, 如果命中, 则不逐个调用<code>fileManifest.render()</code>来产生 assets 了. 如果不命中, 则调用 render 后写入 cache.</p>
+<p>(这里调用的时候加了层包装是因为这里的 cache 都要匹配 hash )</p>
+</li>
+</ul>
+<h3 id="这些-cache-的来源和相关的调用时机"><a href="#这些-cache-的来源和相关的调用时机" class="headerlink" title="这些 cache 的来源和相关的调用时机"></a>这些 cache 的来源和相关的调用时机</h3><p>在代码中可以看到, 这些 cache 都是调用 <code>compiler.getCache()</code> 获得的, 也就是 <code>compiler.cache()</code>封装了一层 facade.</p>
+<p>而<code>this.cache</code>就是<code>new Cache()</code>. 所以上面章节的 cache, 都是 <code>new Cache()</code>实例的调用.</p>
+<p>另外可以看到, <code>this.cache</code>在 compiler 中, 还在对应的流程中调用了 <code>beginIdle</code>, <code>endIdle</code>, <code>shutdown</code>, 和<code>storeBuildDependencies</code>.</p>
+<p>buildDependency 不影响功能先不看, 其他的调用之后展开.</p>
+<h3 id="通过-option-指向不同的-cache-实现"><a href="#通过-option-指向不同的-cache-实现" class="headerlink" title="通过 option 指向不同的 cache 实现"></a>通过 option 指向不同的 cache 实现</h3><p>进入到<code>Cache</code>类里, 发现所有方法的时间都是调用了 tapable.</p>
+<p>cache 的具体实现, 是在 apply option 的时候注入的. (文件是 WebpackOptionsApply, 方法是 process )</p>
+<p>在这里可以看到, case 很少, 只有2个.</p>
+<p>第一个是使用内存, 第二个是使用文件系统写入硬盘.</p>
+<p>内存使用里的<code>MemoryCachePlugin</code>非常简单: </p>
+<blockquote>
+<p>在内存里建立一个<code>map</code>, 分别在外部调用<code>get()</code>, 和<code>store()</code>方法的时候调用对应的<code>map</code>的方法.</p>
+<p>另外在<code>shutdown</code>的时候把<code>map</code>清了.</p>
+</blockquote>
+<p>对, 就是这么简单. 其实文件系统也这么简单, 复杂的点是读取和写入硬盘.</p>
+<h3 id="写入文件的-cache-实现-IdleFileCachePlugin"><a href="#写入文件的-cache-实现-IdleFileCachePlugin" class="headerlink" title="写入文件的 cache 实现: IdleFileCachePlugin"></a>写入文件的 cache 实现: IdleFileCachePlugin</h3><p>现在我们来看写入硬盘的实现: <code>IdleFileCachePlugin</code>.</p>
+<p>先看<code>get</code>和<code>store</code>方法, 其实就是调用了<code>strategy.store</code>和<code>strategy.restore</code>. 只是多写几行代码来保证所有的写操作都做完再读.</p>
+<p>除此之外, 还在 beginIdle 和 shutdown 的时候调用了<code>strategy.afterAllStored</code>来持久化 cache.</p>
+<h3 id="PackFileCacheStrategy-主要功能"><a href="#PackFileCacheStrategy-主要功能" class="headerlink" title="PackFileCacheStrategy 主要功能"></a>PackFileCacheStrategy 主要功能</h3><p>进入到strategy, 我们关注<code>store</code>, <code>restore</code>, 和<code>afterAllStored</code>方法.</p>
+<p>先看<code>store</code>, 和<code>restore</code>方法, 通过<code>_getPack()</code>获取到从硬盘读取的结构化数据<code>pack</code>, 分别调用<code>pack</code>的<code>get()</code>方法和<code>set()</code>方法.</p>
+<p><code>afterAllStored</code>的作用是把数据持久化到硬盘. 第一步也是获取内存里的<code>pack</code>数据, 再经过一定处理来写到硬盘中.</p>
+<p>经过观察可以看到, <code>_openPack()</code>的读取硬盘, 和<code>afterAllStored()</code>的写入文件, 都是通过<code>fileSerializer()</code>来进行的.</p>
+<p>cache 在内存, 与文件系统的最大区别, 其实就在于持久化的过程, 对于 cache 的读取和写入都是差不多的.</p>
+<p>而下面要说的<code>fileSerializer</code>做的事, 就把内存中的格式化数据向硬盘读写, <strong>并且尽量优化减少写入的体积</strong>.</p>
+<h3 id="整理数据与写入和读取文件的-Serializer"><a href="#整理数据与写入和读取文件的-Serializer" class="headerlink" title="整理数据与写入和读取文件的 Serializer"></a>整理数据与写入和读取文件的 Serializer</h3><p>这一节是最复杂的, 主要研究对象是<code>fileSerializer</code>的2个方法<code>serialize()</code>和<code>deserialize()</code>.</p>
+<p>并且优化逻辑是和上面提到的<code>pack</code>和相关实体的数据结构紧密相关的.</p>
+<p>首先看<code>fileSerializer</code>以 middleware 的形式来分代码职责, 执行<code>fileSerializer</code>的<code>serialize()或deserialize()</code>的时候, 会轮流执行各个 middleware 的对应的<code>serialize()或deserialize()</code>方法.</p>
+<p>构造时候的 middleware 有:</p>
+<ol>
+<li>SingleItemMiddleware: 转化数组&#x2F;单个元素的, 我感觉就没啥用, 没体会到意义.</li>
+<li>ObjectMiddleware: 在序列化的时候, 调用目标数据自己的函数, 进行数据整理.</li>
+<li>binaryMiddleware: 序列化&#x2F;反序列化成二进制.</li>
+<li>fileMiddleware: 读取&#x2F;写入硬盘.</li>
+</ol>
+<p>下面展开讲一下我关注的<code>ObjectMiddleware</code>.</p>
+<h3 id="ObjectMiddleware与pack的读取-写入优化"><a href="#ObjectMiddleware与pack的读取-写入优化" class="headerlink" title="ObjectMiddleware与pack的读取&#x2F;写入优化"></a><code>ObjectMiddleware</code>与<code>pack</code>的读取&#x2F;写入优化</h3><p>先来看<code>ObjectMiddleware</code>的<code>serialize()</code>和<code>deserialize()</code>方法.</p>
+<p>他们的模式其实是一样的: 构造一个上下文<code>ctx</code>来给序列化&#x2F;反序列化的数据对应的方法调用.</p>
+<p>其实 s&#x2F;ds 的直接目标都是<code>PackContainer</code>对象, 所以会在 s&#x2F;ds 的过程中调用<code>PackContainer</code>的 s&#x2F;ds 方法.</p>
+<p>ctx中提供的<code>write</code>, <code>read</code>方法可以操作正在被<code>ObjectMiddleware</code>处理的数据, 从而影响<code>ObjectMiddleware</code>的处理结果.</p>
+<p>另外可以看到<code>PackContainer</code>的<code>writeLazy</code>的目标是<code>this.data</code>, 也就是<code>pack</code>对象, 并且<code>write()</code>会触发<code>pack</code>对象的 s&#x2F;ds 方法.</p>
+<p>经过debug, <code>PackContainer</code>里的内容其实是差不多的, 所以核心内容就是<code>pack</code>的 s&#x2F;ds 方法了.</p>
+<h3 id="pack-的数据结构与优化"><a href="#pack-的数据结构与优化" class="headerlink" title="pack 的数据结构与优化"></a>pack 的数据结构与优化</h3><p>这是最后一部分, 但比较复杂, 我只有能力简单的说一下.</p>
+<p>首先说几个 pack 的关键属性:</p>
+<ul>
+<li><p>content: 他是真正存放内容的地方. 但奇怪的他不是一个 map, 而是一个数组.</p>
+<p><strong>用意是数组的每个元素最后会被写成单独的文件, 通过一些优化, 每次改动可以只写有改动的 cache 所对应的文件</strong></p>
+</li>
+<li><p>itemInfo: 这个是保存数据关系的地方. </p>
+<p>他的键是 id, <code>pack</code> 的 <code>get()</code>, <code>set()</code> 的第一步都是先从<code>itemInfo</code>中通过 id 找到对应的信息.</p>
+<p>他的值是对应的信息, 信息内容有: <strong>etag 对比 hash; location 存储信息在 content 数组的哪个位置; lastAccess 每次 get 会更新值, 在垃圾回收的时候配合 maxAge 决定是否清理; freshValue 如果不存储在 content 中, 他是一个刚被建立的内容, 值就存在这里, 相对的, location 有值的时候这里是没值的</strong>.</p>
+</li>
+<li><p>invalid: 如果<code>pack</code>完全没动, 这个变量可以快速判断. 第一次 <code>set()</code> 操作就会把他置为 true.</p>
+</li>
+</ul>
+<p>如果熟悉了这些属性, 那么<code>pack</code>的<code>set()</code>和<code>get()</code>方法就非常好理解了.</p>
+<p>最后, <code>pack</code>在<code>serialize()</code>的方法中进行了垃圾回收的操作, </p>
+<p>就结果而言, 就是合理地对<code>pack</code>的数据结构进行一些更新. (主要就是 content 和 itemInfo, lazy, outdated 判断和变更)</p>
+<p>但其过程在我能力范围之外, 以后能力有提升的话再回来分析.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/webpack/">webpack</a></div><div class="post-nav"><a class="next" href="/2023/12/29/rewriting-git-history/">改写git历史</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
