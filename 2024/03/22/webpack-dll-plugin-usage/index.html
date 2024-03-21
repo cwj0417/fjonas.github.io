@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>webpack dll-plugin使用方法 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">webpack dll-plugin使用方法</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/vue/" style="font-size: 19.5px;">vue</a> <a href="/tags/javascript/" style="font-size: 19px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 18.5px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 18px;">深入es6</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.5px;">应用</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.5px;">vue源码</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.5px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 17px;">心理学</a> <a href="/tags/electron/" style="font-size: 17px;">electron</a> <a href="/tags/react/" style="font-size: 16.5px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 16px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 16px;">博客装饰</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.5px;">代码组织</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.5px;">资本论</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/d3/" style="font-size: 15px;">d3</a> <a href="/tags/haha/" style="font-size: 15px;">haha</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/ae-exp/" style="font-size: 14.5px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.5px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.5px;">chrome extension</a> <a href="/tags/vite/" style="font-size: 14.5px;">vite</a> <a href="/tags/ci/" style="font-size: 14.5px;">ci</a> <a href="/tags/monorepo/" style="font-size: 14.5px;">monorepo</a> <a href="/tags/http/" style="font-size: 14.5px;">http</a> <a href="/tags/git/" style="font-size: 14.5px;">git</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.5px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.5px;">vuex</a> <a href="/tags/redux/" style="font-size: 14.5px;">redux</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E6%91%A9%E6%89%98%E8%BD%A6/" style="font-size: 14px;">摩托车</a> <a href="/tags/chrome-extension/" style="font-size: 14px;">chrome-extension</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/codemirror/" style="font-size: 14px;">codemirror</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/github-action/" style="font-size: 14px;">github action</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 14px;">道德情操论</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%9A%84%E9%9B%A8%E4%BC%9E%E4%B8%8B/" style="font-size: 14px;">数学的雨伞下</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">webpack dll-plugin使用方法</h1><div class="post-meta">Mar 22, 2024<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>dll-plugin是个官方插件, 但文档不那么清楚, 网上的文章也比较模糊.</p>
+<p>前阵在使用的时候还遇到了个bug, 最后给webpack提了pr, 所以这里说一下dll-plugin的使用方法和简单的原理.</p>
+<span id="more"></span>
+
+<h2 id="总体效果"><a href="#总体效果" class="headerlink" title="总体效果"></a>总体效果</h2><p>效果上来说, 把不容易变的代码分开打包. 比如第三方库和组件.</p>
+<p>从形式上来说, 新增一个产生dll文件的打包过程, 原打包就做一下引用. 但dll文件涉及ci相关处理.</p>
+<p>从打包结果上来看, dll文件就是一个library的输出, 并且多了manifest文件. manifest文件供使用方读取来获取对应的模块.</p>
+<p>##官方例子</p>
+<p>这个章节我们直接看<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/tree/main/examples/dll">官方例子</a>来感受下用法, 和一些option的用法.</p>
+<h3 id="打包dll"><a href="#打包dll" class="headerlink" title="打包dll"></a>打包dll</h3><p>看这个例子的option: </p>
+<ul>
+<li>有2个入口, alpha和beta.</li>
+<li>输出配置了library, 我们可以尝试把plugins配置去掉, 发现打包结果是基本一样的, 只有hash值不同.</li>
+<li>加载dll-plugin, 这样结果会输出manifest文件, 这个插件的配置内容也就是manifest文件的名字.</li>
+</ul>
+<p>运行webpack后, 获得到2个library的打包文件, 和2个manifest文件. 因为配了2个入口.</p>
+<h3 id="使用dll"><a href="#使用dll" class="headerlink" title="使用dll"></a>使用dll</h3><p>我们来到<code>dll-user</code>的例子. 可以看到这里调用了2次<code>DllReferencePlugin</code>插件.</p>
+<p>配置也非常简单, 就是指了下manifest文件的位置. 使用方通过manifest文件知道模块的名字.</p>
+<p>至于文件名在哪里, 应该要配置name, 并且与打包dll的output相同, 但这里直接写在html了.</p>
+<p>另外, alpha和beta的区别是什么? 是scope. 我们来到example.js下就知道scope的意义了.</p>
+<h2 id="多入口的问题"><a href="#多入口的问题" class="headerlink" title="多入口的问题"></a>多入口的问题</h2><p>我写了简单的测试, 看dll和cache谁更有用, 但偶尔发现了个bug.</p>
+<p>在多入口的场景, dll的path没有配置template string. 导致manifest文件偶尔产生非法json.</p>
+<p>在与朋友讨论后, 还得出过错误的结论(认为要清理, 并使用了不同清理方法), 最后发现多入口必须要通过path选项来产生多个manifest文件.</p>
+<p>于是最后为webpack改进了这个问题的提示, 在错误使用的情况下报了错.</p>
+<p>但中间还是经过了一些改动的:</p>
+<ul>
+<li><p>其实说多入口是不准确, 应该是多chunk.</p>
+</li>
+<li><p>并且光判断path是不是有template string也不能保证是不是每个chunk都有不同的path.</p>
+</li>
+<li><p>说多chunk也不准确, 一些内部情况下是有最终不输出文件的辅助(假)chunk的.</p>
+</li>
+</ul>
+<h2 id="简单看下源码"><a href="#简单看下源码" class="headerlink" title="简单看下源码"></a>简单看下源码</h2><p>最后简单看一下这2个plugin的大致内容:</p>
+<h3 id="DllPlugin"><a href="#DllPlugin" class="headerlink" title="DllPlugin"></a>DllPlugin</h3><p>可以看到代码很简单, 就引用了3个plugin:</p>
+<ul>
+<li><p><code>DllEntryPlugin</code>: </p>
+<p>特别注意<code>entryOption</code>这个钩子是bail钩子, 是会覆盖其他入口的.</p>
+<p>虽然覆盖了原来的entry插件, 但其实把原来的entry作为自己的dependency.</p>
+<p>并且Dll模块的build方法啥事都没干. 所以Dll入口只是在原来entry外面套了一层空的module. 估计是用来配合manifest插件的.</p>
+</li>
+<li><p><code>LibManifestPlugin</code>: 在emit阶段读取chunk graph, 为每个chunk生成一个manifest文件.</p>
+</li>
+<li><p><code>FlagAllModulesAsUsedPlugin</code>: 配合<code>entryOnly</code>选项来用, 用来标记模块是否使用, 以防止optimize的时候被干掉的.</p>
+<p>这个plugin里有好多方法是实用的, 比如避免乾坤的入口被tree-shaking掉.</p>
+<p>(关于tree-shaking相关比较复杂, 之前的文章有详细说)</p>
+</li>
+</ul>
+<h3 id="DllReferencePlugin"><a href="#DllReferencePlugin" class="headerlink" title="DllReferencePlugin"></a>DllReferencePlugin</h3><p>读取: 在beforeCompile的时候读取option里的manifest位置, 并去读那个文件, 把结果保存在内存里. (<code>_compilationData</code>)</p>
+<p>在compile阶段整理参数, 并调用<code>ExternalModuleFactoryPlugin</code>插件. 我看网上有人问dll-plugin和external的区别. 那么答案就是没什么区别.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你觉得本文对你有帮助, 你可以<a href="/about/give-me-a-coffee.html">请我喝一杯咖啡</a></p><p> 本文遵循<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/webpack/">webpack</a></div><div class="post-nav"><a class="next" href="/2024/02/21/webpack-cache-practice-and-mechanism/">webpack cache实践与原理</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
