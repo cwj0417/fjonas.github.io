@@ -40,7 +40,7 @@ tags: [javascript,immer,vue,webpack,http,react]
 
 + **优化**, 无论是html, 首屏, webpack速度, 框架, 数据结构. 本质都是使行为更合理, 减少浪费. 所以优化本身不能作为一个知识点, 而是一个话题. 想优化就要去理解和深入各个知识点本身.
 
-另外**[手写代码合集](https://github.com/cwj0417/sxdm)直接在github上**.
+另外[手写代码合集](https://github.com/cwj0417/sxdm)**直接在github上**.
 
 那么接下来就(不太全面地)分模块, 复习一些基础问题. 
 
