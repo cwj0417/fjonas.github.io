@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>癫痫发作记录的几个改进</title>
+      <link href="/2024/11/22/ep-record-evolution/"/>
+      <url>/2024/11/22/ep-record-evolution/</url>
+      
+        <content type="html"><![CDATA[<p>因为有记录癫痫发作的需求, 一开始是习惯性的使用苹果的notes来记录.</p><p>随着记录越来越多, 很多需求也慢慢出现了, 最近有了一套完整的流程, 觉得比较有意思, 就做一下记录.</p><span id="more"></span><h2 id="翻看历史很难找到目标"><a href="#翻看历史很难找到目标" class="headerlink" title="翻看历史很难找到目标"></a>翻看历史很难找到目标</h2><p>在聊天过程中发现已经不记得国庆的事情, 那么就想知道从国庆到现在有没有发作. 一天的记录就要占小半屏幕, 一个多月的记录很难找到想找的信息.</p><p>另外, 发作是有很多种类的, 想知道种类间有没有关系, 也是很难的.</p><p>所以我写了一个可视化的页面, 分为2个部分, 日历部分和详情部分. 日历上会标注一些关键信息, 方便跳转, 点击日期就会在详情部分滚动到对应的日期.</p><p>另外会把不同发作类型在格式化数据中体现, 并渲染在日历上.</p><p>渲染的方式我选择了canvas, 并把canvas的context作为参数注入到渲染方法中, 这样可以使渲染策略变得很灵活.</p><h2 id="每天每次都要输入日期和时间"><a href="#每天每次都要输入日期和时间" class="headerlink" title="每天每次都要输入日期和时间"></a>每天每次都要输入日期和时间</h2><p>记录是使用notes的, 问题有2个.</p><p>第一是每天都要输入日期, 并且每次发作都会输入时间, 每天10次发作, 一个月就要输入300多次, 而很明显这些操作是可以省略的.</p><p>另外老婆发作告诉我, 我记录, 他也看不到, 有时候轻微的自己可以记录, 也得告诉我, 就需要使用notes的共享.</p><p>notes的共享需要点”invite with link”才可以共享, 之前尝试直接发送airdrop只是复制. 并且中国区通过icloud分享是有bug的, 只能通过imessage发送分享.</p><p>输入日期的问题我使用了shortcuts来解决. 我写了5个脚本互相调用.</p><p>主要调用到的函数很简单. 比如获取当前日期, 获取当前时间, 写入到notes. 再根据具体业务调整就可以了, 没什么难度.</p><h2 id="同步数据的工作量大"><a href="#同步数据的工作量大" class="headerlink" title="同步数据的工作量大"></a>同步数据的工作量大</h2><p>同步数据的问题也分为2个.</p><p>首先数据写在代码里的, 所以每次要提交代码.</p><p>另外数据格式与代码仓库里的数据肯定是不同的, 要手动整理数据, 也是个很大的工作量.</p><p>接上步, 既然日期和时间用shortcuts生成了, 那么格式就很规整, 可以用正则分析出来, 在shortcuts里用的”match text”相关的api.</p><p>一些特殊字段, 发作次数, 使用shortcuts, 让用户选填, 加上通过正则得到的数据, 就整理好了格式化数据.</p><p>第二点, shortcuts可以触发github action, 并且可以带参数, 那么就可以通过github action来提交代码了.</p><p>提交实际, 我选择”每天早上”, 因为睡觉前后很容易发, 在整理好睡觉的发作后, 把前一天的内容提交给github action.</p><p>shortcuts提交给github action, 使用的是ga的触发方式”workflow_dispatch”.</p><p>在github rest api的文档中找到workflow的触发方式, 创建一个personal access token(pat)就可以通过shortcuts的get_url_contents来调用了. (这个api名字让我想到了php)</p><p>需要注意的是, 手动触发的workflow是不会触发其他workflow的. (我这里需要触发on_push的来build页面并发布到github page)</p><p>那么需要新建一个pat, 用这个pat来checkout代码和提交代码.</p><p>强调一下我踩过的坑, 需要用这个pat来checkout代码的, 而checkout一般会用<code>actions/checkout@v4</code>, 注意在这里设置环境变量.</p><p>然后在提交代码的时候先<code>env</code>再在这个<code>env</code>下面<code>run</code>命令就好了.</p><p>简单说一下ga的context. 默认情况下执行ga是可以直接推代码的, 因为context默认有自己githubtoken.</p><p>我们的场景需要自己新建pat. 然后到repo的setting里的action里设置secret, 这样ga的context的secret命名空间就挂上你设的变量了.</p><p>在配置ga的workflow的时候, 使用类似<code>$&#123;&#123;secret.变量名字&#125;&#125;</code>来设置<code>run</code>脚本的<code>env</code>或者插件的<code>with</code>.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> github action </tag>
+            
+            <tag> shortcuts </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>自由意志存不存在</title>
       <link href="/2024/09/17/free-will-existence/"/>
       <url>/2024/09/17/free-will-existence/</url>
