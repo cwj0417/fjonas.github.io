@@ -192,9 +192,7 @@ input {
 }
 .body_container {
   background: transparent;
-  padding: 0 60px;
-  max-width: 1150px;
-  margin: 0 auto;
+  padding: 0 20px;
 }
 .content_container {
   margin-top: 20px;
@@ -770,9 +768,6 @@ div {
 }
 /* middle*/
 @media print, screen and (max-width: 48em) {
-  .body_container {
-    padding: 0 30px;
-  }
   .content_container {
     padding-right: 15px;
   }
@@ -868,9 +863,6 @@ div {
 }
 /* small*/
 @media print, screen and (max-width: 35.5em) {
-  .body_container {
-    padding: 0 20px;
-  }
   .content_container {
     padding-right: 0;
   }
