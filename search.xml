@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>npm依赖的一些问题与resolution的使用</title>
+      <link href="/2025/02/10/npm-resolution/"/>
+      <url>/2025/02/10/npm-resolution/</url>
+      
+        <content type="html"><![CDATA[<p>之前对resolution认知几乎为零, 遇到了问题才理解了.</p><p>再结合之前幽灵依赖的事聊一下npm依赖的问题.</p><span id="more"></span><h2 id="线上bug-本地没问题"><a href="#线上bug-本地没问题" class="headerlink" title="线上bug, 本地没问题"></a>线上bug, 本地没问题</h2><p>有个项目使用到了<code>code-mirror</code>作为文本编辑器, 在一个新版本发生了”按回车不能换行”的问题.</p><p>在生产环境的控制台看不到任何报错, 而在本地功能却没有问题.</p><p>遇到本地生产不一致, 就要思考本地与生产的流程有什么不同, 再逐个验证.</p><p>我把本地node_modules删除重新安装后, 可以重现生产问题了.</p><p>这就是典型的第三方库不讲武德, npm install默认会给兼容小版本的<code>^</code>修饰, 而第三方库在小版本中加入了会使之前代码行为不一致的特性.</p><p>以前有个厉害的同事经常指导我锁版本, 现在算是理解了.</p><h2 id="那就锁版本-但本地白屏了"><a href="#那就锁版本-但本地白屏了" class="headerlink" title="那就锁版本, 但本地白屏了"></a>那就锁版本, 但本地白屏了</h2><p>我把所有<code>code-mirror</code>相关的依赖都锁了版本, 并重新安装, 按我的想象, 所有依赖应该会到以前正常运行的状态.</p><p>仔细看了报错, 是<code>code-mirror</code>加载插件报了”非法插件”, 因为用<code>instance of</code>判断了是否插件类的实例, 而<code>code-mirror</code>的库互相依赖, 导致加载了不同版本的”插件类”, 导致<code>instance of</code>判否, 再导致白屏.</p><p>我认为需要具体描述一下这个过程:</p><p>我的项目有2个依赖:  <strong>A</strong>: 1.0.0, <strong>B</strong>: 1.0.0.</p><p>这2个依赖都锁定了版本为”1.0.0”.</p><p>但 <strong>B</strong> 也把 <strong>A</strong> 作为了依赖, 并且在<code>package.json</code>中的声明是向后兼容小版本: <strong>^1.0.0</strong>.</p><p>在npm安装过程中, <strong>B</strong>的依赖向后兼容, 就安装了 <strong><a href="mailto:&#65;&#64;&#49;&#x2e;&#x35;&#46;&#48;">&#65;&#64;&#49;&#x2e;&#x35;&#46;&#48;</a></strong> 的版本.</p><p>而我的项目安装了<strong><a href="mailto:&#65;&#x40;&#49;&#46;&#x30;&#x2e;&#48;">&#65;&#x40;&#49;&#46;&#x30;&#x2e;&#48;</a></strong> 的版本, 是我在我的项目中锁定的, 而我并不能修改 <strong>B</strong> 项目中的<code>package.json</code>.</p><p>最后, <strong>B</strong> 的代码中, 引入了 <strong><a href="mailto:&#x41;&#x40;&#x31;&#x2e;&#x35;&#x2e;&#x30;">&#x41;&#x40;&#x31;&#x2e;&#x35;&#x2e;&#x30;</a></strong> 的<code>Plugin</code>类, 并且实例化.</p><p>而在我项目的执行过程中, 判断了 <strong>B</strong> 代码中的 <strong>1.5.0</strong>的实例 是否是 <strong><a href="mailto:&#65;&#64;&#49;&#46;&#48;&#46;&#x30;">&#65;&#64;&#49;&#46;&#48;&#46;&#x30;</a></strong>的实例, 他们来自2个文件, 在混淆后甚至变成了不同字母, 那是不可能通过<code>instance of</code>判定了, 所以报错.</p><p>问了朋友, 告诉我在自己<code>package.json</code>中添加一个<code>resolution</code>字段, 声明<code>&#123; A: 1.0.0 &#125;</code>, 这样项目中的<code>A</code>依赖都会安装<code>1.0.0</code>的版本.</p><p>其实前公司一直用<code>resolution</code>固定<code>react</code>版本, 因为react如果存在不同的版本, 也会白屏, 而我一直没去稍微深入了解下.</p><h2 id="幽灵依赖导致的白屏"><a href="#幽灵依赖导致的白屏" class="headerlink" title="幽灵依赖导致的白屏"></a>幽灵依赖导致的白屏</h2><p>然后再重新说一下之前遇到的严重的依赖问题.</p><p>同事的一个组件升级了, 我升级了组件版本, 没有本地运行就推代码, 导致测试环境页面白屏了.</p><p>公司项目用的monorepo, 比如<code>react</code>, <code>react-redux</code>这样的每个项目都要用的依赖, 在子项目中就不声明了.</p><p>同事组件的新版本声明了<code>react-redux</code>的版本, 是比外层声明低的版本.</p><p>在代码中有使用<code>forwardRef</code>, 这个api 是<code>react-redux</code> 7 以后才有的.</p><p>之前使用了外层的<code>react-redux</code>没有问题, 当自己模块就存在<code>react-redux</code>老版本后, 就使用老版本作为resolve, 于是就报错了.</p><p>node的resolve机制是很简单的, 先找自己目录的node_modules, 再递归往父级找, 找到找不到为止.</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果只遇到上述三个问题中的一个, 我们很容易就会得出结论: 比如”要锁版本”, 或者”要写resolution”, 或者”要杜绝幽灵依赖, 自己import的内容一定要声明”.</p><p>但结合一起看会发现, 在一些事情上”准确”,  “合理” 是需要具体情况去把握的.</p><p>比如我盲目杜绝幽灵依赖, 可能导致项目依赖了某个库的多个版本, 导致打包时间与打包体积的大幅上升.</p><p>要记着依赖版本相关的一些特性, 清楚自己在做什么, 具体情况具体处理.</p><p>首先得记得, <strong>只修改依赖的版本号, 也是可能影响其他代码的, 记得先运行再提交代码</strong>  :(</p><p>然后总结下上述问题发生的原因, 都很简单, 遇到问题放松分析就可以:</p><ul><li>线上本地不同的问题可能是线上npm没缓存导致, 可以本地删除node_modules重新安装来重现.</li><li>在锁版本的时候也要同时使用resolution来锁定深层依赖版本.</li><li>在利用幽灵依赖的时候有包的安装和升级要检查新依赖. (在npm install后会在命令行提示的)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>code-mirror块高亮</title>
       <link href="/2025/02/08/code-mirror-block-highlight/"/>
       <url>/2025/02/08/code-mirror-block-highlight/</url>
