@@ -169,6 +169,10 @@ body {
   background-attachment: fixed;
   user-select: none;
 }
+hr {
+  width: 0%;
+  margin: 30px auto;
+}
 .t1 {
   --theme-1: #00c7ff;
   --theme-2: #66deff;
