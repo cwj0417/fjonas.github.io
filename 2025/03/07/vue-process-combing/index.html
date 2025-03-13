@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>vue流程梳理 | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">vue流程梳理</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/vue/" style="font-size: 19.54px;">vue</a> <a href="/tags/javascript/" style="font-size: 19.08px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 18.62px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 18.15px;">深入es6</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.69px;">vue源码</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.23px;">应用</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.23px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 16.77px;">心理学</a> <a href="/tags/electron/" style="font-size: 16.77px;">electron</a> <a href="/tags/react/" style="font-size: 16.31px;">react</a> <a href="/tags/haha/" style="font-size: 15.85px;">haha</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15.85px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 15.85px;">博客装饰</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.38px;">代码组织</a> <a href="/tags/%E8%A7%A3%E9%87%8A%E8%84%91/" style="font-size: 15.38px;">解释脑</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.38px;">资本论</a> <a href="/tags/angular/" style="font-size: 14.92px;">angular</a> <a href="/tags/d3/" style="font-size: 14.92px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 14.92px;">小程序</a> <a href="/tags/ssr/" style="font-size: 14.92px;">ssr</a> <a href="/tags/nuxt/" style="font-size: 14.92px;">nuxt</a> <a href="/tags/ae-exp/" style="font-size: 14.46px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.46px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.46px;">chrome extension</a> <a href="/tags/codemirror/" style="font-size: 14.46px;">codemirror</a> <a href="/tags/vite/" style="font-size: 14.46px;">vite</a> <a href="/tags/ci/" style="font-size: 14.46px;">ci</a> <a href="/tags/github-action/" style="font-size: 14.46px;">github action</a> <a href="/tags/monorepo/" style="font-size: 14.46px;">monorepo</a> <a href="/tags/http/" style="font-size: 14.46px;">http</a> <a href="/tags/git/" style="font-size: 14.46px;">git</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.46px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.46px;">vuex</a> <a href="/tags/redux/" style="font-size: 14.46px;">redux</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/%E6%91%A9%E6%89%98%E8%BD%A6/" style="font-size: 14px;">摩托车</a> <a href="/tags/chrome-extension/" style="font-size: 14px;">chrome-extension</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/shortcuts/" style="font-size: 14px;">shortcuts</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 14px;">道德情操论</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%9A%84%E9%9B%A8%E4%BC%9E%E4%B8%8B/" style="font-size: 14px;">数学的雨伞下</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">vue流程梳理</h1><div class="post-meta">Mar 7, 2025<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>最近看面试题, 我粗看了几个网上的q&amp;a都比较粗糙, 像是背答案, 逻辑连不起来.</p>
+<p>所以打算总结一下vue的启动与更新流程.</p>
+<span id="more"></span>
+
+<p>全文的内容围绕<code>createApp(App).mount(&#39;#app&#39;)</code>做了什么.</p>
+<p>先以最简单的流程, 渐进式深入.</p>
+<h2 id="简要流程"><a href="#简要流程" class="headerlink" title="简要流程"></a>简要流程</h2><h3 id="vue为开发者做了什么"><a href="#vue为开发者做了什么" class="headerlink" title="vue为开发者做了什么"></a>vue为开发者做了什么</h3><p>为什么我们要使用前端框架? 因为可以更容易的维护代码.</p>
+<p>各类框架会比较性能, 而性能最好的一定是 “ js 直接操作dom “, 因为各类框架经过一番操作最后也要做这一步的.</p>
+<p>vue 对于使代码更易维护的解决方案是什么? <strong>UI &#x3D; f ( state )</strong>, 数据驱动界面.</p>
+<p>每一个<code>状态</code>都对应着一个<code>界面</code>, 这是函数的定义.</p>
+<p>而开发者要做的, 就是编写这个函数, 也就是<strong>描述”状态”与”界面”的关系</strong>.</p>
+<p>当然作为前端, 界面也是自己写的. 所以在 .vue 文件中, 有 2 个部分<code>template</code>和<code>script</code>.</p>
+<p><code>template</code>是界面, 视图, 也就是所谓的 <strong>view</strong>.</p>
+<p><code>script</code>是描述视图与数据的关系, vue 在代码中把自己称为 “vm”, 就是 <strong>view-model</strong>.</p>
+<p>数据实体是 model, 这部分分给后端做了, 前端的”vm”, 就是描述model 与 view 的关系.</p>
+<p>vm 就是上个时代 mvc 中的”c”, controller 的重点在”操作, 动作”, vm 的重点在 view 和 model 的对应关系.</p>
+<h3 id="vue的主要流程"><a href="#vue的主要流程" class="headerlink" title="vue的主要流程"></a>vue的主要流程</h3><p>我们写的界面就是 <code>template</code>, 其实他不是 html, 而是一个模板.</p>
+<p>所以 vue 会把 <code>template</code> 处理成真实 dom, 并贴到页面上.</p>
+<p>很明显的, 模板中包含了一些数据.</p>
+<p>当这些数据改变, vue 会把改变后的数据代入模板, 并修改页面上的 dom.</p>
+<p>到这里, 就是 vue 的全部工作了, 业务多复杂, 也就包含了”数据变化页面变化”, 与”收集数据发送给服务端”.</p>
+<p>下面我们再深入一些些细节.</p>
+<h3 id="深入一点点"><a href="#深入一点点" class="headerlink" title="深入一点点"></a>深入一点点</h3><p>再深入一点点, 需要了解一些概念.</p>
+<ul>
+<li><p>虚拟 dom.</p>
+<p>在数据改变而需要改变 dom 的时候, 操作 dom 的成本都比较大.</p>
+<p><strong>虚拟 dom 是描述 dom 状态的 js 对象</strong>.</p>
+<p>对比虚拟 dom 就是对比2个 js 对象, 算出 dom 的最小操作, 再操作 dom, 让性能最大化.</p>
+<p>(题外话, 如果可以不计算, 直接有办法让数据的变化操作 dom, vdom 的对比也可以节省, 关于 vapor 可能会深入看一下, 但现在 vue 的主版本还是基于 vdom 的)</p>
+</li>
+<li><p>render函数.</p>
+<p>vdom 是没有数据变量的, 是一个快照. 所以才能把新老 vdom 进行比较操作.</p>
+<p>而我们的<code>template</code>模板, 是根据包含数据变量的, 不能直接被编译成 vdom.</p>
+<p><code>template</code>模板被编译成 render 函数, 这个函数是包含变量的.</p>
+<p>变量改变, 就可以根据变量生成新的 vdom.</p>
+<p>所以 <strong>render 函数是生成 vdom 的函数, 由<code>template</code>编译而来</strong>.</p>
+</li>
+<li><p>组件.</p>
+<p>vue 应用是以组件为单位”搭积木”的.</p>
+<p>因为组件可以”复用”, 所以我们编写的组件是”组件定义”.</p>
+<p>在使用的时候可以被多次实例化, 形成组件实例, 组件实例是个 js 对象, 会被关联到 vue 应用实例和 dom 上.</p>
+<p>其实有另外组件类型是”容器型组件”, 根组件(页面入口)就是这样的. (这个类型不是实现上的, 是概念上的)</p>
+</li>
+<li><p>effect.</p>
+<p>开始就提到, vue 的方案是 <code>UI = f ( state )</code>.</p>
+<p>那么当 <code>state</code> 变化的时候, 希望函数会自动执行, <code>UI</code> 就会自动变成新的.</p>
+<p>vue 的响应式系统写了 <code>effect</code> 函数, 在 <code>effect</code> 中执行的其他函数, 内部变量改变都会触发函数重新执行.</p>
+<p>大概样子就是 <code>effect(() =&gt; UI = f(state))</code>.</p>
+<p>这样 <code>state</code> 变化, <code>UI</code> 就自动更新. 这个 effect 称作 render effect, 粒度是组件, 这也是容器组件存在的必要性.</p>
+</li>
+</ul>
+<p>接下来说一下启动 vue 的流程:</p>
+<ul>
+<li><p>编译 vue 组件. 这个流程大多情况下是在打包过程中进行的.</p>
+<p>每个 .vue文件都是一个组件, 会被打包成一个 js 对象, 来描述组件.</p>
+<p>这个 js 对象的内容有2部分, <code>script</code>标签返回的内容, 和由 <code>template</code> 编译过来的 render 函数.</p>
+</li>
+<li><p>创建 vue 应用.</p>
+<p>vue 应用也是一个 js 对象, 提供了一些 api, 并包含了我们编写的页面.</p>
+</li>
+<li><p>挂载应用.</p>
+<p>挂载流程从根组件开始.</p>
+<p>执行组件描述对象的 render 函数, 获取到 vdom. (组件描述对象是从 .vue文件编译来的)</p>
+<p>遍历 vdom, 根据 vdom的类型, 创建真实 dom, 贴到挂载目标上.</p>
+<p>如果 vdom 类型是组件, 就递归执行挂载动作.</p>
+</li>
+<li><p>更新视图.</p>
+<p>刚才挂载的流程其实都被包裹在 effect 中.</p>
+<p>在运行环境中的 reactive 变量与 data, props 变化了, 就会引起 组件的 effect 运行.</p>
+<p>effect 运行内容是执行 render 函数, 获取到新的 vdom.</p>
+<p>把新老 vdom 进行比较, 判断出需要更改的 dom, 进行 dom 操作.</p>
+</li>
+</ul>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>上面的内容都是经过简化的, 实际的 vue 使用还有很多分支.</p>
+<p>下面会深入一些, 介绍更细节的东西, 也会介绍更多的分支情况.</p>
+<h3 id="vue-app"><a href="#vue-app" class="headerlink" title="vue app"></a>vue app</h3><p>通过 <code>createApp()</code> 创建的 <code>app</code> 是个 js 对象, 有这些属性:</p>
+<ul>
+<li>_component. 应用的根组件. 也就是整个应用树.</li>
+<li>_container. 应用挂载的目标 dom 节点. 在创建时是空, <code>mount()</code>的时候被赋值.</li>
+<li>_context. 存放很多应用的信息: config &#x2F; components &#x2F; directives &#x2F; mixins &#x2F; provide.</li>
+<li>_instance. 把跟组件实例暴露给 devtools 交互.</li>
+</ul>
+<p>有这些方法: <code>use</code>, <code>mixin</code>, <code>component</code>, <code>directive</code>, <code>mount</code>, <code>unmount</code>, <code>onUnmount</code>, <code>provide</code>, <code>runWithContext</code>.</p>
+<p>这些方法大家都很熟悉, 都是向实例或上下文添加内容, 供后面的流程使用.</p>
+<p>启动后面流程的方法是<code>mount()</code></p>
+<h3 id="mount与patch"><a href="#mount与patch" class="headerlink" title="mount与patch"></a>mount与patch</h3><p><code>mount()</code>做的事是把根组件转成 vdom, 区分 ssr 环境, 最后把 vdom 交给 <code>patch()</code>.</p>
+<p><code>patch()</code>其实就是大家老说的所谓的 diff, 所以自然会接受新老 vdom 这2个参数来进行比较.</p>
+<p>他做的大多数事情并不复杂, 复杂的2个点是涉及到”组件”与”子元素是数组”的情况, 这2个情况后面单独讲.</p>
+<p>这里就顺着代码看<code>patch()</code>做了什么:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">patch</span>: <span class="title class_">PatchFn</span> = <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    n1,</span></span></span><br><span class="line"><span class="params"><span class="function">    n2,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// ...</span></span></span></span><br><span class="line"><span class="params"><span class="function">  </span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n1 === n2) &#123;</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// patching &amp; not same type, unmount old tree</span></span><br><span class="line">    <span class="keyword">if</span> (n1 &amp;&amp; !<span class="title function_">isSameVNodeType</span>(n1, n2)) &#123;</span><br><span class="line">      anchor = <span class="title function_">getNextHostNode</span>(n1)</span><br><span class="line">      <span class="title function_">unmount</span>(n1, parentComponent, parentSuspense, <span class="literal">true</span>)</span><br><span class="line">      n1 = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n2.<span class="property">patchFlag</span> === <span class="title class_">PatchFlags</span>.<span class="property">BAIL</span>) &#123;</span><br><span class="line">      optimized = <span class="literal">false</span></span><br><span class="line">      n2.<span class="property">dynamicChildren</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="keyword">type</span>, ref, shapeFlag &#125; = n2</span><br><span class="line">    <span class="keyword">switch</span> (<span class="keyword">type</span>) &#123;</span><br><span class="line">      <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// set ref</span></span><br><span class="line">    <span class="keyword">if</span> (ref != <span class="literal">null</span> &amp;&amp; parentComponent) &#123;</span><br><span class="line">      <span class="title function_">setRef</span>(ref, n1 &amp;&amp; n1.<span class="property">ref</span>, parentSuspense, n2 || n1, !n2)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>如何新老 vdom 相同, 不做处理.</li>
+<li>新老 vdom 类型不同, 卸载老的组件实例, 把”n1”设为null, 让后续代码走”新挂载”的分支.</li>
+<li>响应关闭简化 diff 的标志. 比如手动写 render 函数而不是实用 <code>template</code>.</li>
+<li>根据 vdom 的类型进行不同处理.</li>
+<li>如果设置了 <code>ref</code>, 就设置下 <code>ref</code>.</li>
+</ol>
+<p>大多数 vdom 的类型都容易处理, 几乎都是”如果没老 vdom, 则插入 dom, 否则修改 dom”.</p>
+<p>如果 vdom 的类型是组件, 或者走到了 patch children 就会比较复杂.</p>
+<p>组件和 patch children 都没有实际操作, 最后都会递归调用到真实的 vdom 类型, 并进行 dom 操作, 所以 <code>patch()</code> 的作用根据新老 vdom, 最终落地操作 dom.</p>
+<p>下面先展开组件, 我们所说的”生命周期”和很多主流程都在组件的挂载里.</p>
+<h3 id="组件挂载"><a href="#组件挂载" class="headerlink" title="组件挂载"></a>组件挂载</h3><p>页面首次挂载, 老 vdom 为空, <code>processComponent()</code>会把挂载流程交给<code>mountComponent()</code>.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mountComponent</span> = (<span class="params">initialVNode, container, anchor, parentComponent, parentSuspense, namespace, optimized</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> instance = (initialVNode.<span class="property">component</span> = <span class="title function_">createComponentInstance</span>(</span><br><span class="line">    initialVNode,</span><br><span class="line">    parentComponent,</span><br><span class="line">    parentSuspense</span><br><span class="line">  ));</span><br><span class="line">  <span class="comment">// ...keep-alive组件处理</span></span><br><span class="line">  <span class="title function_">setupComponent</span>(instance);</span><br><span class="line">  <span class="keyword">if</span> (instance.<span class="property">asyncDep</span>) &#123;</span><br><span class="line">    <span class="comment">// ...异步组件处理</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_">setupRenderEffect</span>(</span><br><span class="line">      instance,</span><br><span class="line">      initialVNode,</span><br><span class="line">      container,</span><br><span class="line">      anchor,</span><br><span class="line">      parentSuspense,</span><br><span class="line">      namespace,</span><br><span class="line">      optimized</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到关键的代码分为这三步:</p>
+<ol>
+<li><p>创建组件实例, 并挂到<code>vnode</code>的<code>component</code>属性上.</p>
+<p>在一些流程中, 组件实例会被设置为<code>currentInstance</code>, 是 composition api 让业务逻辑更容易抽取的解决方案.</p>
+<p>而要获取实例, 以及相关的变量关系是:</p>
+<p>dom &#x3D;&gt; dom._vnode (vnode) &#x3D;&gt; vnode.component (component实例), vnode.type (component定义)</p>
+</li>
+<li><p>进行组件的<code>setup</code>.</p>
+<p><code>setup()</code>作用是为<code>render 函数</code>做准备的.</p>
+<p><code>render()</code>的作用是每次运行会返回最新的<code>vnode</code>, 把最新的<code>vnode</code>与老的一起给<code>patch()</code>, 就可以进行<code>diff</code>最后操作dom.</p>
+<p><code>setup()</code>只会执行一次, 而<code>render 函数</code>在每次更新组件都会执行.</p>
+<p><code>setup()</code>的形式有很多种:</p>
+<ul>
+<li>最常见的 sfc 是返回 js 对象, 作为<code>template</code>的执行环境<code>instance.setupState</code>.</li>
+<li>异步组件会返回<code>promise</code>. 作用也是为<code>render()</code>的执行做准备.</li>
+<li>如果直接返回了<code>render 函数</code>, 就直接赋值给<code>instance.render</code>.</li>
+</ul>
+</li>
+<li><p>创建组件的<code>render-effect</code>.</p>
+<p>(effect 的作用, 下面一节会详细展开)</p>
+<p><code>effect</code>的内容是执行<code>render()</code>函数, 获取到<code>vnode</code>, 并且<code>patch()</code>.</p>
+<p>然后把<code>effect</code>挂到组件实例上, 再给组件实例挂个<code>update()</code>方法, 就是执行一下<code>effect.run()</code>.</p>
+</li>
+</ol>
+<p>挂载组件已经结束.</p>
+<p>最后说的 <code>render-effect</code> 中的数据变化, 触发了 <code>effect</code> 运行时, <code>patch()</code> 的 “n1”参数就有值了.</p>
+<p>此时就会走到<code>updateComponent</code>, 这时候就会直接执行组件实例的<code>update()</code>方法, 并且把老<code>vnode</code>上的组件实例赋值给新<code>vnode</code>, 而这个<code>vnode</code>会在<code>effect</code>执行的时候被挂到组件实例的<code>subTree</code>上.</p>
+<h3 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h3><p>组件的生命周期都在<code>update</code>函数中, 每次执行<code>effect</code>都会触发, 我们仔细观察下生命周期和其他关键步骤的调用顺序.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">componentUpdateFn</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (!instance.<span class="property">isMounted</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; el, props &#125; = initialVNode</span><br><span class="line">        <span class="keyword">const</span> &#123; bm, m, parent, root, <span class="keyword">type</span> &#125; = instance</span><br><span class="line">        <span class="comment">// beforeMount hook</span></span><br><span class="line">        <span class="keyword">if</span> (bm) &#123;</span><br><span class="line">          <span class="title function_">invokeArrayFns</span>(bm)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (el &amp;&amp; hydrateNode) &#123;</span><br><span class="line">          <span class="comment">// hydrate code...</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> subTree = (instance.<span class="property">subTree</span> = <span class="title function_">renderComponentRoot</span>(instance))</span><br><span class="line">          <span class="title function_">patch</span>(</span><br><span class="line">            <span class="literal">null</span>,</span><br><span class="line">            subTree,</span><br><span class="line">            container,</span><br><span class="line">            anchor,</span><br><span class="line">            instance,</span><br><span class="line">            parentSuspense,</span><br><span class="line">            namespace,</span><br><span class="line">          )</span><br><span class="line">          initialVNode.<span class="property">el</span> = subTree.<span class="property">el</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// mounted hook</span></span><br><span class="line">        <span class="keyword">if</span> (m) &#123;</span><br><span class="line">          <span class="title function_">queuePostRenderEffect</span>(m, parentSuspense)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// activated hook for keep-alive roots.</span></span><br><span class="line">        <span class="comment">// #1742 activated hook must be accessed after first render</span></span><br><span class="line">        <span class="comment">// since the hook may be injected by a child keep-alive</span></span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">          initialVNode.<span class="property">shapeFlag</span> &amp; <span class="title class_">ShapeFlags</span>.<span class="property">COMPONENT_SHOULD_KEEP_ALIVE</span> ||</span><br><span class="line">          (parent &amp;&amp;</span><br><span class="line">            <span class="title function_">isAsyncWrapper</span>(parent.<span class="property">vnode</span>) &amp;&amp;</span><br><span class="line">            parent.<span class="property">vnode</span>.<span class="property">shapeFlag</span> &amp; <span class="title class_">ShapeFlags</span>.<span class="property">COMPONENT_SHOULD_KEEP_ALIVE</span>)</span><br><span class="line">        ) &#123;</span><br><span class="line">          instance.<span class="property">a</span> &amp;&amp; <span class="title function_">queuePostRenderEffect</span>(instance.<span class="property">a</span>, parentSuspense)</span><br><span class="line">        &#125;</span><br><span class="line">        instance.<span class="property">isMounted</span> = <span class="literal">true</span></span><br><span class="line">        <span class="comment">// #2458: deference mount-only object parameters to prevent memleaks</span></span><br><span class="line">        initialVNode = container = anchor = <span class="literal">null</span> <span class="keyword">as</span> <span class="built_in">any</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> &#123; next, bu, u, parent, vnode &#125; = instance</span><br><span class="line">        <span class="comment">// updateComponent</span></span><br><span class="line">        <span class="keyword">if</span> (next) &#123;</span><br><span class="line">          next.<span class="property">el</span> = vnode.<span class="property">el</span></span><br><span class="line">          <span class="title function_">updateComponentPreRender</span>(instance, next, optimized)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          next = vnode</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// beforeUpdate hook</span></span><br><span class="line">        <span class="keyword">if</span> (bu) &#123;</span><br><span class="line">          <span class="title function_">invokeArrayFns</span>(bu)</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">// render</span></span><br><span class="line">        <span class="keyword">const</span> nextTree = <span class="title function_">renderComponentRoot</span>(instance)</span><br><span class="line">        <span class="keyword">const</span> prevTree = instance.<span class="property">subTree</span></span><br><span class="line">        instance.<span class="property">subTree</span> = nextTree</span><br><span class="line">        <span class="title function_">patch</span>(</span><br><span class="line">          prevTree,</span><br><span class="line">          nextTree,</span><br><span class="line">          <span class="comment">// parent may have changed if it&#x27;s in a teleport</span></span><br><span class="line">          <span class="title function_">hostParentNode</span>(prevTree.<span class="property">el</span>!)!,</span><br><span class="line">          <span class="comment">// anchor may have changed if it&#x27;s in a fragment</span></span><br><span class="line">          <span class="title function_">getNextHostNode</span>(prevTree),</span><br><span class="line">          instance,</span><br><span class="line">          parentSuspense,</span><br><span class="line">          namespace,</span><br><span class="line">        )</span><br><span class="line">        next.<span class="property">el</span> = nextTree.<span class="property">el</span></span><br><span class="line">        <span class="comment">// updated hook</span></span><br><span class="line">        <span class="keyword">if</span> (u) &#123;</span><br><span class="line">          <span class="title function_">queuePostRenderEffect</span>(u, parentSuspense)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据组件是第一次挂载还是更新, 分成2个大分支:</p>
+<ul>
+<li><p>挂载:</p>
+<p>触发生命周期<code>beforeMount</code> &#x3D;&gt; <code>patch()</code> &#x3D;&gt; 触发生命周期<code>mounted</code>.</p>
+<p>另外处理了<code>keepAlive</code>组件, 在这些动作后又触发了<code>activated</code>.</p>
+</li>
+<li><p>更新:</p>
+<p>触发生命周期<code>beforeUpdate</code> &#x3D;&gt; patch() &#x3D;&gt; 触发生命周期<code>updated</code>.</p>
+</li>
+</ul>
+<p>上面已经提到 <code>patch()</code> 的作用是落地操作 dom, 所以 “before” 的钩子和 “ed” 钩子区别是 dom 存不存在 &#x2F; dom 是不是新的.</p>
+<p>另外, 如果 <code>patch()</code> 的 vdom 里包含组件, 那么父子组件的生命周期函数触发顺序, 也可以很清楚的知道了.</p>
+<p>再另外, vue 3 是没有 <code>beforeCreated</code> 和 <code>created</code> 的. 他们是在 <code>finishComponentSetup</code> 的 <code>applyOptions</code> 中调用的, 也就是 <code>created</code> 的钩子的意义就是”组件实例拥有了options中的属性(如data, props, method等)”的意思.</p>
+<p>这些属性访问都只是<code>setup()</code>返回值的执行上下文, 所以就没意义了.</p>
+<p>如果又写<code>setup()</code>又写了<code>created</code>钩子, 那么<code>setup()</code>是先执行的, 原因上面说了, <code>created</code>相关钩子是在<code>finisComponentSetup</code>中调用的, 此时<code>setup()</code>已经运行完了.</p>
+<h3 id="patchChildren"><a href="#patchChildren" class="headerlink" title="patchChildren"></a>patchChildren</h3><p>上面提到, patch children 只是 patch 流程的一个分支.</p>
+<p>只有当新老 vdom 都是数组的时候, 才进入这个面试题里.</p>
+<p>(其实还会被 patchFlag 过滤一波, 但只有 sfc 才能享受编译时打标签的优化)</p>
+<p>源码的注释写得非常体贴, 所以我就模仿源码中的注释来写例子.</p>
+<ul>
+<li><p>去头去尾</p>
+<p>(a b) i j k (c d)<br>(a b) x y z (c d)</p>
+<p>找出头尾可以复用的dom, 只patch他们的attributes, 减少diff范围.</p>
+<p>具体方法:<br>两次遍历. 分别用1跟指针和2跟指针(数组长度可能不同, 去尾的时候需要2跟指针)<br>循环判断指针节点是否可复用.<br>如果可以, patch他们的attributes, 并移动指针.<br>如果不可以复用. 停止指针.<br>最后得到3个指针. 来判断需要进一步diff的内容.</p>
+</li>
+<li><p>简单的情况: 纯新增或减少</p>
+<p>(a b) c<br>(a b)</p>
+<p>或</p>
+<p>(a b)<br>(a b) c</p>
+<p>需要diff的内容有一边是完全没有的情况, 只需要新增或卸载节点就可以了.</p>
+<p>具体方法:<br>判断指针是否重合, 可以判断出是否有一边的数组被完全处理完了.<br>如果新数组的指针还为重合, 循环2个指针中间的索引, 逐个新增.<br>反之逐个卸载.</p>
+</li>
+<li><p>新老数组都还有长度</p>
+<p>a b [c d e] f g<br>a b [e d c h] f g</p>
+<p>面对这2个序列, 我们要做的事有3个:</p>
+<ol>
+<li>找出可以复用, 并不需要移动的元素, patch他们的attributes.</li>
+<li>移动可以复用但需要移动的元素, patch他们的attributes.</li>
+<li>新增或卸载节点.</li>
+<li>如果需要移动节点, 则移动节点.</li>
+</ol>
+<p>具体方法:</p>
+<ol>
+<li>遍历新数组, 创建一个新数组的key-value的map<code>keyToNewIndexMap</code>.</li>
+<li>创建一个数组<code>newIndexToOldIndexMap</code>, 长度为新数组的长度, 内容是”新元素在老数组里是第几个”, 初始值为0. 代表”新元素在老数组里不存在”</li>
+<li>遍历老数组, 利用第一步创建的<code>keyToNewIndexMap</code>寻找每个老元素是否有对应的新数组.</li>
+<li>如果老元素在新数组中存在, patch这个元素的attributes, 并更新第二步创建的<code>newIndexToOldIndexMap</code>.</li>
+<li>如果老元素在新数组中不存在, 则卸载当前老元素.</li>
+<li>建立一个变量来计数被patch的数量, 如果新元素已经都被patch, 就卸载当前老元素.(这个算算法优化)</li>
+<li>建立一个变量<code>moved</code>, 初始值为false, 如果每次从<code>keyToNewIndexMap</code>取出的不是递增, 就将<code>moved</code>设为true, 后续根据<code>moved</code>来判断是否移动节点.</li>
+<li>至此, 老元素的卸载已完成, 并且我们获得了每个新元素对应了哪个老元素的信息<code>newIndexToOldIndexMap</code>.</li>
+<li>从<code>newIndexToOldIndexMap</code>里获取一个最长递增子序列. 意义是: 新数组和最长递增子序列重合的部分是不需要移动的. (lss: longest stable subsequence)</li>
+<li>反向遍历新数组. 同时增加一根lss的指针, 一起遍历.</li>
+<li>如果新元素符合lss, 则不动. 并向上移动lss的指针.</li>
+<li>如果新元素在<code>newIndexToOldIndexMap</code>里的索引是0, 则新增元素.</li>
+<li>如果都不是, 则将这个新元素移动到当前的指针位置.</li>
+</ol>
+</li>
+</ul>
+<h3 id="effect"><a href="#effect" class="headerlink" title="effect"></a>effect</h3><p>上面已经提到了<code>effect</code>的概念, 如果忘记了建议回去看一下, 这一节展开一下实现原理.</p>
+<p>想实现” state 变化, 自动执行 UI &#x3D; f ( state ) 更新页面”, 把这种”变化触发执行”叫做<code>effect</code>.</p>
+<p>那么<strong>如何知道 state 变化呢? 就要拦截 state 的 setter 方法</strong>.</p>
+<p>另外<strong>如何知道<code>effect</code>执行要响应哪些变量? 那就拦截 state 的 getter 方法</strong>, 第一次执行就会走一遍所有需要监听的变量的 getter 方法.</p>
+<p>于是业务代码就是这样的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = <span class="title function_">reactive</span>(data)</span><br><span class="line"><span class="title function_">effect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable constant_">UI</span> = <span class="title function_">f</span>(state)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>reactive()</code>声明 data 变量是需要被响应的.</p>
+<p><code>effect()</code>包裹的内容, 是需要在”响应变量”变化时, 重新执行的.</p>
+<p>现在再展开一下 <code>reactive</code> 与 <code>effect</code> 的实现.</p>
+<ul>
+<li><p><code>reactive</code> 的工作就是拦截 <code>data</code> . 分别是 setter 和 getter.</p>
+<p>拦截 setter 方法, 去触发 <code>effect</code> 执行, 这个叫 <code>trigger</code>.</p>
+<p>拦截 getter 方法, 记录什么变量应该触发什么函数的执行, 这个叫 <code>track</code>.</p>
+<p>具体如何记录, 是和 <code>effect</code> 配合的.</p>
+</li>
+<li><p>因为 <code>effect</code> 执行的时候, 一定会触发”响应式变量”的 getter 方法.</p>
+<p>所以在 getter 方法中, 把当前变量与”正在执行的函数”关联起来, 以便 setter 触发的时候找到需要执行的函数.</p>
+</li>
+</ul>
+<p><code>reactive</code>和<code>effect</code>分别就是”依赖”(dep), 和”订阅”(sub).</p>
+<p>在 vue 中, 执行”依赖”的函数还有 <code>ref</code>, <code>shallowRef</code>, <code>shallowReactive</code>等, 他们的核心在于调用 <code>track</code> 和<code>trigger</code>, 在 vue 2 中好像叫<code>dep()</code>方法.</p>
+<p>执行”订阅”的函数还有<code>watch</code>系列, <code>computed</code>等, 他们的相同实现都是设置<code>currentEffect</code>, 再调用触发 <code>getter</code> 来收集依赖. 所以<code>track</code>里也会先判断是否有<code>currentEffect</code>, 在<code>effect</code>外被取值不需要进入这个逻辑.</p>
+<p>到这里, <code>effect</code> 已经说完了, 详细的在以往的文章里有, 所有版本的 vue 响应式都是这个思路, 细节上有所不同:</p>
+<ul>
+<li>vue2 的拦截方式不同, 还需要拦截数组方法, 以及提供 set, delete 的 api 以覆盖业务场景.</li>
+<li>dep 和 sub 的关系记录的地方不同. vue2 记录在 data 的属性里, 类似”dep”, “_ob”的属性. vue3 记录在全局的 weakMap中. vue3.5 重构放到双向链表中来提高性能.</li>
+<li>还有 vue2, vue3 的调用方法, 函数名字, api 的不同.</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>很明显的, 这里的细节也不是很细节.</p>
+<p>这篇 post 的目的是从大方向看, 把 vue 的流程看简单.</p>
+<p>也算是把网上其他 q&amp;a 整体串起来, 便于真正理解.</p>
+<p>上面提到的细节, 在以往的 post 都有贴代码更深入介绍.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你可以 <a href="/about/give-me-a-coffee.html">点击这个链接打赏我5毛</a>来鼓励我, 非常感谢.</p><p> 本文遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/vue/">vue</a><a href="/tags/vue%E6%BA%90%E7%A0%81/">vue源码</a></div><div class="post-nav"><a class="next" href="/2025/03/01/boundary-of-mind-and-brain/">意识与大脑其他部分的边界</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
