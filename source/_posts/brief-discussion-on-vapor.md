@@ -41,7 +41,7 @@ tags: [vue]
 
 `template`就是初始的:
 
-```vue
+```html
 <script setup vapor>
 import { ref } from 'vue'
 
@@ -97,7 +97,7 @@ function render(_ctx, $props, $emit, $attrs, $slots) {
 
 做了第二个小修改, 数组遍历, 模板如下:
 
-```vue
+```html
 <template>
   <div v-for="item in array">
     {{item + 1}}
