@@ -14,10 +14,10 @@
 <p>我的项目有2个依赖:  <strong>A</strong>: 1.0.0, <strong>B</strong>: 1.0.0.</p>
 <p>这2个依赖都锁定了版本为”1.0.0”.</p>
 <p>但 <strong>B</strong> 也把 <strong>A</strong> 作为了依赖, 并且在<code>package.json</code>中的声明是向后兼容小版本: <strong>^1.0.0</strong>.</p>
-<p>在npm安装过程中, <strong>B</strong>的依赖向后兼容, 就安装了 <strong><a href="mailto:&#65;&#x40;&#x31;&#x2e;&#x35;&#46;&#x30;">&#65;&#x40;&#x31;&#x2e;&#x35;&#46;&#x30;</a></strong> 的版本.</p>
-<p>而我的项目安装了<strong><a href="mailto:&#65;&#64;&#x31;&#x2e;&#x30;&#x2e;&#48;">&#65;&#64;&#x31;&#x2e;&#x30;&#x2e;&#48;</a></strong> 的版本, 是我在我的项目中锁定的, 而我并不能修改 <strong>B</strong> 项目中的<code>package.json</code>.</p>
-<p>最后, <strong>B</strong> 的代码中, 引入了 <strong><a href="mailto:&#x41;&#x40;&#x31;&#46;&#x35;&#46;&#48;">&#x41;&#x40;&#x31;&#46;&#x35;&#46;&#48;</a></strong> 的<code>Plugin</code>类, 并且实例化.</p>
-<p>而在我项目的执行过程中, 判断了 <strong>B</strong> 代码中的 <strong>1.5.0</strong>的实例 是否是 <strong><a href="mailto:&#65;&#x40;&#x31;&#x2e;&#48;&#46;&#48;">&#65;&#x40;&#x31;&#x2e;&#48;&#46;&#48;</a></strong>的实例, 他们来自2个文件, 在混淆后甚至变成了不同字母, 那是不可能通过<code>instance of</code>判定了, 所以报错.</p>
+<p>在npm安装过程中, <strong>B</strong>的依赖向后兼容, 就安装了 <strong><a href="mailto:&#x41;&#64;&#49;&#46;&#53;&#46;&#x30;">&#x41;&#64;&#49;&#46;&#53;&#46;&#x30;</a></strong> 的版本.</p>
+<p>而我的项目安装了<strong><a href="mailto:&#x41;&#x40;&#49;&#46;&#x30;&#46;&#48;">&#x41;&#x40;&#49;&#46;&#x30;&#46;&#48;</a></strong> 的版本, 是我在我的项目中锁定的, 而我并不能修改 <strong>B</strong> 项目中的<code>package.json</code>.</p>
+<p>最后, <strong>B</strong> 的代码中, 引入了 <strong><a href="mailto:&#65;&#64;&#x31;&#46;&#x35;&#x2e;&#x30;">&#65;&#64;&#x31;&#46;&#x35;&#x2e;&#x30;</a></strong> 的<code>Plugin</code>类, 并且实例化.</p>
+<p>而在我项目的执行过程中, 判断了 <strong>B</strong> 代码中的 <strong>1.5.0</strong>的实例 是否是 <strong><a href="mailto:&#65;&#64;&#49;&#x2e;&#48;&#x2e;&#48;">&#65;&#64;&#49;&#x2e;&#48;&#x2e;&#48;</a></strong>的实例, 他们来自2个文件, 在混淆后甚至变成了不同字母, 那是不可能通过<code>instance of</code>判定了, 所以报错.</p>
 <p>问了朋友, 告诉我在自己<code>package.json</code>中添加一个<code>resolution</code>字段, 声明<code>&#123; A: 1.0.0 &#125;</code>, 这样项目中的<code>A</code>依赖都会安装<code>1.0.0</code>的版本.</p>
 <p>其实前公司一直用<code>resolution</code>固定<code>react</code>版本, 因为react如果存在不同的版本, 也会白屏, 而我一直没去稍微深入了解下.</p>
 <h2 id="幽灵依赖导致的白屏"><a href="#幽灵依赖导致的白屏" class="headerlink" title="幽灵依赖导致的白屏"></a>幽灵依赖导致的白屏</h2><p>然后再重新说一下之前遇到的严重的依赖问题.</p>
