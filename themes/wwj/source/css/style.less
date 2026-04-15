@@ -364,8 +364,63 @@ div {
     text-align: left;
     font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia,
       Times, sans-serif;
+    position: relative;
     a {
       color: @postTitle;
+    }
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 10px;
+      position: relative;
+      text-decoration: none;
+      .ai-badge-text {
+        background-color: var(--theme-1);
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+      &:hover .ai-badge-text {
+        background-color: var(--theme-2);
+      }
+      .ai-badge-tooltip {
+        visibility: hidden;
+        width: 200px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 12px;
+        font-weight: normal;
+      }
+      .ai-badge-tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+      }
+      &:hover .ai-badge-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
   .post-meta {
