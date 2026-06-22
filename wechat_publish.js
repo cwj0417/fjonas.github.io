@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const markedPath = require.resolve('marked', { paths: [path.dirname(require.resolve('hexo-renderer-marked'))] });
@@ -10,64 +11,117 @@ const filename = process.argv[4];
 const shouldPublish = process.argv.includes('--publish');
 
 if (!appid || !appsecret || !filename) {
-    console.log('usage: node notify.js <appid> <appsecret> <post_path> [--publish]');
+    console.log('usage: node wechat_publish.js <appid> <appsecret> <post_path> [--publish]');
     process.exit(1);
 }
 
 const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7';
+const wechatTheme = {
+    ink: '#2f3437',
+    muted: '#6d7477',
+    accent: '#5c817a',
+    accentSoft: '#dde8e3',
+    border: '#e6ddd1',
+    paper: '#fffdf9',
+    panel: '#f6f0e6',
+    codeBg: '#f3eee6',
+    quoteBg: '#f7f3ec',
+    tableStripe: '#fbf7f2',
+};
 
 const wechatStyles = {
-    h1: 'font-size:22px;font-weight:bold;margin:24px 0 16px;color:#333;',
-    h2: 'font-size:19px;font-weight:bold;margin:22px 0 14px;color:#333;',
-    h3: 'font-size:17px;font-weight:bold;margin:20px 0 12px;color:#333;',
-    h4: 'font-size:16px;font-weight:bold;margin:18px 0 10px;color:#333;',
-    p: 'font-size:15px;line-height:1.8;margin:10px 0;color:#333;',
-    ul: 'font-size:15px;line-height:1.8;margin:10px 0;padding-left:20px;color:#333;',
-    ol: 'font-size:15px;line-height:1.8;margin:10px 0;padding-left:20px;color:#333;',
-    li: 'font-size:15px;line-height:1.8;margin:4px 0;color:#333;',
-    blockquote: 'border-left:3px solid #ddd;padding:10px 15px;margin:15px 0;color:#666;background:#f9f9f9;',
-    code: 'font-size:14px;background:#f0f0f0;padding:2px 4px;border-radius:3px;color:#c7254e;',
-    pre: 'font-size:14px;background:#f5f5f5;padding:12px;border-radius:4px;overflow-x:auto;line-height:1.5;',
-    a: 'color:#576b95;text-decoration:none;',
-    strong: 'font-weight:bold;color:#333;',
-    em: 'font-style:italic;',
-    hr: 'border:none;border-top:1px solid #ddd;margin:20px 0;',
-    img: 'max-width:100%;height:auto;',
-    table: 'border-collapse:collapse;margin:15px 0;width:100%;',
-    th: 'border:1px solid #ddd;padding:8px 12px;background:#f5f5f5;font-weight:bold;',
-    td: 'border:1px solid #ddd;padding:8px 12px;',
+    h1: `margin:32px 0 18px;font-size:26px;line-height:1.35;font-weight:700;letter-spacing:0.01em;color:${wechatTheme.ink};`,
+    h2: `margin:30px 0 16px;padding-left:12px;border-left:4px solid ${wechatTheme.accent};font-size:22px;line-height:1.4;font-weight:700;color:${wechatTheme.ink};`,
+    h3: `margin:26px 0 14px;font-size:19px;line-height:1.45;font-weight:700;color:${wechatTheme.ink};`,
+    h4: `margin:22px 0 12px;font-size:17px;line-height:1.5;font-weight:700;color:${wechatTheme.ink};`,
+    p: `margin:0 0 16px;font-size:16px;line-height:1.9;letter-spacing:0.01em;color:${wechatTheme.ink};`,
+    ul: `margin:0 0 18px;padding-left:1.35em;font-size:16px;line-height:1.9;color:${wechatTheme.ink};`,
+    ol: `margin:0 0 18px;padding-left:1.45em;font-size:16px;line-height:1.9;color:${wechatTheme.ink};`,
+    li: `margin:0 0 10px;color:${wechatTheme.ink};`,
+    blockquote: `margin:22px 0;padding:14px 18px;border-left:4px solid ${wechatTheme.accent};border-radius:0 12px 12px 0;background:${wechatTheme.quoteBg};color:${wechatTheme.muted};`,
+    code: `padding:2px 6px;border-radius:6px;background:${wechatTheme.codeBg};font-size:14px;font-family:Menlo,Consolas,monospace;color:${wechatTheme.accent};`,
+    pre: `margin:22px 0;padding:16px 18px;border:1px solid ${wechatTheme.border};border-radius:14px;background:${wechatTheme.codeBg};overflow-x:auto;font-size:13px;line-height:1.75;color:${wechatTheme.ink};`,
+    a: `color:${wechatTheme.accent};text-decoration:underline;text-decoration-color:${wechatTheme.accentSoft};text-underline-offset:3px;word-break:break-word;`,
+    strong: `font-weight:700;color:${wechatTheme.ink};`,
+    em: `font-style:italic;color:${wechatTheme.ink};`,
+    hr: `margin:28px auto;border:none;height:1px;background:linear-gradient(90deg, rgba(92,129,122,0), rgba(92,129,122,0.45), rgba(92,129,122,0));`,
+    img: `display:block;max-width:100%;height:auto;margin:24px auto;border-radius:14px;`,
+    table: `width:100%;border-collapse:collapse;font-size:14px;line-height:1.7;color:${wechatTheme.ink};`,
+    th: `padding:10px 12px;border:1px solid ${wechatTheme.border};background:${wechatTheme.accentSoft};font-weight:700;text-align:left;`,
+    td: `padding:10px 12px;border:1px solid ${wechatTheme.border};background:${wechatTheme.paper};vertical-align:top;`,
 };
+
+const wechatDraftsUrl = 'https://mp.weixin.qq.com/cgi-bin/appmsg?action=list_ex&type=10&begin=0&count=10&lang=zh_CN';
 
 const renderer = new marked.Renderer();
 
-Object.keys(wechatStyles).forEach(tag => {
-    const style = wechatStyles[tag];
-    switch (tag) {
-        case 'h1': renderer.heading = (text, level) => {
-            if (level === 1) return `<h1 style="${style}">${text}</h1>`;
-            if (level === 2) return `<h2 style="${wechatStyles.h2}">${text}</h2>`;
-            if (level === 3) return `<h3 style="${wechatStyles.h3}">${text}</h3>`;
-            return `<h4 style="${wechatStyles.h4}">${text}</h4>`;
-        }; break;
-        case 'p': renderer.paragraph = text => `<p style="${style}">${text}</p>`; break;
-        case 'ul': renderer.list = (body, ordered) => {
-            const tag = ordered ? 'ol' : 'ul';
-            return `<${tag} style="${ordered ? wechatStyles.ol : style}">${body}</${tag}>`;
-        }; break;
-        case 'li': renderer.listitem = text => `<li style="${style}">${text}</li>`; break;
-        case 'blockquote': renderer.blockquote = body => `<blockquote style="${style}">${body}</blockquote>`; break;
-        case 'code': renderer.codespan = text => `<code style="${style}">${text}</code>`; break;
-        case 'pre': renderer.code = (code, lang) => `<pre style="${style}"><code>${code}</code></pre>`; break;
-        case 'a': renderer.link = (href, title, text) => `<a style="${style}" href="${href}">${text}</a>`; break;
-        case 'strong': renderer.strong = text => `<strong style="${style}">${text}</strong>`; break;
-        case 'em': renderer.em = text => `<em style="${style}">${text}</em>`; break;
-        case 'hr': renderer.hr = () => `<hr style="${style}">`; break;
-        case 'img': renderer.image = (href, title, text) => `<img style="${style}" src="${href}" alt="${text || ''}">`; break;
-        case 'table': renderer.table = (header, body) => `<table style="${style}"><thead>${header}</thead><tbody>${body}</tbody></table>`; break;
-        case 'th': renderer.tablercell = (content, flags) => `<th style="${style}">${content}</th>`; break;
-        case 'td': renderer.tablecell = (content, flags) => `<td style="${style}">${content}</td>`; break;
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function safeAttr(str) {
+    return str ? escapeHtml(str) : '';
+}
+
+function wrapWechatArticle(html) {
+    return `
+<section style="margin:0;padding:26px 18px;background-color:${wechatTheme.panel};background-image:linear-gradient(180deg, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0) 100%),radial-gradient(circle at 1px 1px, rgba(92,129,122,0.10) 1px, transparent 0);background-size:auto,18px 18px;border-radius:22px;">
+  <section style="padding:26px 22px;background:${wechatTheme.paper};border:1px solid ${wechatTheme.border};border-radius:18px;box-shadow:0 10px 30px rgba(126,110,84,0.08);">
+    ${html}
+  </section>
+</section>`.trim();
+}
+
+function openWechatDraftsPage() {
+    const openers = {
+        darwin: ['open', [wechatDraftsUrl]],
+        win32: ['cmd', ['/c', 'start', '', wechatDraftsUrl]],
+        linux: ['xdg-open', [wechatDraftsUrl]],
+    };
+    const [command, args] = openers[process.platform] || openers.darwin;
+
+    try {
+        const child = spawn(command, args, {
+            detached: true,
+            stdio: 'ignore',
+        });
+        child.unref();
+        console.log('已尝试打开公众号草稿箱:', wechatDraftsUrl);
+    } catch (error) {
+        console.warn('自动打开草稿箱失败，请手动打开:', wechatDraftsUrl);
     }
-});
+}
+
+renderer.heading = (text, level) => {
+    if (level === 1) return `<h1 style="${wechatStyles.h1}">${text}</h1>`;
+    if (level === 2) return `<h2 style="${wechatStyles.h2}">${text}</h2>`;
+    if (level === 3) return `<h3 style="${wechatStyles.h3}">${text}</h3>`;
+    return `<h4 style="${wechatStyles.h4}">${text}</h4>`;
+};
+
+renderer.paragraph = text => `<p style="${wechatStyles.p}">${text}</p>`;
+renderer.list = (body, ordered) => `<${ordered ? 'ol' : 'ul'} style="${ordered ? wechatStyles.ol : wechatStyles.ul}">${body}</${ordered ? 'ol' : 'ul'}>`;
+renderer.listitem = text => `<li style="${wechatStyles.li}">${text}</li>`;
+renderer.blockquote = body => `<blockquote style="${wechatStyles.blockquote}">${body}</blockquote>`;
+renderer.codespan = text => `<code style="${wechatStyles.code}">${escapeHtml(text)}</code>`;
+renderer.code = code => `<pre style="${wechatStyles.pre}"><code style="display:block;white-space:pre;word-break:normal;font-family:Menlo,Consolas,monospace;">${escapeHtml(code)}</code></pre>`;
+renderer.link = (href, title, text) => `<a style="${wechatStyles.a}" href="${safeAttr(href)}"${title ? ` title="${safeAttr(title)}"` : ''}>${text}</a>`;
+renderer.strong = text => `<strong style="${wechatStyles.strong}">${text}</strong>`;
+renderer.em = text => `<em style="${wechatStyles.em}">${text}</em>`;
+renderer.hr = () => `<hr style="${wechatStyles.hr}">`;
+renderer.image = (href, title, text) => `<img style="${wechatStyles.img}" src="${safeAttr(href)}" alt="${safeAttr(text || '')}"${title ? ` title="${safeAttr(title)}"` : ''}>`;
+renderer.table = (header, body) => `<section style="margin:22px 0;padding:0;overflow-x:auto;border:1px solid ${wechatTheme.border};border-radius:14px;"><table style="${wechatStyles.table}"><thead>${header}</thead><tbody>${body}</tbody></table></section>`;
+renderer.tablerow = content => `<tr style="background:${wechatTheme.paper};">${content}</tr>`;
+renderer.tablecell = (content, flags) => {
+    const tag = flags && flags.header ? 'th' : 'td';
+    const style = tag === 'th' ? wechatStyles.th : wechatStyles.td;
+    return `<${tag} style="${style}">${content}</${tag}>`;
+};
 
 function parseFrontMatter(content) {
     const cleaned = content.replace(/^\uFEFF/, '');
@@ -125,7 +179,8 @@ function extractBriefAndBody(content) {
 
 function mdToWechatHtml(md) {
     const cleaned = md.replace(/<!--more-->\n?/g, '');
-    return marked.parse(cleaned, { renderer });
+    const html = marked.parse(cleaned, { renderer });
+    return wrapWechatArticle(html);
 }
 
 async function getPublicIP() {
@@ -228,7 +283,7 @@ async function main() {
 
     const finalContent = `${htmlContent}
         <br/>
-        <p style="font-size:14px;color:#999;text-align:center;">点击"阅读原文", 以获得更好的观看体验</p>`;
+        <p style="font-size:14px;line-height:1.8;color:${wechatTheme.muted};text-align:center;">点击"阅读原文"，可获得更完整、舒适的阅读体验</p>`;
 
     const token = await getAccessToken();
     console.log('access_token 获取成功');
@@ -245,6 +300,10 @@ async function main() {
     });
 
     console.log('草稿创建成功, media_id:', mediaId);
+
+    if (!shouldPublish) {
+        openWechatDraftsPage();
+    }
 
     if (shouldPublish) {
         console.log('正在发布草稿...');
