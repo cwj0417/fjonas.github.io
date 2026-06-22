@@ -51,7 +51,7 @@ const wechatStyles = {
     td: `padding:10px 12px;border:1px solid ${wechatTheme.border};background:${wechatTheme.paper};vertical-align:top;`,
 };
 
-const wechatDraftsUrl = 'https://mp.weixin.qq.com/cgi-bin/appmsg?action=list_ex&type=10&begin=0&count=10&lang=zh_CN';
+const wechatDraftsUrl = 'https://mp.weixin.qq.com/cgi-bin/appmsg?begin=0&count=10&type=77&action=list_card&lang=zh_CN';
 
 const renderer = new marked.Renderer();
 
@@ -179,13 +179,35 @@ function extractBriefAndBody(content) {
 
 function mdToWechatHtml(md) {
     const cleaned = md.replace(/<!--more-->\n?/g, '');
-    const html = marked.parse(cleaned, { renderer });
+    const html = marked.parse(cleaned, { renderer, breaks: true });
     return wrapWechatArticle(html);
 }
 
 async function getPublicIP() {
-    const res = await axios.get('https://api.ipify.org?format=json');
-    return res.data.ip;
+    // 国内网络访问 api.ipify.org 常被拒，使用多个国内可达的服务做兜底
+    const sources = [
+        { url: 'https://www.taobao.com/helper/getip.php', parse: d => (d && d.ip) ? d.ip.trim() : '' },
+        { url: 'http://ip.cip.cc', parse: d => typeof d === 'string' ? d.trim() : '' },
+        { url: 'https://api.ip.sb/ip', parse: d => typeof d === 'string' ? d.trim() : '' },
+        { url: 'https://myip.ipip.net', parse: d => {
+            if (typeof d !== 'string') return '';
+            const m = d.match(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/);
+            return m ? m[1] : '';
+        } },
+    ];
+    let lastError;
+    for (const src of sources) {
+        try {
+            const res = await axios.get(src.url, { timeout: 5000 });
+            const ip = src.parse(res.data);
+            if (ip) return ip;
+        } catch (e) {
+            lastError = e;
+        }
+    }
+    console.error('无法自动获取公网 IP，请手动查询本机公网 IP 后添加到白名单。');
+    if (lastError) console.error('最后一次错误:', lastError.message || lastError);
+    process.exit(1);
 }
 
 async function getAccessToken() {
