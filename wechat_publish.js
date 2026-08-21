@@ -17,38 +17,48 @@ if (!appid || !appsecret || !filename) {
 
 const picmid = 'rM9vKgwYh7rfR-t1xSaBSMo1eWr6-MHBnkhBIxBBliLv3vP4Oq0jnYec0Hp4n1a7';
 const wechatTheme = {
-    ink: '#2f3437',
-    muted: '#6d7477',
-    accent: '#5c817a',
-    accentSoft: '#dde8e3',
-    border: '#e6ddd1',
-    paper: '#fffdf9',
-    panel: '#f6f0e6',
-    codeBg: '#f3eee6',
-    quoteBg: '#f7f3ec',
-    tableStripe: '#fbf7f2',
+    ink: '#2d2d3a',        // 主文字（深灰蓝，保证可读）
+    muted: '#6b7280',      // 次要文字
+    // 多巴胺配色：明亮活泼
+    coral: '#ff5a5f',      // 珊瑚红 - h1
+    mint: '#06d6a0',       // 薄荷绿 - h2
+    sun: '#ffa726',        // 阳光橙 - h3
+    sky: '#3a9bfd',        // 天空蓝 - h4
+    grape: '#9b5de5',      // 葡萄紫 - 链接/强调
+    // 背景层
+    panel: '#fff8ec',      // 外层淡奶油黄底
+    paper: '#ffffff',      // 卡片白
+    paperSoft: '#fffdf7',  // 卡片次白
+    dot: '#ffd6a5',        // 纹路圆点（淡橙）
+    border: '#ffe8c2',     // 极淡边框
+    // 功能区
+    codeBg: '#fff4e6',     // 代码底（暖）
+    codeInk: '#e63946',    // 行内代码字
+    quoteBg: '#e8f9ff',    // 引用底（清凉蓝）
+    quoteBar: '#3a9bfd',   // 引用色条
+    tableHead: '#fff0d4',  // 表头底（暖黄）
 };
 
 const wechatStyles = {
-    h1: `margin:32px 0 18px;font-size:26px;line-height:1.35;font-weight:700;letter-spacing:0.01em;color:${wechatTheme.ink};`,
-    h2: `margin:30px 0 16px;padding-left:12px;border-left:4px solid ${wechatTheme.accent};font-size:22px;line-height:1.4;font-weight:700;color:${wechatTheme.ink};`,
-    h3: `margin:26px 0 14px;font-size:19px;line-height:1.45;font-weight:700;color:${wechatTheme.ink};`,
-    h4: `margin:22px 0 12px;font-size:17px;line-height:1.5;font-weight:700;color:${wechatTheme.ink};`,
-    p: `margin:0 0 16px;font-size:16px;line-height:1.9;letter-spacing:0.01em;color:${wechatTheme.ink};`,
-    ul: `margin:0 0 18px;padding-left:1.35em;font-size:16px;line-height:1.9;color:${wechatTheme.ink};`,
-    ol: `margin:0 0 18px;padding-left:1.45em;font-size:16px;line-height:1.9;color:${wechatTheme.ink};`,
-    li: `margin:0 0 10px;color:${wechatTheme.ink};`,
-    blockquote: `margin:22px 0;padding:14px 18px;border-left:4px solid ${wechatTheme.accent};border-radius:0 12px 12px 0;background:${wechatTheme.quoteBg};color:${wechatTheme.muted};`,
-    code: `padding:2px 6px;border-radius:6px;background:${wechatTheme.codeBg};font-size:14px;font-family:Menlo,Consolas,monospace;color:${wechatTheme.accent};`,
-    pre: `margin:22px 0;padding:16px 18px;border:1px solid ${wechatTheme.border};border-radius:14px;background:${wechatTheme.codeBg};overflow-x:auto;font-size:13px;line-height:1.75;color:${wechatTheme.ink};`,
-    a: `color:${wechatTheme.accent};text-decoration:underline;text-decoration-color:${wechatTheme.accentSoft};text-underline-offset:3px;word-break:break-word;`,
-    strong: `font-weight:700;color:${wechatTheme.ink};`,
-    em: `font-style:italic;color:${wechatTheme.ink};`,
-    hr: `margin:28px auto;border:none;height:1px;background:linear-gradient(90deg, rgba(92,129,122,0), rgba(92,129,122,0.45), rgba(92,129,122,0));`,
-    img: `display:block;max-width:100%;height:auto;margin:24px auto;border-radius:14px;`,
-    table: `width:100%;border-collapse:collapse;font-size:14px;line-height:1.7;color:${wechatTheme.ink};`,
-    th: `padding:10px 12px;border:1px solid ${wechatTheme.border};background:${wechatTheme.accentSoft};font-weight:700;text-align:left;`,
-    td: `padding:10px 12px;border:1px solid ${wechatTheme.border};background:${wechatTheme.paper};vertical-align:top;`,
+    h1: `margin:36px 0 22px;padding-bottom:14px;font-size:30px;line-height:1.3;font-weight:800;letter-spacing:0.02em;color:${wechatTheme.coral};border-bottom:3px solid ${wechatTheme.coral};border-image:linear-gradient(90deg, ${wechatTheme.coral}, ${wechatTheme.sun}, ${wechatTheme.mint}) 1;`,
+    h2: `margin:34px 0 18px;padding:6px 0 6px 14px;font-size:25px;line-height:1.4;font-weight:800;color:${wechatTheme.mint};border-left:6px solid ${wechatTheme.mint};background:linear-gradient(90deg, rgba(6,214,160,0.08), transparent);`,
+    h3: `margin:30px 0 16px;font-size:21px;line-height:1.45;font-weight:700;color:${wechatTheme.sun};`,
+    h4: `margin:26px 0 14px;font-size:18px;line-height:1.5;font-weight:700;color:${wechatTheme.sky};`,
+    p: `margin:0 0 18px;padding:12px 16px;font-size:17px;line-height:1.95;letter-spacing:0.02em;color:${wechatTheme.ink};background:#fefdf9;border-radius:8px;`,
+    ul: `margin:0 0 22px;padding-left:1.4em;font-size:17px;line-height:1.95;color:${wechatTheme.ink};`,
+    ol: `margin:0 0 22px;padding-left:1.5em;font-size:17px;line-height:1.95;color:${wechatTheme.ink};`,
+    li: `margin:0 0 12px;color:${wechatTheme.ink};`,
+    blockquote: `margin:26px 0;padding:16px 20px;border-left:5px solid ${wechatTheme.quoteBar};border-radius:0 14px 14px 0;background:${wechatTheme.quoteBg};color:${wechatTheme.ink};font-size:16px;line-height:1.85;`,
+    code: `padding:3px 7px;border-radius:6px;background:${wechatTheme.codeBg};font-size:15px;font-family:Menlo,Consolas,monospace;color:${wechatTheme.codeInk};`,
+    pre: `margin:26px 0;padding:18px 20px;border-radius:16px;background:#2d2d3a;overflow-x:auto;font-size:14px;line-height:1.8;color:#f8f8f2;`,
+    a: `color:${wechatTheme.grape};text-decoration:underline;text-decoration-color:rgba(155,93,229,0.35);text-underline-offset:3px;word-break:break-word;font-weight:600;`,
+    strong: `font-weight:800;color:${wechatTheme.coral};`,
+    em: `font-style:italic;color:${wechatTheme.grape};`,
+    hr: `margin:32px auto;border:none;height:3px;background:linear-gradient(90deg, ${wechatTheme.coral}, ${wechatTheme.sun}, ${wechatTheme.mint}, ${wechatTheme.sky});border-radius:2px;`,
+    img: `display:block;max-width:100%;height:auto;margin:26px auto;border-radius:16px;`,
+    table: `width:100%;border-collapse:collapse;font-size:15px;line-height:1.75;color:${wechatTheme.ink};`,
+    th: `padding:12px 14px;border:1px solid ${wechatTheme.border};background:${wechatTheme.tableHead};font-weight:700;text-align:left;color:${wechatTheme.ink};`,
+    td: `padding:12px 14px;border:1px solid ${wechatTheme.border};background:${wechatTheme.paper};vertical-align:top;`,
 };
 
 const wechatDraftsUrl = 'https://mp.weixin.qq.com/cgi-bin/appmsg?begin=0&count=10&type=77&action=list_card&lang=zh_CN';
@@ -69,12 +79,7 @@ function safeAttr(str) {
 }
 
 function wrapWechatArticle(html) {
-    return `
-<section style="margin:0;padding:26px 18px;background-color:${wechatTheme.panel};background-image:linear-gradient(180deg, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0) 100%),radial-gradient(circle at 1px 1px, rgba(92,129,122,0.10) 1px, transparent 0);background-size:auto,18px 18px;border-radius:22px;">
-  <section style="padding:26px 22px;background:${wechatTheme.paper};border:1px solid ${wechatTheme.border};border-radius:18px;box-shadow:0 10px 30px rgba(126,110,84,0.08);">
-    ${html}
-  </section>
-</section>`.trim();
+    return html;
 }
 
 function openWechatDraftsPage() {
