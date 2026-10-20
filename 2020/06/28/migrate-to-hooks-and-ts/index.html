@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>将react项目迁移到hook和ts | EL PSY CONGROO</title><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body></body><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><div class="theme-selector"><div class="selector" onclick="document.body.className = 't1';localStorage.setItem('yo-cwj-theme', 't1')" style="background: #00c7ff;"></div><div class="selector" onclick="document.body.className = 't2';localStorage.setItem('yo-cwj-theme', 't2')" style="background: #ffe100;"></div><div class="selector" onclick="document.body.className = 't3';localStorage.setItem('yo-cwj-theme', 't3')" style="background: #55ff00;"></div></div><br><h1 class="hidden">将react项目迁移到hook和ts</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;">入门</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/vue/" style="font-size: 19.57px;">vue</a> <a href="/tags/javascript/" style="font-size: 19.14px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 18.71px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 18.29px;">深入es6</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 17.86px;">vue源码</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 17.43px;">应用</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 17.43px;">分析</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 17px;">心理学</a> <a href="/tags/electron/" style="font-size: 17px;">electron</a> <a href="/tags/haha/" style="font-size: 17px;">haha</a> <a href="/tags/react/" style="font-size: 16.57px;">react</a> <a href="/tags/ai/" style="font-size: 16.14px;">ai</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 15.71px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 15.71px;">博客装饰</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 15.71px;">道德情操论</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 15.29px;">代码组织</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 15.29px;">资本论</a> <a href="/tags/%E8%A7%A3%E9%87%8A%E8%84%91/" style="font-size: 15.29px;">解释脑</a> <a href="/tags/angular/" style="font-size: 14.86px;">angular</a> <a href="/tags/d3/" style="font-size: 14.86px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 14.86px;">小程序</a> <a href="/tags/ssr/" style="font-size: 14.86px;">ssr</a> <a href="/tags/nuxt/" style="font-size: 14.86px;">nuxt</a> <a href="/tags/hama/" style="font-size: 14.86px;">hama</a> <a href="/tags/ae-exp/" style="font-size: 14.43px;">ae exp</a> <a href="/tags/immer/" style="font-size: 14.43px;">immer</a> <a href="/tags/chrome-extension/" style="font-size: 14.43px;">chrome extension</a> <a href="/tags/vite/" style="font-size: 14.43px;">vite</a> <a href="/tags/ci/" style="font-size: 14.43px;">ci</a> <a href="/tags/github-action/" style="font-size: 14.43px;">github action</a> <a href="/tags/http/" style="font-size: 14.43px;">http</a> <a href="/tags/git/" style="font-size: 14.43px;">git</a> <a href="/tags/%E4%BA%94%E8%A1%8C%E5%85%AB%E5%8D%A6/" style="font-size: 14.43px;">五行八卦</a> <a href="/tags/vuex/" style="font-size: 14.43px;">vuex</a> <a href="/tags/monorepo/" style="font-size: 14.43px;">monorepo</a> <a href="/tags/redux/" style="font-size: 14.43px;">redux</a> <a href="/tags/codemirror/" style="font-size: 14.43px;">codemirror</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 14.43px;">总结</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" style="font-size: 14px;">年终总结</a> <a href="/tags/vscode/" style="font-size: 14px;">vscode</a> <a href="/tags/%E9%A2%9C%E8%89%B2/" style="font-size: 14px;">颜色</a> <a href="/tags/eslint/" style="font-size: 14px;">eslint</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 14px;">抓包</a> <a href="/tags/hook/" style="font-size: 14px;">hook</a> <a href="/tags/typescript/" style="font-size: 14px;">typescript</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 14px;">正则</a> <a href="/tags/jenkins/" style="font-size: 14px;">jenkins</a> <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%AE%BA/" style="font-size: 14px;">相对论</a> <a href="/tags/esbuild/" style="font-size: 14px;">esbuild</a> <a href="/tags/cordova/" style="font-size: 14px;">cordova</a> <a href="/tags/vite-plugin/" style="font-size: 14px;">vite-plugin</a> <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" style="font-size: 14px;">阿德勒</a> <a href="/tags/weex/" style="font-size: 14px;">weex</a> <a href="/tags/%E6%91%A9%E6%89%98%E8%BD%A6/" style="font-size: 14px;">摩托车</a> <a href="/tags/chrome-extension/" style="font-size: 14px;">chrome-extension</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%9A%84%E9%9B%A8%E4%BC%9E%E4%B8%8B/" style="font-size: 14px;">数学的雨伞下</a> <a href="/tags/shortcuts/" style="font-size: 14px;">shortcuts</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">将react项目迁移到hook和ts</h1><div class="post-meta">Jun 28, 2020<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>手里有一个没有历史包袱的react项目, 就成为了上hook和ts的好机会, 这里总结一下hook和ts最浅的实践.</p>
+<span id="more"></span>
+<p>首先做一个迁移后总结: hook和ts的初级使用非常简单, 而高级使用可能也没这么难, 总之比之前估计的难度要低很多.</p>
+<p>本文做最简单的介绍和使用, 没有写的细节都在<a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-intro.html">hook</a>和<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/basic-types.html">ts</a>的文档里.</p>
+<h2 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h2><h3 id="hook的形式"><a href="#hook的形式" class="headerlink" title="hook的形式"></a>hook的形式</h3><p>之前react有2种组件形式, 叫做class components, stateless components.</p>
+<p>而现在改名成: class components, function components.</p>
+<p>也就是: function components现在可以拥有state了, 就是hook给予的功能, 同时hook也给予了function components<strong>大多数</strong>class components可以实现的功能.</p>
+<p>所以hook的基本形式就是基于FC, 增加了一些方法, 来丰富了FC可实现的功能.</p>
+<h3 id="hook的优缺点"><a href="#hook的优缺点" class="headerlink" title="hook的优缺点"></a>hook的优缺点</h3><p>官方说的优点是:</p>
+<ol>
+<li>function比class更容易理解.</li>
+<li>含有多个业务逻辑的大组件, 可以从分块整理, class components只能聚在一起.</li>
+<li>比hoc, render props的集成方式更友好, 更灵活.</li>
+</ol>
+<p>后2条优点的思路是一样的: 都是利用了function的优势, 只要能提供实现一样功能的可能性, 那么FC就会更方便更灵活.</p>
+<p>我认为的缺点是:</p>
+<ol>
+<li>并不能实现class components的所有功能.</li>
+<li>一些行为和class components不一致.</li>
+<li>react devtools的调试体验不习惯.</li>
+</ol>
+<h3 id="hook迁移经验"><a href="#hook迁移经验" class="headerlink" title="hook迁移经验"></a>hook迁移经验</h3><p>把class组件替换成function组件, 第一步就是把class改写成function, class中的this都去掉, class的方法写成内部function. 另外render函数的返回值, 直接作为function组件的返回值即可.</p>
+<p>剩下的就是用hook来替代原先的一些功能:</p>
+<ol>
+<li><p><code>useState</code>用来替代state. </p>
+<p>需要说的是, 这里可以根据具体需求来分成任意个state块. 然后在react devtools里看起来是和class的state不同的.</p>
+</li>
+<li><p><code>useEffect</code>用来替代3个生命周期函数. </p>
+<p>第一个参数function会在初始化执行, 他的返回值函数(如果存在)会在销毁时执行. 第二个参数来判断是否需要在组件更新时执行第一个参数. </p>
+<p>需要注意的是, 和<code>useState</code>一样, 他也可以被分块, 使复杂页面的代码看起来更清晰, 维护更方便.</p>
+</li>
+<li><p><code>useContext</code>, <code>useRef</code>也比较常用. 作用是class组件中的context和ref.</p>
+</li>
+<li><p><code>useLayoutEffect</code>的存在是因为<code>useEffect</code>和<code>componentDidMount</code>执行时间是有差异的, 一些要获取dom的方法需要用这个.</p>
+</li>
+</ol>
+<p>另外, 有个<code>useReducer</code>, 这个和redux并不是一回事, react-redux提供了一些hook, 但也不是必用的, 直接用connect就可以了.</p>
+<h3 id="更多场景"><a href="#更多场景" class="headerlink" title="更多场景"></a>更多场景</h3><p>迁移的过程都是用了hook的基本功能, 接下来要尝试的是用hook代替hoc和render props来抽取一些逻辑.</p>
+<p>hook比hoc好的地方是, 使用方法是引入和调用, 而不是要嵌套dom.</p>
+<p>那么自定义hook可以复用, 就涉及到了作用域问题, hook是如何控制作用域的, 内置的hook是如何编写的, 这个留给下次仔细深入.</p>
+<h2 id="typescript"><a href="#typescript" class="headerlink" title="typescript"></a>typescript</h2><p>ts的作用是强制js类型, 是一种编译时工具.</p>
+<h3 id="ts的形式"><a href="#ts的形式" class="headerlink" title="ts的形式"></a>ts的形式</h3><p>是现在使用的所有js的超集. 所以在形式上, 之前的js都兼容, 不用改语法, 只是增加一些内容.</p>
+<p>在原有js上增加了哪些内容呢? 分为2个部分:</p>
+<ol>
+<li><p>在js变量后规定类型. </p>
+<p>如: <code>let n = 1</code> &#x3D;&gt; <code>let n: number = 1</code>.</p>
+</li>
+<li><p>定义类型.</p>
+<p>基本类型只有那几个, 那如果有一些项目特有的实体, 接口等. 就会自己定义一些, 使用<code>type</code>或者<code>interface</code>关键字.</p>
+<p>如: </p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> phoneSeries &#123;</span><br><span class="line">	<span class="attr">series</span>: <span class="built_in">string</span></span><br><span class="line">	<span class="attr">version</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">iphoneX</span>: phoneSeries = &#123; <span class="attr">serires</span>: <span class="string">&#x27;iphone&#x27;</span>, <span class="attr">version</span>: <span class="number">10</span> &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>所以ts比js就多了这2部分内容. 其他需要学习的就只是一些类型之间互相关系的概念.</p>
+<p>接下来说我在用ts过程中思考过的2个问题.</p>
+<h4 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h4><p>在尖括号出现的地方, 有2种可能, 一个是定义泛型, 一个是使用泛型.</p>
+<p>使用泛型是一些预定义的泛型接口或者泛型类, 在学习概念的时候没理解这点, 以为所有尖括号都是定义泛型, 于是没理解.</p>
+<h4 id="type和interface的区别"><a href="#type和interface的区别" class="headerlink" title="type和interface的区别"></a>type和interface的区别</h4><ol>
+<li><p>定义直接的变量, 只能用type. 例如:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> age = <span class="built_in">number</span></span><br><span class="line"><span class="keyword">type</span> add = (<span class="attr">base</span>: <span class="built_in">number</span>, <span class="attr">increasement</span>: <span class="built_in">number</span>): <span class="built_in">number</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>联合类型只能type.</p>
+</li>
+<li><p>implements 只能interface.</p>
+</li>
+</ol>
+<h3 id="ts的优缺点"><a href="#ts的优缺点" class="headerlink" title="ts的优缺点"></a>ts的优缺点</h3><p>几天以来使用ts的感受非常好, 缺点有2个: 需要学习, 需要配置工程化.</p>
+<p>但工程化是一次性的, 或者可以用别人的. 就算没学好, 直接都any. 特别需要的地方定义类型就可以了.</p>
+<p>所以在我看来上ts是好处远大于缺点的. 接下来说说<strong>实际使用中体会到的优点</strong>.</p>
+<ol>
+<li><p>相比eslint更能分析语法上的错误.</p>
+<p>在迁移ts的过程中, 发现很多ts报错的地方, 确实代码有非常大的问题, 没出bug只是运气好.</p>
+<p>即使不定义类型, ts有许多内置类型, 并有类型推导功能. 在一些操作<code>localStorage</code>等有副作用的代码, ts就能判断出没有写滤空.</p>
+</li>
+<li><p>使用组件时不用看文档了.</p>
+<p>这点在开发上省去了很多时间. 有一个场景: 某个组件库的Api因为版本升级改变了, 于是ts直接报错, 并且按着cmd或者ctrl, 可以直接看到现在有哪些Api.</p>
+</li>
+<li><p>体验很好的生态.</p>
+<p>上一条优点, 是基于那个组件库是用ts定义了类型的情况. 而当更多的引用都是基于ts的, 开发的时候感觉就会特别开心. (因此完全成为了vscode粉)</p>
+</li>
+</ol>
+<h3 id="ts的迁移经验"><a href="#ts的迁移经验" class="headerlink" title="ts的迁移经验"></a>ts的迁移经验</h3><ol>
+<li>在业务偏重的项目里, 我认为大多数地方用any就可以了. react预制的泛型类也都传any就可以.</li>
+<li>在工具类和presentational组件尽量多地使用ts. 组件的react泛型类传入自定义的interface来替代proptypes.</li>
+<li>很多lib都有ts使用手册, 有一些类, 了解后使用.</li>
+</ol>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你可以 <a href="/about/give-me-a-coffee.html">点击这个链接打赏我5毛</a>来鼓励我, 非常感谢.</p><p> 本文遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/react/">react</a><a href="/tags/hook/">hook</a><a href="/tags/typescript/">typescript</a></div><div class="post-nav"><a class="pre" href="/2020/08/16/redux-practice/">redux实践思考</a><a class="next" href="/2020/06/03/monorepo-yarn-and-lerna/">前端monorepo对依赖包的处理</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>document.body.className = localStorage.getItem('yo-cwj-theme') || 't1'
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
