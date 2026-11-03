@@ -1,0 +1,223 @@
+include _partial/helpers
+
+if page.title
+  - var current_title = page.title
+else
+  - var current_title = config.title
+
+doctype html
+html(lang=config.language)
+  head
+    meta(http-equiv='content-type', content='text/html; charset=utf-8')
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    meta(content='yes', name='apple-mobile-web-app-capable')
+    meta(content='black-translucent', name='apple-mobile-web-app-status-bar-style')
+    meta(content='telephone=no', name='format-detection')
+    meta(name='description', content=config.description)
+    meta(name='baidu-site-verification', content='no5dkv1A7T')
+    block title
+    script.
+      // 首屏渲染前把皮肤写到 <html data-skin>, 避免切换闪烁
+      // data-skin-mode 记录用户选择(含 random), data-skin 始终是实际生效的皮肤
+      (function() {
+        var SKINS = ['tech', 'dopamine', '3d', 'girl', 'classic'];
+
+        // 随机模式: 一个自然日只抽一次, 当天内始终复用已抽到的主题
+        function dailyRandomSkin() {
+          var pick = function() { return SKINS[Math.floor(Math.random() * SKINS.length)]; };
+          var now = new Date();
+          var today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+          try {
+            var saved = (localStorage.getItem('aurora-random-skin') || '').split('|');
+            if (saved[0] === today && SKINS.indexOf(saved[1]) !== -1) return saved[1];
+            var skin = pick();
+            localStorage.setItem('aurora-random-skin', today + '|' + skin);
+            return skin;
+          } catch (e) {
+            return pick();
+          }
+        }
+        window.auroraDailyRandomSkin = dailyRandomSkin;
+
+        var mode = 'random';
+        try {
+          var saved = localStorage.getItem('aurora-skin');
+          if (saved && (saved === 'random' || SKINS.indexOf(saved) !== -1)) {
+            mode = saved;
+          } else {
+            localStorage.setItem('aurora-skin', 'random');
+          }
+        } catch (e) {}
+        var skin = mode === 'random' ? dailyRandomSkin() : mode;
+        document.documentElement.setAttribute('data-skin', skin);
+        document.documentElement.setAttribute('data-skin-mode', mode);
+      })();
+    script.
+      // 刷新页面时回到顶部, 避免浏览器恢复刷新前的滚动位置(带锚点的链接除外)
+      (function() {
+        var isReload = false;
+        try {
+          var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+          isReload = nav ? nav.type === 'reload' : !!(performance.navigation && performance.navigation.type === 1);
+        } catch (e) {}
+        if (!isReload || window.location.hash) return;
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); });
+        window.addEventListener('load', function() { window.scrollTo(0, 0); });
+      })();
+    link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css')
+    link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css')
+    link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css')
+    link(rel='stylesheet', type='text/css', href=url_for(theme.css) + '/style.css' + '?v=' + theme.version)
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
+    script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js')
+    link(rel='Shortcut Icon', type='image/x-icon', href=url_for('favicon.ico'))
+    script(type='text/javascript', src=url_for(theme.js) + '/main.js')
+    block scripts
+
+  body(class=(is_home() ? 'layout-home' : (is_post() ? 'layout-post' : (is_category() ? 'layout-category' : (is_archive() ? 'layout-archive' : 'layout-page')))))
+  .theme-switcher
+    button.theme-switcher__trigger(type='button', aria-haspopup='true', aria-expanded='false')
+      span.theme-switcher__swatch.theme-switcher__swatch--tech
+    .theme-switcher__menu(role='menu')
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='random', title='随机')
+        span.theme-switcher__swatch.theme-switcher__swatch--random
+        i.fa.fa-check
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='tech', title='科技感')
+        span.theme-switcher__swatch.theme-switcher__swatch--tech
+        i.fa.fa-check
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='dopamine', title='多巴胺')
+        span.theme-switcher__swatch.theme-switcher__swatch--dopamine
+        i.fa.fa-check
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='3d', title='3D 立体')
+        span.theme-switcher__swatch.theme-switcher__swatch--3d
+        i.fa.fa-check
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='girl', title='少女')
+        span.theme-switcher__swatch.theme-switcher__swatch--girl
+        i.fa.fa-check
+      button.theme-switcher__item(type='button', role='menuitem', data-skin='classic', title='经典')
+        span.theme-switcher__swatch.theme-switcher__swatch--classic
+        i.fa.fa-check
+  #header
+    .body_container
+      #nav-menu
+        - for (var i in theme.menu)
+          +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)
+      .site-name
+        img.avatar(src=url_for('./img/avatar.png'))
+        br
+        h1.hidden= current_title
+        a#logo(href=url_for('.'))= config.title
+        p.description= config.subtitle
+        p.links
+          a(href=url_for('https://segmentfault.com/u/xpang'))
+            img(src=url_for('./img/sf.ico'))
+          a(href=url_for('https://github.com/cwj0417'))
+            img(src=url_for('./img/github.png'))
+          a(href=url_for('https://dribbble.com/fjonas'))
+            img(src=url_for('./img/dribbble.ico'))
+          a(href=url_for('https://weibo.com/2719310113'))
+            img(src=url_for('./img/weibo.ico'))
+      .header-search
+
+  .body_container
+    #layout.pure-g
+      if theme.widgets_on_small_screens
+        .pure-u-1.pure-u-md-1-4: #sidebar
+          each item in theme.widgets
+            != partial('_widget/' + item + '.pug')
+      else
+        .pure-u-1-4.hidden_mid_and_down: #sidebar
+          each item in theme.widgets
+            != partial('_widget/' + item + '.pug')
+      .pure-u-1.pure-u-md-3-4: .content_container
+        block content
+      .pure-u-1.pure-u-md-4-4
+        != partial('_partial/footer.pug')
+  
+  script.
+    (function() {
+      var root = document.documentElement;
+      var switcher = document.querySelector('.theme-switcher');
+      if (!switcher) return;
+
+      var trigger = switcher.querySelector('.theme-switcher__trigger');
+      var swatch = switcher.querySelector('.theme-switcher__swatch');
+      var items = switcher.querySelectorAll('.theme-switcher__item');
+
+      function syncActive() {
+        var mode = root.getAttribute('data-skin-mode') || 'random';
+        var skin = root.getAttribute('data-skin') || 'tech';
+        items.forEach(function(item) {
+          item.classList.toggle('active', item.getAttribute('data-skin') === mode);
+        });
+        swatch.className = 'theme-switcher__swatch theme-switcher__swatch--' + (mode === 'random' ? 'random' : skin);
+      }
+
+      function setOpen(open) {
+        switcher.classList.toggle('open', open);
+        trigger.setAttribute('aria-expanded', String(open));
+      }
+
+      trigger.addEventListener('click', function() {
+        setOpen(!switcher.classList.contains('open'));
+      });
+
+      items.forEach(function(item) {
+        item.addEventListener('click', function() {
+          var mode = item.getAttribute('data-skin');
+          var skin = mode === 'random' && window.auroraDailyRandomSkin ? window.auroraDailyRandomSkin() : mode;
+          root.setAttribute('data-skin', skin);
+          root.setAttribute('data-skin-mode', mode);
+          try { localStorage.setItem('aurora-skin', mode); } catch (e) {}
+          syncActive();
+          setOpen(false);
+        });
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!switcher.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      syncActive();
+
+      /* 多巴胺/少女皮肤: 搜索挂到顶部标题右侧, 切回其它皮肤时放回侧栏 */
+      var sidebar = document.getElementById('sidebar');
+      var headerSearch = document.querySelector('#header .header-search');
+      var searchWidget = null;
+      var searchAnchor = null;
+
+      if (sidebar) {
+        var widgets = sidebar.querySelectorAll('.widget');
+        [].forEach.call(widgets, function(w) {
+          if (w.querySelector('.search-form, #local-search-input')) w.classList.add('widget--search');
+          else if (w.querySelector('#cyReping, .epcRecentComments')) w.classList.add('widget--comments');
+          else if (w.querySelector('.tagcloud')) w.classList.add('widget--tag');
+          else if (w.querySelector('.links')) w.classList.add('widget--links');
+        });
+        searchWidget = sidebar.querySelector('.widget--search');
+        if (searchWidget) searchAnchor = searchWidget.nextElementSibling;
+      }
+
+      function layoutWidgets() {
+        if (!searchWidget || !sidebar) return;
+        var skin = root.getAttribute('data-skin') || 'tech';
+        if ((skin === 'dopamine' || skin === 'girl') && headerSearch) {
+          if (searchWidget.parentNode !== headerSearch) headerSearch.appendChild(searchWidget);
+        } else if (searchWidget.parentNode !== sidebar) {
+          sidebar.insertBefore(searchWidget, searchAnchor || sidebar.firstChild);
+        }
+      }
+
+      layoutWidgets();
+      new MutationObserver(layoutWidgets).observe(root, {
+        attributes: true,
+        attributeFilter: ['data-skin']
+      });
+    })();
+
+  include _partial/totop
+  include _partial/after_footer

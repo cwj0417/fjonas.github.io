@@ -1,0 +1,6 @@
+.widget
+  .widget-title
+    i(class='fa fa-paperclip')= ' '
+    != __('tags')
+  .tagcloud
+    != tagcloud({min_font: 11, max_font: 12, amount: 24, orderby: 'length', order: -1})

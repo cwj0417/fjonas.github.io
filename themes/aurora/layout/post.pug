@@ -1,0 +1,37 @@
+extends base
+
+block title
+  title= page.title + ' | ' + config.title
+
+block scripts
+  script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js')
+  link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css')
+  script(type='text/javascript', src=url_for(theme.js) + '/post.js')
+
+block content
+  .post
+    h1.post-title
+      = page.title
+      include _partial/ai_badge
+    .post-meta= page.date.format('ll')
+      if page.categories.length > 0
+        span= ' | '
+        span.category
+          for category in page.categories.toArray()
+            a(href=url_for(category.path))= category.name
+      if theme.busuanzi == true
+        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
+        span#busuanzi_container_page_pv= ' | '
+          span#busuanzi_value_page_pv
+          span= ' ' + __('次阅读')
+    if page.toc
+      div(class='clear')
+        div(id='toc' class='toc-article')
+          div(class='toc-title')= __('contents')
+          != toc(page.content)
+    .post-content
+      != page.content
+    include _partial/post_footer
+    include _partial/tag
+    include _partial/post_nav
+    include _partial/comments
