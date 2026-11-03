@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>给记事软件加上 mcp | EL PSY CONGROO</title><script>// 首屏渲染前把皮肤写到 <html data-skin>, 避免切换闪烁
+// data-skin-mode 记录用户选择(含 random), data-skin 始终是实际生效的皮肤
+(function() {
+  var SKINS = ['tech', 'dopamine', '3d', 'girl', 'classic'];
+
+  // 随机模式: 一个自然日只抽一次, 当天内始终复用已抽到的主题
+  function dailyRandomSkin() {
+    var pick = function() { return SKINS[Math.floor(Math.random() * SKINS.length)]; };
+    var now = new Date();
+    var today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    try {
+      var saved = (localStorage.getItem('aurora-random-skin') || '').split('|');
+      if (saved[0] === today && SKINS.indexOf(saved[1]) !== -1) return saved[1];
+      var skin = pick();
+      localStorage.setItem('aurora-random-skin', today + '|' + skin);
+      return skin;
+    } catch (e) {
+      return pick();
+    }
+  }
+  window.auroraDailyRandomSkin = dailyRandomSkin;
+
+  var mode = 'random';
+  try {
+    var saved = localStorage.getItem('aurora-skin');
+    if (saved && (saved === 'random' || SKINS.indexOf(saved) !== -1)) {
+      mode = saved;
+    } else {
+      localStorage.setItem('aurora-skin', 'random');
+    }
+  } catch (e) {}
+  var skin = mode === 'random' ? dailyRandomSkin() : mode;
+  document.documentElement.setAttribute('data-skin', skin);
+  document.documentElement.setAttribute('data-skin-mode', mode);
+})();</script><script>// 刷新页面时回到顶部, 避免浏览器恢复刷新前的滚动位置(带锚点的链接除外)
+(function() {
+  var isReload = false;
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    isReload = nav ? nav.type === 'reload' : !!(performance.navigation && performance.navigation.type === 1);
+  } catch (e) {}
+  if (!isReload || window.location.hash) return;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); });
+  window.addEventListener('load', function() { window.scrollTo(0, 0); });
+})();</script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body class="layout-post"></body><div class="theme-switcher"><button class="theme-switcher__trigger" type="button" aria-haspopup="true" aria-expanded="false"><span class="theme-switcher__swatch theme-switcher__swatch--tech"></span></button><div class="theme-switcher__menu" role="menu"><button class="theme-switcher__item" type="button" role="menuitem" data-skin="random" title="随机"><span class="theme-switcher__swatch theme-switcher__swatch--random"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="tech" title="科技感"><span class="theme-switcher__swatch theme-switcher__swatch--tech"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="dopamine" title="多巴胺"><span class="theme-switcher__swatch theme-switcher__swatch--dopamine"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="3d" title="3D 立体"><span class="theme-switcher__swatch theme-switcher__swatch--3d"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="girl" title="少女"><span class="theme-switcher__swatch theme-switcher__swatch--girl"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="classic" title="经典"><span class="theme-switcher__swatch theme-switcher__swatch--classic"></span><i class="fa fa-check"></i></button></div></div><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><br><h1 class="hidden">给记事软件加上 mcp</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div><div class="header-search"></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 12px;">入门</a> <a href="/tags/webpack/" style="font-size: 12px;">webpack</a> <a href="/tags/vue/" style="font-size: 11.91px;">vue</a> <a href="/tags/javascript/" style="font-size: 11.82px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 11.73px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 11.64px;">深入es6</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 11.55px;">vue源码</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 11.45px;">应用</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 11.45px;">分析</a> <a href="/tags/haha/" style="font-size: 11.36px;">haha</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 11.36px;">心理学</a> <a href="/tags/electron/" style="font-size: 11.36px;">electron</a> <a href="/tags/ai/" style="font-size: 11.27px;">ai</a> <a href="/tags/react/" style="font-size: 11.27px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 11.18px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 11.18px;">博客装饰</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 11.18px;">道德情操论</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 11.09px;">代码组织</a> <a href="/tags/%E8%A7%A3%E9%87%8A%E8%84%91/" style="font-size: 11.09px;">解释脑</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 11.09px;">资本论</a> <a href="/tags/angular/" style="font-size: 11px;">angular</a> <a href="/tags/d3/" style="font-size: 11px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11px;">小程序</a> <a href="/tags/hama/" style="font-size: 11px;">hama</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">给记事软件加上 mcp</h1><div class="post-meta">Oct 29, 2026<span> | </span><span class="category"><a href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>前阵子一直在折腾 ai 出图的可修改性. 用 sd 生成一张图容易, 想改其中一只手, 改完之后别的地方全变样, 这就很难受. 所有”ai 用得顺手”的领域都有一个共同点: 产物是可以被精确修改的, 代码是这样, 所以代码成了大语言模型第一个攻占的地方.<br>尝试把 ae 的 mcp 接入 agent, 让 agent 直接操作 ae, 但效果不理想, 因为 agent “看不到”项目效果.</p>
+<p>倒是想到很久前写着自用的<a target="_blank" rel="noopener" href="https://schedulepro.yo-cwj.com/">schedule-pro</a>, 觉得能让 agent 直接在上面记录东西也省去了复制-粘贴的操作.</p>
+<span id="more"></span>
+
+<h2 id="mcp-发生在哪里"><a href="#mcp-发生在哪里" class="headerlink" title="mcp 发生在哪里"></a>mcp 发生在哪里</h2><p>model context protocol, 目标是连接 llm 与应用, 他们之间的关系是这样的.</p>
+<p>llm &#x3D;&gt; agent &#x3D;&gt; mcp client &#x3D;&gt; mcp server &#x3D;&gt; app.</p>
+<p>mcp 是发生在 mcp client 和 mcp server 之间的, <strong>只要 agent 根据协议开发 client, 应用根据协议开发 server, 任意 agent 和任意应用之间就可以互相调用</strong>.</p>
+<p>展开这条链路是这样的:</p>
+<ul>
+<li>agent 和 llm 交互的时候有 function calling 的 json schema, 来告诉 llm 有哪些工具可以用, llm 回复需要用哪些. tool, skill 也是如此的.</li>
+<li>agent 内部维护 mcp 的 client, 通过 client 与 server 交互, 在调用 llm 前获取到应用有哪些能力, 在 llm 需要调用应用的时候, 通过 client 与 server 去交互拿结果.</li>
+<li>server 做的事除了通过协议与 client 交互, 还有根据业务去操作应用, 所以 mcp server 是应用开发者维护的.</li>
+</ul>
+<h2 id="协议交互的方式"><a href="#协议交互的方式" class="headerlink" title="协议交互的方式"></a>协议交互的方式</h2><p>准备在自己的应用里开发 mcp, 先要确定接入方式, 服务由 agent 启动, 还是由应用自己启动.</p>
+<p>方案 A 是 stdio, 让 agent 按配置去拉起一个子进程. 这是最常见的做法, 配置里写个 command 和 args 就完事, 不用管端口, 服务随 agent 的生命周期起停.</p>
+<p>方案 B 是应用内起一个 http 服务, agent 连过来, 配置里写一个 url 就可以.</p>
+<p>我选 B, 理由有三个.</p>
+<p>第一, 数据只有一份. 方案 A 里 agent 起的进程和正在运行的 app 是两个进程, 写数据只能写文件, 还得让 app 去监听文件变化再刷新界面, 中间多了一层不可靠. 方案 B 里写操作直接走 app 自己的数据层, 落盘和界面刷新是同一件事.</p>
+<p>第二, 应用没开的时候, 写进去也没意义. 我的诉求是”看得见”, 而界面只存在于正在运行的应用里. 让 agent 起一个后台进程, 数据写进去了, 但用户打开应用之前什么都看不到, 这个体验是断的.</p>
+<p>第三, 多个客户端可以共用一个服务. 我可能同时用两个不同的 ai 客户端, 方案 A 会起两份进程, 方案 B 天然共享.</p>
+<p>代价也明确: 用户要手动把服务打开, 端口可能被别的程序占用, 应用退出服务就没了. 这些我都接受, 因为它们都发生在”我正在用电脑”的场景里.</p>
+<h2 id="协议交互的内容"><a href="#协议交互的内容" class="headerlink" title="协议交互的内容"></a>协议交互的内容</h2><p>接下来要决定提供什么接口, 协议里提供的概念分这几种:</p>
+<p>服务端提供的:</p>
+<ul>
+<li>tools: 可执行的动作, 由模型决定何时调用.</li>
+<li>resources: 只读的数据, 比如一篇文档、一条记录.</li>
+<li>prompts: 预设的提示词模板, 一般是斜杠命令的形式, 由用户主动选择.</li>
+</ul>
+<p>客户端提供的:</p>
+<ul>
+<li>sampling: server 反过来请求客户端帮忙调一次模型.</li>
+<li>roots: 客户端告诉 server, 你能访问的目录边界在哪.</li>
+<li>elicitation: server 在干活途中向用户提问, 补充信息. 这是比较新的能力.</li>
+</ul>
+<p>我这里选择了 tools 来进行读取, 写入操作.<br>代码实现也非常简单, 在 mcp server 里注册 tool, 触发的时候调用应用内部方法操作数据就可以.<br>这一系列给 mcp 调用的方法挂到一个 bridge 变量上方便管理, 我在 mcp 写入的时候增加了标志, 和应用 ui 配合展示”这条数据是由 mcp 写入的”.</p>
+<h2 id="如何触发"><a href="#如何触发" class="headerlink" title="如何触发"></a>如何触发</h2><p>在注册 tool 的时候填写的 description, 这个字段是让 llm 决定是否要调用这个 mcp的.<br>和 skill 类似, <strong>agent 会带着 mcp 的工具列表去请求 llm, llm 通过读取 description 和 instruction 来决定是否调用 mcp, 调用哪个工具</strong>.<br>所以能不能在合理的时候触发 mcp 取决于如何设置 description 和 instruction.</p>
+<p>我的应用<a target="_blank" rel="noopener" href="https://schedulepro.yo-cwj.com/">schedule-pro</a>是一个记事软件, 所以会强调”记录”相关的关键词, 再根据”记录目标”的类型来决定记录到什么分类中.</p>
+<h2 id="语言和实现"><a href="#语言和实现" class="headerlink" title="语言和实现"></a>语言和实现</h2><p>electron 的应用, 主进程本来就是 node, 这一条几乎把语言选好了. mcp 官方有 typescript 的 sdk, 主进程里直接引, 不用跨语言, 不用额外运行时.</p>
+<h2 id="mcp-ui"><a href="#mcp-ui" class="headerlink" title="mcp ui"></a>mcp ui</h2><p>mcp 有 mcp apps 的扩展协议, 可以在注册 resources 的时候设置 html 的 uri, 让 支持该协议的 agent 调用 mcp 的时候可以获取 html 并展示.<br>页面我也用 vue 写, 打包的时候一起 build 一下就可以了.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>给软件开发 mcp 的技术成本低, 直接拉包就可以, 主要需要花的精力是业务上的, 即设计 mcp 的具体资源和 description.<br>个人觉得, mcp 对 token 的开销也不大, 只是在上下文挂了个列表, mcp 调用的时候再慢也是不消耗 token 的, 但 agent 的使用者尽可能清楚自己挂了哪些 tool&#x2F;skill&#x2F;mcp 还是必要的.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你可以 <a href="/about/give-me-a-coffee.html">点击这个链接打赏我5毛</a>来鼓励我, 非常感谢.</p><p> 本文遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="tags"><a href="/tags/ai/">ai</a></div><div class="post-nav"><a class="pre" href="/2026/11/03/shanghai-library/">劫富济贫之上海图书馆</a><a class="next" href="/2026/10/06/recent-practice-on-ai-coding-and-drawing/">从编码和作图看 ai 时代人要培养什么能力</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>(function() {
+  var root = document.documentElement;
+  var switcher = document.querySelector('.theme-switcher');
+  if (!switcher) return;
+
+  var trigger = switcher.querySelector('.theme-switcher__trigger');
+  var swatch = switcher.querySelector('.theme-switcher__swatch');
+  var items = switcher.querySelectorAll('.theme-switcher__item');
+
+  function syncActive() {
+    var mode = root.getAttribute('data-skin-mode') || 'random';
+    var skin = root.getAttribute('data-skin') || 'tech';
+    items.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('data-skin') === mode);
+    });
+    swatch.className = 'theme-switcher__swatch theme-switcher__swatch--' + (mode === 'random' ? 'random' : skin);
+  }
+
+  function setOpen(open) {
+    switcher.classList.toggle('open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+  }
+
+  trigger.addEventListener('click', function() {
+    setOpen(!switcher.classList.contains('open'));
+  });
+
+  items.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var mode = item.getAttribute('data-skin');
+      var skin = mode === 'random' && window.auroraDailyRandomSkin ? window.auroraDailyRandomSkin() : mode;
+      root.setAttribute('data-skin', skin);
+      root.setAttribute('data-skin-mode', mode);
+      try { localStorage.setItem('aurora-skin', mode); } catch (e) {}
+      syncActive();
+      setOpen(false);
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!switcher.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  syncActive();
+
+  /* 多巴胺/少女皮肤: 搜索挂到顶部标题右侧, 切回其它皮肤时放回侧栏 */
+  var sidebar = document.getElementById('sidebar');
+  var headerSearch = document.querySelector('#header .header-search');
+  var searchWidget = null;
+  var searchAnchor = null;
+
+  if (sidebar) {
+    var widgets = sidebar.querySelectorAll('.widget');
+    [].forEach.call(widgets, function(w) {
+      if (w.querySelector('.search-form, #local-search-input')) w.classList.add('widget--search');
+      else if (w.querySelector('#cyReping, .epcRecentComments')) w.classList.add('widget--comments');
+      else if (w.querySelector('.tagcloud')) w.classList.add('widget--tag');
+      else if (w.querySelector('.links')) w.classList.add('widget--links');
+    });
+    searchWidget = sidebar.querySelector('.widget--search');
+    if (searchWidget) searchAnchor = searchWidget.nextElementSibling;
+  }
+
+  function layoutWidgets() {
+    if (!searchWidget || !sidebar) return;
+    var skin = root.getAttribute('data-skin') || 'tech';
+    if ((skin === 'dopamine' || skin === 'girl') && headerSearch) {
+      if (searchWidget.parentNode !== headerSearch) headerSearch.appendChild(searchWidget);
+    } else if (searchWidget.parentNode !== sidebar) {
+      sidebar.insertBefore(searchWidget, searchAnchor || sidebar.firstChild);
+    }
+  }
+
+  layoutWidgets();
+  new MutationObserver(layoutWidgets).observe(root, {
+    attributes: true,
+    attributeFilter: ['data-skin']
+  });
+})();
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>

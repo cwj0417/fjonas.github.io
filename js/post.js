@@ -60,6 +60,8 @@ $(function () {
     }
 
     var content = getOutLine(titles, 2);
+    if (!content.length) return;
+
     var olwrap = $('<div>').attr('id', "outline").addClass('widget');//outline wrap
     var title = $('<div>').addClass('outline-title');
     title.html('目录');
@@ -68,13 +70,32 @@ $(function () {
     outline.append(nav);
     var ul = $('<ul>').addClass('nav');
     nav.append(ul);
-    $('#sidebar').append(olwrap);
     olwrap.append(title).append(outline);
-    if (content[0]) {
-        content.forEach(function (lev1) {
-            appendMess(ul, lev1);
-        })
+    content.forEach(function (lev1) {
+        appendMess(ul, lev1);
+    });
+
+    function isColumnSkin () {
+        var skin = document.documentElement.getAttribute('data-skin') || 'tech';
+        return skin === 'tech' || skin === 'dopamine' || skin === 'girl';
     }
+
+    // 科技感/多巴胺/少女皮肤把目录放进正文区; 其它皮肤维持原来的侧栏浮层
+    function placeOutline () {
+        var column = isColumnSkin();
+        document.body.classList.toggle('has-outline', column);
+        if (column) {
+            if (!olwrap.parent().is('.content_container')) $('.content_container').append(olwrap);
+        } else if (!olwrap.parent().is('#sidebar')) {
+            $('#sidebar').append(olwrap);
+        }
+    }
+    placeOutline();
+    new MutationObserver(placeOutline).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-skin']
+    });
+
     scrollSpy.init({nodeList: $("nav a")});
 });
 

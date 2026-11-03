@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="chen wen jun's blog"><meta name="baidu-site-verification" content="no5dkv1A7T"><title>劫富济贫之上海图书馆 | EL PSY CONGROO</title><script>// 首屏渲染前把皮肤写到 <html data-skin>, 避免切换闪烁
+// data-skin-mode 记录用户选择(含 random), data-skin 始终是实际生效的皮肤
+(function() {
+  var SKINS = ['tech', 'dopamine', '3d', 'girl', 'classic'];
+
+  // 随机模式: 一个自然日只抽一次, 当天内始终复用已抽到的主题
+  function dailyRandomSkin() {
+    var pick = function() { return SKINS[Math.floor(Math.random() * SKINS.length)]; };
+    var now = new Date();
+    var today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    try {
+      var saved = (localStorage.getItem('aurora-random-skin') || '').split('|');
+      if (saved[0] === today && SKINS.indexOf(saved[1]) !== -1) return saved[1];
+      var skin = pick();
+      localStorage.setItem('aurora-random-skin', today + '|' + skin);
+      return skin;
+    } catch (e) {
+      return pick();
+    }
+  }
+  window.auroraDailyRandomSkin = dailyRandomSkin;
+
+  var mode = 'random';
+  try {
+    var saved = localStorage.getItem('aurora-skin');
+    if (saved && (saved === 'random' || SKINS.indexOf(saved) !== -1)) {
+      mode = saved;
+    } else {
+      localStorage.setItem('aurora-skin', 'random');
+    }
+  } catch (e) {}
+  var skin = mode === 'random' ? dailyRandomSkin() : mode;
+  document.documentElement.setAttribute('data-skin', skin);
+  document.documentElement.setAttribute('data-skin-mode', mode);
+})();</script><script>// 刷新页面时回到顶部, 避免浏览器恢复刷新前的滚动位置(带锚点的链接除外)
+(function() {
+  var isReload = false;
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    isReload = nav ? nav.type === 'reload' : !!(performance.navigation && performance.navigation.type === 1);
+  } catch (e) {}
+  if (!isReload || window.location.hash) return;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); });
+  window.addEventListener('load', function() { window.scrollTo(0, 0); });
+})();</script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><script type="text/javascript" src="/js/main.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css"><script type="text/javascript" src="/js/post.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body class="layout-post"></body><div class="theme-switcher"><button class="theme-switcher__trigger" type="button" aria-haspopup="true" aria-expanded="false"><span class="theme-switcher__swatch theme-switcher__swatch--tech"></span></button><div class="theme-switcher__menu" role="menu"><button class="theme-switcher__item" type="button" role="menuitem" data-skin="random" title="随机"><span class="theme-switcher__swatch theme-switcher__swatch--random"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="tech" title="科技感"><span class="theme-switcher__swatch theme-switcher__swatch--tech"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="dopamine" title="多巴胺"><span class="theme-switcher__swatch theme-switcher__swatch--dopamine"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="3d" title="3D 立体"><span class="theme-switcher__swatch theme-switcher__swatch--3d"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="girl" title="少女"><span class="theme-switcher__swatch theme-switcher__swatch--girl"></span><i class="fa fa-check"></i></button><button class="theme-switcher__item" type="button" role="menuitem" data-skin="classic" title="经典"><span class="theme-switcher__swatch theme-switcher__swatch--classic"></span><i class="fa fa-check"></i></button></div></div><div id="header"><div class="body_container"><div id="nav-menu"><a class="current" href="/."> 主页</a><a href="/archives/"> 归档</a><a target="_blank" rel="noopener" href="https://next.yo-cwj.com"> 项目</a><a href="/about/"> 关于</a></div><div class="site-name"><img class="avatar" src="/./img/avatar.png"><br><h1 class="hidden">劫富济贫之上海图书馆</h1><a id="logo" href="/.">EL PSY CONGROO</a><p class="description">陈文俊的博客</p><p class="links"><a target="_blank" rel="noopener" href="https://segmentfault.com/u/xpang"><img src="/./img/sf.ico"></a><a target="_blank" rel="noopener" href="https://github.com/cwj0417"><img src="/./img/github.png"></a><a target="_blank" rel="noopener" href="https://dribbble.com/fjonas"><img src="/./img/dribbble.ico"></a><a target="_blank" rel="noopener" href="https://weibo.com/2719310113"><img src="/./img/weibo.ico"></a></p></div><div class="header-search"></div></div></div><div class="body_container"><div class="pure-g" id="layout"><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="搜索内容或标题" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-paperclip"> </i>标签</div><div class="tagcloud"><a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 12px;">入门</a> <a href="/tags/webpack/" style="font-size: 12px;">webpack</a> <a href="/tags/vue/" style="font-size: 11.91px;">vue</a> <a href="/tags/javascript/" style="font-size: 11.82px;">javascript</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 11.73px;">翻译</a> <a href="/tags/%E6%B7%B1%E5%85%A5es6/" style="font-size: 11.64px;">深入es6</a> <a href="/tags/vue%E6%BA%90%E7%A0%81/" style="font-size: 11.55px;">vue源码</a> <a href="/tags/%E5%BA%94%E7%94%A8/" style="font-size: 11.45px;">应用</a> <a href="/tags/%E5%88%86%E6%9E%90/" style="font-size: 11.45px;">分析</a> <a href="/tags/haha/" style="font-size: 11.36px;">haha</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 11.36px;">心理学</a> <a href="/tags/electron/" style="font-size: 11.36px;">electron</a> <a href="/tags/ai/" style="font-size: 11.27px;">ai</a> <a href="/tags/react/" style="font-size: 11.27px;">react</a> <a href="/tags/%E4%BA%BA%E6%A0%BC%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 11.18px;">人格心理学</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%A3%85%E9%A5%B0/" style="font-size: 11.18px;">博客装饰</a> <a href="/tags/%E9%81%93%E5%BE%B7%E6%83%85%E6%93%8D%E8%AE%BA/" style="font-size: 11.18px;">道德情操论</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/" style="font-size: 11.09px;">代码组织</a> <a href="/tags/%E8%A7%A3%E9%87%8A%E8%84%91/" style="font-size: 11.09px;">解释脑</a> <a href="/tags/%E8%B5%84%E6%9C%AC%E8%AE%BA/" style="font-size: 11.09px;">资本论</a> <a href="/tags/angular/" style="font-size: 11px;">angular</a> <a href="/tags/d3/" style="font-size: 11px;">d3</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11px;">小程序</a> <a href="/tags/hama/" style="font-size: 11px;">hama</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-commenting-o"> </i>最近评论</div><div class="epcRecentComments" id="cyReping" role="cylabs" data-use="reping"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> </i>友情链接</div><div class="links"><a href="https://blog.csdn.net/u010416101" title="sean(大数据专家, 人工智能专家)" target="_blank">sean(大数据专家, 人工智能专家)</a><a href="https://blog.csdn.net/u012373815" title="abel(大数据专家, 人工智能专家)" target="_blank">abel(大数据专家, 人工智能专家)</a><a href="https://di1shuai.com/" title="bruce(大数据专家, 人工智能专家)" target="_blank">bruce(大数据专家, 人工智能专家)</a><a href="https://www.cnblogs.com/linxiyue/" title="邓雪(全栈开发专家)" target="_blank">邓雪(全栈开发专家)</a><a href="https://www.xilanhua-c7.top/" title="赵吉(后现代浪漫主义诗人)" target="_blank">赵吉(后现代浪漫主义诗人)</a><a href="https://blog.csdn.net/weixin_40413961" title="98年新栋(首席实习生)" target="_blank">98年新栋(首席实习生)</a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">劫富济贫之上海图书馆</h1><div class="post-meta">Nov 3, 2026<span> | </span><span class="category"><a href="/categories/%E7%94%9F%E6%B4%BB%E5%90%90%E6%A7%BD/">生活吐槽</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 次阅读</span></span></div><div class="post-content"><p>前阵子路过嘉定图书馆, 进门兜了一圈, 顺手办了个读书卡, 发现上海图书馆真的很好用, 特别想分享下.</p>
+<span id="more"></span>
+
+<h2 id="办卡"><a href="#办卡" class="headerlink" title="办卡"></a>办卡</h2><p>办卡是免费的, 无需排队的, 不需要图书馆开门的.<br>我在图书馆未开门的时候, 用身份证在机器里刷的, 机器上一路点确认一分钟就出卡了.<br>(后来知道其实办虚拟卡就可以完成所有事情, 所以应该不需要身份证, 注册 app 就可以了, 但没亲身经历)<br>看起来是要100押金, 但可以查征信, 我这样4年没工作的人也可以免押金办.</p>
+<h2 id="借书"><a href="#借书" class="headerlink" title="借书"></a>借书</h2><p>借书的数量是15本, 56天.<br>借书的方式是app扫码或读者证, 然后把书放在机器上, 书上有 rfid, 不需要扫码, 多本一起. 按了确认就可以带走.</p>
+<p>然后借书的地方都有消毒机, 可以先消毒再带回家.</p>
+<p>另外在东馆还可以借电子阅读器, 是京东的, 也是可以借56天.</p>
+<h2 id="连锁"><a href="#连锁" class="headerlink" title="连锁"></a>连锁</h2><p>这是让我觉得最棒的点, 全上海的图书馆都是连锁的.<br>借的书可以在任意别的图书馆还. 我就在社区图书馆还书太方便了.</p>
+<h2 id="自习条件"><a href="#自习条件" class="headerlink" title="自习条件"></a>自习条件</h2><p>需要说一下的是有些地方是24小时自习的, 刷卡或扫码进, 也有书架可以24小时借书还书.</p>
+<p>基本所有图书馆都配备座位, 空调, 网络, 饮水机, 厕所. 网上还有月付2000的自习室, 可能有一部分信息差吧.</p>
+<h2 id="还书"><a href="#还书" class="headerlink" title="还书"></a>还书</h2><p>在借书的机器上还书就可以了, 操作相同.<br>或者直接把书给工作人员, 不需要身份信息, 因为书上已经带了. 这种去冗余很棒.</p>
+<h2 id="找书"><a href="#找书" class="headerlink" title="找书"></a>找书</h2><p>最后这一点是缺点, 找书的方式是 app 搜索, 或者图书馆里当场搜索.<br>搜到以后去对应的图书馆, 根据编号找到书架就可以, 图书馆里会有布局图.</p>
+<p>找书的系统还是挺有问题的, 系统页面很烂, 也不 vibe 一下.<br>虽然看起来状态很明确, 但是我找了几本书, 书架上是不在的.</p>
+<h2 id="共产主义第一步"><a href="#共产主义第一步" class="headerlink" title="共产主义第一步"></a>共产主义第一步</h2><p>这些公共服务都是免费的, 这些服务背后的成本是纳税人的工作.<br>但是现在 ai 时代贫富差距会更大, 这种低痛的劫富济贫, 是一种共产主义吧.<br>感谢国家, 感谢富人, 如果有一天我能找到工作, 我会好好缴税的.</p>
+</div><div class="post-footer"></div><p> (本文完)</p><p> 如果你可以 <a href="/about/give-me-a-coffee.html">点击这个链接打赏我5毛</a>来鼓励我, 非常感谢.</p><p> 本文遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">cc协议</a></p><p> 你可以在注明出处和非商用的前提下任意复制及演绎</p><div class="post-footer"></div><div class="post-nav"><a class="next" href="/2026/10/29/add-mcp-to-schedule-pro/">给记事软件加上 mcp</a></div><div id="SOHUCS"></div></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer"><p>©&nbsp;<a href="/." rel="nofollow">EL PSY CONGROO. </a><a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备16053193号-2</a></p><p>Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a> | Designed by hahahaha</p></div></div></div></div><script>(function() {
+  var root = document.documentElement;
+  var switcher = document.querySelector('.theme-switcher');
+  if (!switcher) return;
+
+  var trigger = switcher.querySelector('.theme-switcher__trigger');
+  var swatch = switcher.querySelector('.theme-switcher__swatch');
+  var items = switcher.querySelectorAll('.theme-switcher__item');
+
+  function syncActive() {
+    var mode = root.getAttribute('data-skin-mode') || 'random';
+    var skin = root.getAttribute('data-skin') || 'tech';
+    items.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('data-skin') === mode);
+    });
+    swatch.className = 'theme-switcher__swatch theme-switcher__swatch--' + (mode === 'random' ? 'random' : skin);
+  }
+
+  function setOpen(open) {
+    switcher.classList.toggle('open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+  }
+
+  trigger.addEventListener('click', function() {
+    setOpen(!switcher.classList.contains('open'));
+  });
+
+  items.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var mode = item.getAttribute('data-skin');
+      var skin = mode === 'random' && window.auroraDailyRandomSkin ? window.auroraDailyRandomSkin() : mode;
+      root.setAttribute('data-skin', skin);
+      root.setAttribute('data-skin-mode', mode);
+      try { localStorage.setItem('aurora-skin', mode); } catch (e) {}
+      syncActive();
+      setOpen(false);
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!switcher.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  syncActive();
+
+  /* 多巴胺/少女皮肤: 搜索挂到顶部标题右侧, 切回其它皮肤时放回侧栏 */
+  var sidebar = document.getElementById('sidebar');
+  var headerSearch = document.querySelector('#header .header-search');
+  var searchWidget = null;
+  var searchAnchor = null;
+
+  if (sidebar) {
+    var widgets = sidebar.querySelectorAll('.widget');
+    [].forEach.call(widgets, function(w) {
+      if (w.querySelector('.search-form, #local-search-input')) w.classList.add('widget--search');
+      else if (w.querySelector('#cyReping, .epcRecentComments')) w.classList.add('widget--comments');
+      else if (w.querySelector('.tagcloud')) w.classList.add('widget--tag');
+      else if (w.querySelector('.links')) w.classList.add('widget--links');
+    });
+    searchWidget = sidebar.querySelector('.widget--search');
+    if (searchWidget) searchAnchor = searchWidget.nextElementSibling;
+  }
+
+  function layoutWidgets() {
+    if (!searchWidget || !sidebar) return;
+    var skin = root.getAttribute('data-skin') || 'tech';
+    if ((skin === 'dopamine' || skin === 'girl') && headerSearch) {
+      if (searchWidget.parentNode !== headerSearch) headerSearch.appendChild(searchWidget);
+    } else if (searchWidget.parentNode !== sidebar) {
+      sidebar.insertBefore(searchWidget, searchAnchor || sidebar.firstChild);
+    }
+  }
+
+  layoutWidgets();
+  new MutationObserver(layoutWidgets).observe(root, {
+    attributes: true,
+    attributeFilter: ['data-skin']
+  });
+})();
+</script><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyt1bgEED" async></script><script>(function () {
+    var appid = 'cyt1bgEED';
+    var conf = 'prod_20e8d05c4d6b3ce62b89be98ae18390c';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+        var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.charset = 'utf-8';
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+    } else {
+        var loadJs=function(d,a){
+        var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+        var b=document.createElement("script");
+        b.setAttribute("type","text/javascript");
+        b.setAttribute("charset","UTF-8");b.setAttribute("src",d);
+        if(typeof a==="function"){
+          if(window.attachEvent){
+            b.onreadystatechange=function(){
+              var e=b.readyState;
+              if(e==="loaded"||e==="complete"){
+                b.onreadystatechange=null;
+                a();
+              }
+            }
+            }else{
+              b.onload=a
+            }
+          }
+          c.appendChild(b)
+        };
+      loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+})();
+</script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></html>
