@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>再试一次让ai帮我写博客</title>
+      <link href="/2026/11/14/use-skill-and-rag-to-write-blog/"/>
+      <url>/2026/11/14/use-skill-and-rag-to-write-blog/</url>
+      
+        <content type="html"><![CDATA[<p>之前就尝试过让 ai 帮写博客, 在便签里手动加 prompt 调 llm, 还在博客上弄了个”ai 生成”标志, 结果基本全是不满意的, 基本全删, 所以就不用 ai 写了.</p><p>这次又探索下 ai 写博客的可能性.</p><span id="more"></span><h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>上次失败不是模型不行, 而是整条链路都靠手搬: 提纲写在便签里, prompt 自己拼, llm 的回复再手动贴进新便签. 除了写 prompt, 人还要负责所有的复制粘贴, 这样也能写, 但每次只能凭感觉判断好坏, 没法把流程固定下来做对比.</p><p>这次多了一个 agent, 它能自己调工具, 把 skill 和 mcp 串起来执行, 而且 token 是跟着 agent 走的, 不用再单独申请 apikey 付费. 于是流程终于变成了一个可以编排、可以反复跑、也可以被推翻的东西.</p><h3 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h3><p>之前是在我的软件 <a href="https://scheduleprop.yo-cwj.com/">scheduleprop.yo-cwj.com</a> 的便签里写提纲 (因为是有灵感慢慢记录的), 自己加 prompt 调 llm, 然后打开新便签放 llm 返回的内容.</p><p>现在想借用 agent 的能力来编排 skill, mcp, 也可以借用 agent 的 token, 原先自己调 token 是要付费拿 apikey 的, 流程变成了这样:</p><ul><li>在软件上通过 mcp 反调 agent 执行 skill</li><li>skill 编排先检索技术上的正确性</li><li>通过 rag mcp 拿到相似情况博客的段落, 作为 context 给 llm 生产博文</li><li>agent 再通过 mcp 打开新的便签</li></ul><h3 id="mcp-的必要性"><a href="#mcp-的必要性" class="headerlink" title="mcp 的必要性"></a>mcp 的必要性</h3><p>跑了下 skill, 发现它在调用 rag 之后还是会读取所有文章, 所以其实是参考了所有文章, 于是在 skill 里禁用了查看所有 post. 结果 token 使用没减少, 反过来让 agent 自己读所有 post, token 使用也没增加.</p><p>于是就做了测试. 在不读 mcp 的情况下, agent 读了 11 篇 post, 也确定了文风与 post 的格式, 看起来也能写. 但<strong>读的 post 没有针对性, 是 mcp 替代不了的</strong>. 它挑哪几篇全靠临时判断, 真正相似的场景反而可能漏掉; rag 的价值不是喂进去更多文章, 而是喂进去对的那几段.</p><p>反复测试了后, 决定还是留下 mcp.</p><h3 id="skill-的必要性"><a href="#skill-的必要性" class="headerlink" title="skill 的必要性"></a>skill 的必要性</h3><p>在运行了不同场景后, 发现调用 skill 实际消耗了更多的 token, 因为 skill 写了太多没必要的”解释”, 于是简写了 skill.</p><p>skill 是一种流程编排, 让流程更稳定, 其实就是一种”匹配 description 以后加载一段 prompt”, 就是一种 prompt 模板. 模型平时只看得到所有 skill 的 name 和 description, 命中之后才把正文装进上下文, 所以它本质上是一段按需加载的 prompt, 不是什么新的运行时.</p><p>当然另外还可以硬控 workflow. 但现在 workflow 的意义在降低, 因为 llm 在增强, <strong>skill 里记录的人的实现方案可能比 llm 差, 用 skill 只是限制了 llm 的发挥</strong>.</p><p>而现在有意义的 skill 我认为是”要求+限制”型的, 也就是”根据场景触发导入一段复杂的 prompt”, 作为 prompt 的剪切板.</p><h3 id="实测"><a href="#实测" class="headerlink" title="实测"></a>实测</h3><ul><li>实测了用 skill&#x2F;不用 skill, 检测文章正确性&#x2F;不检测, 使用 mcp&#x2F;不使用, 感觉不明显, 而且同样条件跑几次效果也是不一样的. 这几组对比都跑过, 差异小到没法归因; 同样的条件重跑一遍, 文章又不一样了. 样本太少, 单次结果说明不了什么.</li><li>skill 里的指导没意义: 实测用不带文件夹的新 session, 会自动调用 rag mcp, 但不会用 skill. 模型自己会想到要做的事, 写进 skill 里也教不会它更多.</li><li>skill 里的要求有意义: 在仔细思考我的提纲细节后, 我认为大多数地方是只需要修正错字和标点符号的, 而不需要扩写, 这点是需要写在 skill 里的. 不写的话, 模型会按”写博客”的默认习惯扩写一大段, 反而把提纲里原本的节奏打乱.</li><li>mcp 有意义: 用文心一言全新 session 写了下, 这肯定用不到我的 rag mcp, 因为我实在看了太多次 ai 生成文章, 自己也有点没法评估文风了, 所以拿一个完全不会读到过去文风的来生成, 结果确实增加了很多”ai 味”. 那也让我相信 rag mcp 是有意义的, 并且发现”注释”是不需要跟 ai 特别解释的, 那么就从 skill 里移除.</li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol><li>文风不能机器 eval (evaluate), 是人需要参与的部分. 就是 ai 没有”眼睛”的地方, 不会 eval, 没 loss 函数的地方. 语法、通顺、结构都能判断, 但”像不像我写的”没有一个能直接优化的目标.</li><li>因为 llm 在进化, 所以我现在偏好不要”教 llm 做事”, 而是”提要求”+”说限制”. 把要实现的效果和不能碰的边界说清楚, 中间怎么做交给模型自己选.</li><li>rag 仍然需要, 因为那么多数据走 llm 处理需要花很多 token, 不把数据告诉 llm 它也没法处理, 所以需要自己处理. 但不排除以后 llm 自己会写 rag, 只是现在我用的模型没想到写 rag. 并且 rag 的”语气”暂时也是需要人类来调教的.</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ai </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>劫富济贫之上海图书馆</title>
       <link href="/2026/11/03/shanghai-library/"/>
       <url>/2026/11/03/shanghai-library/</url>
@@ -719,7 +744,7 @@
       <link href="/2025/02/10/npm-resolution/"/>
       <url>/2025/02/10/npm-resolution/</url>
       
-        <content type="html"><![CDATA[<p>之前对resolution认知几乎为零, 遇到了问题才理解了.</p><p>再结合之前幽灵依赖的事聊一下npm依赖的问题.</p><span id="more"></span><h2 id="线上bug-本地没问题"><a href="#线上bug-本地没问题" class="headerlink" title="线上bug, 本地没问题"></a>线上bug, 本地没问题</h2><p>有个项目使用到了<code>code-mirror</code>作为文本编辑器, 在一个新版本发生了”按回车不能换行”的问题.</p><p>在生产环境的控制台看不到任何报错, 而在本地功能却没有问题.</p><p>遇到本地生产不一致, 就要思考本地与生产的流程有什么不同, 再逐个验证.</p><p>我把本地node_modules删除重新安装后, 可以重现生产问题了.</p><p>这就是典型的第三方库不讲武德, npm install默认会给兼容小版本的<code>^</code>修饰, 而第三方库在小版本中加入了会使之前代码行为不一致的特性.</p><p>以前有个厉害的同事经常指导我锁版本, 现在算是理解了.</p><h2 id="那就锁版本-但本地白屏了"><a href="#那就锁版本-但本地白屏了" class="headerlink" title="那就锁版本, 但本地白屏了"></a>那就锁版本, 但本地白屏了</h2><p>我把所有<code>code-mirror</code>相关的依赖都锁了版本, 并重新安装, 按我的想象, 所有依赖应该会到以前正常运行的状态.</p><p>仔细看了报错, 是<code>code-mirror</code>加载插件报了”非法插件”, 因为用<code>instance of</code>判断了是否插件类的实例, 而<code>code-mirror</code>的库互相依赖, 导致加载了不同版本的”插件类”, 导致<code>instance of</code>判否, 再导致白屏.</p><p>我认为需要具体描述一下这个过程:</p><p>我的项目有2个依赖:  <strong>A</strong>: 1.0.0, <strong>B</strong>: 1.0.0.</p><p>这2个依赖都锁定了版本为”1.0.0”.</p><p>但 <strong>B</strong> 也把 <strong>A</strong> 作为了依赖, 并且在<code>package.json</code>中的声明是向后兼容小版本: <strong>^1.0.0</strong>.</p><p>在npm安装过程中, <strong>B</strong>的依赖向后兼容, 就安装了 <strong><a href="mailto:&#65;&#x40;&#x31;&#x2e;&#53;&#46;&#48;">&#65;&#x40;&#x31;&#x2e;&#53;&#46;&#48;</a></strong> 的版本.</p><p>而我的项目安装了<strong><a href="mailto:&#65;&#64;&#x31;&#46;&#48;&#46;&#x30;">&#65;&#64;&#x31;&#46;&#48;&#46;&#x30;</a></strong> 的版本, 是我在我的项目中锁定的, 而我并不能修改 <strong>B</strong> 项目中的<code>package.json</code>.</p><p>最后, <strong>B</strong> 的代码中, 引入了 <strong><a href="mailto:&#x41;&#x40;&#49;&#x2e;&#x35;&#x2e;&#x30;">&#x41;&#x40;&#49;&#x2e;&#x35;&#x2e;&#x30;</a></strong> 的<code>Plugin</code>类, 并且实例化.</p><p>而在我项目的执行过程中, 判断了 <strong>B</strong> 代码中的 <strong>1.5.0</strong>的实例 是否是 <strong><a href="mailto:&#x41;&#x40;&#49;&#46;&#48;&#x2e;&#x30;">&#x41;&#x40;&#49;&#46;&#48;&#x2e;&#x30;</a></strong>的实例, 他们来自2个文件, 在混淆后甚至变成了不同字母, 那是不可能通过<code>instance of</code>判定了, 所以报错.</p><p>问了朋友, 告诉我在自己<code>package.json</code>中添加一个<code>resolution</code>字段, 声明<code>&#123; A: 1.0.0 &#125;</code>, 这样项目中的<code>A</code>依赖都会安装<code>1.0.0</code>的版本.</p><p>其实前公司一直用<code>resolution</code>固定<code>react</code>版本, 因为react如果存在不同的版本, 也会白屏, 而我一直没去稍微深入了解下.</p><h2 id="幽灵依赖导致的白屏"><a href="#幽灵依赖导致的白屏" class="headerlink" title="幽灵依赖导致的白屏"></a>幽灵依赖导致的白屏</h2><p>然后再重新说一下之前遇到的严重的依赖问题.</p><p>同事的一个组件升级了, 我升级了组件版本, 没有本地运行就推代码, 导致测试环境页面白屏了.</p><p>公司项目用的monorepo, 比如<code>react</code>, <code>react-redux</code>这样的每个项目都要用的依赖, 在子项目中就不声明了.</p><p>同事组件的新版本声明了<code>react-redux</code>的版本, 是比外层声明低的版本.</p><p>在代码中有使用<code>forwardRef</code>, 这个api 是<code>react-redux</code> 7 以后才有的.</p><p>之前使用了外层的<code>react-redux</code>没有问题, 当自己模块就存在<code>react-redux</code>老版本后, 就使用老版本作为resolve, 于是就报错了.</p><p>node的resolve机制是很简单的, 先找自己目录的node_modules, 再递归往父级找, 找到找不到为止.</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果只遇到上述三个问题中的一个, 我们很容易就会得出结论: 比如”要锁版本”, 或者”要写resolution”, 或者”要杜绝幽灵依赖, 自己import的内容一定要声明”.</p><p>但结合一起看会发现, 在一些事情上”准确”,  “合理” 是需要具体情况去把握的.</p><p>比如我盲目杜绝幽灵依赖, 可能导致项目依赖了某个库的多个版本, 导致打包时间与打包体积的大幅上升.</p><p>要记着依赖版本相关的一些特性, 清楚自己在做什么, 具体情况具体处理.</p><p>首先得记得, <strong>只修改依赖的版本号, 也是可能影响其他代码的, 记得先运行再提交代码</strong>  :(</p><p>然后总结下上述问题发生的原因, 都很简单, 遇到问题放松分析就可以:</p><ul><li>线上本地不同的问题可能是线上npm没缓存导致, 可以本地删除node_modules重新安装来重现.</li><li>在锁版本的时候也要同时使用resolution来锁定深层依赖版本.</li><li>在利用幽灵依赖的时候有包的安装和升级要检查新依赖. (在npm install后会在命令行提示的)</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>之前对resolution认知几乎为零, 遇到了问题才理解了.</p><p>再结合之前幽灵依赖的事聊一下npm依赖的问题.</p><span id="more"></span><h2 id="线上bug-本地没问题"><a href="#线上bug-本地没问题" class="headerlink" title="线上bug, 本地没问题"></a>线上bug, 本地没问题</h2><p>有个项目使用到了<code>code-mirror</code>作为文本编辑器, 在一个新版本发生了”按回车不能换行”的问题.</p><p>在生产环境的控制台看不到任何报错, 而在本地功能却没有问题.</p><p>遇到本地生产不一致, 就要思考本地与生产的流程有什么不同, 再逐个验证.</p><p>我把本地node_modules删除重新安装后, 可以重现生产问题了.</p><p>这就是典型的第三方库不讲武德, npm install默认会给兼容小版本的<code>^</code>修饰, 而第三方库在小版本中加入了会使之前代码行为不一致的特性.</p><p>以前有个厉害的同事经常指导我锁版本, 现在算是理解了.</p><h2 id="那就锁版本-但本地白屏了"><a href="#那就锁版本-但本地白屏了" class="headerlink" title="那就锁版本, 但本地白屏了"></a>那就锁版本, 但本地白屏了</h2><p>我把所有<code>code-mirror</code>相关的依赖都锁了版本, 并重新安装, 按我的想象, 所有依赖应该会到以前正常运行的状态.</p><p>仔细看了报错, 是<code>code-mirror</code>加载插件报了”非法插件”, 因为用<code>instance of</code>判断了是否插件类的实例, 而<code>code-mirror</code>的库互相依赖, 导致加载了不同版本的”插件类”, 导致<code>instance of</code>判否, 再导致白屏.</p><p>我认为需要具体描述一下这个过程:</p><p>我的项目有2个依赖:  <strong>A</strong>: 1.0.0, <strong>B</strong>: 1.0.0.</p><p>这2个依赖都锁定了版本为”1.0.0”.</p><p>但 <strong>B</strong> 也把 <strong>A</strong> 作为了依赖, 并且在<code>package.json</code>中的声明是向后兼容小版本: <strong>^1.0.0</strong>.</p><p>在npm安装过程中, <strong>B</strong>的依赖向后兼容, 就安装了 <strong><a href="mailto:&#65;&#64;&#49;&#46;&#53;&#x2e;&#x30;">&#65;&#64;&#49;&#46;&#53;&#x2e;&#x30;</a></strong> 的版本.</p><p>而我的项目安装了<strong><a href="mailto:&#x41;&#64;&#49;&#46;&#x30;&#46;&#48;">&#x41;&#64;&#49;&#46;&#x30;&#46;&#48;</a></strong> 的版本, 是我在我的项目中锁定的, 而我并不能修改 <strong>B</strong> 项目中的<code>package.json</code>.</p><p>最后, <strong>B</strong> 的代码中, 引入了 <strong><a href="mailto:&#x41;&#64;&#x31;&#x2e;&#53;&#x2e;&#x30;">&#x41;&#64;&#x31;&#x2e;&#53;&#x2e;&#x30;</a></strong> 的<code>Plugin</code>类, 并且实例化.</p><p>而在我项目的执行过程中, 判断了 <strong>B</strong> 代码中的 <strong>1.5.0</strong>的实例 是否是 <strong><a href="mailto:&#65;&#x40;&#49;&#46;&#x30;&#46;&#x30;">&#65;&#x40;&#49;&#46;&#x30;&#46;&#x30;</a></strong>的实例, 他们来自2个文件, 在混淆后甚至变成了不同字母, 那是不可能通过<code>instance of</code>判定了, 所以报错.</p><p>问了朋友, 告诉我在自己<code>package.json</code>中添加一个<code>resolution</code>字段, 声明<code>&#123; A: 1.0.0 &#125;</code>, 这样项目中的<code>A</code>依赖都会安装<code>1.0.0</code>的版本.</p><p>其实前公司一直用<code>resolution</code>固定<code>react</code>版本, 因为react如果存在不同的版本, 也会白屏, 而我一直没去稍微深入了解下.</p><h2 id="幽灵依赖导致的白屏"><a href="#幽灵依赖导致的白屏" class="headerlink" title="幽灵依赖导致的白屏"></a>幽灵依赖导致的白屏</h2><p>然后再重新说一下之前遇到的严重的依赖问题.</p><p>同事的一个组件升级了, 我升级了组件版本, 没有本地运行就推代码, 导致测试环境页面白屏了.</p><p>公司项目用的monorepo, 比如<code>react</code>, <code>react-redux</code>这样的每个项目都要用的依赖, 在子项目中就不声明了.</p><p>同事组件的新版本声明了<code>react-redux</code>的版本, 是比外层声明低的版本.</p><p>在代码中有使用<code>forwardRef</code>, 这个api 是<code>react-redux</code> 7 以后才有的.</p><p>之前使用了外层的<code>react-redux</code>没有问题, 当自己模块就存在<code>react-redux</code>老版本后, 就使用老版本作为resolve, 于是就报错了.</p><p>node的resolve机制是很简单的, 先找自己目录的node_modules, 再递归往父级找, 找到找不到为止.</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果只遇到上述三个问题中的一个, 我们很容易就会得出结论: 比如”要锁版本”, 或者”要写resolution”, 或者”要杜绝幽灵依赖, 自己import的内容一定要声明”.</p><p>但结合一起看会发现, 在一些事情上”准确”,  “合理” 是需要具体情况去把握的.</p><p>比如我盲目杜绝幽灵依赖, 可能导致项目依赖了某个库的多个版本, 导致打包时间与打包体积的大幅上升.</p><p>要记着依赖版本相关的一些特性, 清楚自己在做什么, 具体情况具体处理.</p><p>首先得记得, <strong>只修改依赖的版本号, 也是可能影响其他代码的, 记得先运行再提交代码</strong>  :(</p><p>然后总结下上述问题发生的原因, 都很简单, 遇到问题放松分析就可以:</p><ul><li>线上本地不同的问题可能是线上npm没缓存导致, 可以本地删除node_modules重新安装来重现.</li><li>在锁版本的时候也要同时使用resolution来锁定深层依赖版本.</li><li>在利用幽灵依赖的时候有包的安装和升级要检查新依赖. (在npm install后会在命令行提示的)</li></ul>]]></content>
       
       
       <categories>
@@ -4220,9 +4245,9 @@
       
         <tags>
             
-            <tag> 代码组织 </tag>
-            
             <tag> 翻译 </tag>
+            
+            <tag> 代码组织 </tag>
             
             <tag> 入门 </tag>
             
@@ -4330,9 +4355,9 @@
       
         <tags>
             
-            <tag> angular </tag>
-            
             <tag> 代码组织 </tag>
+            
+            <tag> angular </tag>
             
             <tag> 应用 </tag>
             
@@ -4831,11 +4856,11 @@
       
         <tags>
             
-            <tag> angular </tag>
-            
             <tag> 翻译 </tag>
             
             <tag> 入门 </tag>
+            
+            <tag> angular </tag>
             
             <tag> webpack </tag>
             
