@@ -1,0 +1,16 @@
+{
+  "name": "blog-rag",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "基于历史文章的语气检索层，供外部 skill 通过 MCP 调用",
+  "scripts": {
+    "index": "node cli.js index",
+    "eval": "node cli.js eval",
+    "serve": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "gray-matter": "^4.0.3"
+  }
+}
